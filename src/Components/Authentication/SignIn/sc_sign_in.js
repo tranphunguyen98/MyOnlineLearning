@@ -1,15 +1,26 @@
-import 'package:flutter/material.dart';
-import 'package:my_online_learning/presentation/screen/Authentication/sign_in/widget_login_form.dart';
+import React from "react";
+import { StyleSheet, Text, View, Image } from "react-native";
 
-class ScreenLogin extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: Icon(Icons.arrow_back),
-        title: Text("Sign In"),
-      ),
-      body: WidgetLoginForm(),
-    );
-  }
+import { Layout, Images, Common } from "../../../Theme/index";
+
+function LoginScreen() {
+  return (
+    <View style={styles.container}>
+      <Text>
+        Open up App.js to start working on werweeeyour a1111111111spp!
+      </Text>
+      <StatusBar style="auto" />
+    </View>
+  );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+});
+
+export default LoginScreen;
