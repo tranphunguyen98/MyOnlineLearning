@@ -1,0 +1,23 @@
+import 'package:flutter/material.dart';
+import 'package:my_online_learning/model/entity/course.dart';
+import 'package:my_online_learning/presentation/screen/browse_courses/home/widget_item_course.dart';
+
+class ListCourseHorizontal extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.only(top: 16.0),
+      height: 220,
+      child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          shrinkWrap: true,
+          itemCount: Course.listCourse.length,
+          itemBuilder: (BuildContext context, int index) {
+            return Padding(
+              padding: const EdgeInsets.only(right: 16.0),
+              child: ItemCourse(course: Course.listCourse[index]),
+            );
+          }),
+    );
+  }
+}

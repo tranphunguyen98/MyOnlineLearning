@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        initialRoute: Router.MyRouter.CHANGE_PASSWORD,
+        initialRoute: Router.MyRouter.HOME,
         onGenerateRoute: Router.MyRouter.generateRoute,
         home: StartScreen());
   }

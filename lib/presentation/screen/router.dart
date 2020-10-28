@@ -5,6 +5,7 @@ import 'package:my_online_learning/presentation/screen/Authentication/reset_pass
 import 'package:my_online_learning/presentation/screen/Authentication/start/sc_start.dart';
 
 import 'Authentication/sign_in/sc_sign_in.dart';
+import 'browse_courses/home/sc_home.dart';
 
 class MyRouter {
   static const String HOME = '/home';
@@ -17,6 +18,8 @@ class MyRouter {
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
+      case HOME:
+        return MaterialPageRoute(builder: (_) => HomeScreen());
       case LOGIN:
         return MaterialPageRoute(builder: (_) => LoginScreen());
       case START:
