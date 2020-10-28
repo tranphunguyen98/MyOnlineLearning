@@ -7,10 +7,9 @@ import { Colors, FontSize, SpaceSizes } from "./Variables";
 import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
-  evenlyContainer: {
+  containerMain: {
     flex: 1,
-    padding: 16,
-    justifyContent: "space-evenly",
+    padding: SpaceSizes.large,
   },
   generalContainer: {
     flex: 1,
@@ -39,5 +38,18 @@ export default StyleSheet.create({
   textLogo: { color: Colors.primary, fontSize: FontSize.large },
   regularVMargin: {
     marginVertical: SpaceSizes.regular,
+  },
+  textInputGeneral: {
+    backgroundColor: "#e1f5fe",
+    borderRadius: 8,
+    padding: 8,
+    marginVertical: 8,
+    color: Colors.textDark,
+  },
+  textSmall: { fontSize: 12, fontWeight: "300", color: Colors.textDark },
+  textRegularBlue: {
+    alignSelf: "center",
+    marginTop: SpaceSizes.large,
+    color: "#2196f3",
   },
 });

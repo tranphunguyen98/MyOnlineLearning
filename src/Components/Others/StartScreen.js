@@ -7,7 +7,7 @@ import { Images, Colors, Common, Layout } from "../../Theme/index";
 
 function StartScreen({ navigation }) {
   return (
-    <View style={Common.evenlyContainer}>
+    <View style={[Common.containerMain, Layout.justifyContentEvenly]}>
       <View style={Layout.colCenter}>
         <Image style={Common.imageLogo} source={Images.logo} />
         <Text style={[Common.textLogo, Common.regularVMargin]}>
@@ -18,7 +18,9 @@ function StartScreen({ navigation }) {
         <Button
           title={"Login"}
           buttonStyle={Common.regularVMargin}
-          onPress={() => {}}
+          onPress={() => {
+            navigation.navigate("Login");
+          }}
         />
         <Button
           title={"Register"}
