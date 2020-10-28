@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_online_learning/presentation/screen/Authentication/sign_in/sc_sign_in.dart';
+import 'package:my_online_learning/presentation/screen/Authentication/start/sc_start.dart';
 
 void main() {
   runApp(MyApp());
@@ -14,6 +14,6 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        home: ScreenLogin());
+        home: ScreenStart());
   }
 }

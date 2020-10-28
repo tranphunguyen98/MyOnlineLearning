@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:my_online_learning/presentation/screen/Authentication/sign_in/widget_login_form.dart';
-import 'package:my_online_learning/presentation/screen/Authentication/sign_in/widget_my_flat_btn.dart';
 import 'package:my_online_learning/utils/my_const/my_const.dart';
 
-import 'widget_my_raised_btn.dart';
+import 'file:///C:/react-native/MyOnlineLearning/lib/presentation/common_widgets/widget_my_flat_btn.dart';
+
+import '../../../common_widgets/widget_my_raised_btn.dart';
 
 class ScreenLogin extends StatelessWidget {
   @override
