@@ -4,7 +4,11 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 import StartScreen from "../Components/Others/StartScreen";
 // import Login from "../Components/Authentication/SignIn/sc_sign_in";
-import { Login, Register } from "../Components/Authentication/index";
+import {
+  Login,
+  Register,
+  ForgotPassword,
+} from "../Components/Authentication/index";
 import { Colors } from "../Theme/index";
 
 const Stack = createStackNavigator();
@@ -12,6 +16,11 @@ const Stack = createStackNavigator();
 function MyStack() {
   return (
     <Stack.Navigator>
+      <Stack.Screen
+        name="Forgot Password"
+        component={ForgotPassword}
+        options={optionsHeader}
+      />
       <Stack.Screen
         name="Register"
         component={Register}

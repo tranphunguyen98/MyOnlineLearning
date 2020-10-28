@@ -40,6 +40,9 @@ export default StyleSheet.create({
   regularVMargin: {
     marginVertical: SpaceSizes.regular,
   },
+  extraVMargin: {
+    marginVertical: SpaceSizes.extraLarge,
+  },
   textInputGeneral: {
     backgroundColor: Colors.grayLight,
     borderRadius: 8,
@@ -48,6 +51,7 @@ export default StyleSheet.create({
     color: "#ffffff",
   },
   textSmall: { fontSize: 14, fontWeight: "300", color: Colors.grayLight },
+  textRegular: { fontSize: 16, fontWeight: "300", color: Colors.white },
   textRegularBlue: {
     alignSelf: "center",
     marginTop: SpaceSizes.large,
