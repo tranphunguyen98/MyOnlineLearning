@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:my_online_learning/presentation/screen/Authentication/change_password/sc_change_password.dart';
 import 'package:my_online_learning/presentation/screen/Authentication/register/sc_register.dart';
 import 'package:my_online_learning/presentation/screen/Authentication/reset_password/sc_reset_password.dart';
-import 'package:my_online_learning/presentation/screen/Authentication/sign_in/sc_sign_in.dart';
 import 'package:my_online_learning/presentation/screen/Authentication/start/sc_start.dart';
+
+import 'Authentication/sign_in/sc_sign_in.dart';
 
 class MyRouter {
   static const String HOME = '/home';
@@ -23,6 +25,8 @@ class MyRouter {
         return MaterialPageRoute(builder: (_) => RegisterScreen());
       case FORGOT_PASSWORD:
         return MaterialPageRoute(builder: (_) => ForgotPasswordScreen());
+      case CHANGE_PASSWORD:
+        return MaterialPageRoute(builder: (_) => ChangePasswordScreen());
       default:
         return MaterialPageRoute(
             builder: (_) => Scaffold(
