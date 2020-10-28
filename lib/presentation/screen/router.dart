@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_online_learning/presentation/screen/Authentication/register/sc_register.dart';
+import 'package:my_online_learning/presentation/screen/Authentication/reset_password/sc_reset_password.dart';
 import 'package:my_online_learning/presentation/screen/Authentication/sign_in/sc_sign_in.dart';
 import 'package:my_online_learning/presentation/screen/Authentication/start/sc_start.dart';
 
@@ -9,6 +10,8 @@ class MyRouter {
   static const String SPLASH = '/splash';
   static const String LOGIN = '/login';
   static const String REGISTER = '/register';
+  static const String FORGOT_PASSWORD = '/forgot_password';
+  static const String CHANGE_PASSWORD = '/change_password';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -18,6 +21,8 @@ class MyRouter {
         return MaterialPageRoute(builder: (_) => StartScreen());
       case REGISTER:
         return MaterialPageRoute(builder: (_) => RegisterScreen());
+      case FORGOT_PASSWORD:
+        return MaterialPageRoute(builder: (_) => ForgotPasswordScreen());
       default:
         return MaterialPageRoute(
             builder: (_) => Scaffold(
