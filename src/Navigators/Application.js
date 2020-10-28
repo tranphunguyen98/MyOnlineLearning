@@ -8,6 +8,7 @@ import {
   Login,
   Register,
   ForgotPassword,
+  ChangePassword,
 } from "../Components/Authentication/index";
 import { Colors } from "../Theme/index";
 
@@ -16,6 +17,11 @@ const Stack = createStackNavigator();
 function MyStack() {
   return (
     <Stack.Navigator>
+      <Stack.Screen
+        name="Change Password"
+        component={ChangePassword}
+        options={optionsHeader}
+      />
       <Stack.Screen
         name="Forgot Password"
         component={ForgotPassword}
