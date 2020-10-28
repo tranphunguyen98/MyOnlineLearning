@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_online_learning/presentation/screen/Authentication/start/sc_start.dart';
+import 'package:my_online_learning/presentation/screen/router.dart' as Router;
 
 void main() {
   runApp(MyApp());
@@ -10,10 +11,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Flutter Demo',
+        title: 'Online Learning',
         theme: ThemeData(
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        home: ScreenStart());
+        initialRoute: Router.MyRouter.START,
+        onGenerateRoute: Router.MyRouter.generateRoute,
+        home: StartScreen());
   }
 }

@@ -6,12 +6,17 @@ import 'file:///C:/react-native/MyOnlineLearning/lib/presentation/common_widgets
 
 import '../../../common_widgets/widget_my_raised_btn.dart';
 
-class ScreenLogin extends StatelessWidget {
+class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: Icon(Icons.arrow_back),
+        leading: GestureDetector(
+          child: Icon(Icons.arrow_back),
+          onTap: () {
+            Navigator.pop(context);
+          },
+        ),
         title: Text("Sign In"),
         backgroundColor: COLOR_CONST.GRAY_DARK,
       ),
@@ -25,6 +30,7 @@ class ScreenLogin extends StatelessWidget {
             SizedBox(height: 16.0),
             MyRaisedButton(
               title: "SIGN IN",
+              onPressed: () => {},
             ),
             SizedBox(height: 8.0),
             MyFlatButton(
