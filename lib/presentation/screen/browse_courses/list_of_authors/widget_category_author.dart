@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:my_online_learning/presentation/screen/browse_courses/home/widget_list_author_h.dart';
 import 'package:my_online_learning/utils/my_const/my_const.dart';
+
+import 'file:///C:/react-native/MyOnlineLearning/lib/presentation/screen/browse_courses/list_of_authors/widget_list_author_h.dart';
 
 class WidgetCategoryAuthor extends StatelessWidget {
   final String title;

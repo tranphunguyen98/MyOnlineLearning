@@ -3,12 +3,14 @@ import 'package:my_online_learning/presentation/screen/Authentication/change_pas
 import 'package:my_online_learning/presentation/screen/Authentication/register/sc_register.dart';
 import 'package:my_online_learning/presentation/screen/Authentication/reset_password/sc_reset_password.dart';
 import 'package:my_online_learning/presentation/screen/Authentication/start/sc_start.dart';
+import 'package:my_online_learning/presentation/screen/browse_courses/list_of_courses/sc_list_course.dart';
 
 import 'Authentication/sign_in/sc_sign_in.dart';
 import 'browse_courses/home/sc_home.dart';
 
 class MyRouter {
   static const String HOME = '/home';
+  static const String LIST_COURSE = '/list_course';
   static const String START = '/start';
   static const String SPLASH = '/splash';
   static const String LOGIN = '/login';
@@ -22,6 +24,8 @@ class MyRouter {
         return MaterialPageRoute(builder: (_) => HomeScreen());
       case LOGIN:
         return MaterialPageRoute(builder: (_) => LoginScreen());
+      case LIST_COURSE:
+        return MaterialPageRoute(builder: (_) => ListCourseScreen());
       case START:
         return MaterialPageRoute(builder: (_) => StartScreen());
       case REGISTER:

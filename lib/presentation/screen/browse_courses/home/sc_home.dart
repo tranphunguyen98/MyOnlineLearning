@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:my_online_learning/presentation/screen/browse_courses/home/widget_category_course.dart';
 import 'package:my_online_learning/utils/my_const/my_const.dart';
 
-import 'widget_category_author.dart';
+import 'file:///C:/react-native/MyOnlineLearning/lib/presentation/screen/browse_courses/list_of_categories/widget_category_course.dart';
+
+import '../list_of_authors/widget_category_author.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
