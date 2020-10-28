@@ -16,6 +16,9 @@ export const Colors = {
   primary: "#5EE2C5",
   success: "#28a745",
   error: "#dc3545",
+  backgroundDark: "#121212",
+  gray: "#464F54",
+  grayLight: "#66737A",
 };
 
 /**

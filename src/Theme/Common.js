@@ -10,10 +10,11 @@ export default StyleSheet.create({
   containerMain: {
     flex: 1,
     padding: SpaceSizes.large,
+    backgroundColor: Colors.backgroundDark,
   },
   generalContainer: {
     flex: 1,
-    backgroundColor: "#ffffff",
+    backgroundColor: Colors.white,
   },
   button: {
     backgroundColor: Colors.primary,
@@ -40,13 +41,13 @@ export default StyleSheet.create({
     marginVertical: SpaceSizes.regular,
   },
   textInputGeneral: {
-    backgroundColor: "#e1f5fe",
+    backgroundColor: Colors.grayLight,
     borderRadius: 8,
     padding: 8,
     marginVertical: 8,
-    color: Colors.textDark,
+    color: "#ffffff",
   },
-  textSmall: { fontSize: 12, fontWeight: "300", color: Colors.textDark },
+  textSmall: { fontSize: 14, fontWeight: "300", color: Colors.grayLight },
   textRegularBlue: {
     alignSelf: "center",
     marginTop: SpaceSizes.large,
