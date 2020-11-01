@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_online_learning/presentation/screen/Authentication/sign_in/sc_sign_in.dart';
 import 'package:my_online_learning/presentation/screen/browse_courses/home/sc_home.dart';
+import 'package:my_online_learning/presentation/screen/search_courses/search/sc_search.dart';
 import 'package:my_online_learning/utils/my_const/COLOR_CONST.dart';
 
 class HomePage extends StatefulWidget {
@@ -15,7 +16,7 @@ class _HomePageState extends State<HomePage> {
     HomeScreen(),
     LoginScreen(),
     HomeScreen(),
-    HomeScreen(),
+    SearchScreen(),
   ];
 
   void _onItemTapped(int index) {
