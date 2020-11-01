@@ -6,7 +6,7 @@ class STYLE_CONST {
   static const TextStyle textMedium =
       TextStyle(color: Colors.white, fontSize: 16);
   static const TextStyle textMediumPrimary =
-      TextStyle(color: Color(0xFF181b20), fontSize: 16);
+      TextStyle(color: Color(0xFF2196f3), fontSize: 16);
   static const TextStyle textRegularGray =
       TextStyle(color: Colors.grey, fontSize: 14);
   static const TextStyle textTitle =

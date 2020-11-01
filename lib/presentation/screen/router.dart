@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_online_learning/presentation/screen/AccountManager/Account/sc_account.dart';
+import 'package:my_online_learning/presentation/screen/AccountManager/ChangeThemes/sc_change_themes.dart';
 import 'package:my_online_learning/presentation/screen/AccountManager/Setting/sc_setting.dart';
 import 'package:my_online_learning/presentation/screen/Authentication/change_password/sc_change_password.dart';
 import 'package:my_online_learning/presentation/screen/Authentication/register/sc_register.dart';
@@ -15,6 +16,7 @@ class MyRouter {
   static const String HOME_PAGE = '/home_page';
   static const String ACCOUNT = '/account';
   static const String SETTING = '/setting';
+  static const String THEME = '/theme';
   static const String HOME = '/home';
   static const String LIST_COURSE = '/list_course';
   static const String START = '/start';
@@ -34,6 +36,8 @@ class MyRouter {
         return MaterialPageRoute(builder: (_) => SettingScreen());
       case HOME:
         return MaterialPageRoute(builder: (_) => HomeScreen());
+      case THEME:
+        return MaterialPageRoute(builder: (_) => ChangeThemeScreen());
       case LOGIN:
         return MaterialPageRoute(builder: (_) => LoginScreen());
       case LIST_COURSE:
