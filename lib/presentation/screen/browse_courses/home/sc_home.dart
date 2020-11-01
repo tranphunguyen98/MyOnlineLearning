@@ -12,6 +12,16 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text("Home"),
         backgroundColor: COLOR_CONST.GRAY_DARK,
+        actions: [
+          Icon(
+            Icons.account_circle,
+            color: Colors.white,
+          ),
+          Icon(
+            Icons.more_vert,
+            color: Colors.white,
+          ),
+        ],
       ),
       body: Container(
         color: COLOR_CONST.BACKGROUND_DARK,
