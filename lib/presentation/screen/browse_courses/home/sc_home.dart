@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_online_learning/presentation/screen/router.dart';
 import 'package:my_online_learning/utils/my_const/my_const.dart';
 
 import 'file:///C:/react-native/MyOnlineLearning/lib/presentation/screen/browse_courses/list_of_categories/widget_category_course.dart';
@@ -6,6 +7,12 @@ import 'file:///C:/react-native/MyOnlineLearning/lib/presentation/screen/browse_
 import '../list_of_authors/widget_category_author.dart';
 
 class HomeScreen extends StatelessWidget {
+  final List<DropdownChoices> dropdownChoices = [
+    DropdownChoices(title: "Setting"),
+    DropdownChoices(title: "Send feedback"),
+    DropdownChoices(title: "Contact support"),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -13,13 +20,28 @@ class HomeScreen extends StatelessWidget {
         title: Text("Home"),
         backgroundColor: COLOR_CONST.GRAY_DARK,
         actions: [
-          Icon(
-            Icons.account_circle,
-            color: Colors.white,
+          GestureDetector(
+            child: Icon(
+              Icons.account_circle,
+              color: Colors.white,
+            ),
+            onTap: () {
+              Navigator.pushNamed(context, MyRouter.ACCOUNT);
+            },
           ),
-          Icon(
-            Icons.more_vert,
-            color: Colors.white,
+          PopupMenuButton<DropdownChoices>(
+            onSelected: (DropdownChoices choice) {
+              Navigator.pushNamed(context, MyRouter.SETTING);
+            },
+            elevation: 6,
+            itemBuilder: (BuildContext context) {
+              return dropdownChoices.map((DropdownChoices choice) {
+                return PopupMenuItem<DropdownChoices>(
+                  value: choice,
+                  child: Text(choice.title),
+                );
+              }).toList();
+            },
           ),
         ],
       ),
@@ -40,4 +62,10 @@ class HomeScreen extends StatelessWidget {
       ),
     );
   }
+}
+
+class DropdownChoices {
+  const DropdownChoices({this.title});
+
+  final String title;
 }
