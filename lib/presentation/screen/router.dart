@@ -4,11 +4,13 @@ import 'package:my_online_learning/presentation/screen/Authentication/register/s
 import 'package:my_online_learning/presentation/screen/Authentication/reset_password/sc_reset_password.dart';
 import 'package:my_online_learning/presentation/screen/Authentication/start/sc_start.dart';
 import 'package:my_online_learning/presentation/screen/browse_courses/list_of_courses/sc_list_course.dart';
+import 'package:my_online_learning/presentation/screen/home_page.dart';
 
 import 'Authentication/sign_in/sc_sign_in.dart';
 import 'browse_courses/home/sc_home.dart';
 
 class MyRouter {
+  static const String HOME_PAGE = '/home_page';
   static const String HOME = '/home';
   static const String LIST_COURSE = '/list_course';
   static const String START = '/start';
@@ -20,6 +22,8 @@ class MyRouter {
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
+      case HOME_PAGE:
+        return MaterialPageRoute(builder: (_) => HomePage());
       case HOME:
         return MaterialPageRoute(builder: (_) => HomeScreen());
       case LOGIN:
