@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:my_online_learning/presentation/screen/Authentication/sign_in/sc_sign_in.dart';
 import 'package:my_online_learning/presentation/screen/browse_courses/home/sc_home.dart';
-import 'package:my_online_learning/presentation/screen/search_courses/search/sc_search.dart';
 import 'package:my_online_learning/utils/my_const/COLOR_CONST.dart';
+
+import 'router.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -12,11 +12,17 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
 
-  List<Widget> listDestination = [
-    HomeScreen(),
-    LoginScreen(),
-    HomeScreen(),
-    SearchScreen(),
+  final List<DropdownChoices> dropdownChoices = [
+    DropdownChoices(title: "Setting"),
+    DropdownChoices(title: "Send feedback"),
+    DropdownChoices(title: "Contact support"),
+  ];
+
+  final List<BottomNavigationData> bottomNavigationItems = [
+    BottomNavigationData("Home", Icons.home, 0xff181b20, HomeScreen()),
+    BottomNavigationData("Downloads", Icons.get_app, 0xff181b20, HomeScreen()),
+    BottomNavigationData("Browse", Icons.language, 0xff181b20, HomeScreen()),
+    BottomNavigationData("Search", Icons.search, 0xff181b20, HomeScreen()),
   ];
 
   void _onItemTapped(int index) {
@@ -28,33 +34,63 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        bottomNavigationBar: BottomNavigationBar(
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Home',
-              backgroundColor: Color(0xff181b20),
+        appBar: AppBar(
+          title: Text(bottomNavigationItems[_selectedIndex].title),
+          backgroundColor: COLOR_CONST.GRAY_DARK,
+          actions: [
+            GestureDetector(
+              child: Icon(
+                Icons.account_circle,
+                color: Colors.white,
+              ),
+              onTap: () {
+                Navigator.pushNamed(context, MyRouter.ACCOUNT);
+              },
             ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.get_app),
-              label: 'Downloads',
-              backgroundColor: Color(0xff181b20),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.language),
-              label: 'Browse',
-              backgroundColor: Color(0xff181b20),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.search),
-              label: 'Search',
-              backgroundColor: Color(0xff181b20),
+            PopupMenuButton<DropdownChoices>(
+              onSelected: (DropdownChoices choice) {
+                Navigator.pushNamed(context, MyRouter.SETTING);
+              },
+              elevation: 6,
+              itemBuilder: (BuildContext context) {
+                return dropdownChoices.map((DropdownChoices choice) {
+                  return PopupMenuItem<DropdownChoices>(
+                    value: choice,
+                    child: Text(choice.title),
+                  );
+                }).toList();
+              },
             ),
           ],
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          items: bottomNavigationItems
+              .map((e) => BottomNavigationBarItem(
+                    icon: Icon(e.iconData),
+                    label: e.title,
+                    backgroundColor: Color(e.color),
+                  ))
+              .toList(),
           currentIndex: _selectedIndex,
           selectedItemColor: COLOR_CONST.BTN_DEFAULT,
           onTap: _onItemTapped,
         ),
-        body: listDestination[_selectedIndex]);
+        body: bottomNavigationItems[_selectedIndex].destination);
   }
+}
+
+class BottomNavigationData {
+  final String title;
+  final IconData iconData;
+  final int color;
+  final Widget destination;
+
+  const BottomNavigationData(
+      this.title, this.iconData, this.color, this.destination);
+}
+
+class DropdownChoices {
+  const DropdownChoices({this.title});
+
+  final String title;
 }

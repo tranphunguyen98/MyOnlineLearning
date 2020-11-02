@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_online_learning/presentation/screen/browse_courses/home/sc_home.dart';
+import 'package:my_online_learning/presentation/screen/home_page.dart';
 import 'package:my_online_learning/presentation/screen/router.dart';
 
 void main() {
@@ -15,8 +15,8 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        initialRoute: MyRouter.COURSE_DETAIL,
+        initialRoute: MyRouter.HOME_PAGE,
         onGenerateRoute: MyRouter.generateRoute,
-        home: HomeScreen());
+        home: HomePage());
   }
 }
