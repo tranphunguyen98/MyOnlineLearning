@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_online_learning/presentation/screen/browse_courses/browse/sc_browse.dart';
 import 'package:my_online_learning/presentation/screen/browse_courses/home/sc_home.dart';
 import 'package:my_online_learning/utils/my_const/COLOR_CONST.dart';
 
@@ -21,7 +22,7 @@ class _HomePageState extends State<HomePage> {
   final List<BottomNavigationData> bottomNavigationItems = [
     BottomNavigationData("Home", Icons.home, 0xff181b20, HomeScreen()),
     BottomNavigationData("Downloads", Icons.get_app, 0xff181b20, HomeScreen()),
-    BottomNavigationData("Browse", Icons.language, 0xff181b20, HomeScreen()),
+    BottomNavigationData("Browse", Icons.language, 0xff181b20, BrowseScreen()),
     BottomNavigationData("Search", Icons.search, 0xff181b20, HomeScreen()),
   ];
 
