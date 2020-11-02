@@ -3,9 +3,16 @@ import 'package:my_online_learning/model/entity/course.dart';
 import 'package:my_online_learning/presentation/screen/browse_courses/list_of_courses/widget_item_course_vertical.dart';
 
 class WidgetListCourseVertical extends StatelessWidget {
+  final bool isScroll;
+
+  const WidgetListCourseVertical({this.isScroll = true});
+
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
+      physics: isScroll
+          ? AlwaysScrollableScrollPhysics()
+          : NeverScrollableScrollPhysics(),
       scrollDirection: Axis.vertical,
       shrinkWrap: true,
       itemCount: Course.listCourse.length,

@@ -24,7 +24,7 @@ class Course {
       this.instructorNames,
       this.description = ""});
 
-  static List<Course> listCourse = [
+  static const List<Course> listCourse = [
     Course(
         id: "1",
         title: "Angular Fundamentals",

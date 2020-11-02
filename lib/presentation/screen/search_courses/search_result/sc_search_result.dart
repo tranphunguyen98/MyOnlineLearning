@@ -17,7 +17,7 @@ class SearchScreen extends StatelessWidget {
             children: [
               WidgetSearchEditText(),
               //ListSearchSuggestion(),
-              Expanded(child: TabResultSearch()),
+              TabResultSearch(),
             ],
           )),
     );

@@ -17,4 +17,7 @@ class STYLE_CONST {
       TextStyle(color: Colors.white, fontSize: 18);
   static const TextStyle textLarge =
       TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold);
+  static const SizedBox spaceHorizontalRegular = SizedBox(
+    height: 16.0,
+  );
 }
