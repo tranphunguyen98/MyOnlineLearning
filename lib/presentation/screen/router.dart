@@ -11,6 +11,7 @@ import 'package:my_online_learning/presentation/screen/browse_courses/list_of_co
 import 'package:my_online_learning/presentation/screen/course_study/course_introduction/sc_course_introduction.dart';
 import 'package:my_online_learning/presentation/screen/home_page.dart';
 import 'package:my_online_learning/presentation/screen/others/splash/sc_splash.dart';
+import 'package:my_online_learning/presentation/screen/others/subscription/sc_subscription.dart';
 
 import 'Authentication/sign_in/sc_sign_in.dart';
 import 'browse_courses/home/sc_home.dart';
@@ -30,6 +31,7 @@ class MyRouter {
   static const String REGISTER = '/register';
   static const String FORGOT_PASSWORD = '/forgot_password';
   static const String CHANGE_PASSWORD = '/change_password';
+  static const String SUBSCRIPTION = '/subscription';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -61,6 +63,8 @@ class MyRouter {
         return MaterialPageRoute(builder: (_) => ForgotPasswordScreen());
       case CHANGE_PASSWORD:
         return MaterialPageRoute(builder: (_) => ChangePasswordScreen());
+      case SUBSCRIPTION:
+        return MaterialPageRoute(builder: (_) => SubscriptionScreen());
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(

@@ -12,13 +12,13 @@ class MyOutlineButton extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: OutlineButton(
-        color: COLOR_CONST.BTN_DEFAULT,
-        borderSide: BorderSide(color: COLOR_CONST.BTN_DEFAULT),
+        color: COLOR_CONST.PRIMARY,
+        borderSide: BorderSide(color: COLOR_CONST.PRIMARY),
         onPressed: this.onPressed,
         child: Text(
           this.title,
           style: TextStyle(
-            color: COLOR_CONST.BTN_DEFAULT,
+            color: COLOR_CONST.PRIMARY,
           ),
         ),
       ),

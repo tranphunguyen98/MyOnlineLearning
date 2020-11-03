@@ -15,7 +15,7 @@ class MyFlatButton extends StatelessWidget {
         child: Text(
           this.title,
           style: TextStyle(
-            color: COLOR_CONST.BTN_DEFAULT,
+            color: COLOR_CONST.PRIMARY,
           ),
         ),
       ),

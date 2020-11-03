@@ -35,11 +35,11 @@ class SettingScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: OutlineButton(
-                    textColor: COLOR_CONST.BTN_DEFAULT,
+                    textColor: COLOR_CONST.PRIMARY,
                     child: Text(
                       "SIGN OUT",
                     ),
-                    borderSide: BorderSide(color: COLOR_CONST.BTN_DEFAULT),
+                    borderSide: BorderSide(color: COLOR_CONST.PRIMARY),
                     onPressed: () {}),
               )
             ],

@@ -49,7 +49,7 @@ class _HomePageState extends State<HomePage> {
                   ))
               .toList(),
           currentIndex: _selectedIndex,
-          selectedItemColor: COLOR_CONST.BTN_DEFAULT,
+          selectedItemColor: COLOR_CONST.PRIMARY,
           onTap: _onItemTapped,
         ),
         body: bottomNavigationItems[_selectedIndex].destination);
