@@ -10,11 +10,13 @@ import 'package:my_online_learning/presentation/screen/browse_courses/browse/sc_
 import 'package:my_online_learning/presentation/screen/browse_courses/list_of_courses/sc_list_course.dart';
 import 'package:my_online_learning/presentation/screen/course_study/course_introduction/sc_course_introduction.dart';
 import 'package:my_online_learning/presentation/screen/home_page.dart';
+import 'package:my_online_learning/presentation/screen/others/splash/sc_splash.dart';
 
 import 'Authentication/sign_in/sc_sign_in.dart';
 import 'browse_courses/home/sc_home.dart';
 
 class MyRouter {
+  static const String SPLASH = '/splash';
   static const String HOME_PAGE = '/home_page';
   static const String ACCOUNT = '/account';
   static const String SETTING = '/setting';
@@ -24,7 +26,6 @@ class MyRouter {
   static const String LIST_COURSE = '/list_course';
   static const String COURSE_DETAIL = '/course_detail';
   static const String START = '/start';
-  static const String SPLASH = '/splash';
   static const String LOGIN = '/login';
   static const String REGISTER = '/register';
   static const String FORGOT_PASSWORD = '/forgot_password';
@@ -32,6 +33,8 @@ class MyRouter {
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
+      case SPLASH:
+        return MaterialPageRoute(builder: (_) => SplashScreen());
       case HOME_PAGE:
         return MaterialPageRoute(builder: (_) => HomePage());
       case ACCOUNT:
@@ -60,11 +63,12 @@ class MyRouter {
         return MaterialPageRoute(builder: (_) => ChangePasswordScreen());
       default:
         return MaterialPageRoute(
-            builder: (_) => Scaffold(
-                  body: Center(
-                    child: Text('No route defined for ${settings.name}'),
-                  ),
-                ));
+          builder: (_) => Scaffold(
+            body: Center(
+              child: Text('No route defined for ${settings.name}'),
+            ),
+          ),
+        );
     }
   }
 }

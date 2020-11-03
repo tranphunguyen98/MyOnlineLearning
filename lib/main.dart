@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        initialRoute: MyRouter.HOME_PAGE,
+        initialRoute: MyRouter.SPLASH,
         onGenerateRoute: MyRouter.generateRoute,
         home: HomePage());
   }
