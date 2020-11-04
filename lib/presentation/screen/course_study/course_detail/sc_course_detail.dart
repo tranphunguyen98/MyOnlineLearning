@@ -3,10 +3,11 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:my_online_learning/model/entity/Chapter.dart';
 import 'package:my_online_learning/model/entity/author.dart';
 import 'package:my_online_learning/model/entity/course.dart';
+import 'package:my_online_learning/utils/extensions.dart';
 import 'package:my_online_learning/utils/my_const/my_const.dart';
 
-import 'ItemFunctionDetail.dart';
 import 'WidgetButtonIcon.dart';
+import 'item_function_detail.dart';
 
 class CourseDetailScreen extends StatefulWidget {
   @override
@@ -18,54 +19,38 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: COLOR_CONST.BACKGROUND_DARK,
-      child: ListView(
+    return Scaffold(
+      backgroundColor: context.theme.backgroundColor,
+      body: Column(
         children: [
-          SizedBox(height: MediaQuery.of(context).padding.top),
-          _buildVideoView(),
-          _buildHeaderInfo(),
-          _buildRowFunction(),
-          _buildDescription(),
-          _buildButtonFunction(),
-          _buildContentHeader(),
-          SizedBox(height: 16.0),
-          _buildContent(),
+          VideoView(
+            course: course,
+          ),
+          Expanded(
+            child: ListView(
+              children: [
+                _buildHeaderInfo(),
+                _buildRowFunction(),
+                _buildDescription(),
+                _buildButtonFunction(),
+                _buildContentHeader(),
+                SizedBox(height: 16.0),
+                _buildContent(),
+              ],
+            ),
+          ),
         ],
       ),
     );
   }
 
-  _buildVideoView() {
-    return Stack(
-      children: [
-        Image(
-            height: 200,
-            width: double.infinity,
-            fit: BoxFit.fitWidth,
-            image: AssetImage(course.imageUrl)),
-        Positioned.fill(
-          child: Align(
-            alignment: Alignment.center,
-            child: Image(
-              height: 80,
-              width: 80,
-              image: AssetImage("assets/ic_play.png"),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-
-  _buildItemAuthor() {
+  Widget _buildItemAuthor() {
     return Chip(
       label: Text(
         Author.listAuthor[0].name,
-        style: STYLE_CONST.textRegular,
+        //TODO style: context.textTheme.subtitle2,
       ),
       padding: EdgeInsets.all(0.0),
-      backgroundColor: COLOR_CONST.GRAY,
       avatar: Container(
         decoration: BoxDecoration(
           shape: BoxShape.circle,
@@ -78,18 +63,15 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
     );
   }
 
-  _buildHeaderInfo() {
+  Widget _buildHeaderInfo() {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(
-            height: 16.0,
-          ),
           Text(
             course.title,
-            style: STYLE_CONST.textTitle,
+            style: StyleConst.textTitle,
           ),
           SizedBox(
             height: 16.0,
@@ -112,12 +94,12 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
     );
   }
 
-  _buildRowInfo() {
+  Widget _buildRowInfo() {
     return Row(
       children: [
         Text(
           course.level,
-          style: STYLE_CONST.textSmallWhite60,
+          style: StyleConst.textSmallWhite60,
         ),
         SizedBox(
           width: 4,
@@ -132,7 +114,7 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
         ),
         Text(
           course.createdAt,
-          style: STYLE_CONST.textSmallWhite60,
+          style: StyleConst.textSmallWhite60,
         ),
         SizedBox(
           width: 4,
@@ -147,7 +129,7 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
         ),
         Text(
           "${course.totalMinutes}m",
-          style: STYLE_CONST.textSmallWhite60,
+          style: StyleConst.textSmallWhite60,
         ),
         SizedBox(
           width: 8.0,
@@ -157,7 +139,7 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
     );
   }
 
-  _buildRating() {
+  Widget _buildRating() {
     return RatingBar(
       initialRating: course.ratedNumber,
       minRating: 1,
@@ -174,7 +156,7 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
     );
   }
 
-  _buildRowFunction() {
+  Widget _buildRowFunction() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Row(
@@ -188,7 +170,7 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
     );
   }
 
-  _buildDescription() {
+  Widget _buildDescription() {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: IntrinsicHeight(
@@ -198,7 +180,7 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
             Expanded(
               child: Text(
                 course.description,
-                style: STYLE_CONST.textRegular,
+                //TODO style: context.textTheme.subtitle2,
                 maxLines: 3,
               ),
             ),
@@ -206,7 +188,7 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
               width: 16.0,
             ),
             Container(
-              color: COLOR_CONST.GRAY_LIGHT,
+              color: context.theme.primaryColor,
               alignment: Alignment.center,
               child: Icon(
                 Icons.keyboard_arrow_down,
@@ -219,9 +201,9 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
     );
   }
 
-  _buildButtonFunction() {
+  Widget _buildButtonFunction() {
     return Padding(
-      padding: const EdgeInsets.all(16.0),
+      padding: EdgeInsets.all(16.0),
       child: Column(
         children: [
           WidgetButtonIcon("Take a learning check", Icons.check_circle_outline),
@@ -231,17 +213,17 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
     );
   }
 
-  _buildContentHeader() {
+  Widget _buildContentHeader() {
     return Align(
       alignment: Alignment.center,
       child: Text(
         "CONTENT",
-        style: STYLE_CONST.textMedium,
+        style: StyleConst.textMedium,
       ),
     );
   }
 
-  _buildContent() {
+  Widget _buildContent() {
     return Container(
       padding: EdgeInsets.only(top: 8.0),
       color: Colors.black,
@@ -265,15 +247,48 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
   }
 }
 
+class VideoView extends StatelessWidget {
+  const VideoView({
+    Key key,
+    @required this.course,
+  }) : super(key: key);
+
+  final Course course;
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        Image(
+            height: 240,
+            width: double.infinity,
+            fit: BoxFit.fitWidth,
+            image: AssetImage(course.imageUrl)),
+        Positioned.fill(
+          child: Align(
+            alignment: Alignment.center,
+            child: Image(
+              height: 80,
+              width: 80,
+              image: AssetImage("assets/ic_play.png"),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
 class ItemChapter extends StatelessWidget {
   final Chapter chapter;
 
   const ItemChapter(this.chapter);
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        _buildHeader(),
+        Header(chapter: chapter),
         SizedBox(
           height: 16.0,
         ),
@@ -286,7 +301,7 @@ class ItemChapter extends StatelessWidget {
                     Icons.stop_circle,
                     color: lesson.isStudying
                         ? Colors.green
-                        : COLOR_CONST.BACKGROUND_DARK,
+                        : context.theme.primaryColorDark,
                     size: 12,
                   ),
                   SizedBox(
@@ -295,11 +310,11 @@ class ItemChapter extends StatelessWidget {
                   Expanded(
                       child: Text(
                     lesson.title,
-                    style: STYLE_CONST.textRegular,
+                    style: context.textTheme.subtitle2,
                   )),
                   Text(
                     lesson.durationString,
-                    style: STYLE_CONST.textRegularGray,
+                    style: StyleConst.textRegularGray,
                   ),
                 ],
               ),
@@ -307,8 +322,18 @@ class ItemChapter extends StatelessWidget {
       ],
     );
   }
+}
 
-  _buildHeader() {
+class Header extends StatelessWidget {
+  const Header({
+    Key key,
+    @required this.chapter,
+  }) : super(key: key);
+
+  final Chapter chapter;
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
       height: 60.0,
@@ -320,17 +345,18 @@ class ItemChapter extends StatelessWidget {
               Expanded(
                 child: Container(
                   alignment: Alignment.center,
-                  color: COLOR_CONST.BACKGROUND_DARK,
+                  color: context.theme.primaryColorDark,
                   child: Text(
                     chapter.index.toString(),
-                    style: STYLE_CONST.textRegular,
+                    style: context.textTheme.subtitle2,
                   ),
                 ),
               ),
               Container(
                 height: 4.0,
-                color:
-                    chapter.isStudying ? Colors.green : COLOR_CONST.GRAY_LIGHT,
+                color: chapter.isStudying
+                    ? Colors.green
+                    : context.theme.primaryColorLight,
               )
             ],
           ),
@@ -344,14 +370,14 @@ class ItemChapter extends StatelessWidget {
             children: [
               Text(
                 chapter.title,
-                style: STYLE_CONST.textRegular,
+                //TODO style: context.textTheme.subtitle2,
               ),
               SizedBox(
                 height: 8.0,
               ),
               Text(
                 chapter.durationString,
-                style: STYLE_CONST.textRegularGray,
+                style: StyleConst.textRegularGray,
               )
             ],
           ),

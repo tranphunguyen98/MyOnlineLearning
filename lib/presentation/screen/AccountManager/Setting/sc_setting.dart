@@ -1,56 +1,65 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:my_online_learning/presentation/common_widgets/widget_my_outline_btn.dart';
 import 'package:my_online_learning/presentation/screen/router.dart';
-import 'package:my_online_learning/utils/my_const/COLOR_CONST.dart';
+import 'package:my_online_learning/utils/extensions.dart';
 import 'package:my_online_learning/utils/my_const/my_const.dart';
 
 class SettingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text("Setting"),
-          backgroundColor: COLOR_CONST.GRAY_DARK,
-        ),
-        body: Container(
-          color: COLOR_CONST.BACKGROUND_DARK,
-          child: ListView(
-            children: [
-              SizedBox(
-                height: 16.0,
+      appBar: AppBar(
+        title: Text("Setting"),
+        backgroundColor: context.theme.primaryColor,
+      ),
+      body: Container(
+        color: context.theme.backgroundColor,
+        child: ListView(
+          children: [
+            SizedBox(
+              height: 16.0,
+            ),
+            ItemSetting("Account", "", false),
+            ItemSetting("Subscription", "Free (Limited Library) (Free)", false),
+            ItemSetting("Communication Preferences", "", false),
+            DividerCommon(),
+            ItemSetting("Language", "English", false),
+            ItemSetting("Require Wi-fi for streaming", "", true),
+            ItemSetting("Require Wi-fi for downloading", "", true),
+            DividerCommon(),
+            ItemSetting("Theme", "Dark", false),
+            DividerCommon(),
+            ItemSetting("App version", "1.0.0", false),
+            DividerCommon(),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: MyOutlineButton(
+                "SIGN OUT",
+                onPressed: () {},
               ),
-              ItemSetting("Account", "", false),
-              ItemSetting(
-                  "Subscription", "Free (Limited Library) (Free)", false),
-              ItemSetting("Communication Preferences", "", false),
-              _buildDivider(),
-              ItemSetting("Language", "English", false),
-              ItemSetting("Require Wi-fi for streaming", "", true),
-              ItemSetting("Require Wi-fi for downloading", "", true),
-              _buildDivider(),
-              ItemSetting("Theme", "Dark", false),
-              _buildDivider(),
-              ItemSetting("App version", "1.0.0", false),
-              _buildDivider(),
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: OutlineButton(
-                    textColor: COLOR_CONST.PRIMARY,
-                    child: Text(
-                      "SIGN OUT",
-                    ),
-                    borderSide: BorderSide(color: COLOR_CONST.PRIMARY),
-                    onPressed: () {}),
-              )
-            ],
-          ),
-        ));
+            ),
+          ],
+        ),
+      ),
+    );
   }
+}
 
-  _buildDivider() {
+class DividerCommon extends StatelessWidget {
+  final double left, right;
+
+  const DividerCommon({
+    Key key,
+    this.left = 0.0,
+    this.right = 0.0,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(right: 16.0),
-      child: Divider(
+      padding: EdgeInsets.only(left: left, right: right),
+      child: const Divider(
         thickness: 0.5,
         color: Colors.white60,
       ),
@@ -82,14 +91,14 @@ class ItemSetting extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style: STYLE_CONST.textMedium,
+                    style: StyleConst.textMedium,
                   ),
                   SizedBox(
                     height: 4.0,
                   ),
                   Text(
                     subtitle,
-                    style: STYLE_CONST.textRegularGray,
+                    style: StyleConst.textRegularGray,
                   )
                 ],
               ),

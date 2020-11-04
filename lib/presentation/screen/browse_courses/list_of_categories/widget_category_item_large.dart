@@ -28,7 +28,7 @@ class CategoryItemLarge extends StatelessWidget {
             child: Text(
               title,
               textAlign: TextAlign.center,
-              style: STYLE_CONST.textLarge,
+              style: StyleConst.textLarge,
             ),
           ),
         ),

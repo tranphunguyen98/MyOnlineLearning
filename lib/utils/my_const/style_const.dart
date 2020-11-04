@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class STYLE_CONST {
+class StyleConst {
   static const TextStyle textSmallWhite60 =
       TextStyle(color: Colors.white60, fontSize: 12);
-  static const TextStyle textRegular =
-      TextStyle(color: Colors.white, fontSize: 14);
+  // static const TextStyle textRegular =
+  //     TextStyle(color: Colors.white, fontSize: 14);
   static const TextStyle textRegularGray =
       TextStyle(color: Colors.grey, fontSize: 14);
   static const TextStyle textMedium =

@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:my_online_learning/presentation/screen/browse_courses/list_of_categories/widget_category_item_large.dart';
 import 'package:my_online_learning/presentation/screen/browse_courses/list_of_categories/widget_category_item_medium.dart';
-import 'package:my_online_learning/utils/my_const/my_const.dart';
+import 'package:my_online_learning/utils/extensions.dart';
 
 import 'file:///C:/react-native/MyOnlineLearning/lib/presentation/screen/browse_courses/list_of_categories/widget_category_course.dart';
 
@@ -12,16 +12,16 @@ class BrowseScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: COLOR_CONST.BACKGROUND_DARK,
+//      color: COLOR_CONST.BACKGROUND_DARK,
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              _buildListCategoryLarge(),
-              _buildListCategoryMedium(),
-              _buildListSkill(),
+              ListCategoryLarge(),
+              ListCategoryMedium(),
+              ListSkill(),
               WidgetCategoryCourse(title: "New"),
               WidgetCategoryCourse(title: "Trending"),
               WidgetCategoryAuthor(title: "Top authors"),
@@ -31,56 +31,15 @@ class BrowseScreen extends StatelessWidget {
       ),
     );
   }
+}
 
-  _buildListCategoryLarge() {
-    return Column(
-      children: [
-        CategoryItemLarge(
-            "NEW\nRELEASES", "images/background_category_large.png"),
-        SizedBox(height: 16.0),
-        CategoryItemLarge(
-            "RECOMMENDED\nFOR YOU", "images/background_category_large.png"),
-      ],
-    );
-  }
+class ListCategoryMedium extends StatelessWidget {
+  const ListCategoryMedium({
+    Key key,
+  }) : super(key: key);
 
-  _buildListSkill() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        SizedBox(
-          height: 32.0,
-        ),
-        Text(
-          "Popular Skills",
-          style: STYLE_CONST.textRegular,
-        ),
-        SizedBox(
-          height: 16.0,
-        ),
-        SizedBox(
-          height: 40.0,
-          child: ListView.builder(
-              itemCount: 8,
-              shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.only(right: 8.0),
-                  child: Chip(
-                      backgroundColor: COLOR_CONST.GRAY_LIGHT,
-                      label: Text(
-                        "Angular",
-                        style: STYLE_CONST.textRegular,
-                      )),
-                );
-              }),
-        ),
-      ],
-    );
-  }
-
-  _buildListCategoryMedium() {
+  @override
+  Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 16.0),
       child: ConstrainedBox(
@@ -104,6 +63,68 @@ class BrowseScreen extends StatelessWidget {
           },
         ),
       ),
+    );
+  }
+}
+
+class ListSkill extends StatelessWidget {
+  const ListSkill({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SizedBox(
+          height: 32.0,
+        ),
+        Text(
+          "Popular Skills",
+          style: context.textTheme.subtitle2,
+        ),
+        SizedBox(
+          height: 16.0,
+        ),
+        SizedBox(
+          height: 40.0,
+          child: ListView.builder(
+              itemCount: 8,
+              shrinkWrap: true,
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.only(right: 8.0),
+                  child: Chip(
+//                      backgroundColor: COLOR_CONST.GRAY_LIGHT,
+                      label: Text(
+                    "Angular",
+                    style: context.textTheme.subtitle2,
+                  )),
+                );
+              }),
+        ),
+      ],
+    );
+  }
+}
+
+class ListCategoryLarge extends StatelessWidget {
+  const ListCategoryLarge({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        CategoryItemLarge(
+            "NEW\nRELEASES", "images/background_category_large.png"),
+        SizedBox(height: 16.0),
+        CategoryItemLarge(
+            "RECOMMENDED\nFOR YOU", "images/background_category_large.png"),
+      ],
     );
   }
 }

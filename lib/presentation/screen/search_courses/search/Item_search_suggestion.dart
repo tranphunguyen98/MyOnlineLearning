@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_online_learning/utils/my_const/my_const.dart';
+import 'package:my_online_learning/utils/extensions.dart';
 
 class ItemSearchSuggestion extends StatelessWidget {
   final String suggestion;
@@ -19,7 +19,7 @@ class ItemSearchSuggestion extends StatelessWidget {
         ),
         Text(
           suggestion,
-          style: STYLE_CONST.textRegular,
+          style: context.textTheme.subtitle2,
         ),
       ],
     );

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:my_online_learning/utils/my_const/my_const.dart';
+import 'package:my_online_learning/utils/extensions.dart';
 
-import 'file:///C:/react-native/MyOnlineLearning/lib/presentation/screen/browse_courses/list_of_authors/widget_list_author_h.dart';
+import 'widget_list_author_h.dart';
 
 class WidgetCategoryAuthor extends StatelessWidget {
   final String title;
@@ -12,21 +12,31 @@ class WidgetCategoryAuthor extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        _buildHeader(),
+        Header(title: title),
         ListAuthorHorizontal(),
       ],
     );
   }
+}
 
-  _buildHeader() {
+class Header extends StatelessWidget {
+  const Header({
+    Key key,
+    @required this.title,
+  }) : super(key: key);
+
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 16.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            this.title,
-            style: STYLE_CONST.textRegular,
+            title,
+            style: context.textTheme.subtitle2,
           ),
         ],
       ),

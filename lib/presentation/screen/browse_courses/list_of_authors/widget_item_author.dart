@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_online_learning/model/entity/author.dart';
-import 'package:my_online_learning/utils/my_const/my_const.dart';
+import 'package:my_online_learning/utils/extensions.dart';
 
 class ItemAuthor extends StatelessWidget {
   final Author author;
@@ -24,7 +24,7 @@ class ItemAuthor extends StatelessWidget {
         ),
         Text(
           author.name,
-          style: STYLE_CONST.textRegular,
+          style: context.textTheme.subtitle2,
         )
       ],
     );

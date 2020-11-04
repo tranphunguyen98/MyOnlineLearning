@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:my_online_learning/utils/my_const/my_const.dart';
-
-import 'file:///C:/react-native/MyOnlineLearning/lib/presentation/common_widgets/widget_my_flat_btn.dart';
+import 'package:my_online_learning/presentation/common_widgets/widget_my_flat_btn.dart';
+import 'package:my_online_learning/utils/extensions.dart';
 
 import '../../../common_widgets/widget_my_raised_btn.dart';
 import 'widget_register_form.dart';
@@ -18,10 +17,10 @@ class RegisterScreen extends StatelessWidget {
           },
         ),
         title: Text("Register"),
-        backgroundColor: COLOR_CONST.GRAY_DARK,
+        backgroundColor: context.theme.primaryColor,
       ),
       body: Container(
-        color: COLOR_CONST.BACKGROUND_DARK,
+        color: context.theme.backgroundColor,
         child: ListView(
           children: [
             SizedBox(height: 16.0),
@@ -32,7 +31,7 @@ class RegisterScreen extends StatelessWidget {
               onPressed: () => {},
             ),
             SizedBox(height: 8.0),
-            MyFlatButton(
+            FlatButtonCommon(
               title: "ALREADY HAVE A ACCOUNT?",
             ),
           ],

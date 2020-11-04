@@ -14,16 +14,15 @@ class PageSearchResult extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          STYLE_CONST.spaceHorizontalRegular,
+          StyleConst.spaceHorizontalRegular,
           Text(
             "$numberOfResults Results",
-            style: STYLE_CONST.textRegularGray,
+            style: StyleConst.textRegularGray,
           ),
-          STYLE_CONST.spaceHorizontalRegular,
+          StyleConst.spaceHorizontalRegular,
           Expanded(child: listResult),
         ],
       ),
     );
-    ;
   }
 }

@@ -1,24 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:my_online_learning/utils/my_const/my_const.dart';
+import 'package:my_online_learning/utils/extensions.dart';
 
 class MyOutlineButton extends StatelessWidget {
   final String title;
   final void Function() onPressed;
 
-  const MyOutlineButton({this.title, this.onPressed});
+  const MyOutlineButton(this.title, {@required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: OutlineButton(
-        color: COLOR_CONST.PRIMARY,
-        borderSide: BorderSide(color: COLOR_CONST.PRIMARY),
+        borderSide: BorderSide(color: context.theme.accentColor),
         onPressed: this.onPressed,
         child: Text(
           this.title,
           style: TextStyle(
-            color: COLOR_CONST.PRIMARY,
+            color: context.theme.accentColor,
           ),
         ),
       ),

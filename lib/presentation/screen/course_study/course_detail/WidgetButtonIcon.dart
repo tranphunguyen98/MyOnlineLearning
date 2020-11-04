@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_online_learning/utils/my_const/my_const.dart';
+import 'package:my_online_learning/utils/extensions.dart';
 
 class WidgetButtonIcon extends StatelessWidget {
   final String title;
@@ -11,7 +11,7 @@ class WidgetButtonIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return RaisedButton(
       onPressed: () {},
-      color: COLOR_CONST.GRAY_LIGHT,
+      color: context.theme.primaryColor,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -24,7 +24,7 @@ class WidgetButtonIcon extends StatelessWidget {
           ),
           Text(
             title,
-            style: STYLE_CONST.textRegular,
+            style: context.textTheme.subtitle2,
           ),
         ],
       ),

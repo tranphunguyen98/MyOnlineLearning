@@ -27,7 +27,7 @@ class CategoryItemMedium extends StatelessWidget {
             alignment: Alignment.center,
             child: Text(
               title,
-              style: STYLE_CONST.textMediumBold,
+              style: StyleConst.textMediumBold,
             ),
           ),
         ),

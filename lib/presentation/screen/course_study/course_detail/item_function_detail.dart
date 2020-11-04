@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_online_learning/utils/my_const/my_const.dart';
+import 'package:my_online_learning/utils/extensions.dart';
 
 class ItemFunctionDetail extends StatelessWidget {
   final String title;
@@ -15,7 +15,7 @@ class ItemFunctionDetail extends StatelessWidget {
         child: Column(
           children: [
             CircleAvatar(
-              backgroundColor: COLOR_CONST.GRAY_LIGHT,
+//              backgroundColor: COLOR_CONST.GRAY_LIGHT,
               child: Icon(iconData),
             ),
             SizedBox(
@@ -23,7 +23,7 @@ class ItemFunctionDetail extends StatelessWidget {
             ),
             Text(
               title,
-              style: STYLE_CONST.textRegular,
+              style: context.textTheme.subtitle2,
             ),
           ],
         ));

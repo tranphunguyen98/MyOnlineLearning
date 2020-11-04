@@ -5,6 +5,7 @@ import 'package:my_online_learning/model/entity/path.dart';
 import 'package:my_online_learning/presentation/screen/search_courses/tabs/ItemCourseVerticalDivider.dart';
 import 'package:my_online_learning/presentation/screen/search_courses/tabs/item_author_divider.dart';
 import 'package:my_online_learning/presentation/screen/search_courses/tabs/item_path_divider.dart';
+import 'package:my_online_learning/utils/extensions.dart';
 import 'package:my_online_learning/utils/my_const/my_const.dart';
 
 class TabAll extends StatelessWidget {
@@ -15,19 +16,19 @@ class TabAll extends StatelessWidget {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            _buildHeaderResult("Courses", Course.listCourse.length),
+            HeaderResult("Courses", Course.listCourse.length),
             ...Course.listCourse.map(
               (e) => ItemCourseVerticalDivider(
                 course: e,
               ),
             ),
-            _buildHeaderResult("Paths", Path.listPath.length),
+            HeaderResult("Paths", Path.listPath.length),
             ...Path.listPath.map(
               (e) => ItemPathDivider(
                 path: e,
               ),
             ),
-            _buildHeaderResult("Authors", Author.listAuthor.length),
+            HeaderResult("Authors", Author.listAuthor.length),
             ...Author.listAuthor.map(
               (e) => ItemAuthorSearchDivider(
                 author: e,
@@ -38,8 +39,20 @@ class TabAll extends StatelessWidget {
       ),
     );
   }
+}
 
-  _buildHeaderResult(String title, int numberOfResult) {
+class HeaderResult extends StatelessWidget {
+  final String title;
+  final int numberOfResult;
+
+  const HeaderResult(
+    this.title,
+    this.numberOfResult, {
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 16),
       child: Column(
@@ -49,13 +62,13 @@ class TabAll extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: STYLE_CONST.textRegular,
+                style: context.textTheme.subtitle2,
               ),
               Row(
                 children: [
                   Text(
                     "$numberOfResult Results",
-                    style: STYLE_CONST.textRegularGray,
+                    style: StyleConst.textRegularGray,
                   ),
                   Icon(
                     Icons.chevron_right,
@@ -66,7 +79,7 @@ class TabAll extends StatelessWidget {
               ),
             ],
           ),
-          STYLE_CONST.spaceHorizontalRegular,
+          StyleConst.spaceHorizontalRegular,
           Divider(
             color: Colors.white60,
             height: 8,

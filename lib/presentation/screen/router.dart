@@ -6,15 +6,13 @@ import 'package:my_online_learning/presentation/screen/Authentication/change_pas
 import 'package:my_online_learning/presentation/screen/Authentication/register/sc_register.dart';
 import 'package:my_online_learning/presentation/screen/Authentication/reset_password/sc_reset_password.dart';
 import 'package:my_online_learning/presentation/screen/Authentication/start/sc_start.dart';
-import 'package:my_online_learning/presentation/screen/browse_courses/browse/sc_browse.dart';
 import 'package:my_online_learning/presentation/screen/browse_courses/list_of_courses/sc_list_course.dart';
-import 'package:my_online_learning/presentation/screen/course_study/course_introduction/sc_course_introduction.dart';
 import 'package:my_online_learning/presentation/screen/home_page.dart';
 import 'package:my_online_learning/presentation/screen/others/splash/sc_splash.dart';
 import 'package:my_online_learning/presentation/screen/others/subscription/sc_subscription.dart';
 
 import 'Authentication/sign_in/sc_sign_in.dart';
-import 'browse_courses/home/sc_home.dart';
+import 'course_study/course_detail/sc_course_detail.dart';
 
 class MyRouter {
   static const String SPLASH = '/splash';
@@ -22,8 +20,6 @@ class MyRouter {
   static const String ACCOUNT = '/account';
   static const String SETTING = '/setting';
   static const String THEME = '/theme';
-  static const String HOME = '/home';
-  static const String BROWSE = '/browse';
   static const String LIST_COURSE = '/list_course';
   static const String COURSE_DETAIL = '/course_detail';
   static const String START = '/start';
@@ -43,10 +39,6 @@ class MyRouter {
         return MaterialPageRoute(builder: (_) => AccountScreen());
       case SETTING:
         return MaterialPageRoute(builder: (_) => SettingScreen());
-      case HOME:
-        return MaterialPageRoute(builder: (_) => HomeScreen());
-      case BROWSE:
-        return MaterialPageRoute(builder: (_) => BrowseScreen());
       case THEME:
         return MaterialPageRoute(builder: (_) => ChangeThemeScreen());
       case LOGIN:

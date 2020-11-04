@@ -1,21 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:my_online_learning/utils/my_const/my_const.dart';
+import 'package:my_online_learning/utils/extensions.dart';
 
-class MyFlatButton extends StatelessWidget {
+class FlatButtonCommon extends StatelessWidget {
   final String title;
-
-  const MyFlatButton({this.title});
+  final Function() onPressed;
+  const FlatButtonCommon({
+    this.title,
+    this.onPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: FlatButton(
-        onPressed: () => {},
+        onPressed: onPressed,
         child: Text(
-          this.title,
+          title,
           style: TextStyle(
-            color: COLOR_CONST.PRIMARY,
+            color: context.theme.accentColor,
           ),
         ),
       ),

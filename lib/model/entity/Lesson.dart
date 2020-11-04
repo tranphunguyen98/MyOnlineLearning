@@ -1,7 +1,7 @@
 class Lesson {
   final String title;
   final int duration;
-  final isStudying;
+  final bool isStudying;
 
   const Lesson(this.title, this.duration, {this.isStudying = false});
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:my_online_learning/utils/my_const/COLOR_CONST.dart';
+import 'package:my_online_learning/presentation/common_widgets/widget_circle_avatar.dart';
+import 'package:my_online_learning/utils/extensions.dart';
 import 'package:my_online_learning/utils/my_const/my_const.dart';
 
 class AccountScreen extends StatelessWidget {
@@ -7,87 +8,112 @@ class AccountScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Account"),
-        backgroundColor: COLOR_CONST.GRAY_DARK,
+        title: const Text("Account"),
+        backgroundColor: context.theme.primaryColor,
       ),
       body: Container(
-        color: COLOR_CONST.BACKGROUND_DARK,
+        color: context.theme.backgroundColor,
         child: Column(
-          children: [
+          children: const [
             SizedBox(height: 32.0),
-            _buildAvatarName(),
+            AvatarName(),
             SizedBox(height: 64.0),
-            _buildInfoActive(),
+            InfoOfActivity(),
           ],
         ),
       ),
     );
   }
+}
 
-  _buildAvatarName() {
+class AvatarName extends StatelessWidget {
+  const AvatarName({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
     return Column(
-      children: [
-        Container(
-          width: 100.0,
-          height: 100.0,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            image: DecorationImage(
-              fit: BoxFit.fill,
-              image: AssetImage("images/account_circle.png"),
-            ),
-          ),
+      children: const [
+        CircleAvatarNormal(
+          assetImageUrl: "images/account_circle.png",
+          size: 100,
         ),
+        SizedBox(height: 4.0),
         Text(
           "Tran Phu Nguyen",
-          style: STYLE_CONST.textTitle,
+          style: StyleConst.textTitle,
         )
       ],
     );
   }
 }
 
-_buildItemInfoActive(String title, String data, String extraData) {
-  return Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Text(
-        title,
-        style: STYLE_CONST.textRegularGray,
-      ),
-      SizedBox(
-        height: 8.0,
-      ),
-      Row(
-        children: [
-          Text(data, style: STYLE_CONST.textMedium),
-          SizedBox(
-            width: 8.0,
-          ),
-          Text(extraData, style: STYLE_CONST.textRegularGray),
-        ],
-      )
-    ],
-  );
-}
+class WidgetInfoOfActivityItem extends StatelessWidget {
+  final String title, data, extraData;
 
-_buildInfoActive() {
-  return Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 16.0),
-    child: Column(
+  const WidgetInfoOfActivityItem({
+    Key key,
+    @required this.title,
+    @required this.data,
+    this.extraData = "",
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "Activity insights (last 30 days",
-          style: STYLE_CONST.textMedium,
+          title,
+          style: StyleConst.textRegularGray,
         ),
-        SizedBox(height: 64.0),
-        _buildItemInfoActive("TOTAL ACTIVE DAYS", "1", "0 day streak"),
-        SizedBox(height: 32.0),
-        _buildItemInfoActive("MOST ACTIVE TIME OF DAY", "8:00 PM", ""),
-        SizedBox(height: 32.0),
-        _buildItemInfoActive("MOST VIEWED SUBJECT", "Angular", ""),
+        const SizedBox(
+          height: 8.0,
+        ),
+        Row(
+          children: [
+            Text(data, style: StyleConst.textMedium),
+            const SizedBox(
+              width: 8.0,
+            ),
+            Text(extraData, style: StyleConst.textRegularGray),
+          ],
+        )
       ],
-    ),
-  );
+    );
+  }
+}
+
+class InfoOfActivity extends StatelessWidget {
+  const InfoOfActivity({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            "Activity insights (last 30 days)",
+            style: StyleConst.textMedium,
+          ),
+          SizedBox(height: 64.0),
+          WidgetInfoOfActivityItem(
+              title: context.translate("total_active_day"),
+              data: "1",
+              extraData: "0 day streak"),
+          SizedBox(height: 32.0),
+          WidgetInfoOfActivityItem(
+              title: "MOST ACTIVE TIME OF DAY", data: "8:00 PM"),
+          SizedBox(height: 32.0),
+          WidgetInfoOfActivityItem(
+              title: "MOST VIEWED SUBJECT", data: "Angular"),
+        ],
+      ),
+    );
+  }
 }

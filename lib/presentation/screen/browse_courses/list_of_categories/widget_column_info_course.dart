@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:my_online_learning/model/entity/course.dart';
+import 'package:my_online_learning/utils/extensions.dart';
 import 'package:my_online_learning/utils/my_const/my_const.dart';
 
 class WidgetColumnInfoCourse extends StatelessWidget {
@@ -15,33 +16,70 @@ class WidgetColumnInfoCourse extends StatelessWidget {
       children: [
         Text(
           course.title,
-          style: STYLE_CONST.textRegular,
+          style: context.textTheme.subtitle2,
         ),
         SizedBox(
           height: 4.0,
         ),
         Text(
           course.instructorNames[0],
-          style: STYLE_CONST.textSmallWhite60,
+          style: context.textTheme.caption,
         ),
         SizedBox(
           height: 4.0,
         ),
-        _buildRowInfo(),
+        RowInfo(course: course),
         SizedBox(
           height: 4.0,
         ),
-        _buildRating(),
+        Rating(course: course),
       ],
     );
   }
+}
 
-  _buildRowInfo() {
+class Rating extends StatelessWidget {
+  const Rating({
+    Key key,
+    @required this.course,
+  }) : super(key: key);
+
+  final Course course;
+
+  @override
+  Widget build(BuildContext context) {
+    return RatingBar(
+      initialRating: course.ratedNumber,
+      minRating: 1,
+      direction: Axis.horizontal,
+      allowHalfRating: true,
+      unratedColor: Colors.amber.withAlpha(50),
+      itemCount: 5,
+      itemSize: 14.0,
+      itemBuilder: (context, _) => Icon(
+        Icons.star,
+        color: Colors.amber,
+      ),
+      onRatingUpdate: (rating) {},
+    );
+  }
+}
+
+class RowInfo extends StatelessWidget {
+  const RowInfo({
+    Key key,
+    @required this.course,
+  }) : super(key: key);
+
+  final Course course;
+
+  @override
+  Widget build(BuildContext context) {
     return Row(
       children: [
         Text(
           course.level,
-          style: STYLE_CONST.textSmallWhite60,
+          style: StyleConst.textSmallWhite60,
         ),
         SizedBox(
           width: 4,
@@ -56,7 +94,7 @@ class WidgetColumnInfoCourse extends StatelessWidget {
         ),
         Text(
           course.createdAt,
-          style: STYLE_CONST.textSmallWhite60,
+          style: StyleConst.textSmallWhite60,
         ),
         SizedBox(
           width: 4,
@@ -71,26 +109,9 @@ class WidgetColumnInfoCourse extends StatelessWidget {
         ),
         Text(
           "${course.totalMinutes}m",
-          style: STYLE_CONST.textSmallWhite60,
+          style: StyleConst.textSmallWhite60,
         ),
       ],
-    );
-  }
-
-  _buildRating() {
-    return RatingBar(
-      initialRating: course.ratedNumber,
-      minRating: 1,
-      direction: Axis.horizontal,
-      allowHalfRating: true,
-      unratedColor: Colors.amber.withAlpha(50),
-      itemCount: 5,
-      itemSize: 14.0,
-      itemBuilder: (context, _) => Icon(
-        Icons.star,
-        color: Colors.amber,
-      ),
-      onRatingUpdate: (rating) {},
     );
   }
 }

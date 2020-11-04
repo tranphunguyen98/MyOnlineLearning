@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_online_learning/utils/my_const/my_const.dart';
+import 'package:my_online_learning/utils/extensions.dart';
 
 import '../../../common_widgets/widget_my_raised_btn.dart';
 import 'widget_change_password_form.dart';
@@ -16,10 +16,10 @@ class ChangePasswordScreen extends StatelessWidget {
           },
         ),
         title: Text("Change Password"),
-        backgroundColor: COLOR_CONST.GRAY_DARK,
+        backgroundColor: context.theme.primaryColor,
       ),
       body: Container(
-        color: COLOR_CONST.BACKGROUND_DARK,
+        color: context.theme.backgroundColor,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [

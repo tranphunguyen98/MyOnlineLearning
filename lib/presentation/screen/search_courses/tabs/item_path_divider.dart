@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:my_online_learning/model/entity/path.dart';
-import 'package:my_online_learning/utils/my_const/my_const.dart';
+import 'package:my_online_learning/utils/extensions.dart';
 
 class ItemPathDivider extends StatelessWidget {
   final Path path;
@@ -19,7 +19,7 @@ class ItemPathDivider extends StatelessWidget {
               width: 80.0,
               height: 60.0,
               padding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
-              color: COLOR_CONST.GRAY_LIGHT,
+              //color: COLOR_CONST.GRAY_LIGHT,
               child: Image(
                 image: AssetImage(path.image),
                 width: 20.0,
@@ -37,14 +37,14 @@ class ItemPathDivider extends StatelessWidget {
                 ),
                 Text(
                   path.title,
-                  style: STYLE_CONST.textRegular,
+                  style: context.textTheme.subtitle2,
                 ),
                 SizedBox(
                   height: 4.0,
                 ),
                 Text(
                   "${path.courses.length} courses",
-                  style: STYLE_CONST.textRegularGray,
+                  style: context.textTheme.bodyText2,
                 ),
               ],
             ),

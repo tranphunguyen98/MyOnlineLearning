@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:my_online_learning/presentation/common_widgets/widget_logo.dart';
 import 'package:my_online_learning/presentation/common_widgets/widget_my_outline_btn.dart';
-import 'package:my_online_learning/presentation/screen/router.dart';
-import 'package:my_online_learning/utils/my_const/my_const.dart';
+import 'package:my_online_learning/utils/extensions.dart';
 
 import '../../../common_widgets/widget_my_raised_btn.dart';
+import '../../router.dart';
 
 class StartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        color: COLOR_CONST.BACKGROUND_DARK,
+        color: context.theme.backgroundColor,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
@@ -20,17 +20,20 @@ class StartScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 MyRaisedButton(
-                    title: "SIGN IN",
-                    onPressed: () =>
-                        {Navigator.pushNamed(context, MyRouter.LOGIN)},),
-                SizedBox(height: 8.0),
-                MyOutlineButton(title: "Register now", onPressed: () => {
-                  Navigator.pushNamed(context, MyRouter.REGISTER)
-                },),
+                  title: "SIGN IN",
+                  onPressed: () =>
+                      {Navigator.pushNamed(context, MyRouter.LOGIN)},
+                ),
                 SizedBox(height: 8.0),
                 MyOutlineButton(
-                  title: "Explore without sign in",
-                  onPressed: () => {},
+                  "Register now",
+                  onPressed: () =>
+                      {Navigator.pushNamed(context, MyRouter.REGISTER)},
+                ),
+                SizedBox(height: 8.0),
+                MyOutlineButton(
+                  "Explore without sign in",
+                  onPressed: () => {context.pushNamed(MyRouter.HOME_PAGE)},
                 ),
               ],
             ),

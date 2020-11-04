@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:my_online_learning/presentation/screen/browse_courses/list_of_courses/widget_list_course_v.dart';
-import 'package:my_online_learning/utils/my_const/my_const.dart';
+
+import 'widget_list_course_v.dart';
+import 'package:my_online_learning/utils/extensions.dart';
 
 class ListCourseScreen extends StatelessWidget {
   @override
@@ -13,10 +14,10 @@ class ListCourseScreen extends StatelessWidget {
             Navigator.pop(context);
           },
         ),
-        backgroundColor: COLOR_CONST.GRAY_DARK,
+        backgroundColor: context.theme.primaryColor,
       ),
       body: Container(
-        color: COLOR_CONST.BACKGROUND_DARK,
+        color: context.theme.backgroundColor,
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(

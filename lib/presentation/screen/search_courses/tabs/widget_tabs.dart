@@ -23,25 +23,21 @@ class _TabResultSearchState extends State<TabResultSearch> {
       children: [
         DefaultTabController(
           length: 4,
-          child: _buildTabBar(),
+          child: TabBar(
+            onTap: (index) {
+              setState(() {
+                _selectedIndex = index;
+              });
+            },
+            tabs: tabItems
+                .map((e) => Tab(
+                      text: e.title,
+                    ))
+                .toList(),
+          ),
         ),
         Expanded(child: tabItems[_selectedIndex].page),
       ],
-    );
-  }
-
-  _buildTabBar() {
-    return TabBar(
-      onTap: (index) {
-        setState(() {
-          _selectedIndex = index;
-        });
-      },
-      tabs: tabItems
-          .map((e) => Tab(
-                text: e.title,
-              ))
-          .toList(),
     );
   }
 }

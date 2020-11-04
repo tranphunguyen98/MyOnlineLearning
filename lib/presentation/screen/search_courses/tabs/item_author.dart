@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:my_online_learning/model/entity/author.dart';
+import 'package:my_online_learning/utils/extensions.dart';
 import 'package:my_online_learning/utils/my_const/my_const.dart';
 
 class ItemAuthorSearch extends StatelessWidget {
@@ -35,14 +36,14 @@ class ItemAuthorSearch extends StatelessWidget {
             ),
             Text(
               author.name,
-              style: STYLE_CONST.textRegular,
+              style: context.textTheme.subtitle2,
             ),
             SizedBox(
               height: 4.0,
             ),
             Text(
               "${author.courses.length} courses",
-              style: STYLE_CONST.textRegularGray,
+              style: StyleConst.textRegularGray,
             ),
           ],
         ),

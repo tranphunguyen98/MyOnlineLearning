@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:my_online_learning/utils/my_const/COLOR_CONST.dart';
+import 'package:my_online_learning/utils/extensions.dart';
 import 'package:my_online_learning/utils/my_const/my_const.dart';
 
 class ChangeThemeScreen extends StatelessWidget {
@@ -9,28 +9,28 @@ class ChangeThemeScreen extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           title: Text("Themes"),
-          backgroundColor: COLOR_CONST.GRAY_DARK,
+          backgroundColor: context.theme.primaryColor,
         ),
         body: Container(
-          color: COLOR_CONST.BACKGROUND_DARK,
+          color: context.theme.backgroundColor,
           padding: EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("System", style: STYLE_CONST.textMedium),
+              Text("System", style: StyleConst.textMedium),
               _buildDivider(),
-              Text("Light", style: STYLE_CONST.textMedium),
+              Text("Light", style: StyleConst.textMedium),
               _buildDivider(),
-              Text("Dark", style: STYLE_CONST.textMediumPrimary),
+              Text("Dark", style: StyleConst.textMediumPrimary),
               _buildDivider(),
             ],
           ),
         ));
   }
 
-  _buildDivider() {
-    return Padding(
-      padding: const EdgeInsets.only(right: 16.0, top: 8.0, bottom: 8.0),
+  Widget _buildDivider() {
+    return const Padding(
+      padding: EdgeInsets.only(right: 16.0, top: 8.0, bottom: 8.0),
       child: Divider(
         thickness: 0.5,
         color: Colors.white60,
@@ -53,7 +53,7 @@ class ChangeThemeScreen extends StatelessWidget {
                 ),
                 Text(
                   subtitle,
-                  style: STYLE_CONST.textRegularGray,
+                  style: StyleConst.textRegularGray,
                 )
               ],
             ),

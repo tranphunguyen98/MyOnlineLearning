@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:my_online_learning/presentation/screen/Authentication/reset_password/widget_forgot_password_form.dart';
-import 'package:my_online_learning/utils/my_const/my_const.dart';
+import 'package:my_online_learning/presentation/screen/router.dart';
+import 'package:my_online_learning/utils/extensions.dart';
 
 import '../../../common_widgets/widget_my_raised_btn.dart';
+import 'widget_forgot_password_form.dart';
 
 class ForgotPasswordScreen extends StatelessWidget {
   @override
@@ -16,10 +17,10 @@ class ForgotPasswordScreen extends StatelessWidget {
           },
         ),
         title: Text("Forgot Password"),
-        backgroundColor: COLOR_CONST.GRAY_DARK,
+        backgroundColor: context.theme.primaryColor,
       ),
       body: Container(
-        color: COLOR_CONST.BACKGROUND_DARK,
+        color: context.theme.backgroundColor,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -28,7 +29,7 @@ class ForgotPasswordScreen extends StatelessWidget {
             SizedBox(height: 16.0),
             MyRaisedButton(
               title: "SEND VERIFICATION CODE",
-              onPressed: () => {},
+              onPressed: () => {context.pushNamed(MyRouter.CHANGE_PASSWORD)},
             ),
           ],
         ),

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:my_online_learning/presentation/screen/Authentication/sign_in/widget_login_form.dart';
-import 'package:my_online_learning/utils/my_const/my_const.dart';
-
-import 'file:///C:/react-native/MyOnlineLearning/lib/presentation/common_widgets/widget_my_flat_btn.dart';
+import 'package:my_online_learning/presentation/common_widgets/widget_my_flat_btn.dart';
+import 'package:my_online_learning/presentation/screen/router.dart';
+import 'package:my_online_learning/utils/extensions.dart';
 
 import '../../../common_widgets/widget_my_raised_btn.dart';
+import 'widget_login_form.dart';
 
 class LoginScreen extends StatelessWidget {
   @override
@@ -18,10 +18,10 @@ class LoginScreen extends StatelessWidget {
           },
         ),
         title: Text("Sign In"),
-        backgroundColor: COLOR_CONST.GRAY_DARK,
+        backgroundColor: context.theme.primaryColor,
       ),
       body: Container(
-        color: COLOR_CONST.BACKGROUND_DARK,
+        color: context.theme.backgroundColor,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -33,10 +33,13 @@ class LoginScreen extends StatelessWidget {
               onPressed: () => {},
             ),
             SizedBox(height: 8.0),
-            MyFlatButton(
+            FlatButtonCommon(
               title: "FORGOT PASSWORD?",
+              onPressed: () {
+                context.pushNamed(MyRouter.FORGOT_PASSWORD);
+              },
             ),
-            MyFlatButton(
+            FlatButtonCommon(
               title: "DON'T HAVE A ACCOUNT?",
             ),
           ],
