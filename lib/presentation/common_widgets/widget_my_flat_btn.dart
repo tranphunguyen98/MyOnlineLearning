@@ -3,7 +3,7 @@ import 'package:my_online_learning/utils/extensions.dart';
 
 class FlatButtonCommon extends StatelessWidget {
   final String title;
-  final Function() onPressed;
+  final void Function() onPressed;
   const FlatButtonCommon({
     this.title,
     this.onPressed,
