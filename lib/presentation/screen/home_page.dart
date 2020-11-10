@@ -16,9 +16,13 @@ class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
 
   final List<DropdownChoices> dropdownChoices = [
-    DropdownChoices(title: "Setting"),
-    DropdownChoices(title: "Send feedback"),
-    DropdownChoices(title: "Contact support"),
+    DropdownChoices(
+        title: "Setting",
+        onPressed: (context) {
+          Navigator.pushNamed(context, MyRouter.SETTING);
+        }),
+    DropdownChoices(title: "Send feedback", onPressed: (context) {}),
+    DropdownChoices(title: "Contact support", onPressed: (context) {}),
   ];
 
   final List<BottomNavigationData> bottomNavigationItems = [
@@ -41,47 +45,10 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
         backgroundColor: context.theme.backgroundColor,
         appBar: bottomNavigationItems[_selectedIndex].hasAppBar
-            ? AppBar(
-                title: Text(
-                  bottomNavigationItems[_selectedIndex].title,
-                  style: context.textTheme.subtitle2,
-                ),
-                actions: [
-                  GestureDetector(
-                    child: Icon(
-                      Icons.account_circle,
-                    ),
-                    onTap: () {
-                      Navigator.pushNamed(context, MyRouter.ACCOUNT);
-                    },
-                  ),
-                  PopupMenuButton<DropdownChoices>(
-                    onSelected: (DropdownChoices choice) {
-                      Navigator.pushNamed(context, MyRouter.SETTING);
-                    },
-                    elevation: 6,
-                    itemBuilder: (BuildContext context) {
-                      return dropdownChoices.map((DropdownChoices choice) {
-                        return PopupMenuItem<DropdownChoices>(
-                          value: choice,
-                          child: Text(choice.title),
-                        );
-                      }).toList();
-                    },
-                  ),
-                ],
-              )
+            ? _buildAppBar()
             : null,
         bottomNavigationBar: BottomNavigationBar(
-          items: bottomNavigationItems
-              .map((bottomNavigationData) => BottomNavigationBarItem(
-                    icon: Icon(
-                      bottomNavigationData.iconData,
-                    ),
-                    label: bottomNavigationData.title,
-                    backgroundColor: context.theme.primaryColor,
-                  ))
-              .toList(),
+          items: _buildBottomNavigationBarItems(),
           currentIndex: _selectedIndex,
           selectedItemColor: context.theme.accentColor,
           unselectedItemColor: Colors.white70,
@@ -89,6 +56,53 @@ class _HomePageState extends State<HomePage> {
           onTap: _onItemTapped,
         ),
         body: bottomNavigationItems[_selectedIndex].destination);
+  }
+
+  List<BottomNavigationBarItem> _buildBottomNavigationBarItems() {
+    return bottomNavigationItems
+        .map(
+          (bottomNavigationData) => BottomNavigationBarItem(
+            icon: Icon(
+              bottomNavigationData.iconData,
+            ),
+            label: bottomNavigationData.title,
+            backgroundColor: context.theme.primaryColor,
+          ),
+        )
+        .toList();
+  }
+
+  AppBar _buildAppBar() {
+    return AppBar(
+      title: Text(
+        bottomNavigationItems[_selectedIndex].title,
+        style: context.textTheme.subtitle2,
+      ),
+      actions: [
+        GestureDetector(
+          child: Icon(
+            Icons.account_circle,
+          ),
+          onTap: () {
+            Navigator.pushNamed(context, MyRouter.ACCOUNT);
+          },
+        ),
+        PopupMenuButton<DropdownChoices>(
+          onSelected: (DropdownChoices choice) {
+            choice.onPressed(context);
+          },
+          elevation: 6,
+          itemBuilder: (BuildContext context) {
+            return dropdownChoices.map((DropdownChoices choice) {
+              return PopupMenuItem<DropdownChoices>(
+                value: choice,
+                child: Text(choice.title),
+              );
+            }).toList();
+          },
+        ),
+      ],
+    );
   }
 }
 
@@ -105,7 +119,11 @@ class BottomNavigationData {
 }
 
 class DropdownChoices {
-  const DropdownChoices({this.title});
+  const DropdownChoices({
+    @required this.title,
+    @required this.onPressed,
+  });
 
   final String title;
+  final Function(BuildContext context) onPressed;
 }
