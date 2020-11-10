@@ -34,6 +34,11 @@ class LoginScreen extends StatelessWidget {
             ),
             SizedBox(height: 8.0),
             FlatButtonCommon(
+              title: "LOGIN WITH GOOGLE",
+              onPressed: () {},
+            ),
+            SizedBox(height: 8.0),
+            FlatButtonCommon(
               title: "FORGOT PASSWORD?",
               onPressed: () {
                 context.pushNamed(MyRouter.FORGOT_PASSWORD);

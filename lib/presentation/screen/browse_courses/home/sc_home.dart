@@ -11,11 +11,11 @@ class HomeScreen extends StatelessWidget {
       padding: const EdgeInsets.all(16.0),
       child: ListView(
         children: [
+          WidgetCategoryCourse(title: "My Courses"),
           WidgetCategoryCourse(title: "New"),
           WidgetCategoryCourse(title: "Trending"),
-          WidgetCategoryAuthor(
-            title: "Top authors",
-          ),
+          WidgetCategoryCourse(title: "Suggest For You"),
+          WidgetCategoryAuthor(title: "Top authors"),
         ],
       ),
     );
