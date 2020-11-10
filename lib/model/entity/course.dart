@@ -1,3 +1,5 @@
+import 'package:my_online_learning/model/entity/Chapter.dart';
+
 class Course {
   final String id;
   final String title;
@@ -10,19 +12,22 @@ class Course {
   final String level;
   final List<String> instructorNames;
   final String description;
+  final List<Chapter> chapters;
 
-  const Course(
-      {this.id = "",
-      this.title = "",
-      this.subtitle = "",
-      this.price = "",
-      this.ratedNumber = 0.0,
-      this.totalMinutes = 0,
-      this.imageUrl = "",
-      this.createdAt = "",
-      this.level = "",
-      this.instructorNames,
-      this.description = ""});
+  const Course({
+    this.id = "",
+    this.title = "",
+    this.subtitle = "",
+    this.price = "",
+    this.ratedNumber = 0.0,
+    this.totalMinutes = 0,
+    this.imageUrl = "",
+    this.createdAt = "",
+    this.level = "",
+    this.instructorNames,
+    this.description = "",
+    this.chapters,
+  });
 
   static const List<Course> listCourse = [
     Course(
@@ -33,6 +38,7 @@ class Course {
         createdAt: "Apr 2020",
         totalMinutes: 575,
         ratedNumber: 4.2,
+        chapters: Chapter.listChapter,
         imageUrl: "images/course_image_2.jpg",
         description:
             "Angular is one of the fastest, most popular open source web app frameworks today, and knowing how to use it is essential for developers. You'll learn how to create components and user interfaces, data-binding, retrieving data using HTTP, and more."),
@@ -44,6 +50,7 @@ class Course {
       createdAt: "Apr 2020",
       totalMinutes: 575,
       ratedNumber: 5,
+      chapters: Chapter.listChapter,
       imageUrl: "images/course_image_2.jpg",
     ),
     Course(
@@ -54,6 +61,7 @@ class Course {
       createdAt: "Apr 2020",
       totalMinutes: 575,
       ratedNumber: 4.2,
+      chapters: Chapter.listChapter,
       imageUrl: "images/course_image_2.jpg",
     ),
     Course(
@@ -64,6 +72,7 @@ class Course {
       createdAt: "Apr 2020",
       totalMinutes: 575,
       ratedNumber: 5,
+      chapters: Chapter.listChapter,
       imageUrl: "images/course_image_2.jpg",
     ),
     Course(
@@ -74,6 +83,7 @@ class Course {
       createdAt: "Apr 2020",
       totalMinutes: 575,
       ratedNumber: 4.2,
+      chapters: Chapter.listChapter,
       imageUrl: "images/course_image_2.jpg",
     ),
     Course(
@@ -84,6 +94,7 @@ class Course {
       createdAt: "Apr 2020",
       totalMinutes: 575,
       ratedNumber: 5,
+      chapters: Chapter.listChapter,
       imageUrl: "images/course_image_2.jpg",
     ),
     Course(
@@ -94,6 +105,7 @@ class Course {
       createdAt: "Apr 2020",
       totalMinutes: 575,
       ratedNumber: 4.2,
+      chapters: Chapter.listChapter,
       imageUrl: "images/course_image_2.jpg",
     ),
     Course(
@@ -104,6 +116,7 @@ class Course {
       createdAt: "Apr 2020",
       totalMinutes: 575,
       ratedNumber: 5,
+      chapters: Chapter.listChapter,
       imageUrl: "images/course_image_2.jpg",
     ),
   ];

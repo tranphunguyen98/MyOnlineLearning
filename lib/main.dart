@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
             title: 'Online Learning',
             // themeMode: ThemeMode.light,
             theme: isThemeLight ? themeLight : themeDark,
-            initialRoute: MyRouter.START,
+            initialRoute: MyRouter.VIEW_LIST_BY_LOCATION,
             onGenerateRoute: MyRouter.generateRoute,
             home: HomePage());
     // );

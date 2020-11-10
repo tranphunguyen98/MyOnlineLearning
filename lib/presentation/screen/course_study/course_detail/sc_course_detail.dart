@@ -7,6 +7,7 @@ import 'package:my_online_learning/utils/extensions.dart';
 import 'package:my_online_learning/utils/my_const/my_const.dart';
 
 import 'WidgetButtonIcon.dart';
+import 'content_of_course.dart';
 import 'item_function_detail.dart';
 
 class CourseDetailScreen extends StatefulWidget {
@@ -35,7 +36,7 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
                 _buildButtonFunction(),
                 _buildContentHeader(),
                 SizedBox(height: 16.0),
-                _buildContent(),
+                ContentOfCourse(),
               ],
             ),
           ),
@@ -219,29 +220,6 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
       child: Text(
         "CONTENT",
         style: StyleConst.textMedium,
-      ),
-    );
-  }
-
-  Widget _buildContent() {
-    return Container(
-      padding: EdgeInsets.only(top: 8.0),
-      color: Colors.black,
-      child: ListView.separated(
-        shrinkWrap: true,
-        physics: ClampingScrollPhysics(),
-        itemCount: Chapter.listChapter.length,
-        itemBuilder: (context, index) {
-          return ItemChapter(Chapter.listChapter[index]);
-        },
-        separatorBuilder: (BuildContext context, int index) {
-          return Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Divider(
-              color: Colors.grey,
-            ),
-          );
-        },
       ),
     );
   }
