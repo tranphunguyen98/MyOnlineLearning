@@ -41,6 +41,9 @@ class LoginScreen extends StatelessWidget {
             ),
             FlatButtonCommon(
               title: "DON'T HAVE A ACCOUNT?",
+              onPressed: () {
+                Navigator.pushReplacementNamed(context, MyRouter.REGISTER);
+              },
             ),
           ],
         ),

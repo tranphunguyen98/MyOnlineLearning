@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:my_online_learning/presentation/screen/AccountManager/Account/sc_account.dart';
-import 'package:my_online_learning/presentation/screen/AccountManager/ChangeThemes/sc_change_themes.dart';
-import 'package:my_online_learning/presentation/screen/AccountManager/Setting/sc_setting.dart';
 import 'package:my_online_learning/presentation/screen/Authentication/change_password/sc_change_password.dart';
 import 'package:my_online_learning/presentation/screen/Authentication/register/sc_register.dart';
 import 'package:my_online_learning/presentation/screen/Authentication/reset_password/sc_reset_password.dart';
@@ -13,6 +10,9 @@ import 'package:my_online_learning/presentation/screen/others/subscription/sc_su
 import 'package:my_online_learning/presentation/screen/others/view_list_by_location/sc_view_list_by_location.dart';
 
 import 'Authentication/sign_in/sc_sign_in.dart';
+import 'account_manager/Account/sc_account.dart';
+import 'account_manager/Setting/sc_setting.dart';
+import 'account_manager/change_theme/sc_change_themes.dart';
 import 'course_study/course_detail/sc_course_detail.dart';
 
 class MyRouter {

@@ -36,7 +36,9 @@ class SettingScreen extends StatelessWidget {
               padding: const EdgeInsets.all(16.0),
               child: MyOutlineButton(
                 "SIGN OUT",
-                onPressed: () {},
+                onPressed: () {
+                  context.pushNamed(MyRouter.START);
+                },
               ),
             ),
           ],
