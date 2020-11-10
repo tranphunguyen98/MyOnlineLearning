@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:my_online_learning/model/entity/category.dart';
 import 'package:my_online_learning/presentation/screen/browse_courses/list_of_categories/widget_category_item_large.dart';
 import 'package:my_online_learning/presentation/screen/browse_courses/list_of_categories/widget_category_item_medium.dart';
 import 'package:my_online_learning/utils/extensions.dart';
@@ -20,7 +21,8 @@ class BrowseScreen extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               ListCategoryLarge(),
-              ListCategoryMedium(),
+              ListCategoryMedium(categories: Category.categories),
+              SizedBox(height: 32.0),
               ListSkill(),
               WidgetCategoryCourse(title: "New"),
               WidgetCategoryCourse(title: "Trending"),
@@ -34,8 +36,10 @@ class BrowseScreen extends StatelessWidget {
 }
 
 class ListCategoryMedium extends StatelessWidget {
+  final List<Category> categories;
   const ListCategoryMedium({
     Key key,
+    @required this.categories,
   }) : super(key: key);
 
   @override
@@ -56,10 +60,9 @@ class ListCategoryMedium extends StatelessWidget {
             mainAxisSpacing: 8.0,
             childAspectRatio: 0.6,
           ),
-          itemCount: 10,
+          itemCount: categories.length,
           itemBuilder: (context, index) {
-            return CategoryItemMedium("  SOFTWARE\nDEVELOPMENT",
-                "images/background_category_large.png");
+            return CategoryItemMedium(categories[index]);
           },
         ),
       ),
@@ -77,9 +80,6 @@ class ListSkill extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(
-          height: 32.0,
-        ),
         Text(
           "Popular Skills",
           style: context.textTheme.subtitle2,

@@ -13,9 +13,9 @@ class ItemCourse extends StatelessWidget {
   ItemCourse({this.course});
 
   final List<DropdownChoices> dropdownChoices = [
-    DropdownChoices(title: "Bookmark"),
-    DropdownChoices(title: "Download"),
-    DropdownChoices(title: "Share"),
+    DropdownChoices(title: "Bookmark", onPressed: (context) {}),
+    DropdownChoices(title: "Download", onPressed: (context) {}),
+    DropdownChoices(title: "Share", onPressed: (context) {}),
   ];
 
   @override

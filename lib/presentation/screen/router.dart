@@ -3,6 +3,7 @@ import 'package:my_online_learning/presentation/screen/Authentication/change_pas
 import 'package:my_online_learning/presentation/screen/Authentication/register/sc_register.dart';
 import 'package:my_online_learning/presentation/screen/Authentication/reset_password/sc_reset_password.dart';
 import 'package:my_online_learning/presentation/screen/Authentication/start/sc_start.dart';
+import 'package:my_online_learning/presentation/screen/browse_courses/category_detail/sc_category_detail.dart';
 import 'package:my_online_learning/presentation/screen/browse_courses/list_of_courses/sc_list_course.dart';
 import 'package:my_online_learning/presentation/screen/home_page.dart';
 import 'package:my_online_learning/presentation/screen/others/splash/sc_splash.dart';
@@ -30,11 +31,14 @@ class MyRouter {
   static const String CHANGE_PASSWORD = '/change_password';
   static const String SUBSCRIPTION = '/subscription';
   static const String VIEW_LIST_BY_LOCATION = '/view_list_by_location';
+  static const String CATEGORY_DETAIL = '/category_detail';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case SPLASH:
         return MaterialPageRoute(builder: (_) => SplashScreen());
+      case CATEGORY_DETAIL:
+        return MaterialPageRoute(builder: (_) => CategoryDetailScreen());
       case HOME_PAGE:
         return MaterialPageRoute(builder: (_) => HomePage());
       case ACCOUNT:
