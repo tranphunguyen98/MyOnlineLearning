@@ -12,11 +12,17 @@ class ItemCourse extends StatelessWidget {
 
   ItemCourse({this.course});
 
-  final List<DropdownChoices> dropdownChoices = [
-    DropdownChoices(title: "Bookmark", onPressed: (context) {}),
-    DropdownChoices(title: "Download", onPressed: (context) {}),
-    DropdownChoices(title: "Share", onPressed: (context) {}),
-  ];
+  String get sharingText => "I'm watching ${course.title} from Online Learning";
+
+  List<DropdownChoices> get dropdownChoices => [
+        DropdownChoices(title: "Bookmark", onPressed: (context) {}),
+        DropdownChoices(title: "Download", onPressed: (context) {}),
+        DropdownChoices(
+            title: "Share",
+            onPressed: (context) {
+              Share.share(sharingText);
+            }),
+      ];
 
   @override
   Widget build(BuildContext context) {
@@ -41,8 +47,7 @@ class ItemCourse extends StatelessWidget {
                     Icons.more_vert,
                   ),
                   onSelected: (DropdownChoices choice) {
-                    Share.share(
-                        "I'm watching ${course.title} from Online Learning");
+                    choice.onPressed(context);
                   },
                   elevation: 6,
                   itemBuilder: (BuildContext context) {

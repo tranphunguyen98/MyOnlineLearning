@@ -37,7 +37,8 @@ class SettingScreen extends StatelessWidget {
               child: MyOutlineButton(
                 "SIGN OUT",
                 onPressed: () {
-                  context.pushNamed(MyRouter.START);
+                  Navigator.of(context).pushNamedAndRemoveUntil(
+                      MyRouter.START, (Route<dynamic> route) => false);
                 },
               ),
             ),

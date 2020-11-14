@@ -15,6 +15,7 @@ class HomeScreen extends StatelessWidget {
           WidgetCategoryCourse(title: "New"),
           WidgetCategoryCourse(title: "Trending"),
           WidgetCategoryCourse(title: "Suggest For You"),
+          WidgetCategoryCourse(title: "Bookmark"),
           WidgetCategoryAuthor(title: "Top authors"),
         ],
       ),

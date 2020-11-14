@@ -1,5 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:my_online_learning/presentation/common_widgets/widget_circle_avatar.dart';
+import 'package:my_online_learning/presentation/common_widgets/widget_circle_avatar_file.dart';
 import 'package:my_online_learning/utils/extensions.dart';
 import 'package:my_online_learning/utils/my_const/my_const.dart';
 
@@ -13,37 +17,89 @@ class AccountScreen extends StatelessWidget {
       ),
       body: Container(
         color: context.theme.backgroundColor,
-        child: Column(
-          children: const [
-            SizedBox(height: 32.0),
-            AvatarName(),
-            SizedBox(height: 64.0),
-            InfoOfActivity(),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            children: const [
+              SizedBox(height: 32.0),
+              AvatarName(),
+              SizedBox(height: 64.0),
+              InfoOfActivity(),
+            ],
+          ),
         ),
       ),
     );
   }
 }
 
-class AvatarName extends StatelessWidget {
+class AvatarName extends StatefulWidget {
   const AvatarName({
     Key key,
   }) : super(key: key);
 
   @override
+  _AvatarNameState createState() => _AvatarNameState();
+}
+
+class _AvatarNameState extends State<AvatarName> {
+  File _image;
+  final picker = ImagePicker();
+
+  TextEditingController _nameController = TextEditingController();
+
+  Future getImage() async {
+    print('1No image selected.');
+    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+
+    setState(() {
+      if (pickedFile != null) {
+        _image = File(pickedFile.path);
+      } else {
+        print('No image selected.');
+      }
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
+    _nameController.text = "Trần Phú Nguyện";
     return Column(
-      children: const [
-        CircleAvatarNormal(
-          assetImageUrl: "images/account_circle.png",
-          size: 100,
+      children: [
+        GestureDetector(
+            onTap: getImage,
+            child: _image == null
+                ? CircleAvatarNormal(
+                    assetImageUrl: "images/account_circle.png",
+                    size: 100,
+                  )
+                : CircleAvatarFile(
+                    image: _image,
+                    size: 100.0,
+                  )),
+        SizedBox(height: 8.0),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            ConstrainedBox(
+              constraints: BoxConstraints(minWidth: 48),
+              child: IntrinsicWidth(
+                child: TextField(
+                  controller: _nameController,
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              width: 4.0,
+            ),
+            Icon(
+              Icons.edit,
+              size: 20.0,
+            ),
+          ],
         ),
-        SizedBox(height: 4.0),
-        Text(
-          "Tran Phu Nguyen",
-          style: StyleConst.textTitle,
-        )
       ],
     );
   }
