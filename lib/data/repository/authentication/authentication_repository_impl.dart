@@ -8,18 +8,18 @@ class AuthenticationRepositoryImplement implements IAuthenticationRepository {
   AuthenticationRepositoryImplement(this._authenticationDataSource);
 
   @override
-  Future<bool> createNewPassword(String password) {
-    return _authenticationDataSource.createNewPassword(password);
+  Future<bool> createNewPassword(String email, String password) {
+    return _authenticationDataSource.createNewPassword(email, password);
   }
 
   @override
-  Future<bool> forgotPassword(String email) {
-    return _authenticationDataSource.forgotPassword(email);
+  Future<bool> sendOTPCodeToEmail(String email) {
+    return _authenticationDataSource.sendOTPCodeToEmail(email);
   }
 
   @override
-  Future<bool> sendOTPCode(String opt) {
-    return _authenticationDataSource.sendOTPCode(opt);
+  Future<bool> confirmOTPCode(String otpCode) {
+    return _authenticationDataSource.confirmOTPCode(otpCode);
   }
 
   @override

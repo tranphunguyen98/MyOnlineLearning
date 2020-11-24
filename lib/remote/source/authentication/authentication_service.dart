@@ -27,4 +27,35 @@ class AuthenticationService {
   Future<bool> signUp(NetworkUser user, String password) {
     return Future.delayed(500.milliseconds, () => true);
   }
+
+  Future<bool> confirmOTPCode(String optCode) {
+    return Future.delayed(
+      500.milliseconds,
+      () {
+        if (optCode == '111111') {
+          return true;
+        } else {
+          throw Exception("OTP Code is not correct");
+        }
+      },
+    );
+  }
+
+  Future<bool> sendOTPCodeToEmail(String email) {
+    return Future.delayed(
+      500.milliseconds,
+      () {
+        return true;
+      },
+    );
+  }
+
+  Future<bool> createNewPassword(String email, String password) {
+    return Future.delayed(
+      500.milliseconds,
+      () {
+        return true;
+      },
+    );
+  }
 }

@@ -10,21 +10,18 @@ class AuthenticationDataSourceImplement implements AuthenticationDataSource {
   AuthenticationDataSourceImplement(this._authenticationService, this._mapper);
 
   @override
-  Future<bool> createNewPassword(String password) {
-    // TODO: implement createNewPassword
-    throw UnimplementedError();
+  Future<bool> createNewPassword(String email, String password) {
+    return _authenticationService.createNewPassword(email, password);
   }
 
   @override
-  Future<bool> forgotPassword(String email) {
-    // TODO: implement forgotPassword
-    throw UnimplementedError();
+  Future<bool> sendOTPCodeToEmail(String email) {
+    return _authenticationService.sendOTPCodeToEmail(email);
   }
 
   @override
-  Future<bool> sendOTPCode(String opt) {
-    // TODO: implement sendOTPCode
-    throw UnimplementedError();
+  Future<bool> confirmOTPCode(String opt) {
+    return _authenticationService.confirmOTPCode(opt);
   }
 
   @override

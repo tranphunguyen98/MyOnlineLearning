@@ -19,10 +19,13 @@ class StartScreen extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                MyRaisedButton(
-                  title: "SIGN IN",
-                  onPressed: () =>
-                      {Navigator.pushNamed(context, MyRouter.LOGIN)},
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16.0),
+                  child: MyRaisedButton(
+                    title: "SIGN IN",
+                    onPressed: () =>
+                        {Navigator.pushNamed(context, MyRouter.LOGIN)},
+                  ),
                 ),
                 SizedBox(height: 8.0),
                 MyOutlineButton(

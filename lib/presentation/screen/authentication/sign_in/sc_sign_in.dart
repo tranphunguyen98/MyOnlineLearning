@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:my_online_learning/data/repository/authentication/i_authentication_repository.dart';
+import 'package:my_online_learning/presentation/common_widgets/widget_alert_dialog_simple.dart';
+import 'package:my_online_learning/presentation/common_widgets/widget_dialog_loading.dart';
 import 'package:my_online_learning/presentation/common_widgets/widget_my_flat_btn.dart';
 import 'package:my_online_learning/presentation/screen/router.dart';
-import 'package:my_online_learning/remote/source/authentication/authentication_service.dart';
 import 'package:my_online_learning/utils/extensions.dart';
 import 'package:provider/provider.dart';
 
@@ -28,7 +30,7 @@ class _LoginScreenState extends State<LoginScreen> {
         title: Text("Sign In"),
         backgroundColor: context.theme.primaryColor,
       ),
-      body: Consumer<AuthenticationService>(
+      body: Consumer<IAuthenticationRepository>(
         builder: (_, repository, __) {
           return SingleChildScrollView(
             child: Container(
@@ -74,7 +76,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   FlatButtonCommon(
                     title: "FORGOT PASSWORD?",
                     onPressed: () {
-                      context.pushNamed(MyRouter.FORGOT_PASSWORD);
+                      context.pushReplacementNamed(MyRouter.FORGOT_PASSWORD);
                     },
                   ),
                   FlatButtonCommon(
@@ -94,59 +96,11 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   _showDiaglogLoading(String message) {
-    showDialog(
-      context: context,
-      builder: (_) => Dialog(
-        backgroundColor: context.theme.primaryColor,
-        child: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 16.0),
-          padding: const EdgeInsets.all(32.0),
-          child: Row(
-            children: [
-              CircularProgressIndicator(),
-              SizedBox(
-                width: 32.0,
-              ),
-              Text(
-                message + "...",
-                style: context.textTheme.bodyText1,
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
+    showDialog(context: context, builder: (_) => DialogLoading(message));
   }
 
   _showMaterialDialog(String title, String content) {
     showDialog(
-      context: context,
-      builder: (_) => AlertDialog(
-        backgroundColor: context.theme.primaryColor,
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(10.0))),
-        content: Builder(
-          builder: (context) {
-            var width = MediaQuery.of(context).size.width;
-            return Container(
-              width: width,
-              child: Text(content),
-            );
-          },
-        ),
-        title: Text(title),
-        actions: <Widget>[
-          FlatButton(
-            child: Text(
-              'OK',
-              style: TextStyle(color: Colors.blue),
-            ),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          ),
-        ],
-      ),
-    );
+        context: context, builder: (_) => AlertDialogSimple(title, content));
   }
 }

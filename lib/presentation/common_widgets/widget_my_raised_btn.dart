@@ -8,18 +8,15 @@ class MyRaisedButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: RaisedButton(
-        child: Text(
-          this.title,
-          style: TextStyle(
-            color: Colors.white,
-          ),
+    return RaisedButton(
+      child: Text(
+        this.title,
+        style: TextStyle(
+          color: Colors.white,
         ),
-        onPressed: this.onPressed,
-        color: Colors.blue,
       ),
+      onPressed: this.onPressed,
+      color: Colors.blue,
     );
   }
 }

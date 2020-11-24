@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_online_learning/presentation/common_widgets/widget_my_raised_btn.dart';
 import 'package:my_online_learning/presentation/common_widgets/widget_text_field.dart';
+import 'package:my_online_learning/utils/validator.dart';
 
 class WidgetLoginForm extends StatefulWidget {
   final Function(String, String) signIn;
@@ -12,9 +13,6 @@ class WidgetLoginForm extends StatefulWidget {
 }
 
 class _WidgetLoginFormState extends State<WidgetLoginForm> {
-  final String kRegexEmail =
-      "^[a-zA-Z0-9.!#\$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*\$";
-  final String kRegexPassword = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}\$";
   final _formKey = GlobalKey<FormState>();
 
   final TextEditingController _userNameController = TextEditingController();
@@ -31,14 +29,7 @@ class _WidgetLoginFormState extends State<WidgetLoginForm> {
           children: [
             WidgetTextField(
               controller: _userNameController,
-              validator: (value) {
-                RegExp regExp = RegExp(kRegexEmail);
-                // if (!regExp.hasMatch(value)) {
-                if (value.length < 4) {
-                  return "Invalid email";
-                }
-                return null;
-              },
+              validator: validateEmail,
               title: "Email",
             ),
             SizedBox(
@@ -48,14 +39,7 @@ class _WidgetLoginFormState extends State<WidgetLoginForm> {
               controller: _passwordController,
               title: "Password",
               hasObscure: true,
-              validator: (value) {
-                RegExp regExp = RegExp(kRegexPassword);
-                // if (!regExp.hasMatch(value)) {
-                if (value.length < 4) {
-                  return "Invalid password";
-                }
-                return null;
-              },
+              validator: validatePassword,
             ),
             SizedBox(height: 16.0),
             MyRaisedButton(
