@@ -21,22 +21,34 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
+  # UI
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.0
   flutter_rating_bar: ^3.0.1+1
-  share: ^0.6.5+4
   flutter_svg: ^0.19.1
   image_picker: ^0.6.7+14
+  # Location
   google_maps_flutter: ^1.0.6
   location: ^3.0.2
   flutter_localizations:
     sdk: flutter
+  # Share
+  share: ^0.6.5+4
+  # Json
+  freezed_annotation: ^0.12.0
+  # Util
+  supercharged: ^1.11.1
+  # Provider
+  provider: ^4.3.2+2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   lint: ^1.1.1
+  build_runner:
+  freezed: ^0.1.3+1
+  json_serializable: ^3.2.5
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

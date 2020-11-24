@@ -28,14 +28,14 @@ class WidgetRegisterForm extends StatelessWidget {
           ),
           WidgetTextField(
             title: "Password",
-            isObscure: true,
+            hasObscure: true,
           ),
           SizedBox(
             height: 16,
           ),
           WidgetTextField(
             title: "Confirm Password",
-            isObscure: true,
+            hasObscure: true,
           ),
         ],
       ),

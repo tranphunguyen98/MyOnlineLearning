@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:my_online_learning/data/repository/authentication/authentication_data_source.dart';
+import 'package:my_online_learning/data/repository/authentication/authentication_repository_impl.dart';
+import 'package:my_online_learning/data/repository/authentication/i_authentication_repository.dart';
 import 'package:my_online_learning/presentation/screen/home_page.dart';
 import 'package:my_online_learning/presentation/screen/router.dart';
+import 'package:my_online_learning/remote/mapper/network_user_mapper.dart';
+import 'package:my_online_learning/remote/source/authentication/authentication_data_source_impl.dart';
+import 'package:my_online_learning/remote/source/authentication/authentication_service.dart';
+import 'package:provider/provider.dart';
 
 import 'utils/app_localizations.dart';
 
@@ -14,36 +21,53 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const bool isThemeLight = false;
-    return
-        // ValueListenableBuilder(
-        // valueListenable: SettingsStore.of(context).theme,
-        // builder: (context, ThemeData theme, child) =>
-        MaterialApp(
-            supportedLocales: const [
+    return MultiProvider(
+      providers: [
+        Provider<AuthenticationService>(
+          create: (_) => AuthenticationService(),
+        ),
+        Provider<NetworkUserMapper>(
+          create: (_) => NetworkUserMapper(),
+        ),
+        ProxyProvider2<AuthenticationService, NetworkUserMapper,
+            AuthenticationDataSource>(
+          update: (_, _authenticationService, _mapper, __) =>
+              AuthenticationDataSourceImplement(
+            _authenticationService,
+            _mapper,
+          ),
+        ),
+        ProxyProvider<AuthenticationDataSource, IAuthenticationRepository>(
+            update: (_, _authenticationDataSource, __) =>
+                AuthenticationRepositoryImplement(_authenticationDataSource))
+      ],
+      child: MaterialApp(
+        supportedLocales: const [
           Locale('en', 'US'),
           Locale('vi', 'VN'),
         ],
-            localizationsDelegates: const [
+        localizationsDelegates: const [
           AppLocalizations.delegate,
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
         ],
-            localeResolutionCallback: (locale, supportedLocales) {
-              for (final supportedLocale in supportedLocales) {
-                if (supportedLocale.languageCode == locale.languageCode &&
-                    supportedLocale.countryCode == locale.countryCode) {
-                  return supportedLocale;
-                }
-              }
-              return supportedLocales.first;
-            },
-            title: 'Online Learning',
-            // themeMode: ThemeMode.light,
-            theme: isThemeLight ? themeLight : themeDark,
-            initialRoute: MyRouter.HOME_PAGE,
-            onGenerateRoute: MyRouter.generateRoute,
-            home: HomePage());
-    // );
+        localeResolutionCallback: (locale, supportedLocales) {
+          for (final supportedLocale in supportedLocales) {
+            if (supportedLocale.languageCode == locale.languageCode &&
+                supportedLocale.countryCode == locale.countryCode) {
+              return supportedLocale;
+            }
+          }
+          return supportedLocales.first;
+        },
+        title: 'Online Learning',
+        // themeMode: ThemeMode.light,
+        theme: isThemeLight ? themeLight : themeDark,
+        initialRoute: MyRouter.LOGIN,
+        onGenerateRoute: MyRouter.generateRoute,
+        home: HomePage(),
+      ),
+    );
   }
 
   ThemeData themeLight = ThemeData.light().copyWith(

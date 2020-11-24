@@ -10,14 +10,14 @@ class WidgetChangePasswordForm extends StatelessWidget {
         children: [
           WidgetTextField(
             title: "New Password",
-            isObscure: true,
+            hasObscure: true,
           ),
           SizedBox(
             height: 16,
           ),
           WidgetTextField(
             title: "Confirm New Password",
-            isObscure: true,
+            hasObscure: true,
           ),
         ],
       ),

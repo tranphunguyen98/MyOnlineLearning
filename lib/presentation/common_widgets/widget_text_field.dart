@@ -1,10 +1,25 @@
 import 'package:flutter/material.dart';
 
-class WidgetTextField extends StatelessWidget {
+class WidgetTextField extends StatefulWidget {
   final String title;
-  final bool isObscure;
+  final bool hasObscure;
+  final String Function(String) validator;
+  final TextEditingController controller;
+  const WidgetTextField(
+      {this.title, this.hasObscure = false, this.validator, this.controller});
 
-  const WidgetTextField({this.title, this.isObscure = false});
+  @override
+  _WidgetTextFieldState createState() => _WidgetTextFieldState();
+}
+
+class _WidgetTextFieldState extends State<WidgetTextField> {
+  bool isSecure = false;
+
+  @override
+  void initState() {
+    isSecure = widget.hasObscure;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +27,7 @@ class WidgetTextField extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          this.title,
+          this.widget.title,
           style: TextStyle(color: Colors.white60),
         ),
         Container(
@@ -24,16 +39,25 @@ class WidgetTextField extends StatelessWidget {
           child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: TextFormField(
-                maxLines: 1,
+                controller: widget.controller,
+                validator: widget.validator,
                 keyboardType: TextInputType.text,
                 textAlign: TextAlign.left,
-                obscureText: this.isObscure,
+                obscureText: isSecure,
                 decoration: InputDecoration(
                   border: InputBorder.none,
-                  suffixIcon: this.isObscure
-                      ? const Padding(
+                  suffixIcon: this.widget.hasObscure
+                      ? Padding(
                           padding: const EdgeInsets.only(left: 8.0),
-                          child: const Icon(Icons.visibility_off),
+                          child: GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  isSecure = !isSecure;
+                                });
+                              },
+                              child: isSecure
+                                  ? Icon(Icons.visibility_off)
+                                  : Icon(Icons.visibility)),
                         )
                       : null,
                 ),
