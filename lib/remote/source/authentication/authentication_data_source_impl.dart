@@ -34,6 +34,11 @@ class AuthenticationDataSourceImplement implements AuthenticationDataSource {
 
   @override
   Future<bool> signUp(User user, String password) {
-    return _authenticationService.singUp(_mapper.mapToRemote(user), password);
+    return _authenticationService.signUp(_mapper.mapToRemote(user), password);
+  }
+
+  @override
+  Future<bool> signInWithGoogle() {
+    return _authenticationService.signInWithGoogle();
   }
 }

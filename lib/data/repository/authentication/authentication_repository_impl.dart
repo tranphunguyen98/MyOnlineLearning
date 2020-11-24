@@ -31,4 +31,9 @@ class AuthenticationRepositoryImplement implements IAuthenticationRepository {
   Future<bool> signUp(User user, String password) {
     return _authenticationDataSource.signUp(user, password);
   }
+
+  @override
+  Future<bool> signInWithGoogle() {
+    return _authenticationDataSource.signInWithGoogle();
+  }
 }

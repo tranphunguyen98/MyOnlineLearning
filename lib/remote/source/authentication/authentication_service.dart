@@ -15,7 +15,16 @@ class AuthenticationService {
     );
   }
 
-  Future<bool> singUp(NetworkUser user, String password) {
+  Future<bool> signInWithGoogle() {
+    return Future.delayed(
+      500.milliseconds,
+      () {
+        return true;
+      },
+    );
+  }
+
+  Future<bool> signUp(NetworkUser user, String password) {
     return Future.delayed(500.milliseconds, () => true);
   }
 }

@@ -55,7 +55,20 @@ class _LoginScreenState extends State<LoginScreen> {
                   SizedBox(height: 8.0),
                   FlatButtonCommon(
                     title: "LOGIN WITH GOOGLE",
-                    onPressed: () {},
+                    onPressed: () async {
+                      _showDiaglogLoading("Sign In With Google");
+                      try {
+                        final bool isSucceeded =
+                            await repository.signInWithGoogle();
+                        if (isSucceeded) {
+                          Navigator.pop(context);
+                          _showMaterialDialog("Sign in Succeeded", "Succeeded");
+                        }
+                      } catch (e) {
+                        Navigator.pop(context);
+                        _showMaterialDialog("Sign in failed", e.toString());
+                      }
+                    },
                   ),
                   SizedBox(height: 8.0),
                   FlatButtonCommon(
