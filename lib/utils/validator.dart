@@ -11,6 +11,24 @@ String validateEmail(String email) {
   return null;
 }
 
+String validateNameUser(String name) {
+  RegExp regExp = RegExp(kRegexEmail);
+  // if (!regExp.hasMatch(value)) {
+  if (name.length < 4) {
+    return "Invalid user name";
+  }
+  return null;
+}
+
+String validateFullName(String name) {
+  RegExp regExp = RegExp(kRegexEmail);
+  // if (!regExp.hasMatch(value)) {
+  if (name.length < 4) {
+    return "Invalid full name";
+  }
+  return null;
+}
+
 String validateOTP(String email) {
   RegExp regExp = RegExp(kRegexEmail);
   // if (!regExp.hasMatch(value)) {

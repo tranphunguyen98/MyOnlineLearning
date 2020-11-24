@@ -25,7 +25,12 @@ class AuthenticationService {
   }
 
   Future<bool> signUp(NetworkUser user, String password) {
-    return Future.delayed(500.milliseconds, () => true);
+    return Future.delayed(500.milliseconds, () {
+      if (user.userName != 'user') {
+        return true;
+      }
+      throw Exception("User name is existed");
+    });
   }
 
   Future<bool> confirmOTPCode(String optCode) {

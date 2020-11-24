@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:my_online_learning/data/repository/authentication/i_authentication_repository.dart';
+import 'package:my_online_learning/presentation/common_widgets/widget_alert_dialog_simple.dart';
+import 'package:my_online_learning/presentation/common_widgets/widget_dialog_loading.dart';
 import 'package:my_online_learning/presentation/common_widgets/widget_my_flat_btn.dart';
 import 'package:my_online_learning/presentation/screen/router.dart';
 import 'package:my_online_learning/utils/extensions.dart';
+import 'package:provider/provider.dart';
 
-import '../../../common_widgets/widget_my_raised_btn.dart';
 import 'widget_register_form.dart';
 
 class RegisterScreen extends StatelessWidget {
@@ -20,26 +23,48 @@ class RegisterScreen extends StatelessWidget {
         title: Text("Register"),
         backgroundColor: context.theme.primaryColor,
       ),
-      body: Container(
-        color: context.theme.backgroundColor,
-        child: ListView(
-          children: [
-            SizedBox(height: 16.0),
-            WidgetRegisterForm(),
-            SizedBox(height: 16.0),
-            MyRaisedButton(
-              title: "REGISTER",
-              onPressed: () => {},
+      body: Consumer<IAuthenticationRepository>(
+        builder: (_, repository, __) {
+          return Container(
+            color: context.theme.backgroundColor,
+            child: ListView(
+              children: [
+                const SizedBox(height: 16.0),
+                WidgetRegisterForm(
+                  signUp: (user, password) async {
+                    showDialog(
+                        context: context,
+                        builder: (_) {
+                          return DialogLoading("Register");
+                        });
+
+                    try {
+                      final isSucceed = await repository.signUp(user, password);
+
+                      Navigator.pop(context);
+                      if (isSucceed) {
+                        context.pushReplacementNamed(MyRouter.HOME_PAGE);
+                      }
+                    } catch (e) {
+                      Navigator.pop(context);
+                      showDialog(
+                          context: context,
+                          builder: (_) {
+                            return AlertDialogSimple("Register", e.toString());
+                          });
+                    }
+                  },
+                ),
+                FlatButtonCommon(
+                  title: "ALREADY HAVE A ACCOUNT?",
+                  onPressed: () {
+                    Navigator.pushReplacementNamed(context, MyRouter.LOGIN);
+                  },
+                ),
+              ],
             ),
-            SizedBox(height: 8.0),
-            FlatButtonCommon(
-              title: "ALREADY HAVE A ACCOUNT?",
-              onPressed: () {
-                Navigator.pushReplacementNamed(context, MyRouter.LOGIN);
-              },
-            ),
-          ],
-        ),
+          );
+        },
       ),
     );
   }
