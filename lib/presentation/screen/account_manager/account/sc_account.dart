@@ -76,7 +76,7 @@ class _AvatarNameState extends State<AvatarName> {
                 onTap: getImage,
                 child: _image == null
                     ? CircleAvatarNormal(
-                        assetImageUrl: userModel.user.urlImage ??
+                        assetImageUrl: userModel?.user?.urlImage ??
                             "images/account_circle.png",
                         size: 100,
                       )

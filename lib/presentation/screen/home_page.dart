@@ -84,7 +84,11 @@ class _HomePageState extends State<HomePage> {
       actions: [
         GestureDetector(
           onTap: () {
-            Navigator.pushNamed(context, MyRouter.ACCOUNT);
+            if (context.read<UserModel>().user.isEmpty()) {
+              context.pushNamed(MyRouter.LOGIN);
+            } else {
+              context.pushNamed(MyRouter.ACCOUNT);
+            }
           },
           child: Selector<UserModel, String>(
               selector: (_, userModel) => userModel?.user?.urlImage,

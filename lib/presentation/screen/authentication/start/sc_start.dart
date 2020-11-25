@@ -36,7 +36,8 @@ class StartScreen extends StatelessWidget {
                 SizedBox(height: 8.0),
                 MyOutlineButton(
                   "Explore without sign in",
-                  onPressed: () => {context.pushNamed(MyRouter.HOME_PAGE)},
+                  onPressed: () =>
+                      context.pushNamedAndRemoveUntil(MyRouter.HOME_PAGE),
                 ),
               ],
             ),

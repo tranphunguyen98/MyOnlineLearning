@@ -50,8 +50,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         await userRepo.saveUser(user);
                         context.read<UserModel>().user = user;
                         Navigator.pop(context);
-                        Navigator.pushNamedAndRemoveUntil(
-                            context, MyRouter.HOME_PAGE, (router) => false);
+                        context.pushNamedAndRemoveUntil(MyRouter.HOME_PAGE);
                       }
                     } catch (e) {
                       Navigator.pop(context);

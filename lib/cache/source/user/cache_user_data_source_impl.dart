@@ -19,4 +19,7 @@ class CacheUserDataSourceImplement implements CacheUserDataSource {
   Future<User> getUser() async {
     return _mapper.mapFromCache(await _userService.getUser());
   }
+
+  @override
+  Future<void> removeUser() => _userService.clearUser();
 }

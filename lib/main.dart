@@ -9,7 +9,7 @@ import 'package:my_online_learning/data/repository/authentication/i_authenticati
 import 'package:my_online_learning/data/repository/user/i_user_repository.dart';
 import 'package:my_online_learning/data/repository/user/user_data_source.dart';
 import 'package:my_online_learning/data/repository/user/user_repository_impl.dart';
-import 'package:my_online_learning/presentation/screen/home_page.dart';
+import 'package:my_online_learning/presentation/screen/others/splash/sc_splash.dart';
 import 'package:my_online_learning/presentation/screen/router.dart';
 import 'package:my_online_learning/remote/mapper/network_user_mapper.dart';
 import 'package:my_online_learning/remote/source/authentication/authentication_data_source_impl.dart';
@@ -30,6 +30,7 @@ class MyApp extends StatelessWidget {
     const bool isThemeLight = false;
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider<UserModel>(create: (_) => UserModel()),
         Provider<AuthenticationService>(
           create: (_) => AuthenticationService(),
         ),
@@ -63,7 +64,6 @@ class MyApp extends StatelessWidget {
         ProxyProvider<CacheUserDataSource, IUserRepository>(
             update: (_, _cacheUserDataSource, __) =>
                 UserRepositoryImplement(_cacheUserDataSource)),
-        ChangeNotifierProvider<UserModel>(create: (_) => UserModel())
       ],
       child: MaterialApp(
         supportedLocales: const [
@@ -87,9 +87,9 @@ class MyApp extends StatelessWidget {
         title: 'Online Learning',
         // themeMode: ThemeMode.light,
         theme: isThemeLight ? themeLight : themeDark,
-        initialRoute: MyRouter.START,
+        //initialRoute: MyRouter.SPLASH,
         onGenerateRoute: MyRouter.generateRoute,
-        home: HomePage(),
+        home: SplashScreen(),
       ),
     );
   }

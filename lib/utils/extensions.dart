@@ -9,6 +9,10 @@ extension XBuildContext on BuildContext {
   TextTheme get textTheme => theme.textTheme;
 
   void pushNamed(String routeName) => Navigator.pushNamed(this, routeName);
+
   void pushReplacementNamed(String routeName) =>
       Navigator.pushReplacementNamed(this, routeName);
+
+  void pushNamedAndRemoveUntil(String routeName) =>
+      Navigator.pushNamedAndRemoveUntil(this, routeName, (router) => false);
 }

@@ -16,4 +16,7 @@ class UserRepositoryImplement implements IUserRepository {
   Future<User> getUser() {
     return _userDataSource.getUser();
   }
+
+  @override
+  Future<void> removeUser() => _userDataSource.removeUser();
 }

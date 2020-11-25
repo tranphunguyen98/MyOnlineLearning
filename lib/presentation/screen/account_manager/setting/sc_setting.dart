@@ -1,9 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:my_online_learning/data/model/user.dart';
+import 'package:my_online_learning/data/model/user_model.dart';
+import 'package:my_online_learning/data/repository/user/i_user_repository.dart';
 import 'package:my_online_learning/presentation/common_widgets/widget_my_outline_btn.dart';
 import 'package:my_online_learning/presentation/screen/router.dart';
 import 'package:my_online_learning/utils/extensions.dart';
 import 'package:my_online_learning/utils/my_const/my_const.dart';
+import 'package:provider/provider.dart';
 
 class SettingScreen extends StatelessWidget {
   @override
@@ -13,37 +17,44 @@ class SettingScreen extends StatelessWidget {
         title: Text("Setting"),
         backgroundColor: context.theme.primaryColor,
       ),
-      body: Container(
-        color: context.theme.backgroundColor,
-        child: ListView(
-          children: [
-            SizedBox(
-              height: 16.0,
+      body: Consumer2<UserModel, IUserRepository>(
+        builder: (_, userModel, userRepo, __) {
+          return Container(
+            color: context.theme.backgroundColor,
+            child: ListView(
+              children: [
+                SizedBox(
+                  height: 16.0,
+                ),
+                ItemSetting("Account", "", false),
+                ItemSetting(
+                    "Subscription", "Free (Limited Library) (Free)", false),
+                ItemSetting("Communication Preferences", "", false),
+                DividerCommon(),
+                ItemSetting("Language", "English", false),
+                ItemSetting("Require Wi-fi for streaming", "", true),
+                ItemSetting("Require Wi-fi for downloading", "", true),
+                DividerCommon(),
+                ItemSetting("Theme", "Dark", false),
+                DividerCommon(),
+                ItemSetting("App version", "1.0.0", false),
+                DividerCommon(),
+                if (!userModel.user.isEmpty())
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: MyOutlineButton(
+                      "SIGN OUT",
+                      onPressed: () async {
+                        await userRepo.removeUser();
+                        userModel.user = User.empty();
+                        context.pushNamedAndRemoveUntil(MyRouter.START);
+                      },
+                    ),
+                  ),
+              ],
             ),
-            ItemSetting("Account", "", false),
-            ItemSetting("Subscription", "Free (Limited Library) (Free)", false),
-            ItemSetting("Communication Preferences", "", false),
-            DividerCommon(),
-            ItemSetting("Language", "English", false),
-            ItemSetting("Require Wi-fi for streaming", "", true),
-            ItemSetting("Require Wi-fi for downloading", "", true),
-            DividerCommon(),
-            ItemSetting("Theme", "Dark", false),
-            DividerCommon(),
-            ItemSetting("App version", "1.0.0", false),
-            DividerCommon(),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: MyOutlineButton(
-                "SIGN OUT",
-                onPressed: () {
-                  Navigator.of(context).pushNamedAndRemoveUntil(
-                      MyRouter.START, (Route<dynamic> route) => false);
-                },
-              ),
-            ),
-          ],
-        ),
+          );
+        },
       ),
     );
   }

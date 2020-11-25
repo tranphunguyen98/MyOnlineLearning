@@ -11,7 +11,7 @@ class CacheUser {
   final String email;
 
   CacheUser({
-    this.id,
+    this.id = "",
     this.userName,
     this.fullName,
     this.urlImage,

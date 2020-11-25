@@ -15,6 +15,9 @@ class User {
     @required this.email,
   });
 
+  factory User.empty() => User(id: "");
+  bool isEmpty() => id == "";
+
   User copyWith({
     String id,
     String userName,
