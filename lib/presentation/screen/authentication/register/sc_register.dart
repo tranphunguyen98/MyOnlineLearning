@@ -43,7 +43,8 @@ class RegisterScreen extends StatelessWidget {
                     try {
                       await authRepo.signUp(user, password);
                       Navigator.pop(context);
-                      context.pushReplacementNamed(MyRouter.HOME_PAGE);
+                      Navigator.pushNamedAndRemoveUntil(
+                          context, MyRouter.HOME_PAGE, (router) => false);
                       await userRepo.saveUser(user);
                       context.read<UserModel>().user = user;
                     } catch (e) {

@@ -9,7 +9,7 @@ class CacheUserService {
     try {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String userString = json.encode(user.toJson());
-      prefs.setString(USER_KEY, userString);
+      await prefs.setString(USER_KEY, userString);
       return true;
     } catch (e) {
       rethrow;

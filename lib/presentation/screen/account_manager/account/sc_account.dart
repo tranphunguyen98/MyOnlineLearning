@@ -2,10 +2,13 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:my_online_learning/data/model/user_model.dart';
+import 'package:my_online_learning/data/repository/user/i_user_repository.dart';
 import 'package:my_online_learning/presentation/common_widgets/widget_circle_avatar.dart';
 import 'package:my_online_learning/presentation/common_widgets/widget_circle_avatar_file.dart';
 import 'package:my_online_learning/utils/extensions.dart';
 import 'package:my_online_learning/utils/my_const/my_const.dart';
+import 'package:provider/provider.dart';
 
 class AccountScreen extends StatelessWidget {
   @override
@@ -44,11 +47,13 @@ class AvatarName extends StatefulWidget {
 class _AvatarNameState extends State<AvatarName> {
   File _image;
   final picker = ImagePicker();
+  bool isEditTextSelected = false;
 
   TextEditingController _nameController = TextEditingController();
+  var _focusNode = FocusNode();
 
   Future getImage() async {
-    print('1No image selected.');
+    print('No image selected.');
     final pickedFile = await picker.getImage(source: ImageSource.gallery);
 
     setState(() {
@@ -62,45 +67,83 @@ class _AvatarNameState extends State<AvatarName> {
 
   @override
   Widget build(BuildContext context) {
-    _nameController.text = "Trần Phú Nguyện";
-    return Column(
-      children: [
-        GestureDetector(
-            onTap: getImage,
-            child: _image == null
-                ? CircleAvatarNormal(
-                    assetImageUrl: "images/account_circle.png",
-                    size: 100,
-                  )
-                : CircleAvatarFile(
-                    image: _image,
-                    size: 100.0,
-                  )),
-        SizedBox(height: 8.0),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            ConstrainedBox(
-              constraints: BoxConstraints(minWidth: 48),
-              child: IntrinsicWidth(
-                child: TextField(
-                  controller: _nameController,
-                  decoration: InputDecoration(
-                    border: InputBorder.none,
+    return Consumer2<UserModel, IUserRepository>(
+      builder: (_, userModel, userRepo, __) {
+        _nameController.text = userModel.user.fullName;
+        return Column(
+          children: [
+            GestureDetector(
+                onTap: getImage,
+                child: _image == null
+                    ? CircleAvatarNormal(
+                        assetImageUrl: userModel.user.urlImage ??
+                            "images/account_circle.png",
+                        size: 100,
+                      )
+                    : CircleAvatarFile(
+                        image: _image,
+                        size: 100.0,
+                      )),
+            SizedBox(height: 8.0),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                ConstrainedBox(
+                  constraints: BoxConstraints(minWidth: 48),
+                  child: IntrinsicWidth(
+                    child: TextField(
+                      controller: _nameController,
+                      focusNode: _focusNode,
+                      onTap: () {
+                        //_focusNode.requestFocus();
+                        setState(() {
+                          isEditTextSelected = true;
+                        });
+                      },
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                      ),
+                    ),
                   ),
                 ),
-              ),
-            ),
-            SizedBox(
-              width: 4.0,
-            ),
-            Icon(
-              Icons.edit,
-              size: 20.0,
+                SizedBox(
+                  width: 4.0,
+                ),
+                if (isEditTextSelected)
+                  GestureDetector(
+                    onTap: () async {
+                      final newUser = userModel.user
+                          .copyWith(fullName: _nameController.text);
+                      await userRepo.saveUser(newUser);
+                      userModel.user = newUser;
+                      _focusNode.unfocus();
+                      setState(() {
+                        isEditTextSelected = false;
+                      });
+                    },
+                    child: const Icon(
+                      Icons.check,
+                      size: 20.0,
+                    ),
+                  )
+                else
+                  GestureDetector(
+                    onTap: () async {
+                      _focusNode.requestFocus();
+                      setState(() {
+                        isEditTextSelected = true;
+                      });
+                    },
+                    child: Icon(
+                      Icons.edit,
+                      size: 20.0,
+                    ),
+                  ),
+              ],
             ),
           ],
-        ),
-      ],
+        );
+      },
     );
   }
 }

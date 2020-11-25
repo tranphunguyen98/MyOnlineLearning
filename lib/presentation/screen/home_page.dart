@@ -94,10 +94,9 @@ class _HomePageState extends State<HomePage> {
                         assetImageUrl: urlImage,
                         size: 32.0,
                       )
-                    : Icon(
+                    : const Icon(
                         Icons.account_circle,
                         size: 32.0,
-                        color: Colors.blue,
                       );
               }),
         ),
