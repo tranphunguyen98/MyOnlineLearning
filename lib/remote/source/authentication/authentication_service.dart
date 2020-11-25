@@ -1,13 +1,16 @@
+import 'dart:convert';
+
+import 'package:flutter/services.dart';
 import 'package:my_online_learning/remote/model/network_user.dart';
 import 'package:supercharged/supercharged.dart';
 
 class AuthenticationService {
-  Future<bool> signIn(String userName, String password) {
+  Future<NetworkUser> signIn(String userName, String password) {
     return Future.delayed(
       500.milliseconds,
       () {
         if ((userName == 'user' && password == '1234')) {
-          return true;
+          return loadUser();
         } else {
           throw Exception("Invalid username or password");
         }
@@ -62,5 +65,15 @@ class AuthenticationService {
         return true;
       },
     );
+  }
+
+  Future<NetworkUser> loadUser() async {
+    // Đọc file json dưới dạng chuỗi
+    String jsonString = await rootBundle.loadString('sample_data/user.json');
+    // Giải mã file json sang Map
+    Map<String, dynamic> jsonMap =
+        json.decode(jsonString) as Map<String, dynamic>;
+
+    return NetworkUser.fromJson(jsonMap);
   }
 }

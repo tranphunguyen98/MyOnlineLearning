@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:my_online_learning/data/model/user_model.dart';
 import 'package:my_online_learning/data/repository/authentication/i_authentication_repository.dart';
+import 'package:my_online_learning/data/repository/user/i_user_repository.dart';
 import 'package:my_online_learning/presentation/common_widgets/widget_alert_dialog_simple.dart';
 import 'package:my_online_learning/presentation/common_widgets/widget_dialog_loading.dart';
 import 'package:my_online_learning/presentation/common_widgets/widget_my_flat_btn.dart';
@@ -23,8 +25,8 @@ class RegisterScreen extends StatelessWidget {
         title: Text("Register"),
         backgroundColor: context.theme.primaryColor,
       ),
-      body: Consumer<IAuthenticationRepository>(
-        builder: (_, repository, __) {
+      body: Consumer2<IAuthenticationRepository, IUserRepository>(
+        builder: (_, authRepo, userRepo, __) {
           return Container(
             color: context.theme.backgroundColor,
             child: ListView(
@@ -39,19 +41,19 @@ class RegisterScreen extends StatelessWidget {
                         });
 
                     try {
-                      final isSucceed = await repository.signUp(user, password);
-
+                      await authRepo.signUp(user, password);
                       Navigator.pop(context);
-                      if (isSucceed) {
-                        context.pushReplacementNamed(MyRouter.HOME_PAGE);
-                      }
+                      context.pushReplacementNamed(MyRouter.HOME_PAGE);
+                      await userRepo.saveUser(user);
+                      context.read<UserModel>().user = user;
                     } catch (e) {
                       Navigator.pop(context);
                       showDialog(
-                          context: context,
-                          builder: (_) {
-                            return AlertDialogSimple("Register", e.toString());
-                          });
+                        context: context,
+                        builder: (_) {
+                          return AlertDialogSimple("Register", e.toString());
+                        },
+                      );
                     }
                   },
                 ),

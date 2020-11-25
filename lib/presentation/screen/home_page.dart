@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:my_online_learning/data/model/user_model.dart';
+import 'package:my_online_learning/presentation/common_widgets/widget_circle_avatar.dart';
 import 'package:my_online_learning/presentation/screen/browse_courses/browse/sc_browse.dart';
 import 'package:my_online_learning/presentation/screen/browse_courses/download/sc_download.dart';
 import 'package:my_online_learning/presentation/screen/browse_courses/home/sc_home.dart';
 import 'package:my_online_learning/presentation/screen/search_courses/search/sc_search.dart';
 import 'package:my_online_learning/utils/extensions.dart';
+import 'package:provider/provider.dart';
 
 import 'router.dart';
 
@@ -80,12 +83,23 @@ class _HomePageState extends State<HomePage> {
       ),
       actions: [
         GestureDetector(
-          child: Icon(
-            Icons.account_circle,
-          ),
           onTap: () {
             Navigator.pushNamed(context, MyRouter.ACCOUNT);
           },
+          child: Selector<UserModel, String>(
+              selector: (_, userModel) => userModel?.user?.urlImage,
+              builder: (_, urlImage, __) {
+                return urlImage != null
+                    ? CircleAvatarNormal(
+                        assetImageUrl: urlImage,
+                        size: 32.0,
+                      )
+                    : Icon(
+                        Icons.account_circle,
+                        size: 32.0,
+                        color: Colors.blue,
+                      );
+              }),
         ),
         PopupMenuButton<DropdownChoices>(
           onSelected: (DropdownChoices choice) {

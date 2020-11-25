@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:my_online_learning/cache/mapper/cache_user_mapper.dart';
+import 'package:my_online_learning/cache/source/user/cache_user_data_source_impl.dart';
+import 'package:my_online_learning/cache/source/user/cache_user_service.dart';
 import 'package:my_online_learning/data/repository/authentication/authentication_data_source.dart';
 import 'package:my_online_learning/data/repository/authentication/authentication_repository_impl.dart';
 import 'package:my_online_learning/data/repository/authentication/i_authentication_repository.dart';
+import 'package:my_online_learning/data/repository/user/i_user_repository.dart';
+import 'package:my_online_learning/data/repository/user/user_data_source.dart';
+import 'package:my_online_learning/data/repository/user/user_repository_impl.dart';
 import 'package:my_online_learning/presentation/screen/home_page.dart';
 import 'package:my_online_learning/presentation/screen/router.dart';
 import 'package:my_online_learning/remote/mapper/network_user_mapper.dart';
@@ -10,6 +16,7 @@ import 'package:my_online_learning/remote/source/authentication/authentication_d
 import 'package:my_online_learning/remote/source/authentication/authentication_service.dart';
 import 'package:provider/provider.dart';
 
+import 'data/model/user_model.dart';
 import 'utils/app_localizations.dart';
 
 void main() {
@@ -39,7 +46,24 @@ class MyApp extends StatelessWidget {
         ),
         ProxyProvider<AuthenticationDataSource, IAuthenticationRepository>(
             update: (_, _authenticationDataSource, __) =>
-                AuthenticationRepositoryImplement(_authenticationDataSource))
+                AuthenticationRepositoryImplement(_authenticationDataSource)),
+        Provider<CacheUserService>(
+          create: (_) => CacheUserService(),
+        ),
+        Provider<CacheUserMapper>(
+          create: (_) => CacheUserMapper(),
+        ),
+        ProxyProvider2<CacheUserService, CacheUserMapper, CacheUserDataSource>(
+          update: (_, _cacheUserService, _mapper, __) =>
+              CacheUserDataSourceImplement(
+            _cacheUserService,
+            _mapper,
+          ),
+        ),
+        ProxyProvider<CacheUserDataSource, IUserRepository>(
+            update: (_, _cacheUserDataSource, __) =>
+                UserRepositoryImplement(_cacheUserDataSource)),
+        ChangeNotifierProvider<UserModel>(create: (_) => UserModel())
       ],
       child: MaterialApp(
         supportedLocales: const [

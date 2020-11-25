@@ -7,35 +7,29 @@ import 'authentication_service.dart';
 class AuthenticationDataSourceImplement implements AuthenticationDataSource {
   final AuthenticationService _authenticationService;
   final NetworkUserMapper _mapper;
+
   AuthenticationDataSourceImplement(this._authenticationService, this._mapper);
 
   @override
-  Future<bool> createNewPassword(String email, String password) {
-    return _authenticationService.createNewPassword(email, password);
-  }
+  Future<bool> createNewPassword(String email, String password) =>
+      _authenticationService.createNewPassword(email, password);
 
   @override
-  Future<bool> sendOTPCodeToEmail(String email) {
-    return _authenticationService.sendOTPCodeToEmail(email);
-  }
+  Future<bool> sendOTPCodeToEmail(String email) =>
+      _authenticationService.sendOTPCodeToEmail(email);
 
   @override
-  Future<bool> confirmOTPCode(String opt) {
-    return _authenticationService.confirmOTPCode(opt);
-  }
+  Future<bool> confirmOTPCode(String opt) =>
+      _authenticationService.confirmOTPCode(opt);
 
   @override
-  Future<bool> signIn(String userName, String password) {
-    return _authenticationService.signIn(userName, password);
-  }
+  Future<User> signIn(String userName, String password) async => _mapper
+      .mapFromRemote(await _authenticationService.signIn(userName, password));
 
   @override
-  Future<bool> signUp(User user, String password) {
-    return _authenticationService.signUp(_mapper.mapToRemote(user), password);
-  }
+  Future<bool> signUp(User user, String password) =>
+      _authenticationService.signUp(_mapper.mapToRemote(user), password);
 
   @override
-  Future<bool> signInWithGoogle() {
-    return _authenticationService.signInWithGoogle();
-  }
+  Future<bool> signInWithGoogle() => _authenticationService.signInWithGoogle();
 }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:my_online_learning/data/model/user_model.dart';
 import 'package:my_online_learning/data/repository/authentication/i_authentication_repository.dart';
+import 'package:my_online_learning/data/repository/user/i_user_repository.dart';
 import 'package:my_online_learning/presentation/common_widgets/widget_alert_dialog_simple.dart';
 import 'package:my_online_learning/presentation/common_widgets/widget_dialog_loading.dart';
 import 'package:my_online_learning/presentation/common_widgets/widget_my_flat_btn.dart';
@@ -30,8 +32,8 @@ class _LoginScreenState extends State<LoginScreen> {
         title: Text("Sign In"),
         backgroundColor: context.theme.primaryColor,
       ),
-      body: Consumer<IAuthenticationRepository>(
-        builder: (_, repository, __) {
+      body: Consumer2<IAuthenticationRepository, IUserRepository>(
+        builder: (_, authRepo, userRepo, __) {
           return SingleChildScrollView(
             child: Container(
               color: context.theme.backgroundColor,
@@ -43,11 +45,12 @@ class _LoginScreenState extends State<LoginScreen> {
                       signIn: (String userName, String password) async {
                     _showDiaglogLoading("Sign In");
                     try {
-                      final bool isSucceeded =
-                          await repository.signIn(userName, password);
-                      if (isSucceeded) {
+                      final user = await authRepo.signIn(userName, password);
+                      if (user != null) {
+                        await userRepo.saveUser(user);
+                        context.read<UserModel>().user = user;
                         Navigator.pop(context);
-                        _showMaterialDialog("Sign in Succeeded", "Succeeded");
+                        context.pushReplacementNamed(MyRouter.HOME_PAGE);
                       }
                     } catch (e) {
                       Navigator.pop(context);
@@ -61,7 +64,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       _showDiaglogLoading("Sign In With Google");
                       try {
                         final bool isSucceeded =
-                            await repository.signInWithGoogle();
+                            await authRepo.signInWithGoogle();
                         if (isSucceeded) {
                           Navigator.pop(context);
                           _showMaterialDialog("Sign in Succeeded", "Succeeded");

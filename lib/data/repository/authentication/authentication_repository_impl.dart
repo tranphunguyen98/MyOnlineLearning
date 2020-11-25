@@ -23,7 +23,7 @@ class AuthenticationRepositoryImplement implements IAuthenticationRepository {
   }
 
   @override
-  Future<bool> signIn(String userName, String password) {
+  Future<User> signIn(String userName, String password) {
     return _authenticationDataSource.signIn(userName, password);
   }
 
