@@ -9,6 +9,7 @@ import 'package:my_online_learning/data/repository/authentication/i_authenticati
 import 'package:my_online_learning/data/repository/user/i_user_repository.dart';
 import 'package:my_online_learning/data/repository/user/user_data_source.dart';
 import 'package:my_online_learning/data/repository/user/user_repository_impl.dart';
+import 'package:my_online_learning/di/injection.dart';
 import 'package:my_online_learning/presentation/screen/others/splash/sc_splash.dart';
 import 'package:my_online_learning/presentation/screen/router.dart';
 import 'package:my_online_learning/remote/mapper/network_user_mapper.dart';
@@ -19,7 +20,8 @@ import 'package:provider/provider.dart';
 import 'data/model/user_model.dart';
 import 'utils/app_localizations.dart';
 
-void main() {
+void main() async {
+  await configureDependencies();
   runApp(MyApp());
 }
 

@@ -49,6 +49,7 @@ class Rating extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RatingBar(
+      ignoreGestures: true,
       initialRating: course.ratedNumber,
       minRating: 1,
       direction: Axis.horizontal,

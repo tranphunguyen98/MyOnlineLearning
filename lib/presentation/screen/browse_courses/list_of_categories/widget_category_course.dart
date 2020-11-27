@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_online_learning/model/entity/course.dart';
 import 'package:my_online_learning/presentation/screen/router.dart';
 import 'package:my_online_learning/utils/extensions.dart';
 import 'package:my_online_learning/utils/my_const/my_const.dart';
@@ -7,8 +8,8 @@ import 'file:///C:/react-native/MyOnlineLearning/lib/presentation/screen/browse_
 
 class WidgetCategoryCourse extends StatelessWidget {
   final String title;
-
-  const WidgetCategoryCourse({@required this.title});
+  final List<Course> listCourse;
+  const WidgetCategoryCourse({@required this.title, this.listCourse});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,7 @@ class WidgetCategoryCourse extends StatelessWidget {
         Header(
           title: title,
         ),
-        ListCourseHorizontal(),
+        ListCourseHorizontal(listCourse),
       ],
     );
   }

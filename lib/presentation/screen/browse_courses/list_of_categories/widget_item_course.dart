@@ -32,35 +32,13 @@ class ItemCourse extends StatelessWidget {
         color: context.theme.primaryColor,
         child: Column(
           children: [
-            Stack(children: [
-              Image(
-                image: AssetImage(course.imageUrl),
+            Container(
                 width: 190.0,
                 height: 120.0,
-                fit: BoxFit.fitWidth,
-              ),
-              Positioned(
-                right: 0.0,
-                top: 0.0,
-                child: PopupMenuButton<DropdownChoices>(
-                  icon: Icon(
-                    Icons.more_vert,
-                  ),
-                  onSelected: (DropdownChoices choice) {
-                    choice.onPressed(context);
-                  },
-                  elevation: 6,
-                  itemBuilder: (BuildContext context) {
-                    return dropdownChoices.map((DropdownChoices choice) {
-                      return PopupMenuItem<DropdownChoices>(
-                        value: choice,
-                        child: Text(choice.title),
-                      );
-                    }).toList();
-                  },
-                ),
-              ),
-            ]),
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                        fit: BoxFit.fitHeight,
+                        image: AssetImage(course.imageUrl)))),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: WidgetColumnInfoCourse(
