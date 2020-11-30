@@ -4,8 +4,9 @@ import 'package:my_online_learning/presentation/screen/browse_courses/list_of_co
 
 class WidgetListCourseVertical extends StatelessWidget {
   final bool isScroll;
+  final List<Course> listCourse;
 
-  const WidgetListCourseVertical({this.isScroll = true});
+  const WidgetListCourseVertical({this.isScroll = true, this.listCourse});
 
   @override
   Widget build(BuildContext context) {
@@ -15,10 +16,10 @@ class WidgetListCourseVertical extends StatelessWidget {
           : NeverScrollableScrollPhysics(),
       scrollDirection: Axis.vertical,
       shrinkWrap: true,
-      itemCount: Course.listCourse.length,
+      itemCount: listCourse.length,
       itemBuilder: (BuildContext context, int index) {
         return ItemCourseVertical(
-          course: Course.listCourse[index],
+          course: listCourse[index],
         );
       },
       separatorBuilder: (BuildContext context, int index) {

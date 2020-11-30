@@ -5,13 +5,12 @@ import 'package:my_online_learning/presentation/screen/browse_courses/list_of_au
 import 'package:my_online_learning/presentation/screen/browse_courses/list_of_categories/widget_category_course.dart';
 
 class CategoryDetailScreen extends StatelessWidget {
-  Category category;
+  final Category category;
 
-  CategoryDetailScreen({this.category});
+  const CategoryDetailScreen({this.category});
 
   @override
   Widget build(BuildContext context) {
-    category = Category.categories[0];
     return Scaffold(
       body: NestedScrollView(
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
@@ -38,9 +37,9 @@ class CategoryDetailScreen extends StatelessWidget {
             padding: EdgeInsets.all(16.0),
             children: <Widget>[
               ListSkill(),
-              WidgetCategoryCourse(title: "New in ${category.title}"),
-              WidgetCategoryCourse(title: "Trending in ${category.title}"),
-              WidgetCategoryAuthor(title: "Top authors in ${category.title}"),
+              WidgetCategoryCourse(),
+              WidgetCategoryCourse(),
+              WidgetCategoryAuthor(),
             ],
           ),
         ),

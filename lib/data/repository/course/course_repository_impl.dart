@@ -24,22 +24,13 @@ class CourseRepositoryImplement implements ICourseRepository {
   }
 
   @override
-  Future<List<Course>> getTopNew() {
-    // TODO: implement getTopNew
-    throw UnimplementedError();
-  }
+  Future<List<Course>> getTopNew() => _remoteDataSource.getTopNew();
 
   @override
-  Future<List<Course>> getTopRate() {
-    // TODO: implement getTopRate
-    throw UnimplementedError();
-  }
+  Future<List<Course>> getTopRate() => _remoteDataSource.getTopRate();
 
   @override
-  Future<List<Course>> getTopSell() {
-    // TODO: implement getTopSell
-    throw UnimplementedError();
-  }
+  Future<List<Course>> getTopSell() => _remoteDataSource.getTopSell();
 
   @override
   Future<List<Course>> search(String courseId) {

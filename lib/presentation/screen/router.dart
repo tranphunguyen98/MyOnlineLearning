@@ -4,7 +4,6 @@ import 'package:my_online_learning/presentation/screen/Authentication/register/s
 import 'package:my_online_learning/presentation/screen/Authentication/reset_password/sc_reset_password.dart';
 import 'package:my_online_learning/presentation/screen/Authentication/start/sc_start.dart';
 import 'package:my_online_learning/presentation/screen/browse_courses/category_detail/sc_category_detail.dart';
-import 'package:my_online_learning/presentation/screen/browse_courses/list_of_courses/sc_list_course.dart';
 import 'package:my_online_learning/presentation/screen/home_page.dart';
 import 'package:my_online_learning/presentation/screen/others/splash/sc_splash.dart';
 import 'package:my_online_learning/presentation/screen/others/subscription/sc_subscription.dart';
@@ -49,8 +48,8 @@ class MyRouter {
         return MaterialPageRoute(builder: (_) => ChangeThemeScreen());
       case LOGIN:
         return MaterialPageRoute(builder: (_) => LoginScreen());
-      case LIST_COURSE:
-        return MaterialPageRoute(builder: (_) => ListCourseScreen());
+      // case LIST_COURSE:
+      //   return MaterialPageRoute(builder: (_) => ListCourseScreen());
       case COURSE_DETAIL:
         return MaterialPageRoute(builder: (_) => CourseDetailScreen());
       case START:

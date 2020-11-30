@@ -15,4 +15,10 @@ extension XBuildContext on BuildContext {
 
   void pushNamedAndRemoveUntil(String routeName) =>
       Navigator.pushNamedAndRemoveUntil(this, routeName, (router) => false);
+  void push(Widget widget) => Navigator.push(
+        this,
+        MaterialPageRoute(
+          builder: (context) => widget,
+        ),
+      );
 }

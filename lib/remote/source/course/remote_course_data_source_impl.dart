@@ -29,22 +29,19 @@ class RemoteCourseDataSourceImplement implements RemoteCourseDataSource {
   }
 
   @override
-  Future<List<Course>> getTopNew() {
-    // TODO: implement getTopNew
-    throw UnimplementedError();
-  }
+  Future<List<Course>> getTopNew() async => (await _courseService.getTopNew())
+      .map((e) => _mapper.mapFromRemote(e))
+      .toList();
 
   @override
-  Future<List<Course>> getTopRate() {
-    // TODO: implement getTopRate
-    throw UnimplementedError();
-  }
+  Future<List<Course>> getTopRate() async => (await _courseService.getTopNew())
+      .map((e) => _mapper.mapFromRemote(e))
+      .toList();
 
   @override
-  Future<List<Course>> getTopSell() {
-    // TODO: implement getTopSell
-    throw UnimplementedError();
-  }
+  Future<List<Course>> getTopSell() async => (await _courseService.getTopSell())
+      .map((e) => _mapper.mapFromRemote(e))
+      .toList();
 
   @override
   Future<List<Course>> search(String courseId) {

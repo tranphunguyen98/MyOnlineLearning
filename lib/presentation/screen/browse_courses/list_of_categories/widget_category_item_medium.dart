@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_online_learning/model/entity/category.dart';
-import 'package:my_online_learning/presentation/screen/router.dart';
+import 'package:my_online_learning/presentation/screen/browse_courses/category_detail/sc_category_detail.dart';
 import 'package:my_online_learning/utils/extensions.dart';
 import 'package:my_online_learning/utils/my_const/my_const.dart';
 
@@ -13,7 +13,9 @@ class CategoryItemMedium extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        context.pushNamed(MyRouter.CATEGORY_DETAIL);
+        context.push(CategoryDetailScreen(
+          category: category,
+        ));
       },
       child: Stack(
         children: [
