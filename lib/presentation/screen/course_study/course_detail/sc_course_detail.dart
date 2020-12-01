@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:my_online_learning/data/model/courses_download.dart';
 import 'package:my_online_learning/data/repository/course/i_course_repository.dart';
 import 'package:my_online_learning/di/injection.dart';
 import 'package:my_online_learning/model/entity/Chapter.dart';
@@ -7,6 +8,7 @@ import 'package:my_online_learning/model/entity/course.dart';
 import 'package:my_online_learning/presentation/common_widgets/widget_circle_avatar.dart';
 import 'package:my_online_learning/utils/extensions.dart';
 import 'package:my_online_learning/utils/my_const/my_const.dart';
+import 'package:provider/provider.dart';
 
 import 'WidgetButtonIcon.dart';
 import 'content_of_course.dart';
@@ -23,6 +25,7 @@ class CourseDetailScreen extends StatefulWidget {
 
 class _CourseDetailScreenState extends State<CourseDetailScreen> {
   Course course;
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<Course>(
@@ -167,9 +170,20 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          ItemFunctionDetail("Bookmark", Icons.bookmark),
-          ItemFunctionDetail("Add to channel", Icons.control_point),
-          ItemFunctionDetail("Download", Icons.download_rounded),
+          ItemFunctionDetail("Bookmark", Icons.bookmark, () {}),
+          ItemFunctionDetail("Add to channel", Icons.control_point, () {}),
+          Consumer<CoursesDownload>(
+            builder: (_, coursesDownload, __) => ItemFunctionDetail(
+              coursesDownload.contain(course) ? "Downloaded" : "Download",
+              Icons.download_rounded,
+              coursesDownload.contain(course)
+                  ? null
+                  : () {
+                      coursesDownload.addCourse(course);
+                      print("ADdddddddd");
+                    },
+            ),
+          ),
         ],
       ),
     );

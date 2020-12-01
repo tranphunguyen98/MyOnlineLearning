@@ -3,6 +3,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:my_online_learning/cache/mapper/cache_user_mapper.dart';
 import 'package:my_online_learning/cache/source/user/cache_user_data_source_impl.dart';
 import 'package:my_online_learning/cache/source/user/cache_user_service.dart';
+import 'package:my_online_learning/data/model/courses_download.dart';
 import 'package:my_online_learning/data/repository/authentication/authentication_data_source.dart';
 import 'package:my_online_learning/data/repository/authentication/authentication_repository_impl.dart';
 import 'package:my_online_learning/data/repository/authentication/i_authentication_repository.dart';
@@ -33,6 +34,8 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<UserModel>(create: (_) => UserModel()),
+        ChangeNotifierProvider<CoursesDownload>(
+            create: (_) => CoursesDownload()),
         Provider<AuthenticationService>(
           create: (_) => AuthenticationService(),
         ),

@@ -10,27 +10,31 @@ class WidgetListCourseVertical extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.separated(
-      physics: isScroll
-          ? AlwaysScrollableScrollPhysics()
-          : NeverScrollableScrollPhysics(),
-      scrollDirection: Axis.vertical,
-      shrinkWrap: true,
-      itemCount: listCourse.length,
-      itemBuilder: (BuildContext context, int index) {
-        return ItemCourseVertical(
-          course: listCourse[index],
-        );
-      },
-      separatorBuilder: (BuildContext context, int index) {
-        return Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8.0),
-          child: Divider(
-            color: Colors.white60,
-            height: 8,
-          ),
-        );
-      },
-    );
+    return listCourse.length > 0
+        ? ListView.separated(
+            physics: isScroll
+                ? AlwaysScrollableScrollPhysics()
+                : NeverScrollableScrollPhysics(),
+            scrollDirection: Axis.vertical,
+            shrinkWrap: true,
+            itemCount: listCourse.length,
+            itemBuilder: (BuildContext context, int index) {
+              return ItemCourseVertical(
+                course: listCourse[index],
+              );
+            },
+            separatorBuilder: (BuildContext context, int index) {
+              return Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: Divider(
+                  color: Colors.white60,
+                  height: 8,
+                ),
+              );
+            },
+          )
+        : Center(
+            child: Text("NO DATA"),
+          );
   }
 }
