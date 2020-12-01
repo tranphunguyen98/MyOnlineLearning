@@ -13,7 +13,6 @@ import 'Authentication/sign_in/sc_sign_in.dart';
 import 'account_manager/Account/sc_account.dart';
 import 'account_manager/Setting/sc_setting.dart';
 import 'account_manager/change_theme/sc_change_themes.dart';
-import 'course_study/course_detail/sc_course_detail.dart';
 
 class MyRouter {
   static const String SPLASH = '/splash';
@@ -50,8 +49,8 @@ class MyRouter {
         return MaterialPageRoute(builder: (_) => LoginScreen());
       // case LIST_COURSE:
       //   return MaterialPageRoute(builder: (_) => ListCourseScreen());
-      case COURSE_DETAIL:
-        return MaterialPageRoute(builder: (_) => CourseDetailScreen());
+      // case COURSE_DETAIL:
+      //   return MaterialPageRoute(builder: (_) => CourseDetailScreen());
       case START:
         return MaterialPageRoute(builder: (_) => StartScreen());
       case REGISTER:

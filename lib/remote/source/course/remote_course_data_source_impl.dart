@@ -11,10 +11,8 @@ class RemoteCourseDataSourceImplement implements RemoteCourseDataSource {
   RemoteCourseDataSourceImplement(this._courseService, this._mapper);
 
   @override
-  Future<Course> getCourseInfo(String courseId) {
-    // TODO: implement getCourseInfo
-    throw UnimplementedError();
-  }
+  Future<Course> getCourseInfo(String courseId) async =>
+      _mapper.mapFromRemote(await _courseService.getCourseInfo(courseId));
 
   @override
   Future<List<Course>> getCoursesUserFavoriteCategories(String userId) async =>

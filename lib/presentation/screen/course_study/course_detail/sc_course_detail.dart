@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:my_online_learning/data/repository/course/i_course_repository.dart';
+import 'package:my_online_learning/di/injection.dart';
 import 'package:my_online_learning/model/entity/Chapter.dart';
-import 'package:my_online_learning/model/entity/author.dart';
 import 'package:my_online_learning/model/entity/course.dart';
+import 'package:my_online_learning/presentation/common_widgets/widget_circle_avatar.dart';
 import 'package:my_online_learning/utils/extensions.dart';
 import 'package:my_online_learning/utils/my_const/my_const.dart';
 
@@ -11,57 +13,67 @@ import 'content_of_course.dart';
 import 'item_function_detail.dart';
 
 class CourseDetailScreen extends StatefulWidget {
+  final String courseId;
+
+  const CourseDetailScreen(this.courseId);
+
   @override
   _CourseDetailScreenState createState() => _CourseDetailScreenState();
 }
 
 class _CourseDetailScreenState extends State<CourseDetailScreen> {
-  Course course = Course.listCourse[0];
-
+  Course course;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: context.theme.backgroundColor,
-      body: Column(
-        children: [
-          VideoView(
-            course: course,
-          ),
-          Expanded(
-            child: ListView(
-              children: [
-                _buildHeaderInfo(),
-                _buildRowFunction(),
-                _buildDescription(),
-                _buildButtonFunction(),
-                _buildContentHeader(),
-                SizedBox(height: 16.0),
-                ContentOfCourse(),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
+    return FutureBuilder<Course>(
+        future: getIt<ICourseRepository>().getCourseInfo(widget.courseId),
+        builder: (_, courseSnapshot) {
+          if (courseSnapshot.hasData) {
+            course = courseSnapshot.data;
+            return Scaffold(
+              backgroundColor: context.theme.backgroundColor,
+              body: Column(
+                children: [
+                  VideoView(
+                    course: course,
+                  ),
+                  Expanded(
+                    child: ListView(
+                      children: [
+                        _buildHeaderInfo(),
+                        _buildRowFunction(),
+                        _buildDescription(),
+                        _buildButtonFunction(),
+                        _buildContentHeader(),
+                        SizedBox(height: 16.0),
+                        ContentOfCourse(),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            );
+          } else if (courseSnapshot.hasError) {
+            return Center(
+              child: Text(courseSnapshot.error.toString()),
+            );
+          } else
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+        });
   }
 
   Widget _buildItemAuthor() {
     return Chip(
-      label: Text(
-        Author.listAuthor[0].name,
-        //TODO style: context.textTheme.subtitle2,
-      ),
-      padding: EdgeInsets.all(0.0),
-      avatar: Container(
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          image: new DecorationImage(
-            fit: BoxFit.fill,
-            image: new AssetImage(Author.listAuthor[0].avatar),
-          ),
+        label: Text(
+          course.instructorName,
+          //TODO style: context.textTheme.subtitle2,
         ),
-      ),
-    );
+        avatar: CircleAvatarNormal(
+          size: 32.0,
+          assetImageUrl: course.instructorAvatar,
+        ));
   }
 
   Widget _buildHeaderInfo() {
@@ -77,15 +89,7 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
           SizedBox(
             height: 16.0,
           ),
-          Row(
-            children: [
-              _buildItemAuthor(),
-              SizedBox(
-                width: 8.0,
-              ),
-              _buildItemAuthor(),
-            ],
-          ),
+          _buildItemAuthor(),
           SizedBox(
             height: 8.0,
           ),

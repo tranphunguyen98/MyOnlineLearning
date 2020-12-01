@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_online_learning/model/entity/course.dart';
 import 'package:my_online_learning/presentation/screen/browse_courses/list_of_categories/widget_column_info_course.dart';
-import 'package:my_online_learning/presentation/screen/router.dart';
+import 'package:my_online_learning/presentation/screen/course_study/course_detail/sc_course_detail.dart';
 import 'package:my_online_learning/utils/extensions.dart';
 import 'package:share/share.dart';
 
@@ -27,7 +27,7 @@ class ItemCourse extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => context.pushNamed(MyRouter.COURSE_DETAIL),
+      onTap: () => context.push(CourseDetailScreen(course.id)),
       child: Container(
         color: context.theme.primaryColor,
         child: Column(

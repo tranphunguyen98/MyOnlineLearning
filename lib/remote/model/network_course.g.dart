@@ -12,12 +12,14 @@ NetworkCourse _$NetworkCourseFromJson(Map<String, dynamic> json) {
     title: json['title'] as String,
     subtitle: json['subtitle'] as String,
     price: json['price'] as int,
+    description: json['description'] as String,
     ratedNumber: json['ratedNumber'] as int,
     totalHours: json['totalHours'] as int,
     imageUrl: json['imageUrl'] as String,
     createdAt: json['createdAt'] as String,
     instructorId: json['instructorId'] as String,
-    description: json['description'] as String,
+    instructorName: json['instructorName'] as String,
+    instructorAvatar: json['instructorAvatar'] as String,
   );
 }
 
@@ -33,4 +35,6 @@ Map<String, dynamic> _$NetworkCourseToJson(NetworkCourse instance) =>
       'imageUrl': instance.imageUrl,
       'createdAt': instance.createdAt,
       'instructorId': instance.instructorId,
+      'instructorName': instance.instructorName,
+      'instructorAvatar': instance.instructorAvatar,
     };

@@ -15,10 +15,9 @@ class NetworkCourseMapper implements NetworkMapper<NetworkCourse, Course> {
         ratedNumber: type.ratedNumber.toDouble(),
         imageUrl: type.imageUrl,
         subtitle: type.subtitle,
-        description: type.description,
-        instructorNames: [
-          type.instructorId,
-        ],
+        description: "${type.title} ${type.description}",
+        instructorName: type.instructorName ?? "1",
+        instructorAvatar: type.instructorAvatar ?? "1",
         totalMinutes: type.totalHours * 60,
         level: "Beginner",
         createdAt:

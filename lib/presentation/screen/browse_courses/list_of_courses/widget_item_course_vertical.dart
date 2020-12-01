@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:my_online_learning/model/entity/course.dart';
 import 'package:my_online_learning/presentation/screen/browse_courses/list_of_categories/widget_column_info_course.dart';
-import 'package:my_online_learning/presentation/screen/router.dart';
+import 'package:my_online_learning/presentation/screen/course_study/course_detail/sc_course_detail.dart';
+import 'package:my_online_learning/utils/extensions.dart';
 
 class ItemCourseVertical extends StatelessWidget {
   final Course course;
@@ -12,7 +13,7 @@ class ItemCourseVertical extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, MyRouter.COURSE_DETAIL);
+        context.push(CourseDetailScreen(course.id));
       },
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,

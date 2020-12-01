@@ -63,7 +63,7 @@ class HomeScreen extends StatelessWidget {
           ),
           Consumer<UserModel>(
             builder: (_, userModel, __) {
-              return Column(
+              return !userModel.user.isEmpty() ? Column(
                 children: [
                   FutureBuilder<List<Course>>(
                     future: repository
@@ -108,7 +108,7 @@ class HomeScreen extends StatelessWidget {
                     },
                   ),
                 ],
-              );
+              ) : Container();
             },
           ),
           FutureBuilder<List<Author>>(

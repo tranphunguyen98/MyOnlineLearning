@@ -8,20 +8,16 @@ class CourseRepositoryImplement implements ICourseRepository {
   CourseRepositoryImplement(this._remoteDataSource);
 
   @override
-  Future<Course> getCourseInfo(String courseId) {
-    // TODO: implement getCourseInfo
-    throw UnimplementedError();
-  }
+  Future<Course> getCourseInfo(String courseId) =>
+      _remoteDataSource.getCourseInfo(courseId);
 
   @override
   Future<List<Course>> getCoursesUserFavoriteCategories(String userId) =>
       _remoteDataSource.getCoursesUserFavoriteCategories(userId);
 
   @override
-  Future<Course> getDetailWithLesson(String courseId) {
-    // TODO: implement getDetailWithLesson
-    throw UnimplementedError();
-  }
+  Future<Course> getDetailWithLesson(String courseId) =>
+      _remoteDataSource.getDetailWithLesson(courseId);
 
   @override
   Future<List<Course>> getTopNew() => _remoteDataSource.getTopNew();

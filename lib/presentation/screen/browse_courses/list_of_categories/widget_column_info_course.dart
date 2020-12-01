@@ -22,7 +22,7 @@ class WidgetColumnInfoCourse extends StatelessWidget {
           height: 4.0,
         ),
         Text(
-          course.instructorNames[0],
+          course.instructorName,
           style: context.textTheme.caption,
         ),
         SizedBox(
