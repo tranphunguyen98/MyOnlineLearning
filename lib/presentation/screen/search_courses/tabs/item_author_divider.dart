@@ -22,7 +22,7 @@ class ItemAuthorSearchDivider extends StatelessWidget {
                 shape: BoxShape.circle,
                 image: new DecorationImage(
                   fit: BoxFit.fill,
-                  image: AssetImage(author.imageUrl),
+                  image: AssetImage(author.avatar),
                 ),
               ),
             ),

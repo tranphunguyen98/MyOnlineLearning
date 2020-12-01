@@ -1,0 +1,44 @@
+{
+  "message": "OK",
+  "payload": [
+    {
+      "id": "a1",
+      "userId": "a1",
+      "major": "string",
+      "intro": "string",
+      "skills": [
+        "string"
+      ],
+      "cumulativeTuition": 0,
+      "isDeleted": true,
+      "createdAt": "2020-12-01T02:14:23.421Z",
+      "updatedAt": "2020-12-01T02:14:23.421Z"
+    },
+    {
+      "id": "a2",
+      "userId": "a2",
+      "major": "string",
+      "intro": "string",
+      "skills": [
+        "string"
+      ],
+      "cumulativeTuition": 0,
+      "isDeleted": true,
+      "createdAt": "2020-12-01T02:14:23.421Z",
+      "updatedAt": "2020-12-01T02:14:23.421Z"
+    },
+    {
+      "id": "a3",
+      "userId": "a3",
+      "major": "string",
+      "intro": "string",
+      "skills": [
+        "string"
+      ],
+      "cumulativeTuition": 0,
+      "isDeleted": true,
+      "createdAt": "2020-12-01T02:14:23.421Z",
+      "updatedAt": "2020-12-01T02:14:23.421Z"
+    }
+  ]
+}

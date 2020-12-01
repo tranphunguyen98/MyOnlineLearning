@@ -37,8 +37,7 @@ class ItemCourse extends StatelessWidget {
                 height: 120.0,
                 decoration: BoxDecoration(
                     image: DecorationImage(
-                        fit: BoxFit.fitHeight,
-                        image: AssetImage(course.imageUrl)))),
+                        fit: BoxFit.fill, image: AssetImage(course.imageUrl)))),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: WidgetColumnInfoCourse(

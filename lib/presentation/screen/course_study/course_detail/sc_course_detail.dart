@@ -57,7 +57,7 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
           shape: BoxShape.circle,
           image: new DecorationImage(
             fit: BoxFit.fill,
-            image: new AssetImage(Author.listAuthor[0].imageUrl),
+            image: new AssetImage(Author.listAuthor[0].avatar),
           ),
         ),
       ),

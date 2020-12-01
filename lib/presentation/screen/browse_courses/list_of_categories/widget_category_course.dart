@@ -36,6 +36,7 @@ class Header extends StatelessWidget {
           children: [
             Text(
               category.title,
+              maxLines: 2,
               style: context.textTheme.subtitle2,
             ),
             Padding(

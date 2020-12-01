@@ -17,7 +17,7 @@ class ItemAuthor extends StatelessWidget {
           decoration: BoxDecoration(
               shape: BoxShape.circle,
               image: DecorationImage(
-                  fit: BoxFit.fill, image: AssetImage(author.imageUrl))),
+                  fit: BoxFit.fill, image: AssetImage(author.avatar))),
         ),
         SizedBox(
           height: 8.0,
