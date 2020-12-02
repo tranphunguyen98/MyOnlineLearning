@@ -1,40 +1,40 @@
 import 'package:flutter/material.dart';
-import 'package:my_online_learning/model/entity/author.dart';
-import 'package:my_online_learning/model/entity/course.dart';
-import 'package:my_online_learning/model/entity/path.dart';
-import 'package:my_online_learning/presentation/screen/search_courses/tabs/ItemCourseVerticalDivider.dart';
+import 'package:my_online_learning/data/model/search_result_model.dart';
 import 'package:my_online_learning/presentation/screen/search_courses/tabs/item_author_divider.dart';
-import 'package:my_online_learning/presentation/screen/search_courses/tabs/item_path_divider.dart';
+import 'package:my_online_learning/presentation/screen/search_courses/tabs/item_course_vertical_divider.dart';
 import 'package:my_online_learning/utils/extensions.dart';
 import 'package:my_online_learning/utils/my_const/my_const.dart';
+import 'package:provider/provider.dart';
 
 class TabAll extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            HeaderResult("Courses", Course.listCourse.length),
-            ...Course.listCourse.map(
-              (e) => ItemCourseVerticalDivider(
-                course: e,
+    return Consumer<SearchResultModel>(
+      builder: (_, searchResult, __) => Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              HeaderResult("Courses", searchResult.data.listCourse.length),
+              ...searchResult.data.listCourse.map(
+                (e) => ItemCourseVerticalDivider(
+                  course: e,
+                ),
               ),
-            ),
-            HeaderResult("Paths", Path.listPath.length),
-            ...Path.listPath.map(
-              (e) => ItemPathDivider(
-                path: e,
+              // HeaderResult("Paths", Path.listPath.length),
+              // ...Path.listPath.map(
+              //   (e) => ItemPathDivider(
+              //     path: e,
+              //   ),
+              // ),
+              HeaderResult("Authors", searchResult.data.listAuthor.length),
+              ...searchResult.data.listAuthor.map(
+                (e) => ItemAuthorSearchDivider(
+                  author: e,
+                ),
               ),
-            ),
-            HeaderResult("Authors", Author.listAuthor.length),
-            ...Author.listAuthor.map(
-              (e) => ItemAuthorSearchDivider(
-                author: e,
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

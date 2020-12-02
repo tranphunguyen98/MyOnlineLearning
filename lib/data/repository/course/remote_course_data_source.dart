@@ -1,3 +1,4 @@
+import 'package:my_online_learning/data/model/search_result.dart';
 import 'package:my_online_learning/model/entity/course.dart';
 
 abstract class RemoteCourseDataSource {
@@ -7,5 +8,5 @@ abstract class RemoteCourseDataSource {
   Future<List<Course>> getCoursesUserFavoriteCategories(String userId);
   Future<Course> getCourseInfo(String courseId);
   Future<Course> getDetailWithLesson(String courseId);
-  Future<List<Course>> search(String courseId);
+  Future<SearchResult> search(String data);
 }

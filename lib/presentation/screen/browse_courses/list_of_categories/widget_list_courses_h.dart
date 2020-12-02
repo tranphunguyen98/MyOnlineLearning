@@ -9,6 +9,7 @@ class ListCourseHorizontal extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<Category>(
       builder: (_, category, __) => Container(
+        width: double.infinity,
         margin: const EdgeInsets.only(top: 16.0),
         height: 220,
         child: category.courses.isNotEmpty

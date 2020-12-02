@@ -5,6 +5,7 @@ import 'package:my_online_learning/cache/source/user/cache_user_data_source_impl
 import 'package:my_online_learning/cache/source/user/cache_user_service.dart';
 import 'package:my_online_learning/data/model/courses_bookmark.dart';
 import 'package:my_online_learning/data/model/courses_download.dart';
+import 'package:my_online_learning/data/model/search_history.dart';
 import 'package:my_online_learning/data/repository/authentication/authentication_data_source.dart';
 import 'package:my_online_learning/data/repository/authentication/authentication_repository_impl.dart';
 import 'package:my_online_learning/data/repository/authentication/i_authentication_repository.dart';
@@ -19,6 +20,7 @@ import 'package:my_online_learning/remote/source/authentication/authentication_d
 import 'package:my_online_learning/remote/source/authentication/authentication_service.dart';
 import 'package:provider/provider.dart';
 
+import 'data/model/search_result_model.dart';
 import 'data/model/user_model.dart';
 import 'utils/app_localizations.dart';
 
@@ -39,6 +41,9 @@ class MyApp extends StatelessWidget {
             create: (_) => CoursesDownload()),
         ChangeNotifierProvider<CoursesBookmark>(
             create: (_) => CoursesBookmark()),
+        ChangeNotifierProvider<SearchHistory>(create: (_) => SearchHistory()),
+        ChangeNotifierProvider<SearchResultModel>(
+            create: (_) => SearchResultModel()),
         Provider<AuthenticationService>(
           create: (_) => AuthenticationService(),
         ),

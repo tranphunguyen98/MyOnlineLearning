@@ -1,3 +1,4 @@
+import 'package:my_online_learning/data/model/search_result.dart';
 import 'package:my_online_learning/data/repository/course/i_course_repository.dart';
 import 'package:my_online_learning/data/repository/course/remote_course_data_source.dart';
 import 'package:my_online_learning/model/entity/course.dart';
@@ -29,8 +30,5 @@ class CourseRepositoryImplement implements ICourseRepository {
   Future<List<Course>> getTopSell() => _remoteDataSource.getTopSell();
 
   @override
-  Future<List<Course>> search(String courseId) {
-    // TODO: implement search
-    throw UnimplementedError();
-  }
+  Future<SearchResult> search(String data) => _remoteDataSource.search(data);
 }

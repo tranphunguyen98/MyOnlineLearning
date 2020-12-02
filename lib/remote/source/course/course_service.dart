@@ -2,9 +2,11 @@ import 'dart:convert';
 
 import 'package:flutter/services.dart';
 import 'package:injectable/injectable.dart';
+import 'package:my_online_learning/data/model/search_result.dart';
 import 'package:my_online_learning/di/injection.dart';
 import 'package:my_online_learning/model/entity/author.dart';
 import 'package:my_online_learning/remote/mapper/network_author_mapper.dart';
+import 'package:my_online_learning/remote/mapper/network_course_mapper.dart';
 import 'package:my_online_learning/remote/model/network_author.dart';
 import 'package:my_online_learning/remote/model/network_course.dart';
 
@@ -82,4 +84,51 @@ class CourseService {
 
   Future<List<NetworkCourse>> getTopSell() =>
       getCoursesUserFavoriteCategories("");
+
+  Future<SearchResult> search(String data) async {
+    String jsonString = await rootBundle.loadString('sample_data/courses.json');
+    String jsonAuthorString =
+        await rootBundle.loadString('sample_data/authors_detail.json');
+    List<Author> listAuthor = <Author>[];
+
+    listAuthor = (json.decode(jsonAuthorString)["payload"] as List)
+        .map((i) => getIt<NetworkAuthorMapper>()
+            .mapFromRemote(NetworkAuthor.fromJson(i as Map<String, dynamic>)))
+        .toList();
+
+    List<NetworkCourse> listCourses = <NetworkCourse>[];
+
+    listCourses = (json.decode(jsonString)["payload"] as List)
+        .map((i) => NetworkCourse.fromJson(i as Map<String, dynamic>))
+        .toList();
+
+    listCourses = listCourses
+        .map((e) => e.copyWith(
+              instructorName: listAuthor
+                  .firstWhere((element) => element.id == e.instructorId)
+                  .name,
+              instructorAvatar: listAuthor
+                  .firstWhere((element) => element.id == e.instructorId)
+                  .avatar,
+            ))
+        .toList();
+
+    final listNetworkCourseResult = listCourses
+        .where((element) =>
+            element.title.toLowerCase().contains(data.toLowerCase()))
+        .toList();
+
+    final listAuthorResult = listAuthor
+        .where((eAuthor) =>
+            listNetworkCourseResult
+                .indexWhere((element) => element.instructorId == eAuthor.id) >=
+            0)
+        .toList();
+
+    return SearchResult(
+        listNetworkCourseResult
+            .map((e) => getIt<NetworkCourseMapper>().mapFromRemote(e))
+            .toList(),
+        listAuthorResult);
+  }
 }

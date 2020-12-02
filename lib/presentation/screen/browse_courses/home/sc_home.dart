@@ -99,7 +99,7 @@ class HomeScreen extends StatelessWidget {
             print("sc_hie" + coursesBookmark.listCourse.toString());
             return Provider<Category>(
               create: (_) => Category(
-                "Bookmark${coursesBookmark.listCourse.length}",
+                "Bookmark",
                 coursesBookmark.listCourse,
               ),
               child: WidgetCategoryCourse(),

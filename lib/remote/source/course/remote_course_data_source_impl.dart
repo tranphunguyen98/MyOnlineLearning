@@ -1,3 +1,4 @@
+import 'package:my_online_learning/data/model/search_result.dart';
 import 'package:my_online_learning/data/repository/course/remote_course_data_source.dart';
 import 'package:my_online_learning/model/entity/course.dart';
 import 'package:my_online_learning/remote/mapper/network_course_mapper.dart';
@@ -42,8 +43,5 @@ class RemoteCourseDataSourceImplement implements RemoteCourseDataSource {
       .toList();
 
   @override
-  Future<List<Course>> search(String courseId) {
-    // TODO: implement search
-    throw UnimplementedError();
-  }
+  Future<SearchResult> search(String data) => _courseService.search(data);
 }
