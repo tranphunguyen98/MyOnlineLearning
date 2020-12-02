@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:my_online_learning/data/model/courses_bookmark.dart';
 import 'package:my_online_learning/data/model/courses_download.dart';
 import 'package:my_online_learning/data/repository/course/i_course_repository.dart';
 import 'package:my_online_learning/di/injection.dart';
@@ -170,19 +171,29 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          ItemFunctionDetail("Bookmark", Icons.bookmark, () {}),
+          Consumer<CoursesBookmark>(
+            builder: (_, coursesBookmark, __) => ItemFunctionDetail(
+              coursesBookmark.contain(course) ? "Bookmarked" : "Bookmark",
+              Icons.bookmark,
+              coursesBookmark.contain(course)
+                  ? () {
+                      coursesBookmark.removeCourse(course);
+                    }
+                  : () {
+                      coursesBookmark.addCourse(course);
+                    },
+            ),
+          ),
           ItemFunctionDetail("Add to channel", Icons.control_point, () {}),
           Consumer<CoursesDownload>(
             builder: (_, coursesDownload, __) => ItemFunctionDetail(
-              coursesDownload.contain(course) ? "Downloaded" : "Download",
-              Icons.download_rounded,
-              coursesDownload.contain(course)
-                  ? null
-                  : () {
-                      coursesDownload.addCourse(course);
-                      print("ADdddddddd");
-                    },
-            ),
+                coursesDownload.contain(course) ? "Downloaded" : "Download",
+                Icons.download_rounded,
+                coursesDownload.contain(course)
+                    ? null
+                    : () {
+                        coursesDownload.addCourse(course);
+                      }),
           ),
         ],
       ),

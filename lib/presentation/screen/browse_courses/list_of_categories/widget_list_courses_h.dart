@@ -11,16 +11,18 @@ class ListCourseHorizontal extends StatelessWidget {
       builder: (_, category, __) => Container(
         margin: const EdgeInsets.only(top: 16.0),
         height: 220,
-        child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            shrinkWrap: true,
-            itemCount: category.courses.length,
-            itemBuilder: (BuildContext context, int index) {
-              return Padding(
-                padding: const EdgeInsets.only(right: 16.0),
-                child: ItemCourse(course: category.courses[index]),
-              );
-            }),
+        child: category.courses.isNotEmpty
+            ? ListView.builder(
+                scrollDirection: Axis.horizontal,
+                shrinkWrap: true,
+                itemCount: category.courses.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return Padding(
+                    padding: const EdgeInsets.only(right: 16.0),
+                    child: ItemCourse(course: category.courses[index]),
+                  );
+                })
+            : Center(child: Text("NO DATA")),
       ),
     );
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_online_learning/data/model/courses_bookmark.dart';
 import 'package:my_online_learning/data/model/user_model.dart';
 import 'package:my_online_learning/data/repository/course/i_course_repository.dart';
 import 'package:my_online_learning/di/injection.dart';
@@ -63,54 +64,47 @@ class HomeScreen extends StatelessWidget {
           ),
           Consumer<UserModel>(
             builder: (_, userModel, __) {
-              return !userModel.user.isEmpty() ? Column(
-                children: [
-                  FutureBuilder<List<Course>>(
-                    future: repository
-                        .getCoursesUserFavoriteCategories(userModel.user.id),
-                    builder: (_, listCourseSnapshot) {
-                      if (listCourseSnapshot.hasData) {
-                        return Provider<Category>(
-                          create: (_) =>
-                              Category("Bookmark", listCourseSnapshot.data),
-                          child: const WidgetCategoryCourse(),
-                        );
-                      }
-                      if (listCourseSnapshot.hasError) {
-                        return Center(
-                          child: Text(listCourseSnapshot.error.toString()),
-                        );
-                      } else {
-                        return Container();
-                      }
-                    },
-                  ),
-                  FutureBuilder<List<Course>>(
-                    future: repository
-                        .getCoursesUserFavoriteCategories(userModel.user.id),
-                    builder: (_, listCourseSnapshot) {
-                      if (listCourseSnapshot.hasData) {
-                        return Provider<Category>(
-                          create: (_) =>
-                              Category("My Courses", listCourseSnapshot.data),
-                          child: const WidgetCategoryCourse(),
-                        );
-                      }
-                      if (listCourseSnapshot.hasError) {
-                        return Container(
-                          child: Center(
-                            child: Text(listCourseSnapshot.error.toString()),
-                          ),
-                        );
-                      } else {
-                        return Container();
-                      }
-                    },
-                  ),
-                ],
-              ) : Container();
+              return !userModel.user.isEmpty()
+                  ? Column(
+                      children: [
+                        FutureBuilder<List<Course>>(
+                          future: repository.getCoursesUserFavoriteCategories(
+                              userModel.user.id),
+                          builder: (_, listCourseSnapshot) {
+                            if (listCourseSnapshot.hasData) {
+                              return Provider<Category>(
+                                create: (_) => Category(
+                                    "My Courses", listCourseSnapshot.data),
+                                child: const WidgetCategoryCourse(),
+                              );
+                            }
+                            if (listCourseSnapshot.hasError) {
+                              return Container(
+                                child: Center(
+                                  child:
+                                      Text(listCourseSnapshot.error.toString()),
+                                ),
+                              );
+                            } else {
+                              return Container();
+                            }
+                          },
+                        ),
+                      ],
+                    )
+                  : Container();
             },
           ),
+          Consumer<CoursesBookmark>(builder: (_, coursesBookmark, __) {
+            print("sc_hie" + coursesBookmark.listCourse.toString());
+            return Provider<Category>(
+              create: (_) => Category(
+                "Bookmark${coursesBookmark.listCourse.length}",
+                coursesBookmark.listCourse,
+              ),
+              child: WidgetCategoryCourse(),
+            );
+          }),
           FutureBuilder<List<Author>>(
             future: authorService.getAuthor(),
             builder: (_, ListAuthorSnapshot) {
