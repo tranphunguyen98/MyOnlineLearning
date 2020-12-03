@@ -44,7 +44,7 @@ class Course {
         ratedNumber: 4.2,
         chapters: Chapter.listChapter,
         imageUrl: "images/course_image_2.jpg",
-        description: ""),
+        description: "")
   ];
 
   @override

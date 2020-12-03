@@ -12,19 +12,30 @@ class Category {
       Course.listCourse,
       "images/background_category_large.png",
     ),
-    // Category("CONFERENCES", "images/background_category_large.png",
-    //     Course.listCourse),
-    // Category(
-    //     "IT OPS", "images/background_category_large.png", Course.listCourse),
-    // Category("CERTIFICATIONS", "images/background_category_large.png",
-    //     Course.listCourse),
-    // Category(
-    //     "BUSINESS", "images/background_category_large.png", Course.listCourse),
-    // Category("CONFERENCES", "images/background_category_large.png",
-    //     Course.listCourse),
-    // Category(
-    //     "IT OPS", "images/background_category_large.png", Course.listCourse),
-    // Category("CERTIFICATIONS", "images/background_category_large.png",
-    //     Course.listCourse),
+    Category(
+      "CONFERENCES",
+      Course.listCourse,
+      "images/background_category_large.png",
+    ),
+    Category(
+      "CERTIFICATIONS",
+      Course.listCourse,
+      "images/background_category_large.png",
+    ),
+    Category(
+      "BUSINESS",
+      Course.listCourse,
+      "images/background_category_large.png",
+    ),
+    Category(
+      "IT OPS",
+      Course.listCourse,
+      "images/background_category_large.png",
+    ),
+    Category(
+      "DEVELOPMENT",
+      Course.listCourse,
+      "images/background_category_large.png",
+    ),
   ];
 }

@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:my_online_learning/data/repository/course/i_course_repository.dart';
+import 'package:my_online_learning/di/injection.dart';
+import 'package:my_online_learning/model/entity/author.dart';
 import 'package:my_online_learning/model/entity/category.dart';
+import 'package:my_online_learning/model/entity/course.dart';
 import 'package:my_online_learning/presentation/screen/browse_courses/browse/sc_browse.dart';
 import 'package:my_online_learning/presentation/screen/browse_courses/list_of_authors/widget_category_author.dart';
 import 'package:my_online_learning/presentation/screen/browse_courses/list_of_categories/widget_category_course.dart';
+import 'package:my_online_learning/remote/source/author/author_service.dart';
+import 'package:provider/provider.dart';
 
 class CategoryDetailScreen extends StatelessWidget {
   final Category category;
@@ -37,9 +43,35 @@ class CategoryDetailScreen extends StatelessWidget {
             padding: EdgeInsets.all(16.0),
             children: <Widget>[
               ListSkill(),
-              WidgetCategoryCourse(),
-              WidgetCategoryCourse(),
-              WidgetCategoryAuthor(),
+              FutureBuilder<List<Course>>(
+                future: getIt<ICourseRepository>().getTopSell(),
+                builder: (context, snapshot) => snapshot.hasData
+                    ? Provider<Category>(
+                        create: (context) =>
+                            Category("NEW IN ${category.title}", snapshot.data),
+                        child: WidgetCategoryCourse())
+                    : Container(),
+              ),
+              FutureBuilder<List<Course>>(
+                future: getIt<ICourseRepository>().getTopSell(),
+                builder: (context, snapshot) => snapshot.hasData
+                    ? Provider<Category>(
+                        create: (context) => Category(
+                            "TRENDING IN ${category.title}", snapshot.data),
+                        child: WidgetCategoryCourse())
+                    : Container(),
+              ),
+              FutureBuilder<List<Author>>(
+                future: getIt<AuthorSevice>().getAuthor(),
+                builder: (context, snapshot) => snapshot.hasData
+                    ? Provider<List<Author>>(
+                        create: (context) => snapshot.data,
+                        child: WidgetCategoryAuthor(
+                          title: "TOP AUTHORS IN ${category.title}",
+                        ),
+                      )
+                    : Container(),
+              ),
             ],
           ),
         ),

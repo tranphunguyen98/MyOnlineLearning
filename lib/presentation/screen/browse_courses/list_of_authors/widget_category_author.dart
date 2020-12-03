@@ -6,7 +6,7 @@ import 'widget_list_author_h.dart';
 class WidgetCategoryAuthor extends StatelessWidget {
   final String title;
 
-  const WidgetCategoryAuthor({@required this.title});
+  const WidgetCategoryAuthor({this.title = ""});
 
   @override
   Widget build(BuildContext context) {

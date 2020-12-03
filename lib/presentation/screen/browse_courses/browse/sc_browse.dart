@@ -1,13 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:my_online_learning/di/injection.dart';
+import 'package:my_online_learning/model/entity/author.dart';
 import 'package:my_online_learning/model/entity/category.dart';
+import 'package:my_online_learning/presentation/screen/browse_courses/list_of_authors/widget_category_author.dart';
 import 'package:my_online_learning/presentation/screen/browse_courses/list_of_categories/widget_category_item_large.dart';
 import 'package:my_online_learning/presentation/screen/browse_courses/list_of_categories/widget_category_item_medium.dart';
+import 'package:my_online_learning/remote/source/author/author_service.dart';
 import 'package:my_online_learning/utils/extensions.dart';
-
-import 'file:///C:/react-native/MyOnlineLearning/lib/presentation/screen/browse_courses/list_of_categories/widget_category_course.dart';
-
-import '../list_of_authors/widget_category_author.dart';
+import 'package:provider/provider.dart';
 
 class BrowseScreen extends StatelessWidget {
   @override
@@ -24,9 +25,17 @@ class BrowseScreen extends StatelessWidget {
               ListCategoryMedium(categories: Category.categories),
               SizedBox(height: 32.0),
               ListSkill(),
-              WidgetCategoryCourse(),
-              WidgetCategoryCourse(),
-              WidgetCategoryAuthor(),
+              FutureBuilder<List<Author>>(
+                future: getIt<AuthorSevice>().getAuthor(),
+                builder: (context, snapshot) => snapshot.hasData
+                    ? Provider<List<Author>>(
+                        create: (context) => snapshot.data,
+                        child: WidgetCategoryAuthor(
+                          title: "TOP AUTHORS",
+                        ),
+                      )
+                    : Container(),
+              ),
             ],
           ),
         ),
