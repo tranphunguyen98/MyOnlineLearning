@@ -29,15 +29,19 @@ class ItemCourse extends StatelessWidget {
     return GestureDetector(
       onTap: () => context.push(CourseDetailScreen(course.id)),
       child: Container(
-        color: context.theme.primaryColor,
+        color: context.theme.cardColor,
         child: Column(
           children: [
             Container(
-                width: 190.0,
-                height: 120.0,
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                        fit: BoxFit.fill, image: AssetImage(course.imageUrl)))),
+              width: 190.0,
+              height: 120.0,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  fit: BoxFit.fill,
+                  image: AssetImage(course.imageUrl),
+                ),
+              ),
+            ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: WidgetColumnInfoCourse(

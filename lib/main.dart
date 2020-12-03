@@ -112,8 +112,10 @@ class MyApp extends StatelessWidget {
   }
 
   ThemeData themeLight = ThemeData.light().copyWith(
-    primaryColor: const Color(0xffe1f5fe),
+    primaryColor: const Color(0xff42a5f5),
     primaryColorDark: const Color(0xffafc2cb),
+    primaryColorLight: const Color(0xffffffff),
+    cardColor: const Color(0xffafc2cb),
     accentColor: const Color(0xffffc107),
     backgroundColor: const Color(0xffffffff),
     textTheme: ThemeData.light().textTheme.copyWith(
@@ -131,6 +133,7 @@ class MyApp extends StatelessWidget {
     primaryColorDark: const Color(0xff181b20),
     primaryColorLight: const Color(0xff3e4247),
     accentColor: const Color(0xff2196f3),
+    cardColor: const Color(0xff20252B),
     backgroundColor: const Color(0xff121212),
     textTheme: ThemeData.dark().textTheme.copyWith(
           bodyText2: ThemeData.dark().textTheme.bodyText2.copyWith(

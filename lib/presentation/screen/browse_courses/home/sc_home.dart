@@ -90,21 +90,23 @@ class HomeScreen extends StatelessWidget {
                             }
                           },
                         ),
+                        Consumer<CoursesBookmark>(
+                            builder: (_, coursesBookmark, __) {
+                          print(
+                              "sc_hie" + coursesBookmark.listCourse.toString());
+                          return Provider<Category>(
+                            create: (_) => Category(
+                              "Bookmark",
+                              coursesBookmark.listCourse,
+                            ),
+                            child: WidgetCategoryCourse(),
+                          );
+                        }),
                       ],
                     )
                   : Container();
             },
           ),
-          Consumer<CoursesBookmark>(builder: (_, coursesBookmark, __) {
-            print("sc_hie" + coursesBookmark.listCourse.toString());
-            return Provider<Category>(
-              create: (_) => Category(
-                "Bookmark",
-                coursesBookmark.listCourse,
-              ),
-              child: WidgetCategoryCourse(),
-            );
-          }),
           FutureBuilder<List<Author>>(
             future: authorService.getAuthor(),
             builder: (_, ListAuthorSnapshot) {

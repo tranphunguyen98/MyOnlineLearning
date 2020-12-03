@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:my_online_learning/model/entity/course.dart';
 import 'package:my_online_learning/utils/extensions.dart';
-import 'package:my_online_learning/utils/my_const/my_const.dart';
 
 class WidgetColumnInfoCourse extends StatelessWidget {
   final Course course;
@@ -80,7 +79,7 @@ class RowInfo extends StatelessWidget {
       children: [
         Text(
           course.level,
-          style: StyleConst.textSmallWhite60,
+          style: context.textTheme.caption,
         ),
         SizedBox(
           width: 4,
@@ -95,7 +94,7 @@ class RowInfo extends StatelessWidget {
         ),
         Text(
           course.createdAt,
-          style: StyleConst.textSmallWhite60,
+          style: context.textTheme.caption,
         ),
         SizedBox(
           width: 4,
@@ -110,7 +109,7 @@ class RowInfo extends StatelessWidget {
         ),
         Text(
           "${course.totalMinutes}m",
-          style: StyleConst.textSmallWhite60,
+          style: context.textTheme.caption,
         ),
       ],
     );
