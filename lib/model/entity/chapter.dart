@@ -1,4 +1,4 @@
-import 'Lesson.dart';
+import 'lesson.dart';
 
 class Chapter {
   final String title;

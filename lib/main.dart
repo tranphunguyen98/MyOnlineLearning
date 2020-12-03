@@ -6,6 +6,7 @@ import 'package:my_online_learning/cache/source/user/cache_user_service.dart';
 import 'package:my_online_learning/data/model/courses_bookmark.dart';
 import 'package:my_online_learning/data/model/courses_download.dart';
 import 'package:my_online_learning/data/model/search_history.dart';
+import 'package:my_online_learning/data/model/theme_setting.dart';
 import 'package:my_online_learning/data/repository/authentication/authentication_data_source.dart';
 import 'package:my_online_learning/data/repository/authentication/authentication_repository_impl.dart';
 import 'package:my_online_learning/data/repository/authentication/i_authentication_repository.dart';
@@ -36,6 +37,7 @@ class MyApp extends StatelessWidget {
     const bool isThemeLight = false;
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider<ThemeSetting>(create: (_) => ThemeSetting()),
         ChangeNotifierProvider<UserModel>(create: (_) => UserModel()),
         ChangeNotifierProvider<CoursesDownload>(
             create: (_) => CoursesDownload()),
@@ -78,31 +80,33 @@ class MyApp extends StatelessWidget {
             update: (_, _cacheUserDataSource, __) =>
                 UserRepositoryImplement(_cacheUserDataSource)),
       ],
-      child: MaterialApp(
-        supportedLocales: const [
-          Locale('en', 'US'),
-          Locale('vi', 'VN'),
-        ],
-        localizationsDelegates: const [
-          AppLocalizations.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-        ],
-        localeResolutionCallback: (locale, supportedLocales) {
-          for (final supportedLocale in supportedLocales) {
-            if (supportedLocale.languageCode == locale.languageCode &&
-                supportedLocale.countryCode == locale.countryCode) {
-              return supportedLocale;
+      child: Consumer<ThemeSetting>(
+        builder: (context, themeSetting, child) => MaterialApp(
+          supportedLocales: const [
+            Locale('en', 'US'),
+            Locale('vi', 'VN'),
+          ],
+          localizationsDelegates: const [
+            AppLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+          ],
+          localeResolutionCallback: (locale, supportedLocales) {
+            for (final supportedLocale in supportedLocales) {
+              if (supportedLocale.languageCode == locale.languageCode &&
+                  supportedLocale.countryCode == locale.countryCode) {
+                return supportedLocale;
+              }
             }
-          }
-          return supportedLocales.first;
-        },
-        title: 'Online Learning',
-        // themeMode: ThemeMode.light,
-        theme: isThemeLight ? themeLight : themeDark,
-        //initialRoute: MyRouter.SPLASH,
-        onGenerateRoute: MyRouter.generateRoute,
-        home: SplashScreen(),
+            return supportedLocales.first;
+          },
+          title: 'Online Learning',
+          // themeMode: ThemeMode.light,
+          theme: themeSetting.isLightTheme ? themeLight : themeDark,
+          //initialRoute: MyRouter.SPLASH,
+          onGenerateRoute: MyRouter.generateRoute,
+          home: SplashScreen(),
+        ),
       ),
     );
   }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_online_learning/model/entity/Chapter.dart';
+import 'package:my_online_learning/model/entity/chapter.dart';
 import 'package:my_online_learning/presentation/screen/course_study/course_detail/sc_course_detail.dart';
 
 class ContentOfCourse extends StatelessWidget {

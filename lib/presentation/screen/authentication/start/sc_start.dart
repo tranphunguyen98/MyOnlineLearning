@@ -16,30 +16,30 @@ class StartScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             WidgetLogo(),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16.0),
-                  child: MyRaisedButton(
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  MyRaisedButton(
                     title: "SIGN IN",
                     onPressed: () =>
                         {Navigator.pushNamed(context, MyRouter.LOGIN)},
                   ),
-                ),
-                SizedBox(height: 8.0),
-                MyOutlineButton(
-                  "Register now",
-                  onPressed: () =>
-                      {Navigator.pushNamed(context, MyRouter.REGISTER)},
-                ),
-                SizedBox(height: 8.0),
-                MyOutlineButton(
-                  "Explore without sign in",
-                  onPressed: () =>
-                      context.pushNamedAndRemoveUntil(MyRouter.HOME_PAGE),
-                ),
-              ],
+                  SizedBox(height: 8.0),
+                  MyOutlineButton(
+                    "Register now",
+                    onPressed: () =>
+                        {Navigator.pushNamed(context, MyRouter.REGISTER)},
+                  ),
+                  SizedBox(height: 8.0),
+                  MyOutlineButton(
+                    "Explore without sign in",
+                    onPressed: () =>
+                        context.pushNamedAndRemoveUntil(MyRouter.HOME_PAGE),
+                  ),
+                ],
+              ),
             ),
           ],
         ),

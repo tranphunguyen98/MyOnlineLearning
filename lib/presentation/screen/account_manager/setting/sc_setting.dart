@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:my_online_learning/data/model/theme_setting.dart';
 import 'package:my_online_learning/data/model/user.dart';
 import 'package:my_online_learning/data/model/user_model.dart';
 import 'package:my_online_learning/data/repository/user/i_user_repository.dart';
@@ -14,11 +15,14 @@ class SettingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Setting"),
+        title: Text(
+          "Setting",
+          style: context.textTheme.headline6,
+        ),
         backgroundColor: context.theme.primaryColor,
       ),
-      body: Consumer2<UserModel, IUserRepository>(
-        builder: (_, userModel, userRepo, __) {
+      body: Consumer3<UserModel, IUserRepository, ThemeSetting>(
+        builder: (_, userModel, userRepo, themeSetting, __) {
           return Container(
             color: context.theme.backgroundColor,
             child: ListView(
@@ -35,7 +39,13 @@ class SettingScreen extends StatelessWidget {
                 ItemSetting("Require Wi-fi for streaming", "", true),
                 ItemSetting("Require Wi-fi for downloading", "", true),
                 DividerCommon(),
-                ItemSetting("Theme", "Dark", false),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, MyRouter.THEME);
+                  },
+                  child: ItemSetting("Theme",
+                      themeSetting.isLightTheme ? "Light" : "Dark", false),
+                ),
                 DividerCommon(),
                 ItemSetting("App version", "1.0.0", false),
                 DividerCommon(),
@@ -90,37 +100,32 @@ class ItemSetting extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.pushNamed(context, MyRouter.THEME);
-      },
-      child: Padding(
-          padding: const EdgeInsets.only(
-              top: 8.0, left: 16.0, right: 16.0, bottom: 8.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    title,
-                    style: StyleConst.textMedium,
-                  ),
-                  SizedBox(
-                    height: 4.0,
-                  ),
-                  Text(
-                    subtitle,
-                    style: StyleConst.textRegularGray,
-                  )
-                ],
-              ),
-              hasSwitch
-                  ? Switch(value: true, onChanged: (bool value) => {})
-                  : SizedBox(),
-            ],
-          )),
-    );
+    return Padding(
+        padding: const EdgeInsets.only(
+            top: 8.0, left: 16.0, right: 16.0, bottom: 8.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: context.textTheme.subtitle2,
+                ),
+                SizedBox(
+                  height: 4.0,
+                ),
+                Text(
+                  subtitle,
+                  style: StyleConst.textRegularGray,
+                )
+              ],
+            ),
+            hasSwitch
+                ? Switch(value: true, onChanged: (bool value) => {})
+                : SizedBox(),
+          ],
+        ));
   }
 }

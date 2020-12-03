@@ -4,7 +4,7 @@ import 'package:my_online_learning/data/model/courses_bookmark.dart';
 import 'package:my_online_learning/data/model/courses_download.dart';
 import 'package:my_online_learning/data/repository/course/i_course_repository.dart';
 import 'package:my_online_learning/di/injection.dart';
-import 'package:my_online_learning/model/entity/Chapter.dart';
+import 'package:my_online_learning/model/entity/chapter.dart';
 import 'package:my_online_learning/model/entity/course.dart';
 import 'package:my_online_learning/presentation/common_widgets/widget_circle_avatar.dart';
 import 'package:my_online_learning/presentation/screen/browse_courses/list_of_authors/sc_detail_author.dart';

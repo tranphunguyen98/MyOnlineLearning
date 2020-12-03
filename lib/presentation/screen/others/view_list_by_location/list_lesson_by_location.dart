@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_online_learning/model/entity/Chapter.dart';
+import 'package:my_online_learning/model/entity/chapter.dart';
 import 'package:my_online_learning/model/entity/course.dart';
 
 import 'item_view_by_location.dart';

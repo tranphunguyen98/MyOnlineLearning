@@ -1,4 +1,4 @@
-import 'package:my_online_learning/model/entity/Chapter.dart';
+import 'package:my_online_learning/model/entity/chapter.dart';
 
 class Course {
   final String id;
