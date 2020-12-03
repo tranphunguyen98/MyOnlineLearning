@@ -12,10 +12,12 @@ class Course {
   final String level;
   final String instructorName;
   final String instructorAvatar;
+  final String instructorId;
   final String description;
   final List<Chapter> chapters;
 
   const Course({
+    this.instructorId,
     this.instructorName,
     this.instructorAvatar,
     this.id = "",

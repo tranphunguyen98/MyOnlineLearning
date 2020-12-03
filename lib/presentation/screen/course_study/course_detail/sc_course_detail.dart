@@ -7,6 +7,7 @@ import 'package:my_online_learning/di/injection.dart';
 import 'package:my_online_learning/model/entity/Chapter.dart';
 import 'package:my_online_learning/model/entity/course.dart';
 import 'package:my_online_learning/presentation/common_widgets/widget_circle_avatar.dart';
+import 'package:my_online_learning/presentation/screen/browse_courses/list_of_authors/sc_detail_author.dart';
 import 'package:my_online_learning/utils/extensions.dart';
 import 'package:my_online_learning/utils/my_const/my_const.dart';
 import 'package:provider/provider.dart';
@@ -69,15 +70,20 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
   }
 
   Widget _buildItemAuthor() {
-    return Chip(
-        label: Text(
-          course.instructorName,
-          //TODO style: context.textTheme.subtitle2,
-        ),
-        avatar: CircleAvatarNormal(
-          size: 32.0,
-          assetImageUrl: course.instructorAvatar,
-        ));
+    return GestureDetector(
+      onTap: () {
+        context.push(AuthorDetailScreen(course.instructorId));
+      },
+      child: Chip(
+          label: Text(
+            course.instructorName,
+            style: context.textTheme.subtitle2,
+          ),
+          avatar: CircleAvatarNormal(
+            size: 32.0,
+            assetImageUrl: course.instructorAvatar,
+          )),
+    );
   }
 
   Widget _buildHeaderInfo() {
@@ -210,7 +216,7 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
             Expanded(
               child: Text(
                 course.description,
-                //TODO style: context.textTheme.subtitle2,
+                style: context.textTheme.subtitle2,
                 maxLines: 3,
               ),
             ),

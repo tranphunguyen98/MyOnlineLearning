@@ -26,7 +26,9 @@ class ListSearchSuggestion extends StatelessWidget {
                     ),
                     Spacer(),
                     FlatButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        searchHistory.removeAll();
+                      },
                       child: Text(
                         "CLEAR ALL",
                         style: TextStyle(

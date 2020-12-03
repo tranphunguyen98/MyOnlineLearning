@@ -25,9 +25,11 @@ class ItemSearchSuggestion extends StatelessWidget {
           SizedBox(
             width: 16.0,
           ),
-          Text(
-            suggestion,
-            style: context.textTheme.subtitle2,
+          Expanded(
+            child: Text(
+              suggestion,
+              style: context.textTheme.subtitle2,
+            ),
           ),
           // Spacer(
           //   flex: 1,

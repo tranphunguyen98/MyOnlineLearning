@@ -25,4 +25,20 @@ class AuthorSevice {
     listAuthor.shuffle();
     return listAuthor;
   }
+
+  Future<Author> getAuthorDetail(String authorId) async {
+    // Đọc file json dưới dạng chuỗi
+    String jsonString =
+        await rootBundle.loadString('sample_data/authors_detail.json');
+    //print(jsonString);
+    // Giải mã file json sang Map
+    List<Author> listAuthor = <Author>[];
+
+    listAuthor = (json.decode(jsonString)["payload"] as List)
+        .map((i) => getIt<NetworkAuthorMapper>()
+            .mapFromRemote(NetworkAuthor.fromJson(i as Map<String, dynamic>)))
+        .toList();
+
+    return listAuthor.firstWhere((element) => element.id == authorId);
+  }
 }
