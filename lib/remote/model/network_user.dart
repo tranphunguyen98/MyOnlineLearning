@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'network_user.g.dart';
@@ -5,20 +6,23 @@ part 'network_user.g.dart';
 @JsonSerializable(nullable: false)
 class NetworkUser {
   final String id;
-  final String userName;
-  final String fullName;
-  final String urlImage;
   final String email;
+  final String avatar;
+  final String username;
+  final String phone;
+  final String password;
 
   NetworkUser({
     this.id,
-    this.userName,
-    this.fullName,
-    this.urlImage,
-    this.email,
+    this.username,
+    this.phone,
+    this.avatar,
+    @required this.email,
+    @required this.password,
   });
 
   factory NetworkUser.fromJson(Map<String, dynamic> json) =>
       _$NetworkUserFromJson(json);
+
   Map<String, dynamic> toJson() => _$NetworkUserToJson(this);
 }

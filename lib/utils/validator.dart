@@ -1,6 +1,7 @@
 const String kRegexEmail =
     "^[a-zA-Z0-9.!#\$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*\$";
 const String kRegexPassword = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}\$";
+const String kRegexPhone = "\\(?(0[0-9]{2})\\)?([ .-]?)([0-9]{3})\\2([0-9]{4})";
 
 String validateEmail(String email) {
   RegExp regExp = RegExp(kRegexEmail);
@@ -20,11 +21,10 @@ String validateNameUser(String name) {
   return null;
 }
 
-String validateFullName(String name) {
-  RegExp regExp = RegExp(kRegexEmail);
-  // if (!regExp.hasMatch(value)) {
-  if (name.length < 4) {
-    return "Invalid full name";
+String validatePhone(String phone) {
+  final RegExp regExp = RegExp(kRegexPhone);
+  if (!regExp.hasMatch(phone)) {
+    return "Invalid Phone";
   }
   return null;
 }

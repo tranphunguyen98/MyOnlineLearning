@@ -1,6 +1,7 @@
 import 'package:my_online_learning/data/model/user.dart';
 import 'package:my_online_learning/data/repository/authentication/authentication_data_source.dart';
 import 'package:my_online_learning/data/repository/authentication/i_authentication_repository.dart';
+import 'package:my_online_learning/remote/model/response.dart';
 
 class AuthenticationRepositoryImplement implements IAuthenticationRepository {
   final AuthenticationDataSource _authenticationDataSource;
@@ -28,8 +29,8 @@ class AuthenticationRepositoryImplement implements IAuthenticationRepository {
   }
 
   @override
-  Future<bool> signUp(User user, String password) {
-    return _authenticationDataSource.signUp(user, password);
+  Future<MyResponse> signUp(User user) {
+    return _authenticationDataSource.signUp(user);
   }
 
   @override

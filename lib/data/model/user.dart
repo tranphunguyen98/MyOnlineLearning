@@ -2,49 +2,57 @@ import 'package:flutter/foundation.dart';
 
 class User {
   final String id;
-  final String userName;
-  final String fullName;
-  final String urlImage;
+  final String name;
+  final String phone;
+  final String avatar;
   final String email;
+  final String password;
 
   const User({
-    @required this.id,
-    @required this.userName,
-    @required this.fullName,
-    @required this.urlImage,
+    this.id,
+    this.phone,
+    this.avatar,
+    this.name,
     @required this.email,
+    @required this.password,
   });
 
   factory User.empty() => User(id: "");
+
   bool isEmpty() => id == "";
+
+//<editor-fold desc="Data Methods" defaultstate="collapsed">
 
   User copyWith({
     String id,
-    String userName,
-    String fullName,
-    String urlImage,
+    String name,
+    String phone,
+    String avatar,
     String email,
+    String password,
   }) {
     if ((id == null || identical(id, this.id)) &&
-        (userName == null || identical(userName, this.userName)) &&
-        (fullName == null || identical(fullName, this.fullName)) &&
-        (urlImage == null || identical(urlImage, this.urlImage)) &&
-        (email == null || identical(email, this.email))) {
+        (name == null || identical(name, this.name)) &&
+        (phone == null || identical(phone, this.phone)) &&
+        (avatar == null || identical(avatar, this.avatar)) &&
+        (email == null || identical(email, this.email)) &&
+        (password == null || identical(password, this.password))) {
       return this;
     }
 
-    return User(
+    return new User(
       id: id ?? this.id,
-      userName: userName ?? this.userName,
-      fullName: fullName ?? this.fullName,
-      urlImage: urlImage ?? this.urlImage,
+      name: name ?? this.name,
+      phone: phone ?? this.phone,
+      avatar: avatar ?? this.avatar,
       email: email ?? this.email,
+      password: password ?? this.password,
     );
   }
 
   @override
   String toString() {
-    return 'User{id: $id, userName: $userName, fullName: $fullName, urlImage: $urlImage, email: $email}';
+    return 'User{id: $id, name: $name, phone: $phone, avatar: $avatar, email: $email, password: $password}';
   }
 
   @override
@@ -53,16 +61,44 @@ class User {
       (other is User &&
           runtimeType == other.runtimeType &&
           id == other.id &&
-          userName == other.userName &&
-          fullName == other.fullName &&
-          urlImage == other.urlImage &&
-          email == other.email);
+          name == other.name &&
+          phone == other.phone &&
+          avatar == other.avatar &&
+          email == other.email &&
+          password == other.password);
 
   @override
   int get hashCode =>
       id.hashCode ^
-      userName.hashCode ^
-      fullName.hashCode ^
-      urlImage.hashCode ^
-      email.hashCode;
+      name.hashCode ^
+      phone.hashCode ^
+      avatar.hashCode ^
+      email.hashCode ^
+      password.hashCode;
+
+  factory User.fromMap(Map<String, dynamic> map) {
+    return new User(
+      id: map['id'] as String,
+      name: map['name'] as String,
+      phone: map['phone'] as String,
+      avatar: map['avatar'] as String,
+      email: map['email'] as String,
+      password: map['password'] as String,
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    // ignore: unnecessary_cast
+    return {
+      'id': this.id,
+      'name': this.name,
+      'phone': this.phone,
+      'avatar': this.avatar,
+      'email': this.email,
+      'password': this.password,
+    } as Map<String, dynamic>;
+  }
+
+//</editor-fold>
+
 }

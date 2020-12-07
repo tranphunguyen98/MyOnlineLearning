@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:my_online_learning/data/model/user_model.dart';
 import 'package:my_online_learning/data/repository/authentication/i_authentication_repository.dart';
@@ -6,6 +7,7 @@ import 'package:my_online_learning/presentation/common_widgets/widget_alert_dial
 import 'package:my_online_learning/presentation/common_widgets/widget_dialog_loading.dart';
 import 'package:my_online_learning/presentation/common_widgets/widget_my_flat_btn.dart';
 import 'package:my_online_learning/presentation/screen/router.dart';
+import 'package:my_online_learning/remote/model/response.dart';
 import 'package:my_online_learning/utils/extensions.dart';
 import 'package:provider/provider.dart';
 
@@ -33,27 +35,27 @@ class RegisterScreen extends StatelessWidget {
               children: [
                 const SizedBox(height: 16.0),
                 WidgetRegisterForm(
-                  signUp: (user, password) async {
+                  signUp: (user) async {
                     showDialog(
                         context: context,
                         builder: (_) {
                           return DialogLoading("Register");
                         });
-
                     try {
-                      await authRepo.signUp(user, password);
-                      Navigator.pop(context);
-                      context.pushNamedAndRemoveUntil(MyRouter.HOME_PAGE);
-                      await userRepo.saveUser(user);
-                      context.read<UserModel>().user = user;
+                      final response = await authRepo.signUp(user);
+                      if (response.isSuccess()) {
+                        Navigator.pop(context);
+                        context.pushNamedAndRemoveUntil(MyRouter.HOME_PAGE);
+                        await userRepo.saveUser(user);
+                        context.read<UserModel>().user = user;
+                      } else {
+                        throw DioError(response: Response<MyResponse>());
+                      }
+                    } on DioError catch (e) {
+                      _showDialogRegister(
+                          context, (e.response.data as MyResponse).message);
                     } catch (e) {
-                      Navigator.pop(context);
-                      showDialog(
-                        context: context,
-                        builder: (_) {
-                          return AlertDialogSimple("Register", e.toString());
-                        },
-                      );
+                      _showDialogRegister(context, e.toString());
                     }
                   },
                 ),
@@ -68,6 +70,16 @@ class RegisterScreen extends StatelessWidget {
           );
         },
       ),
+    );
+  }
+
+  void _showDialogRegister(BuildContext context, String message) {
+    Navigator.pop(context);
+    showDialog(
+      context: context,
+      builder: (_) {
+        return AlertDialogSimple("Register", message);
+      },
     );
   }
 }

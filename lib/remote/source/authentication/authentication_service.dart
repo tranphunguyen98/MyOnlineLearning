@@ -1,79 +1,34 @@
-import 'dart:convert';
-
-import 'package:flutter/services.dart';
+import 'package:dio/dio.dart';
 import 'package:my_online_learning/remote/model/network_user.dart';
-import 'package:supercharged/supercharged.dart';
+import 'package:my_online_learning/remote/model/response.dart';
+import 'package:retrofit/http.dart';
+import 'package:retrofit/retrofit.dart';
 
-class AuthenticationService {
-  Future<NetworkUser> signIn(String userName, String password) {
-    return Future.delayed(
-      500.milliseconds,
-      () {
-        if ((userName == 'user' && password == '1234')) {
-          return loadUser();
-        } else {
-          throw Exception("Invalid username or password");
-        }
-      },
-    );
-  }
+part 'authentication_service.g.dart';
 
-  Future<bool> signInWithGoogle() {
-    return Future.delayed(
-      500.milliseconds,
-      () {
-        return true;
-      },
-    );
-  }
+@RestApi(baseUrl: "http://api.dev.letstudy.org/")
+abstract class AuthenticationService {
+  factory AuthenticationService(Dio dio, {String baseUrl}) =
+      _AuthenticationService;
 
-  Future<bool> signUp(NetworkUser user, String password) {
-    return Future.delayed(500.milliseconds, () {
-      if (user.userName != 'user') {
-        return true;
-      }
-      throw Exception("User name is existed");
-    });
-  }
+  @GET("/user/intro-page")
+  Future<NetworkUser> signIn(String userName, String password);
 
-  Future<bool> confirmOTPCode(String optCode) {
-    return Future.delayed(
-      500.milliseconds,
-      () {
-        if (optCode == '111111') {
-          return true;
-        } else {
-          throw Exception("OTP Code is not correct");
-        }
-      },
-    );
-  }
+  @GET("/user/intro-page")
+  Future<bool> signInWithGoogle();
 
-  Future<bool> sendOTPCodeToEmail(String email) {
-    return Future.delayed(
-      500.milliseconds,
-      () {
-        return true;
-      },
-    );
-  }
+  @POST("/user/register")
+  Future<MyResponse> signUp(@Body() NetworkUser user);
 
-  Future<bool> createNewPassword(String email, String password) {
-    return Future.delayed(
-      500.milliseconds,
-      () {
-        return true;
-      },
-    );
-  }
+  @GET("/user/intro-page")
+  Future<bool> confirmOTPCode(String optCode);
 
-  Future<NetworkUser> loadUser() async {
-    // Đọc file json dưới dạng chuỗi
-    String jsonString = await rootBundle.loadString('sample_data/user.json');
-    // Giải mã file json sang Map
-    Map<String, dynamic> jsonMap =
-        json.decode(jsonString) as Map<String, dynamic>;
+  @GET("/user/intro-page")
+  Future<bool> sendOTPCodeToEmail(String email);
 
-    return NetworkUser.fromJson(jsonMap);
-  }
+  @GET("/user/intro-page")
+  Future<bool> createNewPassword(String email, String password);
+
+  @GET("/user/intro-page")
+  Future<NetworkUser> loadUser();
 }

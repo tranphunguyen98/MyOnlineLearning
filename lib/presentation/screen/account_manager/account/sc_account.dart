@@ -69,14 +69,14 @@ class _AvatarNameState extends State<AvatarName> {
   Widget build(BuildContext context) {
     return Consumer2<UserModel, IUserRepository>(
       builder: (_, userModel, userRepo, __) {
-        _nameController.text = userModel.user.fullName;
+        _nameController.text = userModel.user.phone;
         return Column(
           children: [
             GestureDetector(
                 onTap: getImage,
                 child: _image == null
                     ? CircleAvatarNormal(
-                        assetImageUrl: userModel?.user?.urlImage ??
+                        assetImageUrl: userModel?.user?.avatar ??
                             "images/account_circle.png",
                         size: 100,
                       )
@@ -112,8 +112,8 @@ class _AvatarNameState extends State<AvatarName> {
                 if (isEditTextSelected)
                   GestureDetector(
                     onTap: () async {
-                      final newUser = userModel.user
-                          .copyWith(fullName: _nameController.text);
+                      final newUser =
+                          userModel.user.copyWith(name: _nameController.text);
                       await userRepo.saveUser(newUser);
                       userModel.user = newUser;
                       _focusNode.unfocus();

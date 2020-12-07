@@ -91,7 +91,7 @@ class _HomePageState extends State<HomePage> {
             }
           },
           child: Selector<UserModel, String>(
-              selector: (_, userModel) => userModel?.user?.urlImage,
+              selector: (_, userModel) => userModel?.user?.avatar,
               builder: (_, urlImage, __) {
                 return urlImage != null
                     ? CircleAvatarNormal(

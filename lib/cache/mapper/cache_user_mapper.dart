@@ -9,9 +9,9 @@ class CacheUserMapper implements CacheMapper<CacheUser, User> {
     return User(
       id: type.id,
       email: type.email,
-      fullName: type.fullName,
-      urlImage: type.urlImage,
-      userName: type.userName,
+      phone: type.fullName,
+      avatar: type.urlImage,
+      name: type.userName,
     );
   }
 
@@ -20,9 +20,9 @@ class CacheUserMapper implements CacheMapper<CacheUser, User> {
     return CacheUser(
       id: type.id,
       email: type.email,
-      fullName: type.fullName,
-      urlImage: type.urlImage,
-      userName: type.userName,
+      fullName: type.phone,
+      urlImage: type.avatar,
+      userName: type.name,
     );
   }
 }

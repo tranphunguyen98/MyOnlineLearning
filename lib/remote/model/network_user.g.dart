@@ -9,18 +9,20 @@ part of 'network_user.dart';
 NetworkUser _$NetworkUserFromJson(Map<String, dynamic> json) {
   return NetworkUser(
     id: json['id'] as String,
-    userName: json['userName'] as String,
-    fullName: json['fullName'] as String,
-    urlImage: json['urlImage'] as String,
+    username: json['username'] as String,
+    phone: json['phone'] as String,
+    avatar: json['avatar'] as String,
     email: json['email'] as String,
+    password: json['password'] as String,
   );
 }
 
 Map<String, dynamic> _$NetworkUserToJson(NetworkUser instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'userName': instance.userName,
-      'fullName': instance.fullName,
-      'urlImage': instance.urlImage,
       'email': instance.email,
+      'avatar': instance.avatar,
+      'username': instance.username,
+      'phone': instance.phone,
+      'password': instance.password,
     };

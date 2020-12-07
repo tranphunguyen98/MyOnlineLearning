@@ -5,7 +5,7 @@ import 'package:my_online_learning/presentation/common_widgets/widget_text_field
 import 'package:my_online_learning/utils/validator.dart';
 
 class WidgetRegisterForm extends StatefulWidget {
-  final Function(User, String) signUp;
+  final Function(User user) signUp;
 
   const WidgetRegisterForm({@required this.signUp});
 
@@ -18,7 +18,7 @@ class _WidgetRegisterFormState extends State<WidgetRegisterForm> {
 
   final _controllerUserEmail = TextEditingController();
 
-  final _controllerUserFullName = TextEditingController();
+  final _controllerUserPhone = TextEditingController();
 
   final _controllerUserPassword = TextEditingController();
 
@@ -48,9 +48,9 @@ class _WidgetRegisterFormState extends State<WidgetRegisterForm> {
             ),
             SizedBox(height: 16),
             WidgetTextField(
-              validator: validateFullName,
-              controller: _controllerUserFullName,
-              title: "Full Name",
+              validator: validatePhone,
+              controller: _controllerUserPhone,
+              title: "Phone",
             ),
             SizedBox(height: 16),
             WidgetTextField(
@@ -77,11 +77,12 @@ class _WidgetRegisterFormState extends State<WidgetRegisterForm> {
               onPressed: () {
                 if (_formKey.currentState.validate()) {
                   final user = User(
-                    userName: _controllerUserName.text,
-                    fullName: _controllerUserFullName.text,
+                    name: _controllerUserName.text,
+                    phone: _controllerUserPhone.text,
                     email: _controllerUserEmail.text,
+                    password: _controllerUserPassword.text,
                   );
-                  widget.signUp(user, _controllerUserPassword.text);
+                  widget.signUp(user);
                 }
               },
             ),

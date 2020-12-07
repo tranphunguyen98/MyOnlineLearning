@@ -16,9 +16,6 @@ import 'package:my_online_learning/data/repository/user/user_repository_impl.dar
 import 'package:my_online_learning/di/injection.dart';
 import 'package:my_online_learning/presentation/screen/others/splash/sc_splash.dart';
 import 'package:my_online_learning/presentation/screen/router.dart';
-import 'package:my_online_learning/remote/mapper/network_user_mapper.dart';
-import 'package:my_online_learning/remote/source/authentication/authentication_data_source_impl.dart';
-import 'package:my_online_learning/remote/source/authentication/authentication_service.dart';
 import 'package:provider/provider.dart';
 
 import 'data/model/search_result_model.dart';
@@ -46,19 +43,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<SearchHistory>(create: (_) => SearchHistory()),
         ChangeNotifierProvider<SearchResultModel>(
             create: (_) => SearchResultModel()),
-        Provider<AuthenticationService>(
-          create: (_) => AuthenticationService(),
-        ),
-        Provider<NetworkUserMapper>(
-          create: (_) => NetworkUserMapper(),
-        ),
-        ProxyProvider2<AuthenticationService, NetworkUserMapper,
-            AuthenticationDataSource>(
-          update: (_, _authenticationService, _mapper, __) =>
-              AuthenticationDataSourceImplement(
-            _authenticationService,
-            _mapper,
-          ),
+        Provider<AuthenticationDataSource>(
+          create: (_) => getIt<AuthenticationDataSource>(),
         ),
         ProxyProvider<AuthenticationDataSource, IAuthenticationRepository>(
             update: (_, _authenticationDataSource, __) =>
