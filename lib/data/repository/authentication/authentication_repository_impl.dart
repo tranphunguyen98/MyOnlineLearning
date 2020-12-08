@@ -29,9 +29,8 @@ class AuthenticationRepositoryImplement implements IAuthenticationRepository {
   }
 
   @override
-  Future<MyResponse> signUp(User user) {
-    return _authenticationDataSource.signUp(user);
-  }
+  Future<MyResponse> signUp(User user) =>
+      _authenticationDataSource.signUp(user);
 
   @override
   Future<bool> signInWithGoogle() {

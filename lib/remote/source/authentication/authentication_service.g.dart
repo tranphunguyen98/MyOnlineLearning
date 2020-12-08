@@ -17,21 +17,22 @@ class _AuthenticationService implements AuthenticationService {
   String baseUrl;
 
   @override
-  Future<NetworkUser> signIn(userName, password) async {
-    ArgumentError.checkNotNull(userName, 'userName');
+  Future<UserResponse> signIn(email, password) async {
+    ArgumentError.checkNotNull(email, 'email');
     ArgumentError.checkNotNull(password, 'password');
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    final _result = await _dio.request<Map<String, dynamic>>('/user/intro-page',
+    final _data = {'email': email, 'password': password};
+    _data.removeWhere((k, v) => v == null);
+    final _result = await _dio.request<Map<String, dynamic>>('/user/login',
         queryParameters: queryParameters,
         options: RequestOptions(
-            method: 'GET',
+            method: 'POST',
             headers: <String, dynamic>{},
             extra: _extra,
             baseUrl: baseUrl),
         data: _data);
-    final value = NetworkUser.fromJson(_result.data);
+    final value = UserResponse.fromJson(_result.data);
     return value;
   }
 

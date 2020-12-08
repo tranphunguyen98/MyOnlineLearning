@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:my_online_learning/data/model/user.dart';
 import 'package:my_online_learning/data/repository/authentication/authentication_data_source.dart';
 import 'package:my_online_learning/remote/mapper/network_user_mapper.dart';
@@ -24,8 +25,19 @@ class AuthenticationDataSourceImplement implements AuthenticationDataSource {
       _authenticationService.confirmOTPCode(opt);
 
   @override
-  Future<User> signIn(String userName, String password) async => _mapper
-      .mapFromRemote(await _authenticationService.signIn(userName, password));
+  Future<User> signIn(String userName, String password) async {
+    try {
+      final userResponse =
+          await _authenticationService.signIn(userName, password);
+      if (userResponse.isSuccess()) {
+        return _mapper.mapFromRemote(userResponse.userInfo);
+      } else {
+        throw Exception(userResponse.message);
+      }
+    } on DioError catch (e) {
+      throw Exception(e.response.data["message"]);
+    }
+  }
 
   @override
   Future<MyResponse> signUp(User user) =>

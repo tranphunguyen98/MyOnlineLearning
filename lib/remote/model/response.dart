@@ -12,7 +12,7 @@ class MyResponse {
     this.message,
   });
 
-  bool isSuccess() => message.endsWith(kResponseOK);
+  bool isSuccess() => message == kResponseOK;
 
   factory MyResponse.fromJson(Map<String, dynamic> json) =>
       _$MyResponseFromJson(json);

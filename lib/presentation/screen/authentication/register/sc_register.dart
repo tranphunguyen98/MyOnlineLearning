@@ -7,7 +7,6 @@ import 'package:my_online_learning/presentation/common_widgets/widget_alert_dial
 import 'package:my_online_learning/presentation/common_widgets/widget_dialog_loading.dart';
 import 'package:my_online_learning/presentation/common_widgets/widget_my_flat_btn.dart';
 import 'package:my_online_learning/presentation/screen/router.dart';
-import 'package:my_online_learning/remote/model/response.dart';
 import 'package:my_online_learning/utils/extensions.dart';
 import 'package:provider/provider.dart';
 
@@ -48,14 +47,12 @@ class RegisterScreen extends StatelessWidget {
                         context.pushNamedAndRemoveUntil(MyRouter.HOME_PAGE);
                         await userRepo.saveUser(user);
                         context.read<UserModel>().user = user;
-                      } else {
-                        throw DioError(response: Response<MyResponse>());
                       }
                     } on DioError catch (e) {
                       _showDialogRegister(
-                          context, (e.response.data as MyResponse).message);
+                          context, "DioError ${e.response.data["message"]}");
                     } catch (e) {
-                      _showDialogRegister(context, e.toString());
+                      _showDialogRegister(context, "Error $e");
                     }
                   },
                 ),

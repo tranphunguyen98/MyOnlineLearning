@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:my_online_learning/remote/model/network_user.dart';
 import 'package:my_online_learning/remote/model/response.dart';
+import 'package:my_online_learning/remote/model/user_response.dart';
 import 'package:retrofit/http.dart';
 import 'package:retrofit/retrofit.dart';
 
@@ -11,8 +12,8 @@ abstract class AuthenticationService {
   factory AuthenticationService(Dio dio, {String baseUrl}) =
       _AuthenticationService;
 
-  @GET("/user/intro-page")
-  Future<NetworkUser> signIn(String userName, String password);
+  @POST("/user/login")
+  Future<UserResponse> signIn(@Field() String email, @Field() String password);
 
   @GET("/user/intro-page")
   Future<bool> signInWithGoogle();
