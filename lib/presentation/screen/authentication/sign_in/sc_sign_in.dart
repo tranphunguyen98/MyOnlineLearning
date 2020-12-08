@@ -32,8 +32,8 @@ class _LoginScreenState extends State<LoginScreen> {
         title: Text("Sign In"),
         backgroundColor: context.theme.primaryColor,
       ),
-      body: Consumer2<IAuthenticationRepository, IUserRepository>(
-        builder: (_, authRepo, userRepo, __) {
+      body: Consumer3<IAuthenticationRepository, IUserRepository, UserModel>(
+        builder: (_, authRepo, userRepo, userModel, __) {
           return SingleChildScrollView(
             child: Container(
               color: context.theme.backgroundColor,
@@ -42,21 +42,24 @@ class _LoginScreenState extends State<LoginScreen> {
                 children: [
                   SizedBox(height: 16.0),
                   WidgetLoginForm(
+                      email: userModel.user.email,
+                      password: userModel.user.password,
                       signIn: (String userName, String password) async {
-                    _showDiaglogLoading("Sign In");
-                    try {
-                      final user = await authRepo.signIn(userName, password);
-                      if (user != null) {
-                        await userRepo.saveUser(user);
-                        context.read<UserModel>().user = user;
-                        Navigator.pop(context);
-                        context.pushNamedAndRemoveUntil(MyRouter.HOME_PAGE);
-                      }
-                    } catch (e) {
-                      Navigator.pop(context);
-                      _showMaterialDialog("Sign in failed", e.toString());
-                    }
-                  }),
+                        _showDiaglogLoading("Sign In");
+                        try {
+                          final user =
+                              await authRepo.signIn(userName, password);
+                          if (user != null) {
+                            await userRepo.saveUser(user);
+                            userModel.user = user;
+                            Navigator.pop(context);
+                            context.pushNamedAndRemoveUntil(MyRouter.HOME_PAGE);
+                          }
+                        } catch (e) {
+                          Navigator.pop(context);
+                          _showMaterialDialog("Sign in failed", e.toString());
+                        }
+                      }),
                   SizedBox(height: 8.0),
                   FlatButtonCommon(
                     title: "LOGIN WITH GOOGLE",

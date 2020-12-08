@@ -5,8 +5,11 @@ import 'package:my_online_learning/utils/validator.dart';
 
 class WidgetLoginForm extends StatefulWidget {
   final Function(String, String) signIn;
+  final String email;
+  final String password;
 
-  const WidgetLoginForm({@required this.signIn});
+  const WidgetLoginForm(
+      {@required this.signIn, this.email = "", this.password = ""});
 
   @override
   _WidgetLoginFormState createState() => _WidgetLoginFormState();
@@ -15,8 +18,15 @@ class WidgetLoginForm extends StatefulWidget {
 class _WidgetLoginFormState extends State<WidgetLoginForm> {
   final _formKey = GlobalKey<FormState>();
 
-  final TextEditingController _userNameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+
+  @override
+  void initState() {
+    _emailController.text = widget.email;
+    _passwordController.text = widget.password;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +38,7 @@ class _WidgetLoginFormState extends State<WidgetLoginForm> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             WidgetTextField(
-              controller: _userNameController,
+              controller: _emailController,
               validator: validateEmail,
               title: "Email",
             ),
@@ -47,7 +57,7 @@ class _WidgetLoginFormState extends State<WidgetLoginForm> {
                 onPressed: () {
                   if (_formKey.currentState.validate()) {
                     widget.signIn(
-                      _userNameController.text,
+                      _emailController.text,
                       _passwordController.text,
                     );
                   }
