@@ -4,8 +4,9 @@ import 'package:my_online_learning/utils/extensions.dart';
 class AlertDialogSimple extends StatelessWidget {
   final String title;
   final String content;
+  final VoidCallback onPressedOK;
 
-  const AlertDialogSimple(this.title, this.content);
+  const AlertDialogSimple(this.title, this.content, [this.onPressedOK]);
 
   @override
   Widget build(BuildContext context) {
@@ -29,9 +30,10 @@ class AlertDialogSimple extends StatelessWidget {
             'OK',
             style: TextStyle(color: Colors.blue),
           ),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
+          onPressed: onPressedOK ??
+              () {
+                Navigator.of(context).pop();
+              },
         ),
       ],
     );

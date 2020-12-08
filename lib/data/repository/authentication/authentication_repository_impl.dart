@@ -14,7 +14,7 @@ class AuthenticationRepositoryImplement implements IAuthenticationRepository {
   }
 
   @override
-  Future<bool> sendOTPCodeToEmail(String email) {
+  Future<bool> sendEmailResetPassword(String email) {
     return _authenticationDataSource.sendOTPCodeToEmail(email);
   }
 
@@ -29,7 +29,7 @@ class AuthenticationRepositoryImplement implements IAuthenticationRepository {
   }
 
   @override
-  Future<MyResponse> signUp(User user) =>
+  Future<MessageResponse> signUp(User user) =>
       _authenticationDataSource.signUp(user);
 
   @override

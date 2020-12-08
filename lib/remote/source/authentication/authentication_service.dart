@@ -19,13 +19,13 @@ abstract class AuthenticationService {
   Future<bool> signInWithGoogle();
 
   @POST("/user/register")
-  Future<MyResponse> signUp(@Body() NetworkUser user);
+  Future<MessageResponse> signUp(@Body() NetworkUser user);
 
   @GET("/user/intro-page")
   Future<bool> confirmOTPCode(String optCode);
 
-  @GET("/user/intro-page")
-  Future<bool> sendOTPCodeToEmail(String email);
+  @POST("/user/forget-pass/send-email")
+  Future<MessageResponse> sendOTPCodeToEmail(@Field() String email);
 
   @GET("/user/intro-page")
   Future<bool> createNewPassword(String email, String password);

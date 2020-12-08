@@ -54,7 +54,7 @@ class _AuthenticationService implements AuthenticationService {
   }
 
   @override
-  Future<MyResponse> signUp(user) async {
+  Future<MessageResponse> signUp(user) async {
     ArgumentError.checkNotNull(user, 'user');
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -69,7 +69,7 @@ class _AuthenticationService implements AuthenticationService {
             extra: _extra,
             baseUrl: baseUrl),
         data: _data);
-    final value = MyResponse.fromJson(_result.data);
+    final value = MessageResponse.fromJson(_result.data);
     return value;
   }
 
@@ -92,20 +92,22 @@ class _AuthenticationService implements AuthenticationService {
   }
 
   @override
-  Future<bool> sendOTPCodeToEmail(email) async {
+  Future<MessageResponse> sendOTPCodeToEmail(email) async {
     ArgumentError.checkNotNull(email, 'email');
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    final _result = await _dio.request<bool>('/user/intro-page',
+    final _data = {'email': email};
+    _data.removeWhere((k, v) => v == null);
+    final _result = await _dio.request<Map<String, dynamic>>(
+        '/user/forget-pass/send-email',
         queryParameters: queryParameters,
         options: RequestOptions(
-            method: 'GET',
+            method: 'POST',
             headers: <String, dynamic>{},
             extra: _extra,
             baseUrl: baseUrl),
         data: _data);
-    final value = _result.data;
+    final value = MessageResponse.fromJson(_result.data);
     return value;
   }
 

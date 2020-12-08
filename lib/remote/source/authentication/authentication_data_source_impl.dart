@@ -17,8 +17,15 @@ class AuthenticationDataSourceImplement implements AuthenticationDataSource {
       _authenticationService.createNewPassword(email, password);
 
   @override
-  Future<bool> sendOTPCodeToEmail(String email) =>
-      _authenticationService.sendOTPCodeToEmail(email);
+  Future<bool> sendOTPCodeToEmail(String email) async {
+    try {
+      final messageResponse =
+          await _authenticationService.sendOTPCodeToEmail(email);
+      return true;
+    } on DioError catch (e) {
+      throw Exception(e.response.data["message"]);
+    }
+  }
 
   @override
   Future<bool> confirmOTPCode(String opt) =>
@@ -40,7 +47,7 @@ class AuthenticationDataSourceImplement implements AuthenticationDataSource {
   }
 
   @override
-  Future<MyResponse> signUp(User user) =>
+  Future<MessageResponse> signUp(User user) =>
       _authenticationService.signUp(_mapper.mapToRemote(user));
 
   @override
