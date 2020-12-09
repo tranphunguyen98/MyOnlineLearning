@@ -9,7 +9,7 @@ import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
   final repository = getIt<ICourseRepository>();
-  final authorService = getIt<AuthorSevice>();
+  final authorService = getIt<AuthorService>();
 
   @override
   Widget build(BuildContext context) {

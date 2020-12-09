@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:my_online_learning/data/repository/author/course_repository_impl.dart';
 import 'package:my_online_learning/di/injection.dart';
 import 'package:my_online_learning/model/entity/author.dart';
 import 'package:my_online_learning/presentation/common_widgets/widget_circle_avatar.dart';
 import 'package:my_online_learning/presentation/common_widgets/widget_my_outline_btn.dart';
 import 'package:my_online_learning/presentation/common_widgets/widget_my_raised_btn.dart';
 import 'package:my_online_learning/presentation/screen/browse_courses/list_of_courses/widget_list_course_v.dart';
-import 'package:my_online_learning/remote/source/author/author_service.dart';
 import 'package:my_online_learning/utils/extensions.dart';
 
 class AuthorDetailScreen extends StatelessWidget {
@@ -33,7 +33,7 @@ class AuthorDetailScreen extends StatelessWidget {
         backgroundColor: context.theme.primaryColor,
       ),
       body: FutureBuilder<Author>(
-        future: getIt<AuthorSevice>().getAuthorDetail(_instructorId),
+        future: getIt<AuthorRepository>().getAuthorDetail(_instructorId),
         builder: (context, authorSnapshot) {
           if (authorSnapshot.hasData) {
             return Container(

@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:my_online_learning/data/repository/author/course_repository_impl.dart';
 import 'package:my_online_learning/di/injection.dart';
 import 'package:my_online_learning/model/entity/author.dart';
 import 'package:my_online_learning/model/entity/category.dart';
 import 'package:my_online_learning/presentation/screen/browse_courses/list_of_authors/widget_category_author.dart';
 import 'package:my_online_learning/presentation/screen/browse_courses/list_of_categories/widget_category_item_large.dart';
 import 'package:my_online_learning/presentation/screen/browse_courses/list_of_categories/widget_category_item_medium.dart';
-import 'package:my_online_learning/remote/source/author/author_service.dart';
 import 'package:my_online_learning/utils/extensions.dart';
 import 'package:provider/provider.dart';
 
@@ -26,7 +26,7 @@ class BrowseScreen extends StatelessWidget {
               SizedBox(height: 32.0),
               ListSkill(),
               FutureBuilder<List<Author>>(
-                future: getIt<AuthorSevice>().getAuthor(),
+                future: getIt<AuthorRepository>().getAuthors(),
                 builder: (context, snapshot) => snapshot.hasData
                     ? Provider<List<Author>>(
                         create: (context) => snapshot.data,

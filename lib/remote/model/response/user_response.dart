@@ -9,6 +9,10 @@ class UserResponse {
   final NetworkUser userInfo;
   final String token;
 
+  NetworkUser get userInfoWithToken {
+    return userInfo.copyWith(token: token);
+  }
+
   UserResponse({
     this.message,
     this.userInfo,

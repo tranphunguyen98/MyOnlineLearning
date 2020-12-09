@@ -12,6 +12,7 @@ import 'package:my_online_learning/remote/mapper/network_course_mapper.dart';
 import 'package:my_online_learning/remote/mapper/network_user_mapper.dart';
 import 'package:my_online_learning/remote/source/authentication/authentication_data_source_impl.dart';
 import 'package:my_online_learning/remote/source/authentication/authentication_service.dart';
+import 'package:my_online_learning/remote/source/author/author_service.dart';
 import 'package:my_online_learning/remote/source/course/course_service.dart';
 import 'package:my_online_learning/remote/source/course/remote_course_data_source_impl.dart';
 
@@ -46,4 +47,9 @@ Future<void> configureDependencies() async {
 
   getIt.registerLazySingleton<ICourseRepository>(
       () => CourseRepositoryImplement(getIt.get<RemoteCourseDataSource>()));
+
+  getIt.registerSingleton<AuthorService>(AuthorService(getIt<Dio>()));
+
+  // getIt.registerLazySingleton<AuthorRepository>(() =>
+  //     AuthorRepository(getIt<AuthorService>(), getIt<NetworkAuthorMapper>()));
 }

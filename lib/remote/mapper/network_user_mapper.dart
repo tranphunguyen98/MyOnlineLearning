@@ -8,6 +8,7 @@ class NetworkUserMapper implements NetworkMapper<NetworkUser, User> {
   @override
   User mapFromRemote(NetworkUser type) {
     return User(
+        token: type.token,
         id: type.id,
         email: type.email,
         phone: type.phone,
@@ -19,6 +20,7 @@ class NetworkUserMapper implements NetworkMapper<NetworkUser, User> {
   @override
   NetworkUser mapToRemote(User type) {
     return NetworkUser(
+        token: type.token,
         id: type.id,
         email: type.email,
         phone: type.phone,

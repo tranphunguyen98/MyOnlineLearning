@@ -1,7 +1,7 @@
 import 'package:my_online_learning/data/model/user.dart';
 import 'package:my_online_learning/data/repository/authentication/authentication_data_source.dart';
 import 'package:my_online_learning/data/repository/authentication/i_authentication_repository.dart';
-import 'package:my_online_learning/remote/model/response.dart';
+import 'package:my_online_learning/remote/model/response/response.dart';
 
 class AuthenticationRepositoryImplement implements IAuthenticationRepository {
   final AuthenticationDataSource _authenticationDataSource;

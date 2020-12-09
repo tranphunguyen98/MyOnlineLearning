@@ -11,7 +11,7 @@ class ItemSearchSuggestion extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        context.read<SearchResultModel>().search(suggestion);
+        context.read<SearchResultModel>().search("", suggestion);
       },
       child: Row(
         children: [

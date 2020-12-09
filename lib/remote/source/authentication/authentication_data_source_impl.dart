@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:my_online_learning/data/model/user.dart';
 import 'package:my_online_learning/data/repository/authentication/authentication_data_source.dart';
 import 'package:my_online_learning/remote/mapper/network_user_mapper.dart';
-import 'package:my_online_learning/remote/model/response.dart';
+import 'package:my_online_learning/remote/model/response/response.dart';
 
 import 'authentication_service.dart';
 
@@ -36,7 +36,8 @@ class AuthenticationDataSourceImplement implements AuthenticationDataSource {
     try {
       final userResponse =
           await _authenticationService.signIn(userName, password);
-      return _mapper.mapFromRemote(userResponse.userInfo);
+      print(userResponse.userInfoWithToken.toString());
+      return _mapper.mapFromRemote(userResponse.userInfoWithToken);
     } on DioError catch (e) {
       throw Exception(e.response.data["message"]);
     }

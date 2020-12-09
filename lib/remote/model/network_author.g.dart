@@ -11,6 +11,7 @@ NetworkAuthor _$NetworkAuthorFromJson(Map<String, dynamic> json) {
     id: json['id'] as String,
     name: json['name'] as String,
     avatar: json['avatar'] as String,
+    intro: json['intro'] as String,
     courses: (json['courses'] as List)
         .map((e) => NetworkCourse.fromJson(e as Map<String, dynamic>))
         .toList(),
@@ -22,5 +23,6 @@ Map<String, dynamic> _$NetworkAuthorToJson(NetworkAuthor instance) =>
       'id': instance.id,
       'name': instance.name,
       'avatar': instance.avatar,
+      'intro': instance.intro,
       'courses': instance.courses,
     };

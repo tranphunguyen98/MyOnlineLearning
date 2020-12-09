@@ -1,44 +1,18 @@
-import 'dart:convert';
+import 'package:dio/dio.dart';
+import 'package:my_online_learning/remote/model/response/author_response.dart';
+import 'package:my_online_learning/remote/model/response/list_author_response.dart';
+import 'package:retrofit/http.dart';
+import 'package:retrofit/retrofit.dart';
 
-import 'package:flutter/services.dart';
-import 'package:injectable/injectable.dart';
-import 'package:my_online_learning/di/injection.dart';
-import 'package:my_online_learning/model/entity/author.dart';
-import 'package:my_online_learning/remote/mapper/network_author_mapper.dart';
-import 'package:my_online_learning/remote/model/network_author.dart';
+part 'author_service.g.dart';
 
-@injectable
-class AuthorSevice {
-  Future<List<Author>> getAuthor() async {
-    // Đọc file json dưới dạng chuỗi
-    String jsonString =
-        await rootBundle.loadString('sample_data/authors_detail.json');
-    //print(jsonString);
-    // Giải mã file json sang Map
-    List<Author> listAuthor = <Author>[];
+@RestApi(baseUrl: "http://api.dev.letstudy.org/")
+abstract class AuthorService {
+  factory AuthorService(Dio dio, {String baseUrl}) = _AuthorService;
 
-    listAuthor = (json.decode(jsonString)["payload"] as List)
-        .map((i) => getIt<NetworkAuthorMapper>()
-            .mapFromRemote(NetworkAuthor.fromJson(i as Map<String, dynamic>)))
-        .toList();
+  @GET("/instructor")
+  Future<ListAuthorResponse> getAuthors();
 
-    listAuthor.shuffle();
-    return listAuthor;
-  }
-
-  Future<Author> getAuthorDetail(String authorId) async {
-    // Đọc file json dưới dạng chuỗi
-    String jsonString =
-        await rootBundle.loadString('sample_data/authors_detail.json');
-    //print(jsonString);
-    // Giải mã file json sang Map
-    List<Author> listAuthor = <Author>[];
-
-    listAuthor = (json.decode(jsonString)["payload"] as List)
-        .map((i) => getIt<NetworkAuthorMapper>()
-            .mapFromRemote(NetworkAuthor.fromJson(i as Map<String, dynamic>)))
-        .toList();
-
-    return listAuthor.firstWhere((element) => element.id == authorId);
-  }
+  @GET("/instructor/detail/{id}")
+  Future<AuthorResponse> getAuthorDetail(@Path("id") String id);
 }

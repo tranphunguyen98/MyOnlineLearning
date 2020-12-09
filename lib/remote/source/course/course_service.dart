@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:my_online_learning/remote/model/list_course_response.dart';
-import 'package:my_online_learning/remote/model/list_course_search_response.dart';
 import 'package:my_online_learning/remote/model/network_course.dart';
+import 'package:my_online_learning/remote/model/response/list_course_response.dart';
+import 'package:my_online_learning/remote/model/response/list_course_search_response.dart';
 import 'package:retrofit/http.dart';
 import 'package:retrofit/retrofit.dart';
 

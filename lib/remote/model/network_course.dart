@@ -15,8 +15,6 @@ class NetworkCourse {
   final String imageUrl;
   final String updatedAt;
   final String instructorId;
-  final String instructorName;
-  final String instructorAvatar;
 
   factory NetworkCourse.fromJson(Map<String, dynamic> json) =>
       _$NetworkCourseFromJson(json);
@@ -34,8 +32,8 @@ class NetworkCourse {
     @required this.imageUrl,
     @required this.updatedAt,
     @required this.instructorId,
-    @required this.instructorName,
-    @required this.instructorAvatar,
+    // @required this.instructorName,
+    // @required this.instructorAvatar,
   });
 
   NetworkCourse copyWith({
@@ -49,8 +47,6 @@ class NetworkCourse {
     String imageUrl,
     String updatedAt,
     String instructorId,
-    String instructorName,
-    String instructorAvatar,
   }) {
     if ((id == null || identical(id, this.id)) &&
         (title == null || identical(title, this.title)) &&
@@ -61,11 +57,7 @@ class NetworkCourse {
         (totalHours == null || identical(totalHours, this.totalHours)) &&
         (imageUrl == null || identical(imageUrl, this.imageUrl)) &&
         (updatedAt == null || identical(updatedAt, this.updatedAt)) &&
-        (instructorId == null || identical(instructorId, this.instructorId)) &&
-        (instructorName == null ||
-            identical(instructorName, this.instructorName)) &&
-        (instructorAvatar == null ||
-            identical(instructorAvatar, this.instructorAvatar))) {
+        (instructorId == null || identical(instructorId, this.instructorId))) {
       return this;
     }
 
@@ -80,8 +72,11 @@ class NetworkCourse {
       imageUrl: imageUrl ?? this.imageUrl,
       updatedAt: updatedAt ?? this.updatedAt,
       instructorId: instructorId ?? this.instructorId,
-      instructorName: instructorName ?? this.instructorName,
-      instructorAvatar: instructorAvatar ?? this.instructorAvatar,
     );
+  }
+
+  @override
+  String toString() {
+    return 'NetworkCourse{id: $id, title: $title, subtitle: $subtitle, price: $price, description: $description, ratedNumber: $ratedNumber, totalHours: $totalHours, imageUrl: $imageUrl, updatedAt: $updatedAt, instructorId: $instructorId}';
   }
 }

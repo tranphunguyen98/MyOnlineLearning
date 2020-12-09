@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_online_learning/data/repository/author/course_repository_impl.dart';
 import 'package:my_online_learning/data/repository/course/i_course_repository.dart';
 import 'package:my_online_learning/di/injection.dart';
 import 'package:my_online_learning/model/entity/author.dart';
@@ -7,7 +8,6 @@ import 'package:my_online_learning/model/entity/course.dart';
 import 'package:my_online_learning/presentation/screen/browse_courses/browse/sc_browse.dart';
 import 'package:my_online_learning/presentation/screen/browse_courses/list_of_authors/widget_category_author.dart';
 import 'package:my_online_learning/presentation/screen/browse_courses/list_of_categories/widget_category_course.dart';
-import 'package:my_online_learning/remote/source/author/author_service.dart';
 import 'package:provider/provider.dart';
 
 class CategoryDetailScreen extends StatelessWidget {
@@ -62,7 +62,7 @@ class CategoryDetailScreen extends StatelessWidget {
                     : Container(),
               ),
               FutureBuilder<List<Author>>(
-                future: getIt<AuthorSevice>().getAuthor(),
+                future: getIt<AuthorRepository>().getAuthors(),
                 builder: (context, snapshot) => snapshot.hasData
                     ? Provider<List<Author>>(
                         create: (context) => snapshot.data,

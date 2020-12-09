@@ -1,5 +1,5 @@
 import 'package:my_online_learning/data/model/user.dart';
-import 'package:my_online_learning/remote/model/response.dart';
+import 'package:my_online_learning/remote/model/response/response.dart';
 
 abstract class IAuthenticationRepository {
   Future<User> signIn(String userName, String password);

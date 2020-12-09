@@ -18,8 +18,6 @@ NetworkCourse _$NetworkCourseFromJson(Map<String, dynamic> json) {
     imageUrl: json['imageUrl'] as String,
     updatedAt: json['updatedAt'] as String,
     instructorId: json['instructorId'] as String,
-    instructorName: json['instructorName'] as String,
-    instructorAvatar: json['instructorAvatar'] as String,
   );
 }
 
@@ -35,6 +33,4 @@ Map<String, dynamic> _$NetworkCourseToJson(NetworkCourse instance) =>
       'imageUrl': instance.imageUrl,
       'updatedAt': instance.updatedAt,
       'instructorId': instance.instructorId,
-      'instructorName': instance.instructorName,
-      'instructorAvatar': instance.instructorAvatar,
     };

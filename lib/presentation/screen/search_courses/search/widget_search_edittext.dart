@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_online_learning/data/model/search_history.dart';
 import 'package:my_online_learning/data/model/search_result_model.dart';
+import 'package:my_online_learning/data/model/user_model.dart';
 import 'package:my_online_learning/model/entity/search_history_item.dart';
 import 'package:my_online_learning/utils/extensions.dart';
 import 'package:provider/provider.dart';
@@ -29,8 +30,9 @@ class WidgetSearchEditText extends StatelessWidget {
             style: context.textTheme.subtitle2,
             onSubmitted: (data) {
               _controller.clear();
+              final token = context.read<UserModel>().user.token ?? "";
+              searchResult.search(token, data);
               context.read<SearchHistory>().addItem(SearchHistoryItem(data));
-              context.read<SearchResultModel>().search(data);
             },
             decoration: InputDecoration(
               contentPadding: EdgeInsets.all(8.0),

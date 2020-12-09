@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_online_learning/data/model/user_model.dart';
-import 'package:my_online_learning/presentation/common_widgets/widget_circle_avatar.dart';
+import 'package:my_online_learning/presentation/common_widgets/widget_circle_avatar_network.dart';
 import 'package:my_online_learning/presentation/screen/browse_courses/browse/sc_browse.dart';
 import 'package:my_online_learning/presentation/screen/browse_courses/download/sc_download.dart';
 import 'package:my_online_learning/presentation/screen/browse_courses/home/sc_home.dart';
@@ -94,8 +94,8 @@ class _HomePageState extends State<HomePage> {
               selector: (_, userModel) => userModel?.user?.avatar,
               builder: (_, urlImage, __) {
                 return urlImage != null
-                    ? CircleAvatarNormal(
-                        assetImageUrl: urlImage,
+                    ? CircleAvatarNetwork(
+                        networkImageUrl: urlImage,
                         size: 32.0,
                       )
                     : const Icon(

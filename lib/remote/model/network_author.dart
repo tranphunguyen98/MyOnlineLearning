@@ -8,10 +8,15 @@ class NetworkAuthor {
   final String id;
   final String name;
   final String avatar;
+  final String intro;
   final List<NetworkCourse> courses;
 
   const NetworkAuthor(
-      {this.id = "", this.name = "", this.avatar = "", this.courses});
+      {this.id = "",
+      this.name = "",
+      this.avatar = "",
+      this.intro = "",
+      this.courses});
 
   factory NetworkAuthor.fromJson(Map<String, dynamic> json) =>
       _$NetworkAuthorFromJson(json);

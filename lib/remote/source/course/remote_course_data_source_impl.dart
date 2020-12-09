@@ -1,7 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:my_online_learning/data/model/search_result.dart';
 import 'package:my_online_learning/data/repository/course/remote_course_data_source.dart';
-import 'package:my_online_learning/model/entity/author.dart';
 import 'package:my_online_learning/model/entity/course.dart';
 import 'package:my_online_learning/remote/mapper/network_course_mapper.dart';
 import 'package:my_online_learning/remote/model/network_course.dart';
@@ -67,20 +65,29 @@ class RemoteCourseDataSourceImplement implements RemoteCourseDataSource {
   }
 
   @override
-  Future<SearchResult> searchV2(String token, String keyword) async {
-    return SearchResult.empty();
+  Future<List<Course>> searchV2(String token, String keyword) async {
+    try {
+      final listCourseSearchResponse =
+          await _courseService.searchV2(token, keyword, 10, 1);
+      final resultCourses =
+          listCourseSearchResponse.payload.rows ?? <NetworkCourse>[];
+      return resultCourses.map((e) => _mapper.mapFromRemote(e)).toList();
+    } on DioError catch (e) {
+      throw Exception(e.response.data["message"]);
+    }
   }
 
   @override
-  Future<SearchResult> search(String keyword) async {
+  Future<List<Course>> search(String keyword) async {
     try {
       final listCourseSearchResponse =
           await _courseService.search(keyword, 10, 1);
       final resultCourses =
           listCourseSearchResponse.payload.rows ?? <NetworkCourse>[];
-      return SearchResult(
-          resultCourses.map((e) => _mapper.mapFromRemote(e)).toList(),
-          <Author>[]);
+      return resultCourses.map((e) {
+        print(e.toString());
+        return _mapper.mapFromRemote(e);
+      }).toList();
     } on DioError catch (e) {
       throw Exception(e.response.data["message"]);
     }

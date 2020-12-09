@@ -49,6 +49,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         try {
                           final user =
                               await authRepo.signIn(userName, password);
+                          print(user.toString());
                           if (user != null) {
                             await userRepo.saveUser(user);
                             userModel.user = user;
