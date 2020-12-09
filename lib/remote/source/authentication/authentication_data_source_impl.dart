@@ -36,11 +36,7 @@ class AuthenticationDataSourceImplement implements AuthenticationDataSource {
     try {
       final userResponse =
           await _authenticationService.signIn(userName, password);
-      if (userResponse.isSuccess()) {
-        return _mapper.mapFromRemote(userResponse.userInfo);
-      } else {
-        throw Exception(userResponse.message);
-      }
+      return _mapper.mapFromRemote(userResponse.userInfo);
     } on DioError catch (e) {
       throw Exception(e.response.data["message"]);
     }

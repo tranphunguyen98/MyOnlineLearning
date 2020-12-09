@@ -30,15 +30,16 @@ class ItemCourse extends StatelessWidget {
       onTap: () => context.push(CourseDetailScreen(course.id)),
       child: Container(
         color: context.theme.cardColor,
+        width: 190.0,
         child: Column(
           children: [
             Container(
-              width: 190.0,
+              width: double.infinity,
               height: 120.0,
               decoration: BoxDecoration(
                 image: DecorationImage(
                   fit: BoxFit.fill,
-                  image: AssetImage(course.imageUrl),
+                  image: NetworkImage(course.imageUrl),
                 ),
               ),
             ),

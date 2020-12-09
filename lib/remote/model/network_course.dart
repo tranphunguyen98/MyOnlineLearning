@@ -11,7 +11,7 @@ class NetworkCourse {
   final int price;
   final String description;
   final int ratedNumber;
-  final int totalHours;
+  final double totalHours;
   final String imageUrl;
   final String createdAt;
   final String instructorId;
@@ -45,7 +45,7 @@ class NetworkCourse {
     int price,
     String description,
     int ratedNumber,
-    int totalHours,
+    double totalHours,
     String imageUrl,
     String createdAt,
     String instructorId,

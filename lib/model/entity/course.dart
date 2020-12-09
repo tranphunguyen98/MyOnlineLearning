@@ -6,7 +6,7 @@ class Course {
   final String subtitle;
   final String price;
   final double ratedNumber;
-  final int totalMinutes;
+  final String totalMinutes;
   final String imageUrl;
   final String createdAt;
   final String level;
@@ -25,7 +25,7 @@ class Course {
     this.subtitle = "",
     this.price = "",
     this.ratedNumber = 0.0,
-    this.totalMinutes = 0,
+    this.totalMinutes = "",
     this.imageUrl = "",
     this.createdAt = "",
     this.level = "",
@@ -40,7 +40,7 @@ class Course {
         instructorName: "jose",
         level: "Intermediate",
         createdAt: "Apr 2020",
-        totalMinutes: 575,
+        totalMinutes: "575",
         ratedNumber: 4.2,
         chapters: Chapter.listChapter,
         imageUrl: "images/course_image_2.jpg",

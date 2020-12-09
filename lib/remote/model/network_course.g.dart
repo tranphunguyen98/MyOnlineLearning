@@ -14,7 +14,7 @@ NetworkCourse _$NetworkCourseFromJson(Map<String, dynamic> json) {
     price: json['price'] as int,
     description: json['description'] as String,
     ratedNumber: json['ratedNumber'] as int,
-    totalHours: json['totalHours'] as int,
+    totalHours: (json['totalHours'] as num).toDouble(),
     imageUrl: json['imageUrl'] as String,
     createdAt: json['createdAt'] as String,
     instructorId: json['instructorId'] as String,

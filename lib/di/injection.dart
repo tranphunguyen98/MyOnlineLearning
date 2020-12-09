@@ -35,6 +35,8 @@ Future<void> configureDependencies() async {
   getIt.registerLazySingleton<IAuthenticationRepository>(() =>
       AuthenticationRepositoryImplement(getIt<AuthenticationDataSource>()));
 
+  getIt.registerLazySingleton(() => CourseService(getIt<Dio>()));
+
   getIt.registerLazySingleton<RemoteCourseDataSource>(() {
     return RemoteCourseDataSourceImplement(
       getIt.get<CourseService>(),

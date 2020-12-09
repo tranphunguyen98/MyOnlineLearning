@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:my_online_learning/data/model/search_result.dart';
 import 'package:my_online_learning/data/repository/course/remote_course_data_source.dart';
 import 'package:my_online_learning/model/entity/course.dart';
@@ -28,20 +29,43 @@ class RemoteCourseDataSourceImplement implements RemoteCourseDataSource {
   }
 
   @override
-  Future<List<Course>> getTopNew() async => (await _courseService.getTopNew())
-      .map((e) => _mapper.mapFromRemote(e))
-      .toList();
+  Future<List<Course>> getTopNew() async {
+    try {
+      final listCourseResponse = await _courseService.getTopNew(10, 1);
+      return listCourseResponse.payload
+          .map((e) => _mapper.mapFromRemote(e))
+          .toList();
+    } on DioError catch (e) {
+      throw Exception(e.response.data["message"]);
+    }
+  }
 
   @override
-  Future<List<Course>> getTopRate() async => (await _courseService.getTopNew())
-      .map((e) => _mapper.mapFromRemote(e))
-      .toList();
+  Future<List<Course>> getTopRate() async {
+    try {
+      final listCourseResponse = await _courseService.getTopRate(10, 1);
+      return listCourseResponse.payload
+          .map((e) => _mapper.mapFromRemote(e))
+          .toList();
+    } on DioError catch (e) {
+      throw Exception(e.response.data["message"]);
+    }
+  }
 
   @override
-  Future<List<Course>> getTopSell() async => (await _courseService.getTopSell())
-      .map((e) => _mapper.mapFromRemote(e))
-      .toList();
+  Future<List<Course>> getTopSell() async {
+    try {
+      final listCourseResponse = await _courseService.getTopSell(10, 1);
+      return listCourseResponse.payload
+          .map((e) => _mapper.mapFromRemote(e))
+          .toList();
+    } on DioError catch (e) {
+      throw Exception(e.response.data["message"]);
+    }
+  }
 
   @override
-  Future<SearchResult> search(String data) => _courseService.search(data);
+  Future<SearchResult> search(String data) async {
+    return SearchResult.empty();
+  }
 }

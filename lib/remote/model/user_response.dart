@@ -5,8 +5,6 @@ part 'user_response.g.dart';
 
 @JsonSerializable(nullable: false)
 class UserResponse {
-  static String kResponseOK = "OK";
-
   final String message;
   final NetworkUser userInfo;
   final String token;
@@ -16,8 +14,6 @@ class UserResponse {
     this.userInfo,
     this.token,
   });
-
-  bool isSuccess() => message == kResponseOK;
 
   factory UserResponse.fromJson(Map<String, dynamic> json) =>
       _$UserResponseFromJson(json);

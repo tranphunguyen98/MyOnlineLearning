@@ -1,134 +1,30 @@
-import 'dart:convert';
-
-import 'package:flutter/services.dart';
-import 'package:injectable/injectable.dart';
-import 'package:my_online_learning/data/model/search_result.dart';
-import 'package:my_online_learning/di/injection.dart';
-import 'package:my_online_learning/model/entity/author.dart';
-import 'package:my_online_learning/remote/mapper/network_author_mapper.dart';
-import 'package:my_online_learning/remote/mapper/network_course_mapper.dart';
-import 'package:my_online_learning/remote/model/network_author.dart';
+import 'package:dio/dio.dart';
+import 'package:my_online_learning/remote/model/list_course_response.dart';
 import 'package:my_online_learning/remote/model/network_course.dart';
+import 'package:retrofit/http.dart';
+import 'package:retrofit/retrofit.dart';
 
-@injectable
-class CourseService {
-  Future<NetworkCourse> getCourseInfo(String courseId) async {
-    String jsonString = await rootBundle.loadString('sample_data/courses.json');
-    String jsonAuthorString =
-        await rootBundle.loadString('sample_data/authors_detail.json');
-    List<Author> listAuthor = <Author>[];
+part 'course_service.g.dart';
 
-    listAuthor = (json.decode(jsonAuthorString)["payload"] as List)
-        .map((i) => getIt<NetworkAuthorMapper>()
-            .mapFromRemote(NetworkAuthor.fromJson(i as Map<String, dynamic>)))
-        .toList();
+@RestApi(baseUrl: "http://api.dev.letstudy.org/")
+abstract class CourseService {
+  factory CourseService(Dio dio, {String baseUrl}) = _CourseService;
 
-    List<NetworkCourse> listCourses = <NetworkCourse>[];
+  @GET("/user/intro-page")
+  Future<NetworkCourse> getCourseInfo(String courseId);
 
-    listCourses = (json.decode(jsonString)["payload"] as List)
-        .map((i) => NetworkCourse.fromJson(i as Map<String, dynamic>))
-        .toList();
+  @GET("/user/intro-page")
+  Future<List<NetworkCourse>> getCoursesUserFavoriteCategories(String userId);
 
-    listCourses = listCourses
-        .map((e) => e.copyWith(
-              instructorName: listAuthor
-                  .firstWhere((element) => element.id == e.instructorId)
-                  .name,
-              instructorAvatar: listAuthor
-                  .firstWhere((element) => element.id == e.instructorId)
-                  .avatar,
-            ))
-        .toList();
+  @POST("/course/top-rate")
+  Future<ListCourseResponse> getTopRate(@Field() int limit, @Field() int page);
 
-    return listCourses.firstWhere((element) => element.id == courseId);
-  }
+  @POST("/course/top-new")
+  Future<ListCourseResponse> getTopNew(@Field() int limit, @Field() int page);
 
-  Future<List<NetworkCourse>> getCoursesUserFavoriteCategories(
-      String userId) async {
-    String jsonString = await rootBundle.loadString('sample_data/courses.json');
-    String jsonAuthorString =
-        await rootBundle.loadString('sample_data/authors_detail.json');
-    List<Author> listAuthor = <Author>[];
+  @POST("/course/top-sell")
+  Future<ListCourseResponse> getTopSell(@Field() int limit, @Field() int page);
 
-    listAuthor = (json.decode(jsonAuthorString)["payload"] as List)
-        .map((i) => getIt<NetworkAuthorMapper>()
-            .mapFromRemote(NetworkAuthor.fromJson(i as Map<String, dynamic>)))
-        .toList();
-
-    List<NetworkCourse> listCourses = <NetworkCourse>[];
-
-    listCourses = (json.decode(jsonString)["payload"] as List)
-        .map((i) => NetworkCourse.fromJson(i as Map<String, dynamic>))
-        .toList();
-
-    listCourses = listCourses
-        .map((e) => e.copyWith(
-              instructorName: listAuthor
-                  .firstWhere((element) => element.id == e.instructorId)
-                  .name,
-              instructorAvatar: listAuthor
-                  .firstWhere((element) => element.id == e.instructorId)
-                  .avatar,
-            ))
-        .toList();
-
-    listCourses.shuffle();
-    return listCourses;
-  }
-
-  Future<List<NetworkCourse>> getTrending() =>
-      getCoursesUserFavoriteCategories("");
-
-  Future<List<NetworkCourse>> getTopNew() =>
-      getCoursesUserFavoriteCategories("");
-
-  Future<List<NetworkCourse>> getTopSell() =>
-      getCoursesUserFavoriteCategories("");
-
-  Future<SearchResult> search(String data) async {
-    String jsonString = await rootBundle.loadString('sample_data/courses.json');
-    String jsonAuthorString =
-        await rootBundle.loadString('sample_data/authors_detail.json');
-    List<Author> listAuthor = <Author>[];
-
-    listAuthor = (json.decode(jsonAuthorString)["payload"] as List)
-        .map((i) => getIt<NetworkAuthorMapper>()
-            .mapFromRemote(NetworkAuthor.fromJson(i as Map<String, dynamic>)))
-        .toList();
-
-    List<NetworkCourse> listCourses = <NetworkCourse>[];
-
-    listCourses = (json.decode(jsonString)["payload"] as List)
-        .map((i) => NetworkCourse.fromJson(i as Map<String, dynamic>))
-        .toList();
-
-    listCourses = listCourses
-        .map((e) => e.copyWith(
-              instructorName: listAuthor
-                  .firstWhere((element) => element.id == e.instructorId)
-                  .name,
-              instructorAvatar: listAuthor
-                  .firstWhere((element) => element.id == e.instructorId)
-                  .avatar,
-            ))
-        .toList();
-
-    final listNetworkCourseResult = listCourses
-        .where((element) =>
-            element.title.toLowerCase().contains(data.toLowerCase()))
-        .toList();
-
-    final listAuthorResult = listAuthor
-        .where((eAuthor) =>
-            listNetworkCourseResult
-                .indexWhere((element) => element.instructorId == eAuthor.id) >=
-            0)
-        .toList();
-
-    return SearchResult(
-        listNetworkCourseResult
-            .map((e) => getIt<NetworkCourseMapper>().mapFromRemote(e))
-            .toList(),
-        listAuthorResult);
-  }
+  @GET("/user/intro-page")
+  Future<void> search(String data);
 }

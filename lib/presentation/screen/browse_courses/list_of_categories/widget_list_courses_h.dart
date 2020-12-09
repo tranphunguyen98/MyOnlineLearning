@@ -11,7 +11,7 @@ class ListCourseHorizontal extends StatelessWidget {
       builder: (_, category, __) => Container(
         width: double.infinity,
         margin: const EdgeInsets.only(top: 16.0),
-        height: 220,
+        height: 240,
         child: category.courses.isNotEmpty
             ? ListView.builder(
                 scrollDirection: Axis.horizontal,

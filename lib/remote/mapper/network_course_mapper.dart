@@ -19,7 +19,7 @@ class NetworkCourseMapper implements NetworkMapper<NetworkCourse, Course> {
         instructorId: type.instructorId,
         instructorName: type.instructorName ?? "1",
         instructorAvatar: type.instructorAvatar ?? "1",
-        totalMinutes: type.totalHours * 60,
+        totalMinutes: (type.totalHours * 60).toStringAsFixed(2),
         level: "Beginner",
         createdAt:
             getIt.get<DateFormat>().format(DateTime.parse(type.createdAt)));

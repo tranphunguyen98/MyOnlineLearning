@@ -1,16 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:my_online_learning/data/model/courses_bookmark.dart';
-import 'package:my_online_learning/data/model/user_model.dart';
 import 'package:my_online_learning/data/repository/course/i_course_repository.dart';
 import 'package:my_online_learning/di/injection.dart';
-import 'package:my_online_learning/model/entity/author.dart';
 import 'package:my_online_learning/model/entity/category.dart';
 import 'package:my_online_learning/model/entity/course.dart';
 import 'package:my_online_learning/presentation/screen/browse_courses/list_of_categories/widget_category_course.dart';
 import 'package:my_online_learning/remote/source/author/author_service.dart';
 import 'package:provider/provider.dart';
-
-import '../list_of_authors/widget_category_author.dart';
 
 class HomeScreen extends StatelessWidget {
   final repository = getIt<ICourseRepository>();
@@ -32,13 +27,16 @@ class HomeScreen extends StatelessWidget {
                 );
               }
               if (listCourseSnapshot.hasError) {
-                return Container(
-                  child: Center(
-                    child: Text(listCourseSnapshot.error.toString()),
-                  ),
+                return Center(
+                  child: Text(listCourseSnapshot.error.toString()),
                 );
               } else {
-                return Container();
+                return Container(
+                  height: 400.0,
+                  child: Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                );
               }
             },
           ),
@@ -62,71 +60,71 @@ class HomeScreen extends StatelessWidget {
               }
             },
           ),
-          Consumer<UserModel>(
-            builder: (_, userModel, __) {
-              return !userModel.user.isEmpty()
-                  ? Column(
-                      children: [
-                        FutureBuilder<List<Course>>(
-                          future: repository.getCoursesUserFavoriteCategories(
-                              userModel.user.id),
-                          builder: (_, listCourseSnapshot) {
-                            if (listCourseSnapshot.hasData) {
-                              return Provider<Category>(
-                                create: (_) => Category(
-                                    "My Courses", listCourseSnapshot.data),
-                                child: const WidgetCategoryCourse(),
-                              );
-                            }
-                            if (listCourseSnapshot.hasError) {
-                              return Container(
-                                child: Center(
-                                  child:
-                                      Text(listCourseSnapshot.error.toString()),
-                                ),
-                              );
-                            } else {
-                              return Container();
-                            }
-                          },
-                        ),
-                        Consumer<CoursesBookmark>(
-                            builder: (_, coursesBookmark, __) {
-                          print(
-                              "sc_hie" + coursesBookmark.listCourse.toString());
-                          return Provider<Category>(
-                            create: (_) => Category(
-                              "Bookmark",
-                              coursesBookmark.listCourse,
-                            ),
-                            child: WidgetCategoryCourse(),
-                          );
-                        }),
-                      ],
-                    )
-                  : Container();
-            },
-          ),
-          FutureBuilder<List<Author>>(
-            future: authorService.getAuthor(),
-            builder: (_, ListAuthorSnapshot) {
-              if (ListAuthorSnapshot.hasData) {
-                return Provider<List<Author>>(
-                  create: (_) => ListAuthorSnapshot.data,
-                  child: WidgetCategoryAuthor(title: "Top authors"),
-                );
-              }
-              if (ListAuthorSnapshot.hasError) {
-                return Container(
-                  child: Center(
-                    child: Text(ListAuthorSnapshot.error.toString()),
-                  ),
-                );
-              } else {
-                return Container();
-              }
-            },
-          ),
+          // Consumer<UserModel>(
+          //   builder: (_, userModel, __) {
+          //     return !userModel.user.isEmpty()
+          //         ? Column(
+          //             children: [
+          //               FutureBuilder<List<Course>>(
+          //                 future: repository.getCoursesUserFavoriteCategories(
+          //                     userModel.user.id),
+          //                 builder: (_, listCourseSnapshot) {
+          //                   if (listCourseSnapshot.hasData) {
+          //                     return Provider<Category>(
+          //                       create: (_) => Category(
+          //                           "My Courses", listCourseSnapshot.data),
+          //                       child: const WidgetCategoryCourse(),
+          //                     );
+          //                   }
+          //                   if (listCourseSnapshot.hasError) {
+          //                     return Container(
+          //                       child: Center(
+          //                         child:
+          //                             Text(listCourseSnapshot.error.toString()),
+          //                       ),
+          //                     );
+          //                   } else {
+          //                     return Container();
+          //                   }
+          //                 },
+          //               ),
+          //               Consumer<CoursesBookmark>(
+          //                   builder: (_, coursesBookmark, __) {
+          //                 print(
+          //                     "sc_hie" + coursesBookmark.listCourse.toString());
+          //                 return Provider<Category>(
+          //                   create: (_) => Category(
+          //                     "Bookmark",
+          //                     coursesBookmark.listCourse,
+          //                   ),
+          //                   child: WidgetCategoryCourse(),
+          //                 );
+          //               }),
+          //             ],
+          //           )
+          //         : Container();
+          //   },
+          // ),
+          // FutureBuilder<List<Author>>(
+          //   future: authorService.getAuthor(),
+          //   builder: (_, ListAuthorSnapshot) {
+          //     if (ListAuthorSnapshot.hasData) {
+          //       return Provider<List<Author>>(
+          //         create: (_) => ListAuthorSnapshot.data,
+          //         child: WidgetCategoryAuthor(title: "Top authors"),
+          //       );
+          //     }
+          //     if (ListAuthorSnapshot.hasError) {
+          //       return Container(
+          //         child: Center(
+          //           child: Text(ListAuthorSnapshot.error.toString()),
+          //         ),
+          //       );
+          //     } else {
+          //       return Container();
+          //     }
+          //   },
+          // ),
         ],
       ),
     );
