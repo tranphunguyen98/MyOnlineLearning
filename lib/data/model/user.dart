@@ -7,21 +7,23 @@ class User {
   final String avatar;
   final String email;
   final String password;
-
-  const User({
-    this.id,
-    this.phone,
-    this.avatar,
-    this.name,
-    @required this.email,
-    @required this.password,
-  });
+  final String token;
 
   factory User.empty() => User(id: "");
 
   bool isEmpty() => id == "";
 
 //<editor-fold desc="Data Methods" defaultstate="collapsed">
+
+  const User({
+    @required this.id,
+    @required this.name,
+    @required this.phone,
+    @required this.avatar,
+    @required this.email,
+    @required this.password,
+    @required this.token,
+  });
 
   User copyWith({
     String id,
@@ -30,13 +32,15 @@ class User {
     String avatar,
     String email,
     String password,
+    String token,
   }) {
     if ((id == null || identical(id, this.id)) &&
         (name == null || identical(name, this.name)) &&
         (phone == null || identical(phone, this.phone)) &&
         (avatar == null || identical(avatar, this.avatar)) &&
         (email == null || identical(email, this.email)) &&
-        (password == null || identical(password, this.password))) {
+        (password == null || identical(password, this.password)) &&
+        (token == null || identical(token, this.token))) {
       return this;
     }
 
@@ -47,12 +51,13 @@ class User {
       avatar: avatar ?? this.avatar,
       email: email ?? this.email,
       password: password ?? this.password,
+      token: token ?? this.token,
     );
   }
 
   @override
   String toString() {
-    return 'User{id: $id, name: $name, phone: $phone, avatar: $avatar, email: $email, password: $password}';
+    return 'User{id: $id, name: $name, phone: $phone, avatar: $avatar, email: $email, password: $password, token: $token}';
   }
 
   @override
@@ -65,7 +70,8 @@ class User {
           phone == other.phone &&
           avatar == other.avatar &&
           email == other.email &&
-          password == other.password);
+          password == other.password &&
+          token == other.token);
 
   @override
   int get hashCode =>
@@ -74,7 +80,8 @@ class User {
       phone.hashCode ^
       avatar.hashCode ^
       email.hashCode ^
-      password.hashCode;
+      password.hashCode ^
+      token.hashCode;
 
   factory User.fromMap(Map<String, dynamic> map) {
     return new User(
@@ -84,6 +91,7 @@ class User {
       avatar: map['avatar'] as String,
       email: map['email'] as String,
       password: map['password'] as String,
+      token: map['token'] as String,
     );
   }
 
@@ -96,6 +104,7 @@ class User {
       'avatar': this.avatar,
       'email': this.email,
       'password': this.password,
+      'token': this.token,
     } as Map<String, dynamic>;
   }
 

@@ -23,7 +23,7 @@ class SearchResultModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void search(String data) async {
+  Future<void> search(String data) async {
     _switchToGetResultMode();
     print("searching...");
     _data = await getIt<ICourseRepository>().search(data);

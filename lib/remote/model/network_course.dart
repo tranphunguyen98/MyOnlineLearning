@@ -13,7 +13,7 @@ class NetworkCourse {
   final int ratedNumber;
   final double totalHours;
   final String imageUrl;
-  final String createdAt;
+  final String updatedAt;
   final String instructorId;
   final String instructorName;
   final String instructorAvatar;
@@ -32,7 +32,7 @@ class NetworkCourse {
     @required this.ratedNumber,
     @required this.totalHours,
     @required this.imageUrl,
-    @required this.createdAt,
+    @required this.updatedAt,
     @required this.instructorId,
     @required this.instructorName,
     @required this.instructorAvatar,
@@ -47,7 +47,7 @@ class NetworkCourse {
     int ratedNumber,
     double totalHours,
     String imageUrl,
-    String createdAt,
+    String updatedAt,
     String instructorId,
     String instructorName,
     String instructorAvatar,
@@ -60,7 +60,7 @@ class NetworkCourse {
         (ratedNumber == null || identical(ratedNumber, this.ratedNumber)) &&
         (totalHours == null || identical(totalHours, this.totalHours)) &&
         (imageUrl == null || identical(imageUrl, this.imageUrl)) &&
-        (createdAt == null || identical(createdAt, this.createdAt)) &&
+        (updatedAt == null || identical(updatedAt, this.updatedAt)) &&
         (instructorId == null || identical(instructorId, this.instructorId)) &&
         (instructorName == null ||
             identical(instructorName, this.instructorName)) &&
@@ -78,7 +78,7 @@ class NetworkCourse {
       ratedNumber: ratedNumber ?? this.ratedNumber,
       totalHours: totalHours ?? this.totalHours,
       imageUrl: imageUrl ?? this.imageUrl,
-      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
       instructorId: instructorId ?? this.instructorId,
       instructorName: instructorName ?? this.instructorName,
       instructorAvatar: instructorAvatar ?? this.instructorAvatar,

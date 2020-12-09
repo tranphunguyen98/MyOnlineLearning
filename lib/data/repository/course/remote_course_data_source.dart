@@ -8,5 +8,6 @@ abstract class RemoteCourseDataSource {
   Future<List<Course>> getCoursesUserFavoriteCategories(String userId);
   Future<Course> getCourseInfo(String courseId);
   Future<Course> getDetailWithLesson(String courseId);
-  Future<SearchResult> search(String data);
+  Future<SearchResult> searchV2(String token, String keyword);
+  Future<SearchResult> search(String keyword);
 }

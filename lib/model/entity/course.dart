@@ -8,7 +8,7 @@ class Course {
   final double ratedNumber;
   final String totalMinutes;
   final String imageUrl;
-  final String createdAt;
+  final String updateAt;
   final String level;
   final String instructorName;
   final String instructorAvatar;
@@ -27,7 +27,7 @@ class Course {
     this.ratedNumber = 0.0,
     this.totalMinutes = "",
     this.imageUrl = "",
-    this.createdAt = "",
+    this.updateAt = "",
     this.level = "",
     this.description = "",
     this.chapters,
@@ -39,7 +39,7 @@ class Course {
         title: "Angular Fundamentals",
         instructorName: "jose",
         level: "Intermediate",
-        createdAt: "Apr 2020",
+        updateAt: "Apr 2020",
         totalMinutes: "575",
         ratedNumber: 4.2,
         chapters: Chapter.listChapter,

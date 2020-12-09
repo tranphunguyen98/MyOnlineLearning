@@ -115,19 +115,51 @@ class _CourseService implements CourseService {
   }
 
   @override
-  Future<void> search(data) async {
-    ArgumentError.checkNotNull(data, 'data');
+  Future<ListCourseSearchResponse> searchV2(
+      token, keyword, limit, offset) async {
+    ArgumentError.checkNotNull(token, 'token');
+    ArgumentError.checkNotNull(keyword, 'keyword');
+    ArgumentError.checkNotNull(limit, 'limit');
+    ArgumentError.checkNotNull(offset, 'offset');
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    await _dio.request<void>('/user/intro-page',
+    final _data = {
+      'token': token,
+      'keyword': keyword,
+      'limit': limit,
+      'offset': offset
+    };
+    _data.removeWhere((k, v) => v == null);
+    final _result = await _dio.request<Map<String, dynamic>>('/course/searchV2',
         queryParameters: queryParameters,
         options: RequestOptions(
-            method: 'GET',
+            method: 'POST',
             headers: <String, dynamic>{},
             extra: _extra,
             baseUrl: baseUrl),
         data: _data);
-    return null;
+    final value = ListCourseSearchResponse.fromJson(_result.data);
+    return value;
+  }
+
+  @override
+  Future<ListCourseSearchResponse> search(keyword, limit, offset) async {
+    ArgumentError.checkNotNull(keyword, 'keyword');
+    ArgumentError.checkNotNull(limit, 'limit');
+    ArgumentError.checkNotNull(offset, 'offset');
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _data = {'keyword': keyword, 'limit': limit, 'offset': offset};
+    _data.removeWhere((k, v) => v == null);
+    final _result = await _dio.request<Map<String, dynamic>>('/course/search',
+        queryParameters: queryParameters,
+        options: RequestOptions(
+            method: 'POST',
+            headers: <String, dynamic>{},
+            extra: _extra,
+            baseUrl: baseUrl),
+        data: _data);
+    final value = ListCourseSearchResponse.fromJson(_result.data);
+    return value;
   }
 }

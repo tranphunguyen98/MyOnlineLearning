@@ -93,7 +93,7 @@ class RowInfo extends StatelessWidget {
           width: 4,
         ),
         Text(
-          course.createdAt,
+          course.updateAt,
           style: context.textTheme.caption,
         ),
         SizedBox(

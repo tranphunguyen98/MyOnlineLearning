@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:my_online_learning/remote/model/list_course_response.dart';
+import 'package:my_online_learning/remote/model/list_course_search_response.dart';
 import 'package:my_online_learning/remote/model/network_course.dart';
 import 'package:retrofit/http.dart';
 import 'package:retrofit/retrofit.dart';
@@ -25,6 +26,18 @@ abstract class CourseService {
   @POST("/course/top-sell")
   Future<ListCourseResponse> getTopSell(@Field() int limit, @Field() int page);
 
-  @GET("/user/intro-page")
-  Future<void> search(String data);
+  @POST("/course/searchV2")
+  Future<ListCourseSearchResponse> searchV2(
+    @Field() String token,
+    @Field() String keyword,
+    @Field() int limit,
+    @Field() int offset,
+  );
+
+  @POST("/course/search")
+  Future<ListCourseSearchResponse> search(
+    @Field() String keyword,
+    @Field() int limit,
+    @Field() int offset,
+  );
 }

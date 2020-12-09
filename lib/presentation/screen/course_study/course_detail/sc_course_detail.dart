@@ -128,7 +128,7 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
           width: 4,
         ),
         Text(
-          course.createdAt,
+          course.updateAt,
           style: StyleConst.textSmallWhite60,
         ),
         SizedBox(

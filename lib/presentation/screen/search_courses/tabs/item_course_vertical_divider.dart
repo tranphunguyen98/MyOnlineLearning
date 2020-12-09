@@ -21,7 +21,7 @@ class ItemCourseVerticalDivider extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Image(
-                image: AssetImage(course.imageUrl),
+                image: NetworkImage(course.imageUrl),
                 width: 80.0,
                 height: 60.0,
                 fit: BoxFit.fitWidth,

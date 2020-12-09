@@ -30,5 +30,10 @@ class CourseRepositoryImplement implements ICourseRepository {
   Future<List<Course>> getTopSell() => _remoteDataSource.getTopSell();
 
   @override
-  Future<SearchResult> search(String data) => _remoteDataSource.search(data);
+  Future<SearchResult> searchV2(String token, String keyword) =>
+      _remoteDataSource.searchV2(token, keyword);
+
+  @override
+  Future<SearchResult> search(String keyword) =>
+      _remoteDataSource.search(keyword);
 }

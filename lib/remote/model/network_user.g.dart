@@ -12,6 +12,7 @@ NetworkUser _$NetworkUserFromJson(Map<String, dynamic> json) {
     username: json['username'] as String,
     phone: json['phone'] as String,
     avatar: json['avatar'] as String,
+    token: json['token'] as String,
     email: json['email'] as String,
     password: json['password'] as String,
   );
@@ -25,4 +26,5 @@ Map<String, dynamic> _$NetworkUserToJson(NetworkUser instance) =>
       'username': instance.username,
       'phone': instance.phone,
       'password': instance.password,
+      'token': instance.token,
     };

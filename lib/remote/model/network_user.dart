@@ -11,12 +11,14 @@ class NetworkUser {
   final String username;
   final String phone;
   final String password;
+  final String token;
 
   NetworkUser({
     this.id,
     this.username,
     this.phone,
     this.avatar,
+    this.token,
     @required this.email,
     @required this.password,
   });
