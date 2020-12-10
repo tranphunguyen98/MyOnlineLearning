@@ -2,12 +2,19 @@ import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:intl/intl.dart';
+import 'package:my_online_learning/cache/mapper/cache_user_mapper.dart';
+import 'package:my_online_learning/cache/source/user/cache_user_data_source_impl.dart';
+import 'package:my_online_learning/cache/source/user/cache_user_service.dart';
 import 'package:my_online_learning/data/repository/authentication/authentication_data_source.dart';
 import 'package:my_online_learning/data/repository/authentication/authentication_repository_impl.dart';
 import 'package:my_online_learning/data/repository/authentication/i_authentication_repository.dart';
 import 'package:my_online_learning/data/repository/course/course_repository_impl.dart';
 import 'package:my_online_learning/data/repository/course/i_course_repository.dart';
 import 'package:my_online_learning/data/repository/course/remote_course_data_source.dart';
+import 'package:my_online_learning/data/repository/user/cache_user_data_source.dart';
+import 'package:my_online_learning/data/repository/user/i_user_repository.dart';
+import 'package:my_online_learning/data/repository/user/remote_user_data_source.dart';
+import 'package:my_online_learning/data/repository/user/user_repository_impl.dart';
 import 'package:my_online_learning/remote/mapper/network_course_mapper.dart';
 import 'package:my_online_learning/remote/mapper/network_user_mapper.dart';
 import 'package:my_online_learning/remote/source/authentication/authentication_data_source_impl.dart';
@@ -15,6 +22,8 @@ import 'package:my_online_learning/remote/source/authentication/authentication_s
 import 'package:my_online_learning/remote/source/author/author_service.dart';
 import 'package:my_online_learning/remote/source/course/course_service.dart';
 import 'package:my_online_learning/remote/source/course/remote_course_data_source_impl.dart';
+import 'package:my_online_learning/remote/source/user/remote_user_data_source_impl.dart';
+import 'package:my_online_learning/remote/source/user/user_service.dart';
 
 import 'injection.config.dart';
 
@@ -49,6 +58,31 @@ Future<void> configureDependencies() async {
       () => CourseRepositoryImplement(getIt.get<RemoteCourseDataSource>()));
 
   getIt.registerSingleton<AuthorService>(AuthorService(getIt<Dio>()));
+
+  // USER
+
+  getIt.registerLazySingleton<UserService>(() => UserService(getIt<Dio>()));
+
+  getIt.registerLazySingleton<CacheUserDataSource>(
+    () => CacheUserDataSourceImplement(
+      getIt<CacheUserService>(),
+      getIt<CacheUserMapper>(),
+    ),
+  );
+
+  getIt.registerLazySingleton<RemoteUserDataSource>(
+    () => RemoteUserDataSourceImplement(
+      getIt<UserService>(),
+      getIt<NetworkUserMapper>(),
+    ),
+  );
+
+  getIt.registerLazySingleton<IUserRepository>(
+    () => UserRepositoryImplement(
+      getIt<CacheUserDataSource>(),
+      getIt<RemoteUserDataSource>(),
+    ),
+  );
 
   // getIt.registerLazySingleton<AuthorRepository>(() =>
   //     AuthorRepository(getIt<AuthorService>(), getIt<NetworkAuthorMapper>()));

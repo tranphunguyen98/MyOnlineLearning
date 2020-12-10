@@ -44,7 +44,7 @@ class RegisterScreen extends StatelessWidget {
                       final response = await authRepo.signUp(user);
                       Navigator.pop(context);
                       context.pushNamedAndRemoveUntil(MyRouter.LOGIN);
-                      await userRepo.saveUser(user);
+                      await userRepo.updateUser(user);
                       context.read<UserModel>().user = user;
                     } on DioError catch (e) {
                       _showDialogRegister(

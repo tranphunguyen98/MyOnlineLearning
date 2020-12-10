@@ -9,12 +9,6 @@ class User {
   final String password;
   final String token;
 
-  factory User.empty() => User(id: "");
-
-  bool isEmpty() => id == "";
-
-//<editor-fold desc="Data Methods" defaultstate="collapsed">
-
   const User({
     @required this.id,
     @required this.name,
@@ -24,6 +18,12 @@ class User {
     @required this.password,
     @required this.token,
   });
+
+  factory User.empty() => User(id: "");
+
+  bool isEmpty() => id == "";
+
+//<editor-fold desc="Data Methods" defaultstate="collapsed">
 
   User copyWith({
     String id,
@@ -44,7 +44,7 @@ class User {
       return this;
     }
 
-    return new User(
+    return User(
       id: id ?? this.id,
       name: name ?? this.name,
       phone: phone ?? this.phone,

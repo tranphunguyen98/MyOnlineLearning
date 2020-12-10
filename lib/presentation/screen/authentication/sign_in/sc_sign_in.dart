@@ -51,7 +51,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               await authRepo.signIn(userName, password);
                           print(user.toString());
                           if (user != null) {
-                            await userRepo.saveUser(user);
+                            //await userRepo.updateUser(user);
                             userModel.user = user;
                             Navigator.pop(context);
                             context.pushNamedAndRemoveUntil(MyRouter.HOME_PAGE);

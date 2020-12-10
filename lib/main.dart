@@ -1,18 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:my_online_learning/cache/mapper/cache_user_mapper.dart';
-import 'package:my_online_learning/cache/source/user/cache_user_data_source_impl.dart';
-import 'package:my_online_learning/cache/source/user/cache_user_service.dart';
 import 'package:my_online_learning/data/model/courses_bookmark.dart';
 import 'package:my_online_learning/data/model/courses_download.dart';
 import 'package:my_online_learning/data/model/search_history.dart';
 import 'package:my_online_learning/data/model/theme_setting.dart';
 import 'package:my_online_learning/data/repository/authentication/authentication_data_source.dart';
 import 'package:my_online_learning/data/repository/authentication/authentication_repository_impl.dart';
-import 'package:my_online_learning/data/repository/authentication/i_authentication_repository.dart';
-import 'package:my_online_learning/data/repository/user/i_user_repository.dart';
-import 'package:my_online_learning/data/repository/user/user_data_source.dart';
-import 'package:my_online_learning/data/repository/user/user_repository_impl.dart';
 import 'package:my_online_learning/di/injection.dart';
 import 'package:my_online_learning/presentation/screen/others/splash/sc_splash.dart';
 import 'package:my_online_learning/presentation/screen/router.dart';
@@ -20,6 +13,8 @@ import 'package:provider/provider.dart';
 
 import 'data/model/search_result_model.dart';
 import 'data/model/user_model.dart';
+import 'data/repository/authentication/i_authentication_repository.dart';
+import 'data/repository/user/i_user_repository.dart';
 import 'utils/app_localizations.dart';
 
 void main() async {
@@ -49,22 +44,9 @@ class MyApp extends StatelessWidget {
         ProxyProvider<AuthenticationDataSource, IAuthenticationRepository>(
             update: (_, _authenticationDataSource, __) =>
                 AuthenticationRepositoryImplement(_authenticationDataSource)),
-        Provider<CacheUserService>(
-          create: (_) => CacheUserService(),
+        Provider<IUserRepository>(
+          create: (_) => getIt<IUserRepository>(),
         ),
-        Provider<CacheUserMapper>(
-          create: (_) => CacheUserMapper(),
-        ),
-        ProxyProvider2<CacheUserService, CacheUserMapper, CacheUserDataSource>(
-          update: (_, _cacheUserService, _mapper, __) =>
-              CacheUserDataSourceImplement(
-            _cacheUserService,
-            _mapper,
-          ),
-        ),
-        ProxyProvider<CacheUserDataSource, IUserRepository>(
-            update: (_, _cacheUserDataSource, __) =>
-                UserRepositoryImplement(_cacheUserDataSource)),
       ],
       child: Consumer<ThemeSetting>(
         builder: (context, themeSetting, child) => MaterialApp(

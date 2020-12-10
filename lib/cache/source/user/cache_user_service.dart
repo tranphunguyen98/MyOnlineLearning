@@ -1,9 +1,11 @@
 import 'dart:convert';
 
+import 'package:injectable/injectable.dart';
 import 'package:my_online_learning/cache/model/cache_user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supercharged/supercharged.dart';
 
+@Injectable()
 class CacheUserService {
   final String USER_KEY = "user";
 

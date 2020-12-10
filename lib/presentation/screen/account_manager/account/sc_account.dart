@@ -2,10 +2,12 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:my_online_learning/data/model/user.dart';
 import 'package:my_online_learning/data/model/user_model.dart';
 import 'package:my_online_learning/data/repository/user/i_user_repository.dart';
-import 'package:my_online_learning/presentation/common_widgets/widget_circle_avatar.dart';
+import 'package:my_online_learning/presentation/common_widgets/widget_alert_dialog_simple.dart';
 import 'package:my_online_learning/presentation/common_widgets/widget_circle_avatar_file.dart';
+import 'package:my_online_learning/presentation/common_widgets/widget_circle_avatar_network.dart';
 import 'package:my_online_learning/utils/extensions.dart';
 import 'package:my_online_learning/utils/my_const/my_const.dart';
 import 'package:provider/provider.dart';
@@ -14,21 +16,31 @@ class AccountScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: context.theme.backgroundColor,
       appBar: AppBar(
         title: const Text("Account"),
         backgroundColor: context.theme.primaryColor,
       ),
-      body: Container(
-        color: context.theme.backgroundColor,
-        child: SingleChildScrollView(
-          child: Column(
-            children: const [
-              SizedBox(height: 32.0),
-              AvatarName(),
-              SizedBox(height: 64.0),
-              InfoOfActivity(),
-            ],
-          ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: const [
+            SizedBox(height: 32.0),
+            AvatarName(),
+            SizedBox(
+              height: 8,
+            ),
+            TextFieldWithEditButton(
+              editMode: TextFieldWithEditButton.kEditPhone,
+            ),
+            TextFieldWithEditButton(
+              editMode: TextFieldWithEditButton.kEditName,
+            ),
+            SizedBox(
+              height: 8,
+            ),
+            SizedBox(height: 64.0),
+            InfoOfActivity(),
+          ],
         ),
       ),
     );
@@ -47,10 +59,6 @@ class AvatarName extends StatefulWidget {
 class _AvatarNameState extends State<AvatarName> {
   File _image;
   final picker = ImagePicker();
-  bool isEditTextSelected = false;
-
-  TextEditingController _nameController = TextEditingController();
-  var _focusNode = FocusNode();
 
   Future getImage() async {
     print('No image selected.');
@@ -69,78 +77,139 @@ class _AvatarNameState extends State<AvatarName> {
   Widget build(BuildContext context) {
     return Consumer2<UserModel, IUserRepository>(
       builder: (_, userModel, userRepo, __) {
-        _nameController.text = userModel.user.phone;
-        return Column(
-          children: [
-            GestureDetector(
-                onTap: getImage,
-                child: _image == null
-                    ? CircleAvatarNormal(
-                        assetImageUrl: userModel?.user?.avatar ??
-                            "images/account_circle.png",
-                        size: 100,
-                      )
-                    : CircleAvatarFile(
-                        image: _image,
-                        size: 100.0,
-                      )),
-            SizedBox(height: 8.0),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                ConstrainedBox(
-                  constraints: BoxConstraints(minWidth: 48),
-                  child: IntrinsicWidth(
-                    child: TextField(
-                      controller: _nameController,
-                      focusNode: _focusNode,
-                      onTap: () {
-                        //_focusNode.requestFocus();
-                        setState(() {
-                          isEditTextSelected = true;
-                        });
-                      },
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  width: 4.0,
-                ),
-                if (isEditTextSelected)
-                  GestureDetector(
-                    onTap: () async {
-                      final newUser =
-                          userModel.user.copyWith(name: _nameController.text);
-                      await userRepo.saveUser(newUser);
-                      userModel.user = newUser;
-                      _focusNode.unfocus();
-                      setState(() {
-                        isEditTextSelected = false;
-                      });
-                    },
-                    child: const Icon(
-                      Icons.check,
-                      size: 20.0,
-                    ),
+        return GestureDetector(
+            onTap: getImage,
+            child: _image == null
+                ? CircleAvatarNetwork(
+                    networkImageUrl:
+                        userModel?.user?.avatar ?? "images/account_circle.png",
+                    size: 100,
                   )
-                else
-                  GestureDetector(
-                    onTap: () async {
-                      _focusNode.requestFocus();
-                      setState(() {
-                        isEditTextSelected = true;
-                      });
-                    },
-                    child: Icon(
-                      Icons.edit,
-                      size: 20.0,
-                    ),
+                : CircleAvatarFile(
+                    image: _image,
+                    size: 100.0,
+                  ));
+      },
+    );
+  }
+}
+
+class TextFieldWithEditButton extends StatefulWidget {
+  static const int kEditPhone = 0;
+  static const int kEditName = 1;
+  final int editMode;
+
+  const TextFieldWithEditButton({@required this.editMode});
+
+  @override
+  _TextFieldWithEditButtonState createState() =>
+      _TextFieldWithEditButtonState();
+}
+
+class _TextFieldWithEditButtonState extends State<TextFieldWithEditButton> {
+  bool isEditTextSelected = false;
+
+  final TextEditingController _controller = TextEditingController();
+  final _focusNode = FocusNode();
+
+  @override
+  Widget build(BuildContext context) {
+    return Consumer2<UserModel, IUserRepository>(
+      builder: (_, userModel, userRepo, __) {
+        switch (widget.editMode) {
+          case TextFieldWithEditButton.kEditName:
+            {
+              _controller.text = userModel.name;
+              break;
+            }
+          case TextFieldWithEditButton.kEditPhone:
+            {
+              _controller.text = userModel.user.phone;
+              break;
+            }
+        }
+
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            ConstrainedBox(
+              constraints: BoxConstraints(minWidth: 48),
+              child: IntrinsicWidth(
+                child: TextField(
+                  controller: _controller,
+                  focusNode: _focusNode,
+                  onTap: () {
+                    //_focusNode.requestFocus();
+                    setState(() {
+                      isEditTextSelected = true;
+                    });
+                  },
+                  decoration: InputDecoration(
+                    hintText:
+                        widget.editMode == TextFieldWithEditButton.kEditName
+                            ? "Name"
+                            : "Phone",
+                    border: InputBorder.none,
                   ),
-              ],
+                ),
+              ),
             ),
+            SizedBox(
+              width: 4.0,
+            ),
+            if (isEditTextSelected)
+              GestureDetector(
+                onTap: () async {
+                  User newUser;
+
+                  switch (widget.editMode) {
+                    case TextFieldWithEditButton.kEditName:
+                      {
+                        newUser =
+                            userModel.user.copyWith(name: _controller.text);
+                        break;
+                      }
+                    case TextFieldWithEditButton.kEditPhone:
+                      {
+                        newUser =
+                            userModel.user.copyWith(phone: _controller.text);
+                        break;
+                      }
+                  }
+                  try {
+                    print("newUser ${newUser.toString()}");
+                    await userRepo.updateUser(newUser);
+                  } catch (e) {
+                    showDialog(
+                      context: context,
+                      builder: (_) =>
+                          AlertDialogSimple("Update user", "Error: $e"),
+                    );
+                  }
+                  userModel.user = newUser;
+                  _focusNode.unfocus();
+                  setState(() {
+                    isEditTextSelected = false;
+                  });
+                },
+                child: const Icon(
+                  Icons.check,
+                  size: 20.0,
+                ),
+              )
+            else
+              GestureDetector(
+                onTap: () async {
+                  _focusNode.requestFocus();
+                  setState(() {
+                    isEditTextSelected = true;
+                  });
+                },
+                child: Icon(
+                  Icons.edit,
+                  size: 20.0,
+                ),
+              ),
           ],
         );
       },

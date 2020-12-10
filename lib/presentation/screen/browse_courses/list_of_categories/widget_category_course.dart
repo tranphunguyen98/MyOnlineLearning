@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:my_online_learning/model/entity/category.dart';
+import 'package:my_online_learning/presentation/screen/browse_courses/list_of_categories/widget_list_courses_h.dart';
 import 'package:my_online_learning/presentation/screen/browse_courses/list_of_courses/sc_list_course.dart';
 import 'package:my_online_learning/utils/extensions.dart';
 import 'package:my_online_learning/utils/my_const/my_const.dart';
 import 'package:provider/provider.dart';
-
-import 'file:///C:/react-native/MyOnlineLearning/lib/presentation/screen/browse_courses/list_of_categories/widget_list_courses_h.dart';
 
 class WidgetCategoryCourse extends StatelessWidget {
   const WidgetCategoryCourse();
@@ -14,15 +13,15 @@ class WidgetCategoryCourse extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Header(),
+        HeaderCategory(),
         ListCourseHorizontal(),
       ],
     );
   }
 }
 
-class Header extends StatelessWidget {
-  const Header({
+class HeaderCategory extends StatelessWidget {
+  const HeaderCategory({
     Key key,
   }) : super(key: key);
 
