@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 
 class User {
   final String id;
-  final String name;
+  final String username;
   final String phone;
   final String avatar;
   final String email;
@@ -11,7 +11,7 @@ class User {
 
   const User({
     @required this.id,
-    @required this.name,
+    @required this.username,
     @required this.phone,
     @required this.avatar,
     @required this.email,
@@ -35,7 +35,7 @@ class User {
     String token,
   }) {
     if ((id == null || identical(id, this.id)) &&
-        (name == null || identical(name, this.name)) &&
+        (name == null || identical(name, this.username)) &&
         (phone == null || identical(phone, this.phone)) &&
         (avatar == null || identical(avatar, this.avatar)) &&
         (email == null || identical(email, this.email)) &&
@@ -46,7 +46,7 @@ class User {
 
     return User(
       id: id ?? this.id,
-      name: name ?? this.name,
+      username: name ?? this.username,
       phone: phone ?? this.phone,
       avatar: avatar ?? this.avatar,
       email: email ?? this.email,
@@ -57,7 +57,7 @@ class User {
 
   @override
   String toString() {
-    return 'User{id: $id, name: $name, phone: $phone, avatar: $avatar, email: $email, password: $password, token: $token}';
+    return 'User{id: $id, name: $username, phone: $phone, avatar: $avatar, email: $email, password: $password, token: $token}';
   }
 
   @override
@@ -66,7 +66,7 @@ class User {
       (other is User &&
           runtimeType == other.runtimeType &&
           id == other.id &&
-          name == other.name &&
+          username == other.username &&
           phone == other.phone &&
           avatar == other.avatar &&
           email == other.email &&
@@ -76,7 +76,7 @@ class User {
   @override
   int get hashCode =>
       id.hashCode ^
-      name.hashCode ^
+      username.hashCode ^
       phone.hashCode ^
       avatar.hashCode ^
       email.hashCode ^
@@ -86,7 +86,7 @@ class User {
   factory User.fromMap(Map<String, dynamic> map) {
     return new User(
       id: map['id'] as String,
-      name: map['name'] as String,
+      username: map['name'] as String,
       phone: map['phone'] as String,
       avatar: map['avatar'] as String,
       email: map['email'] as String,
@@ -99,7 +99,7 @@ class User {
     // ignore: unnecessary_cast
     return {
       'id': this.id,
-      'name': this.name,
+      'name': this.username,
       'phone': this.phone,
       'avatar': this.avatar,
       'email': this.email,

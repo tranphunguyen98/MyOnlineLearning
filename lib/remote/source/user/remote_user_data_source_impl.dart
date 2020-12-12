@@ -12,7 +12,9 @@ class RemoteUserDataSourceImplement implements RemoteUserDataSource {
 
   @override
   Future<MessageResponse> saveUser(User user) async {
-    return _userService.updateProfile(user.token, _mapper.mapToRemote(user));
+    print("Bearer ${user.token}");
+    return _userService.updateProfile(
+        "Bearer ${user.token}", _mapper.mapToRemote(user));
   }
 
   @override

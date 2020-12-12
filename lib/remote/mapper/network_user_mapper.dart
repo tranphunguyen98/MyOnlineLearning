@@ -13,7 +13,7 @@ class NetworkUserMapper implements NetworkMapper<NetworkUser, User> {
         email: type.email,
         phone: type.phone,
         avatar: type.avatar,
-        name: type.username,
+        username: type.name,
         password: type.password);
   }
 
@@ -25,7 +25,7 @@ class NetworkUserMapper implements NetworkMapper<NetworkUser, User> {
         email: type.email,
         phone: type.phone,
         avatar: type.avatar,
-        username: type.name,
+        name: type.username,
         password: type.password);
   }
 }

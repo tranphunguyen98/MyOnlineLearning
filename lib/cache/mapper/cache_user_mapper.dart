@@ -13,7 +13,7 @@ class CacheUserMapper implements CacheMapper<CacheUser, User> {
       email: type.email,
       phone: type.fullName,
       avatar: type.urlImage,
-      name: type.userName,
+      username: type.userName,
     );
   }
 
@@ -24,7 +24,7 @@ class CacheUserMapper implements CacheMapper<CacheUser, User> {
       email: type.email,
       fullName: type.phone,
       urlImage: type.avatar,
-      userName: type.name,
+      userName: type.username,
     );
   }
 }

@@ -11,5 +11,5 @@ abstract class UserService {
 
   @PUT("/user/update-profile")
   Future<MessageResponse> updateProfile(
-      @Header("token") String token, @Body() NetworkUser user);
+      @Header("Authorization") String bearToken, @Body() NetworkUser user);
 }

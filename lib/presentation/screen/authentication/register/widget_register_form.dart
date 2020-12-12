@@ -77,7 +77,7 @@ class _WidgetRegisterFormState extends State<WidgetRegisterForm> {
               onPressed: () {
                 if (_formKey.currentState.validate()) {
                   final user = User(
-                    name: _controllerUserName.text,
+                    username: _controllerUserName.text,
                     phone: _controllerUserPhone.text,
                     email: _controllerUserEmail.text,
                     password: _controllerUserPassword.text,

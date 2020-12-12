@@ -17,8 +17,8 @@ class _UserService implements UserService {
   String baseUrl;
 
   @override
-  Future<MessageResponse> updateProfile(token, user) async {
-    ArgumentError.checkNotNull(token, 'token');
+  Future<MessageResponse> updateProfile(bearToken, user) async {
+    ArgumentError.checkNotNull(bearToken, 'bearToken');
     ArgumentError.checkNotNull(user, 'user');
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -30,7 +30,7 @@ class _UserService implements UserService {
         queryParameters: queryParameters,
         options: RequestOptions(
             method: 'PUT',
-            headers: <String, dynamic>{r'token': token},
+            headers: <String, dynamic>{r'Authorization': bearToken},
             extra: _extra,
             baseUrl: baseUrl),
         data: _data);
