@@ -17,7 +17,7 @@ class NetworkCourseMapper implements NetworkMapper<NetworkCourse, Course> {
         subtitle: type.subtitle,
         description: "${type.title} ${type.description}",
         instructorId: type.instructorId ?? "instructorId",
-        instructorName: type.instructorId ?? "instructorName",
+        instructorName: type.instructorName ?? "instructorName",
         instructorAvatar: type.instructorId ?? "",
         totalMinutes: (type.totalHours * 60).toStringAsFixed(2),
         level: "Beginner",

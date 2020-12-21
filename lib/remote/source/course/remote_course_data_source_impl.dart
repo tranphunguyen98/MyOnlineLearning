@@ -17,10 +17,31 @@ class RemoteCourseDataSourceImplement implements RemoteCourseDataSource {
       _mapper.mapFromRemote(await _courseService.getCourseInfo(courseId));
 
   @override
-  Future<List<Course>> getCoursesUserFavoriteCategories(String userId) async =>
-      (await _courseService.getCoursesUserFavoriteCategories(userId))
-          .map((e) => _mapper.mapFromRemote(e))
-          .toList();
+  Future<List<Course>> getFavoriteCourses(String bearToken) async {
+    try {
+      final listCourseResponse =
+          await _courseService.getFavoritesCourses(bearToken);
+      return listCourseResponse.payload
+              .map((e) => _mapper.mapFromRemote(e))
+              .toList() ??
+          <Course>[];
+    } on DioError catch (e) {
+      throw Exception(e.response.data["message"]);
+    }
+  }
+
+  @override
+  Future<List<Course>> getMyCourses(String bearToken) async {
+    try {
+      final listCourseResponse = await _courseService.getMyCourses(bearToken);
+      return listCourseResponse.payload
+              .map((e) => _mapper.mapFromRemote(e))
+              .toList() ??
+          <Course>[];
+    } on DioError catch (e) {
+      throw Exception(e.response.data["message"]);
+    }
+  }
 
   @override
   Future<Course> getDetailWithLesson(String courseId) {
@@ -32,10 +53,12 @@ class RemoteCourseDataSourceImplement implements RemoteCourseDataSource {
   Future<List<Course>> getTopNew() async {
     try {
       final listCourseResponse = await _courseService.getTopNew(10, 1);
+      print('test ${listCourseResponse.message}');
       return listCourseResponse.payload
           .map((e) => _mapper.mapFromRemote(e))
           .toList();
     } on DioError catch (e) {
+      print('test ${e}');
       throw Exception(e.response.data["message"]);
     }
   }

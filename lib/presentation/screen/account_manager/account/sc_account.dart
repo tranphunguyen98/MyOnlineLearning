@@ -202,7 +202,7 @@ class _TextFieldWithEditButtonState extends State<TextFieldWithEditButton> {
                 ],
               ),
               SizedBox(height: 16.0),
-              CircleOutlineButton("EDIT INFO", onPressed: () async {
+              CircleOutlineButton("CHANGE INFO", onPressed: () async {
                 final newUser = userModel.user.copyWith(
                   phone: _phoneController.text,
                   name: _nameController.text,
@@ -210,7 +210,10 @@ class _TextFieldWithEditButtonState extends State<TextFieldWithEditButton> {
                 try {
                   print("newUser ${newUser.toString()}");
                   await userRepo.updateUser(newUser);
-                  AlertDialogSimple("Update user", "Succeed:");
+                  showDialog(
+                      context: context,
+                      builder: (_) =>
+                          AlertDialogSimple("Update user", "Succeed"),);
                 } catch (e) {
                   showDialog(
                     context: context,
@@ -221,7 +224,7 @@ class _TextFieldWithEditButtonState extends State<TextFieldWithEditButton> {
                 userModel.user = newUser;
               }),
               CircleOutlineButton(
-                "EDIT EMAIL",
+                "CHANGE EMAIL",
                 onPressed: isEditTextSelected
                     ? () {
                         setState(() {

@@ -35,26 +35,6 @@ class _CourseService implements CourseService {
   }
 
   @override
-  Future<List<NetworkCourse>> getCoursesUserFavoriteCategories(userId) async {
-    ArgumentError.checkNotNull(userId, 'userId');
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    final _result = await _dio.request<List<dynamic>>('/user/intro-page',
-        queryParameters: queryParameters,
-        options: RequestOptions(
-            method: 'GET',
-            headers: <String, dynamic>{},
-            extra: _extra,
-            baseUrl: baseUrl),
-        data: _data);
-    var value = _result.data
-        .map((dynamic i) => NetworkCourse.fromJson(i as Map<String, dynamic>))
-        .toList();
-    return value;
-  }
-
-  @override
   Future<ListCourseResponse> getTopRate(limit, page) async {
     ArgumentError.checkNotNull(limit, 'limit');
     ArgumentError.checkNotNull(page, 'page');
@@ -107,6 +87,44 @@ class _CourseService implements CourseService {
         options: RequestOptions(
             method: 'POST',
             headers: <String, dynamic>{},
+            extra: _extra,
+            baseUrl: baseUrl),
+        data: _data);
+    final value = ListCourseResponse.fromJson(_result.data);
+    return value;
+  }
+
+  @override
+  Future<ListCourseResponse> getFavoritesCourses(bearToken) async {
+    ArgumentError.checkNotNull(bearToken, 'bearToken');
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.request<Map<String, dynamic>>(
+        '/user/get-favorite-courses',
+        queryParameters: queryParameters,
+        options: RequestOptions(
+            method: 'GET',
+            headers: <String, dynamic>{r'Authorization': bearToken},
+            extra: _extra,
+            baseUrl: baseUrl),
+        data: _data);
+    final value = ListCourseResponse.fromJson(_result.data);
+    return value;
+  }
+
+  @override
+  Future<ListCourseResponse> getMyCourses(bearToken) async {
+    ArgumentError.checkNotNull(bearToken, 'bearToken');
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.request<Map<String, dynamic>>(
+        '/user/get-process-courses',
+        queryParameters: queryParameters,
+        options: RequestOptions(
+            method: 'GET',
+            headers: <String, dynamic>{r'Authorization': bearToken},
             extra: _extra,
             baseUrl: baseUrl),
         data: _data);

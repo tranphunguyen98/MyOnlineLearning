@@ -32,6 +32,7 @@ final getIt = GetIt.instance;
 @InjectableInit()
 Future<void> configureDependencies() async {
   $initGetIt(getIt);
+  final baseUrl = "http://api.dev.letstudy.org/";
   getIt.registerLazySingleton<DateFormat>(() => DateFormat('MMM yyyy'));
   getIt.registerSingleton<Dio>(Dio());
 

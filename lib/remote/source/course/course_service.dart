@@ -14,9 +14,6 @@ abstract class CourseService {
   @GET("/user/intro-page")
   Future<NetworkCourse> getCourseInfo(String courseId);
 
-  @GET("/user/intro-page")
-  Future<List<NetworkCourse>> getCoursesUserFavoriteCategories(String userId);
-
   @POST("/course/top-rate")
   Future<ListCourseResponse> getTopRate(@Field() int limit, @Field() int page);
 
@@ -25,6 +22,14 @@ abstract class CourseService {
 
   @POST("/course/top-sell")
   Future<ListCourseResponse> getTopSell(@Field() int limit, @Field() int page);
+
+  @GET("/user/get-favorite-courses")
+  Future<ListCourseResponse> getFavoritesCourses(
+      @Header("Authorization") String bearToken);
+
+  @GET("/user/get-process-courses")
+  Future<ListCourseResponse> getMyCourses(
+      @Header("Authorization") String bearToken);
 
   @POST("/course/searchV2")
   Future<ListCourseSearchResponse> searchV2(

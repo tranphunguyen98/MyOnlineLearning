@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:my_online_learning/data/model/courses_bookmark.dart';
 import 'package:my_online_learning/data/model/courses_download.dart';
+import 'package:my_online_learning/data/model/my_courses.dart';
 import 'package:my_online_learning/data/model/search_history.dart';
 import 'package:my_online_learning/data/model/theme_setting.dart';
 import 'package:my_online_learning/data/repository/authentication/authentication_data_source.dart';
@@ -35,6 +36,7 @@ class MyApp extends StatelessWidget {
             create: (_) => CoursesDownload()),
         ChangeNotifierProvider<CoursesBookmark>(
             create: (_) => CoursesBookmark()),
+        ChangeNotifierProvider<MyCourses>(create: (_) => MyCourses()),
         ChangeNotifierProvider<SearchHistory>(create: (_) => SearchHistory()),
         ChangeNotifierProvider<SearchResultModel>(
             create: (_) => SearchResultModel()),

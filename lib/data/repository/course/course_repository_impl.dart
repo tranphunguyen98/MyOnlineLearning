@@ -12,8 +12,8 @@ class CourseRepositoryImplement implements ICourseRepository {
       _remoteDataSource.getCourseInfo(courseId);
 
   @override
-  Future<List<Course>> getCoursesUserFavoriteCategories(String userId) =>
-      _remoteDataSource.getCoursesUserFavoriteCategories(userId);
+  Future<List<Course>> getFavoriteCourses(String bearToken) =>
+      _remoteDataSource.getFavoriteCourses(bearToken);
 
   @override
   Future<Course> getDetailWithLesson(String courseId) =>
@@ -35,4 +35,8 @@ class CourseRepositoryImplement implements ICourseRepository {
   @override
   Future<List<Course>> search(String keyword) =>
       _remoteDataSource.search(keyword);
+
+  @override
+  Future<List<Course>> getMyCourses(String bearToken) =>
+      _remoteDataSource.getMyCourses(bearToken);
 }
