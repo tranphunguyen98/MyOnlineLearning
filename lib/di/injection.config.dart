@@ -12,6 +12,7 @@ import '../remote/source/author/author_service.dart';
 import '../cache/mapper/cache_user_mapper.dart';
 import '../cache/source/user/cache_user_service.dart';
 import '../remote/mapper/network_author_mapper.dart';
+import '../remote/mapper/network_category_mapper.dart';
 import '../remote/mapper/network_course_detail_mapper.dart';
 import '../remote/mapper/network_course_mapper.dart';
 import '../remote/mapper/network_lesson_mapper.dart';
@@ -31,6 +32,7 @@ GetIt $initGetIt(
   gh.factory<CacheUserMapper>(() => CacheUserMapper());
   gh.factory<CacheUserService>(() => CacheUserService());
   gh.factory<NetworkAuthorMapper>(() => NetworkAuthorMapper());
+  gh.factory<NetworkCategoryMapper>(() => NetworkCategoryMapper());
   gh.factory<NetworkCourseDetailMapper>(() => NetworkCourseDetailMapper());
   gh.factory<NetworkCourseMapper>(() => NetworkCourseMapper());
   gh.factory<NetworkLessonMapper>(() => NetworkLessonMapper());

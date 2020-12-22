@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:my_online_learning/remote/model/response/course_detail_response.dart';
+import 'package:my_online_learning/remote/model/response/list_category_response.dart';
 import 'package:my_online_learning/remote/model/response/list_course_response.dart';
 import 'package:my_online_learning/remote/model/response/list_course_search_response.dart';
 import 'package:my_online_learning/remote/model/response/my_course_response.dart';
@@ -12,6 +13,9 @@ part 'course_service.g.dart';
 @RestApi(baseUrl: "http://api.dev.letstudy.org/")
 abstract class CourseService {
   factory CourseService(Dio dio, {String baseUrl}) = _CourseService;
+
+  @GET("/category/all")
+  Future<ListCategoryResponse> getCategories();
 
   @POST("/payment/get-free-courses")
   Future<MessageResponse> enrollCourse(

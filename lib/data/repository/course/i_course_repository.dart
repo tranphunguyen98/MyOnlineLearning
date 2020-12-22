@@ -1,3 +1,4 @@
+import 'package:my_online_learning/model/entity/category.dart';
 import 'package:my_online_learning/model/entity/course.dart';
 
 abstract class ICourseRepository {
@@ -12,4 +13,5 @@ abstract class ICourseRepository {
   Future<List<Course>> search(String keyword);
   Future<bool> enrollCourse(String bearToken, String courseId);
   Future<bool> likeCourse(String bearToken, String courseId);
+  Future<List<Category>> getCategories();
 }

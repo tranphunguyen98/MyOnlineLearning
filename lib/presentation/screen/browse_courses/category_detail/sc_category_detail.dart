@@ -47,8 +47,9 @@ class CategoryDetailScreen extends StatelessWidget {
                 future: getIt<ICourseRepository>().getTopSell(),
                 builder: (context, snapshot) => snapshot.hasData
                     ? Provider<Category>(
-                        create: (context) =>
-                            Category("NEW IN ${category.title}", snapshot.data),
+                        create: (context) => Category(
+                            title: "NEW IN ${category.title}",
+                            courses: snapshot.data),
                         child: WidgetCategoryCourse())
                     : Container(),
               ),
@@ -57,7 +58,8 @@ class CategoryDetailScreen extends StatelessWidget {
                 builder: (context, snapshot) => snapshot.hasData
                     ? Provider<Category>(
                         create: (context) => Category(
-                            "TRENDING IN ${category.title}", snapshot.data),
+                            title: "TRENDING IN  ${category.title}",
+                            courses: snapshot.data),
                         child: WidgetCategoryCourse())
                     : Container(),
               ),

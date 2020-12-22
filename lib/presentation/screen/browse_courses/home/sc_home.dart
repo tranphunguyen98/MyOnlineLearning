@@ -31,7 +31,8 @@ class _HomeScreenState extends State<HomeScreen> {
             builder: (_, listCourseSnapshot) {
               if (listCourseSnapshot.hasData) {
                 return Provider<Category>(
-                  create: (_) => Category("New", listCourseSnapshot.data),
+                  create: (_) =>
+                      Category(title: "New", courses: listCourseSnapshot.data),
                   child: const WidgetCategoryCourse(),
                 );
               }
@@ -54,7 +55,8 @@ class _HomeScreenState extends State<HomeScreen> {
             builder: (_, listCourseSnapshot) {
               if (listCourseSnapshot.hasData) {
                 return Provider<Category>(
-                  create: (_) => Category("Trending", listCourseSnapshot.data),
+                  create: (_) => Category(
+                      title: "Trending", courses: listCourseSnapshot.data),
                   child: const WidgetCategoryCourse(),
                 );
               }
@@ -86,8 +88,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                   builder: (_, myCourse, __) {
                                 return Provider<Category>(
                                   create: (_) => Category(
-                                    "My Courses",
-                                    myCourse.listCourse,
+                                    title: "My Courses",
+                                    courses: myCourse.listCourse,
                                   ),
                                   child: WidgetCategoryCourse(),
                                 );
@@ -110,8 +112,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                   builder: (_, coursesBookmark, __) {
                                 return Provider<Category>(
                                   create: (_) => Category(
-                                    "Bookmark",
-                                    coursesBookmark.listCourse,
+                                    title: "Bookmark",
+                                    courses: coursesBookmark.listCourse,
                                   ),
                                   child: WidgetCategoryCourse(),
                                 );

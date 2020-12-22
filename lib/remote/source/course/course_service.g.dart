@@ -17,6 +17,23 @@ class _CourseService implements CourseService {
   String baseUrl;
 
   @override
+  Future<ListCategoryResponse> getCategories() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.request<Map<String, dynamic>>('/category/all',
+        queryParameters: queryParameters,
+        options: RequestOptions(
+            method: 'GET',
+            headers: <String, dynamic>{},
+            extra: _extra,
+            baseUrl: baseUrl),
+        data: _data);
+    final value = ListCategoryResponse.fromJson(_result.data);
+    return value;
+  }
+
+  @override
   Future<MessageResponse> enrollCourse(bearToken, courseId) async {
     ArgumentError.checkNotNull(bearToken, 'bearToken');
     ArgumentError.checkNotNull(courseId, 'courseId');

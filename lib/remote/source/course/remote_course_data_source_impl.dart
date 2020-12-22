@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:my_online_learning/data/repository/course/remote_course_data_source.dart';
+import 'package:my_online_learning/model/entity/category.dart';
 import 'package:my_online_learning/model/entity/course.dart';
+import 'package:my_online_learning/remote/mapper/network_category_mapper.dart';
 import 'package:my_online_learning/remote/mapper/network_course_detail_mapper.dart';
 import 'package:my_online_learning/remote/mapper/network_course_mapper.dart';
 import 'package:my_online_learning/remote/mapper/network_my_course_mapper.dart';
@@ -13,9 +15,10 @@ class RemoteCourseDataSourceImplement implements RemoteCourseDataSource {
   final NetworkCourseMapper _mapperCourse;
   final NetworkMyCourseMapper _mapperMyCourse;
   final NetworkCourseDetailMapper _mapperCourseDetail;
+  final NetworkCategoryMapper _mapperCategory;
 
   RemoteCourseDataSourceImplement(this._courseService, this._mapperCourse,
-      this._mapperMyCourse, this._mapperCourseDetail);
+      this._mapperMyCourse, this._mapperCourseDetail, this._mapperCategory);
 
   @override
   Future<Course> getCourseInfo(String courseId) async {
@@ -158,6 +161,18 @@ class RemoteCourseDataSourceImplement implements RemoteCourseDataSource {
       } else {
         throw Exception(messageResponse.message);
       }
+    } on DioError catch (e) {
+      throw Exception(e.response.data["message"]);
+    }
+  }
+
+  @override
+  Future<List<Category>> getCategories() async {
+    try {
+      final categoryResponse = await _courseService.getCategories();
+      return categoryResponse.payload
+          .map((e) => _mapperCategory.mapFromRemote(e))
+          .toList();
     } on DioError catch (e) {
       throw Exception(e.response.data["message"]);
     }

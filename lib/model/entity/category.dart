@@ -1,10 +1,10 @@
 import 'course.dart';
 
 class Category {
-  final String title, image;
+  final String id, title, image;
   final List<Course> courses;
 
-  const Category(this.title, this.courses, [this.image = ""]);
+  const Category({this.id, this.title, this.courses, this.image = ""});
 
   static const List<Category> categories = [];
 }

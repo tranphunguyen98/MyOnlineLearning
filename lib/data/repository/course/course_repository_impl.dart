@@ -1,5 +1,6 @@
 import 'package:my_online_learning/data/repository/course/i_course_repository.dart';
 import 'package:my_online_learning/data/repository/course/remote_course_data_source.dart';
+import 'package:my_online_learning/model/entity/category.dart';
 import 'package:my_online_learning/model/entity/course.dart';
 
 class CourseRepositoryImplement implements ICourseRepository {
@@ -47,4 +48,7 @@ class CourseRepositoryImplement implements ICourseRepository {
   @override
   Future<bool> likeCourse(String bearToken, String courseId) =>
       _remoteDataSource.likeCourse(bearToken, courseId);
+
+  @override
+  Future<List<Category>> getCategories() => _remoteDataSource.getCategories();
 }

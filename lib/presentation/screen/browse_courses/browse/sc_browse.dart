@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:my_online_learning/data/repository/author/course_repository_impl.dart';
+import 'package:my_online_learning/data/repository/course/i_course_repository.dart';
 import 'package:my_online_learning/di/injection.dart';
 import 'package:my_online_learning/model/entity/author.dart';
 import 'package:my_online_learning/model/entity/category.dart';
@@ -22,7 +23,14 @@ class BrowseScreen extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               ListCategoryLarge(),
-              ListCategoryMedium(categories: Category.categories),
+              FutureBuilder<List<Category>>(
+                  future: getIt<ICourseRepository>().getCategories(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return ListCategoryMedium(categories: snapshot.data);
+                    }
+                    return Container();
+                  }),
               SizedBox(height: 32.0),
               ListSkill(),
               FutureBuilder<List<Author>>(
