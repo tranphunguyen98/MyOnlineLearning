@@ -7,6 +7,7 @@ import 'package:my_online_learning/remote/mapper/network_course_detail_mapper.da
 import 'package:my_online_learning/remote/mapper/network_course_mapper.dart';
 import 'package:my_online_learning/remote/mapper/network_my_course_mapper.dart';
 import 'package:my_online_learning/remote/model/network_course.dart';
+import 'package:my_online_learning/remote/model/option_search.dart';
 
 import 'course_service.dart';
 
@@ -119,10 +120,10 @@ class RemoteCourseDataSourceImplement implements RemoteCourseDataSource {
   }
 
   @override
-  Future<List<Course>> search(String keyword) async {
+  Future<List<Course>> search(String keyword, OptionSearch optionSearch) async {
     try {
       final listCourseSearchResponse =
-          await _courseService.search(keyword, 10, 1);
+          await _courseService.search(keyword, optionSearch, 10, 1);
       final resultCourses =
           listCourseSearchResponse.payload.rows ?? <NetworkCourse>[];
       return resultCourses.map((e) {

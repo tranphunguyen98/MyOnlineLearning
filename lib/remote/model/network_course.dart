@@ -13,8 +13,9 @@ class NetworkCourse {
   final String updatedAt;
   final String instructorId;
   final String instructorName;
+  final String name;
 
-  //<editor-fold desc="Data Methods" defaultstate="collapsed">
+//<editor-fold desc="Data Methods" defaultstate="collapsed">
 
   const NetworkCourse({
     @required this.id,
@@ -29,6 +30,7 @@ class NetworkCourse {
     @required this.updatedAt,
     @required this.instructorId,
     @required this.instructorName,
+    @required this.name,
   });
 
   NetworkCourse copyWith({
@@ -44,6 +46,7 @@ class NetworkCourse {
     String updatedAt,
     String instructorId,
     String instructorName,
+    String name,
   }) {
     if ((id == null || identical(id, this.id)) &&
         (title == null || identical(title, this.title)) &&
@@ -57,7 +60,8 @@ class NetworkCourse {
         (updatedAt == null || identical(updatedAt, this.updatedAt)) &&
         (instructorId == null || identical(instructorId, this.instructorId)) &&
         (instructorName == null ||
-            identical(instructorName, this.instructorName))) {
+            identical(instructorName, this.instructorName)) &&
+        (name == null || identical(name, this.name))) {
       return this;
     }
 
@@ -74,12 +78,13 @@ class NetworkCourse {
       updatedAt: updatedAt ?? this.updatedAt,
       instructorId: instructorId ?? this.instructorId,
       instructorName: instructorName ?? this.instructorName,
+      name: name ?? this.name,
     );
   }
 
   @override
   String toString() {
-    return 'NetworkCourse{id: $id, title: $title, subtitle: $subtitle, price: $price, description: $description, ratedNumber: $ratedNumber, totalHours: $totalHours, imageUrl: $imageUrl, promoVidUrl: $promoVidUrl, updatedAt: $updatedAt, instructorId: $instructorId, instructorName: $instructorName}';
+    return 'NetworkCourse{id: $id, title: $title, subtitle: $subtitle, price: $price, description: $description, ratedNumber: $ratedNumber, totalHours: $totalHours, imageUrl: $imageUrl, promoVidUrl: $promoVidUrl, updatedAt: $updatedAt, instructorId: $instructorId, instructorName: $instructorName, name: $name}';
   }
 
   @override
@@ -98,7 +103,8 @@ class NetworkCourse {
           promoVidUrl == other.promoVidUrl &&
           updatedAt == other.updatedAt &&
           instructorId == other.instructorId &&
-          instructorName == other.instructorName);
+          instructorName == other.instructorName &&
+          name == other.name);
 
   @override
   int get hashCode =>
@@ -113,10 +119,11 @@ class NetworkCourse {
       promoVidUrl.hashCode ^
       updatedAt.hashCode ^
       instructorId.hashCode ^
-      instructorName.hashCode;
+      instructorName.hashCode ^
+      name.hashCode;
 
   factory NetworkCourse.fromJson(Map<String, dynamic> map) {
-    return NetworkCourse(
+    return new NetworkCourse(
       id: map['id'] as String,
       title: map['title'] as String,
       subtitle: map['subtitle'] as String,
@@ -128,7 +135,8 @@ class NetworkCourse {
       promoVidUrl: map['promoVidUrl'] as String,
       updatedAt: map['updatedAt'] as String,
       instructorId: map['instructorId'] as String,
-      instructorName: map['instructor.user.name'] as String,
+      instructorName: map['instructorName'] as String,
+      name: map['name'] as String,
     );
   }
 
@@ -147,9 +155,10 @@ class NetworkCourse {
       'updatedAt': this.updatedAt,
       'instructorId': this.instructorId,
       'instructorName': this.instructorName,
+      'name': this.name,
     } as Map<String, dynamic>;
   }
 
-  //</editor-fold>
+//</editor-fold>
 
 }

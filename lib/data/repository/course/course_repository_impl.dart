@@ -2,6 +2,7 @@ import 'package:my_online_learning/data/repository/course/i_course_repository.da
 import 'package:my_online_learning/data/repository/course/remote_course_data_source.dart';
 import 'package:my_online_learning/model/entity/category.dart';
 import 'package:my_online_learning/model/entity/course.dart';
+import 'package:my_online_learning/remote/model/option_search.dart';
 
 class CourseRepositoryImplement implements ICourseRepository {
   final RemoteCourseDataSource _remoteDataSource;
@@ -34,8 +35,8 @@ class CourseRepositoryImplement implements ICourseRepository {
       _remoteDataSource.searchV2(token, keyword);
 
   @override
-  Future<List<Course>> search(String keyword) =>
-      _remoteDataSource.search(keyword);
+  Future<List<Course>> search(String keyword, OptionSearch optionSearch) =>
+      _remoteDataSource.search(keyword, optionSearch);
 
   @override
   Future<List<Course>> getMyCourses(String bearToken) =>

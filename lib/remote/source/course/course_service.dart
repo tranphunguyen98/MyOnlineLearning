@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:my_online_learning/remote/model/option_search.dart';
 import 'package:my_online_learning/remote/model/response/course_detail_response.dart';
 import 'package:my_online_learning/remote/model/response/list_category_response.dart';
 import 'package:my_online_learning/remote/model/response/list_course_response.dart';
@@ -56,6 +57,7 @@ abstract class CourseService {
   @POST("/course/search")
   Future<ListCourseSearchResponse> search(
     @Field() String keyword,
+    @Field() OptionSearch opt,
     @Field() int limit,
     @Field() int offset,
   );

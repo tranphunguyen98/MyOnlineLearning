@@ -4,6 +4,7 @@ import 'package:my_online_learning/data/repository/course/i_course_repository.da
 import 'package:my_online_learning/di/injection.dart';
 import 'package:my_online_learning/model/entity/author.dart';
 import 'package:my_online_learning/model/entity/course.dart';
+import 'package:my_online_learning/remote/model/option_search.dart';
 
 class SearchResultModel extends ChangeNotifier {
   SearchResult _data = SearchResult.empty();
@@ -31,7 +32,8 @@ class SearchResultModel extends ChangeNotifier {
     List<Course> listCourse = <Course>[];
     print("TOKEN::: $token");
     //if (token.isEmpty) {
-    listCourse = await getIt<ICourseRepository>().search(keyword);
+    listCourse = await getIt<ICourseRepository>()
+        .search(keyword, OptionSearch(category: []));
     // } else {
     //   listCourse = await getIt<ICourseRepository>().searchV2(token, keyword);
     // }

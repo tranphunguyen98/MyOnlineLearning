@@ -8,6 +8,7 @@ import 'package:my_online_learning/model/entity/course.dart';
 import 'package:my_online_learning/presentation/screen/browse_courses/browse/sc_browse.dart';
 import 'package:my_online_learning/presentation/screen/browse_courses/list_of_authors/widget_category_author.dart';
 import 'package:my_online_learning/presentation/screen/browse_courses/list_of_categories/widget_category_course.dart';
+import 'package:my_online_learning/remote/model/option_search.dart';
 import 'package:provider/provider.dart';
 
 class CategoryDetailScreen extends StatelessWidget {
@@ -44,7 +45,8 @@ class CategoryDetailScreen extends StatelessWidget {
             children: <Widget>[
               ListSkill(),
               FutureBuilder<List<Course>>(
-                future: getIt<ICourseRepository>().getTopSell(),
+                future: getIt<ICourseRepository>()
+                    .search("", OptionSearch(category: [category.id])),
                 builder: (context, snapshot) => snapshot.hasData
                     ? Provider<Category>(
                         create: (context) => Category(
@@ -54,7 +56,8 @@ class CategoryDetailScreen extends StatelessWidget {
                     : Container(),
               ),
               FutureBuilder<List<Course>>(
-                future: getIt<ICourseRepository>().getTopSell(),
+                future: getIt<ICourseRepository>()
+                    .search("", OptionSearch(category: [category.id])),
                 builder: (context, snapshot) => snapshot.hasData
                     ? Provider<Category>(
                         create: (context) => Category(
