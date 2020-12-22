@@ -30,7 +30,7 @@ class ItemCourse extends StatelessWidget {
       onTap: () => context.push(CourseDetailScreen(course.id)),
       child: Container(
         color: context.theme.cardColor,
-        width: 190.0,
+        width: 190,
         child: Column(
           children: [
             Container(

@@ -1,7 +1,9 @@
 import 'package:dio/dio.dart';
-import 'package:my_online_learning/remote/model/network_course.dart';
+import 'package:my_online_learning/remote/model/response/course_detail_response.dart';
 import 'package:my_online_learning/remote/model/response/list_course_response.dart';
 import 'package:my_online_learning/remote/model/response/list_course_search_response.dart';
+import 'package:my_online_learning/remote/model/response/my_course_response.dart';
+import 'package:my_online_learning/remote/model/response/response.dart';
 import 'package:retrofit/http.dart';
 import 'package:retrofit/retrofit.dart';
 
@@ -11,8 +13,16 @@ part 'course_service.g.dart';
 abstract class CourseService {
   factory CourseService(Dio dio, {String baseUrl}) = _CourseService;
 
-  @GET("/user/intro-page")
-  Future<NetworkCourse> getCourseInfo(String courseId);
+  @POST("/payment/get-free-courses")
+  Future<MessageResponse> enrollCourse(
+      @Header("Authorization") String bearToken, @Field() String courseId);
+
+  @POST("/user/like-course")
+  Future<MessageResponse> likeCourse(
+      @Header("Authorization") String bearToken, @Field() String courseId);
+
+  @GET("/course/get-course-detail/{id}/null")
+  Future<CourseDetailResponse> getCourseInfo(@Path("id") String id);
 
   @POST("/course/top-rate")
   Future<ListCourseResponse> getTopRate(@Field() int limit, @Field() int page);
@@ -24,11 +34,11 @@ abstract class CourseService {
   Future<ListCourseResponse> getTopSell(@Field() int limit, @Field() int page);
 
   @GET("/user/get-favorite-courses")
-  Future<ListCourseResponse> getFavoritesCourses(
+  Future<MyCourseResponse> getFavoritesCourses(
       @Header("Authorization") String bearToken);
 
   @GET("/user/get-process-courses")
-  Future<ListCourseResponse> getMyCourses(
+  Future<MyCourseResponse> getMyCourses(
       @Header("Authorization") String bearToken);
 
   @POST("/course/searchV2")

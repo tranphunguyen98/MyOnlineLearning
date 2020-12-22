@@ -47,21 +47,23 @@ class Rating extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RatingBar(
-      ignoreGestures: true,
-      initialRating: course.ratedNumber,
-      minRating: 1,
-      direction: Axis.horizontal,
-      allowHalfRating: true,
-      unratedColor: Colors.amber.withAlpha(50),
-      itemCount: 5,
-      itemSize: 14.0,
-      itemBuilder: (context, _) => Icon(
-        Icons.star,
-        color: Colors.amber,
-      ),
-      onRatingUpdate: (rating) {},
-    );
+    return course.ratedNumber != null
+        ? RatingBar(
+            ignoreGestures: true,
+            initialRating: course.ratedNumber,
+            minRating: 1,
+            direction: Axis.horizontal,
+            allowHalfRating: true,
+            unratedColor: Colors.amber.withAlpha(50),
+            itemCount: 5,
+            itemSize: 14.0,
+            itemBuilder: (context, _) => Icon(
+              Icons.star,
+              color: Colors.amber,
+            ),
+            onRatingUpdate: (rating) {},
+          )
+        : Container();
   }
 }
 
@@ -75,43 +77,45 @@ class RowInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Text(
-          course.level,
-          style: context.textTheme.caption,
-        ),
-        SizedBox(
-          width: 4,
-        ),
-        Icon(
-          Icons.circle,
-          color: Colors.white60,
-          size: 2,
-        ),
-        SizedBox(
-          width: 4,
-        ),
-        Text(
-          course.updateAt,
-          style: context.textTheme.caption,
-        ),
-        SizedBox(
-          width: 4,
-        ),
-        Icon(
-          Icons.circle,
-          color: Colors.white60,
-          size: 2,
-        ),
-        SizedBox(
-          width: 4,
-        ),
-        Text(
-          "${course.totalMinutes}m",
-          style: context.textTheme.caption,
-        ),
-      ],
-    );
+    return course.totalMinutes != null
+        ? Row(
+            children: [
+              Text(
+                course.level,
+                style: context.textTheme.caption,
+              ),
+              SizedBox(
+                width: 4,
+              ),
+              Icon(
+                Icons.circle,
+                color: Colors.white60,
+                size: 2,
+              ),
+              SizedBox(
+                width: 4,
+              ),
+              Text(
+                course.updateAt,
+                style: context.textTheme.caption,
+              ),
+              SizedBox(
+                width: 4,
+              ),
+              Icon(
+                Icons.circle,
+                color: Colors.white60,
+                size: 2,
+              ),
+              SizedBox(
+                width: 4,
+              ),
+              Text(
+                "${course.totalMinutes}m",
+                style: context.textTheme.caption,
+              ),
+            ],
+          )
+        : Container();
   }
 }

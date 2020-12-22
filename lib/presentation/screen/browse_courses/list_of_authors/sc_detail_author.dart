@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_online_learning/data/repository/author/course_repository_impl.dart';
 import 'package:my_online_learning/di/injection.dart';
 import 'package:my_online_learning/model/entity/author.dart';
-import 'package:my_online_learning/presentation/common_widgets/widget_circle_avatar.dart';
+import 'package:my_online_learning/presentation/common_widgets/widget_circle_avatar_network.dart';
 import 'package:my_online_learning/presentation/common_widgets/widget_my_outline_btn.dart';
 import 'package:my_online_learning/presentation/common_widgets/widget_my_raised_btn.dart';
 import 'package:my_online_learning/presentation/screen/browse_courses/list_of_courses/widget_list_course_v.dart';
@@ -92,7 +92,7 @@ class _HeaderInfoState extends State<HeaderInfo> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         SizedBox(height: 16.0),
-        CircleAvatarNormal(assetImageUrl: widget._author.avatar, size: 64.0),
+        CircleAvatarNetwork(networkImageUrl: widget._author.avatar, size: 64.0),
         SizedBox(height: 16.0),
         Text(
           widget._author.name,

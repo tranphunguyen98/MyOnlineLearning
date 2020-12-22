@@ -1,18 +1,26 @@
 import 'lesson.dart';
 
 class Chapter {
-  final String title;
-  final int duration;
-  final int index;
+  final String id;
+  final String courseId;
+  final String name;
+  final int sumMinutes;
+  final int numberOrder;
   final bool isStudying;
   final List<Lesson> listLesson;
 
-  const Chapter(this.title, this.duration, this.index, this.listLesson,
-      {this.isStudying = false});
+  const Chapter(
+      {this.name,
+      this.sumMinutes,
+      this.numberOrder,
+      this.listLesson,
+      this.id,
+      this.courseId,
+      this.isStudying = false});
 
   String get durationString {
-    int minute = duration ~/ 60;
-    int second = duration % 60;
+    int minute = sumMinutes ~/ 60;
+    int second = sumMinutes.toInt() % 60;
     String result = "";
     if (minute < 10) {
       result += "0$minute:";
@@ -28,10 +36,4 @@ class Chapter {
 
     return result;
   }
-
-  static const List<Chapter> listChapter = [
-    Chapter("Course Overview", 220, 1, Lesson.listLesson, isStudying: true),
-    Chapter("Getting Started with Angular", 410, 2, Lesson.listLesson),
-    Chapter("Exploring the Angular Template Syntax", 110, 3, Lesson.listLesson),
-  ];
 }

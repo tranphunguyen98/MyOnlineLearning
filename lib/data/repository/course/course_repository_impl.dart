@@ -39,4 +39,12 @@ class CourseRepositoryImplement implements ICourseRepository {
   @override
   Future<List<Course>> getMyCourses(String bearToken) =>
       _remoteDataSource.getMyCourses(bearToken);
+
+  @override
+  Future<bool> enrollCourse(String bearToken, String courseId) =>
+      _remoteDataSource.enrollCourse(bearToken, courseId);
+
+  @override
+  Future<bool> likeCourse(String bearToken, String courseId) =>
+      _remoteDataSource.likeCourse(bearToken, courseId);
 }

@@ -9,7 +9,7 @@ class MessageResponse {
   final String message;
 
   MessageResponse({
-    this.message,
+    this.message = "",
   });
 
   factory MessageResponse.fromJson(Map<String, dynamic> json) =>

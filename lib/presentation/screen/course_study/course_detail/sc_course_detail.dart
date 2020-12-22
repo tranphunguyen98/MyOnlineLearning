@@ -1,20 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:my_online_learning/data/model/courses_bookmark.dart';
-import 'package:my_online_learning/data/model/courses_download.dart';
 import 'package:my_online_learning/data/repository/course/i_course_repository.dart';
 import 'package:my_online_learning/di/injection.dart';
-import 'package:my_online_learning/model/entity/chapter.dart';
 import 'package:my_online_learning/model/entity/course.dart';
-import 'package:my_online_learning/presentation/common_widgets/widget_circle_avatar.dart';
+import 'package:my_online_learning/presentation/common_widgets/widget_circle_avatar_network.dart';
 import 'package:my_online_learning/presentation/screen/browse_courses/list_of_authors/sc_detail_author.dart';
+import 'package:my_online_learning/presentation/screen/course_study/course_detail/row_function_widget.dart';
+import 'package:my_online_learning/presentation/screen/course_study/course_detail/video_view.dart';
 import 'package:my_online_learning/utils/extensions.dart';
 import 'package:my_online_learning/utils/my_const/my_const.dart';
-import 'package:provider/provider.dart';
 
 import 'WidgetButtonIcon.dart';
 import 'content_of_course.dart';
-import 'item_function_detail.dart';
 
 class CourseDetailScreen extends StatefulWidget {
   final String courseId;
@@ -40,18 +37,20 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
               body: Column(
                 children: [
                   VideoView(
-                    course: course,
+                    course,
                   ),
                   Expanded(
                     child: ListView(
                       children: [
                         _buildHeaderInfo(),
-                        _buildRowFunction(),
+                        RowFunction(course),
                         _buildDescription(),
-                        _buildButtonFunction(),
+                        //_buildButtonFunction(),
                         _buildContentHeader(),
                         SizedBox(height: 16.0),
-                        ContentOfCourse(),
+                        ContentOfCourse(
+                          course: course,
+                        ),
                       ],
                     ),
                   ),
@@ -62,10 +61,11 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
             return Center(
               child: Text(courseSnapshot.error.toString()),
             );
-          } else
+          } else {
             return Center(
               child: CircularProgressIndicator(),
             );
+          }
         });
   }
 
@@ -75,14 +75,20 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
         context.push(AuthorDetailScreen(course.instructorId));
       },
       child: Chip(
-          label: Text(
-            course.instructorName,
-            style: context.textTheme.subtitle2,
-          ),
-          avatar: CircleAvatarNormal(
-            size: 32.0,
-            assetImageUrl: course.instructorAvatar,
-          )),
+        label: Text(
+          course.instructorName,
+          style: context.textTheme.subtitle2,
+        ),
+        avatar: course == null
+            ? const Icon(
+                Icons.account_circle,
+                size: 24.0,
+              )
+            : CircleAvatarNetwork(
+                size: 32.0,
+                networkImageUrl: course.instructorAvatar,
+              ),
+      ),
     );
   }
 
@@ -171,41 +177,6 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
     );
   }
 
-  Widget _buildRowFunction() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Consumer<CoursesBookmark>(
-            builder: (_, coursesBookmark, __) => ItemFunctionDetail(
-              coursesBookmark.contain(course) ? "Bookmarked" : "Bookmark",
-              Icons.bookmark,
-              coursesBookmark.contain(course)
-                  ? () {
-                      coursesBookmark.removeCourse(course);
-                    }
-                  : () {
-                      coursesBookmark.addCourse(course);
-                    },
-            ),
-          ),
-          ItemFunctionDetail("Add to channel", Icons.control_point, () {}),
-          Consumer<CoursesDownload>(
-            builder: (_, coursesDownload, __) => ItemFunctionDetail(
-                coursesDownload.contain(course) ? "Downloaded" : "Download",
-                Icons.download_rounded,
-                coursesDownload.contain(course)
-                    ? null
-                    : () {
-                        coursesDownload.addCourse(course);
-                      }),
-          ),
-        ],
-      ),
-    );
-  }
-
   Widget _buildDescription() {
     return Padding(
       padding: const EdgeInsets.all(16.0),
@@ -256,150 +227,6 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
         "CONTENT",
         style: StyleConst.textMedium,
       ),
-    );
-  }
-}
-
-class VideoView extends StatelessWidget {
-  const VideoView({
-    Key key,
-    @required this.course,
-  }) : super(key: key);
-
-  final Course course;
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Image(
-            height: 240,
-            width: double.infinity,
-            fit: BoxFit.fitWidth,
-            image: AssetImage(course.imageUrl)),
-        Positioned.fill(
-          child: Align(
-            alignment: Alignment.center,
-            child: Image(
-              height: 80,
-              width: 80,
-              image: AssetImage("assets/ic_play.png"),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class ItemChapter extends StatelessWidget {
-  final Chapter chapter;
-
-  const ItemChapter(this.chapter);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Header(chapter: chapter),
-        SizedBox(
-          height: 16.0,
-        ),
-        ...chapter.listLesson.map((lesson) => Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.stop_circle,
-                    color: lesson.isStudying
-                        ? Colors.green
-                        : context.theme.primaryColorDark,
-                    size: 12,
-                  ),
-                  SizedBox(
-                    width: 8.0,
-                  ),
-                  Expanded(
-                      child: Text(
-                    lesson.title,
-                    style: context.textTheme.subtitle2,
-                  )),
-                  Text(
-                    lesson.durationString,
-                    style: StyleConst.textRegularGray,
-                  ),
-                ],
-              ),
-            ))
-      ],
-    );
-  }
-}
-
-class Header extends StatelessWidget {
-  const Header({
-    Key key,
-    @required this.chapter,
-  }) : super(key: key);
-
-  final Chapter chapter;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-      height: 60.0,
-      child: Row(children: [
-        Container(
-          width: 60.0,
-          child: Column(
-            children: [
-              Expanded(
-                child: Container(
-                  alignment: Alignment.center,
-                  color: context.theme.primaryColorDark,
-                  child: Text(
-                    chapter.index.toString(),
-                    style: context.textTheme.subtitle2,
-                  ),
-                ),
-              ),
-              Container(
-                height: 4.0,
-                color: chapter.isStudying
-                    ? Colors.green
-                    : context.theme.primaryColorLight,
-              )
-            ],
-          ),
-        ),
-        SizedBox(
-          width: 8.0,
-        ),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                chapter.title,
-                //TODO style: context.textTheme.subtitle2,
-              ),
-              SizedBox(
-                height: 8.0,
-              ),
-              Text(
-                chapter.durationString,
-                style: StyleConst.textRegularGray,
-              )
-            ],
-          ),
-        ),
-        Icon(
-          Icons.more_vert,
-          color: Colors.white,
-        )
-      ]),
     );
   }
 }

@@ -17,10 +17,10 @@ class NetworkCourseMapper implements NetworkMapper<NetworkCourse, Course> {
         subtitle: type.subtitle,
         description: "${type.title} ${type.description}",
         instructorId: type.instructorId ?? "instructorId",
-        instructorName: type.instructorName ?? "instructorName",
-        instructorAvatar: type.instructorId ?? "",
+        instructorName: type.instructorName ?? "Name",
         totalMinutes: (type.totalHours * 60).toStringAsFixed(2),
         level: "Beginner",
+        promoVidUrl: type.promoVidUrl,
         updateAt:
             getIt.get<DateFormat>().format(DateTime.parse(type.updatedAt)));
   }

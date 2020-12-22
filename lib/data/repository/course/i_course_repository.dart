@@ -10,4 +10,6 @@ abstract class ICourseRepository {
   Future<Course> getDetailWithLesson(String courseId);
   Future<List<Course>> searchV2(String token, String keyword);
   Future<List<Course>> search(String keyword);
+  Future<bool> enrollCourse(String bearToken, String courseId);
+  Future<bool> likeCourse(String bearToken, String courseId);
 }

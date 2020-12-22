@@ -1,0 +1,286 @@
+{
+  "message": "OK",
+  "payload": {
+    "id": "f0dd6257-7cad-4c8b-9207-cdef05f2cdc0",
+    "title": "Microservices with Node JS and React",
+    "subtitle": "Build, deploy, and scale an E-Commerce app using Microservices built with Node, React, Docker and Kubernetes",
+    "price": 0,
+    "description": "Microservices are the number one solution for building and scaling out apps that are intended to grow.  Just one little issue: there are few resources online that delve into the most complex and nasty issues around them!  I built this course to fix that.  This course tackles every major issues around microservices head on. From challenges with data replication to confusing unordered event streams, every major challenge of building microservices is covered.",
+    "requirement": [
+      "Basic knowledge of Javascript and Express is required"
+    ],
+    "learnWhat": [
+      "Architect large, scalable apps using a collection of microservices",
+      "Solve concurrency issues in a distributed systems environment"
+    ],
+    "soldNumber": 6,
+    "ratedNumber": 1,
+    "videoNumber": 1,
+    "totalHours": 0.51,
+    "formalityPoint": 4,
+    "contentPoint": 4,
+    "presentationPoint": 5,
+    "imageUrl": "https://storage.googleapis.com/itedu-bucket/Courses/f0dd6257-7cad-4c8b-9207-cdef05f2cdc0/avatar/cd8d4963-a057-48db-b74c-1e0fa554a149.png",
+    "promoVidUrl": "https://storage.googleapis.com/itedu-bucket/Courses/f0dd6257-7cad-4c8b-9207-cdef05f2cdc0/promo/7d26a454-4f06-4869-b36c-b2fd910d0a18.mp4",
+    "status": "COMPLETED",
+    "isHidden": false,
+    "createdAt": "2020-12-20T18:41:02.576Z",
+    "updatedAt": "2020-12-22T02:44:52.581Z",
+    "instructorId": "c5d3ad42-a2c8-421f-902a-a2dc8dc256bc",
+    "typeUploadVideoLesson": 2,
+    "section": [
+      {
+        "id": "1c6084d1-7072-4826-9db7-c058313c0b55",
+        "courseId": "f0dd6257-7cad-4c8b-9207-cdef05f2cdc0",
+        "numberOrder": 1,
+        "name": "Introduce",
+        "isDeleted": false,
+        "createdAt": "2020-12-20T18:42:39.817Z",
+        "updatedAt": "2020-12-20T18:42:39.817Z",
+        "lesson": [
+          {
+            "id": "5ddde75c-e8d8-4a07-bdf8-dddda7d61dcd",
+            "courseId": "f0dd6257-7cad-4c8b-9207-cdef05f2cdc0",
+            "sectionId": "1c6084d1-7072-4826-9db7-c058313c0b55",
+            "numberOrder": 1,
+            "name": "Setup môi trường",
+            "content": null,
+            "videoName": null,
+            "videoUrl": "https://youtube.com/embed/oI3kmNnKjoc",
+            "captionName": null,
+            "hours": 0.51,
+            "isPreview": false,
+            "isPublic": true,
+            "isDeleted": false,
+            "createdAt": "2020-12-20T18:42:45.511Z",
+            "updatedAt": "2020-12-20T19:43:52.380Z"
+          }
+        ],
+        "sumHours": 0.51,
+        "sumLessonFinish": 0
+      }
+    ],
+    "ratings": {
+      "ratingList": [
+        {
+          "id": "e0ac2cb7-32f9-4439-a17c-f1893268c12d",
+          "userId": "8e69b0bc-b387-4958-8aa2-0431e0066f5c",
+          "courseId": "f0dd6257-7cad-4c8b-9207-cdef05f2cdc0",
+          "formalityPoint": 4,
+          "contentPoint": 4,
+          "presentationPoint": 5,
+          "content": "Noradomi",
+          "createdAt": "2020-12-20T19:58:57.141Z",
+          "updatedAt": "2020-12-20T20:00:16.260Z",
+          "user": {
+            "id": "8e69b0bc-b387-4958-8aa2-0431e0066f5c",
+            "email": "noradomifithcmus@gmail.com",
+            "password": "$2a$08$f3VcBm/4bi9/KXufbbZuae8m/pfeyW/nmHZB.aIPoI1rfGbG4JM2a",
+            "avatar": "https://lh3.googleusercontent.com/-H9KgoF-haIE/AAAAAAAAAAI/AAAAAAAAAAA/AMZuucnn5y_jRaRc7zW-DNi9GI0Rkl-5gQ/s96-c/photo.jpg",
+            "name": "Noradomi FIT_HCMUS",
+            "favoriteCategories": [],
+            "point": 0,
+            "phone": null,
+            "type": "INSTRUCTOR",
+            "facebookId": null,
+            "googleId": "107122007599367889506",
+            "isDeleted": false,
+            "isActivated": true,
+            "createdAt": "2020-11-24T13:02:54.456Z",
+            "updatedAt": "2020-12-10T13:15:34.526Z"
+          },
+          "averagePoint": 4.333333333333333
+        }
+      ],
+      "stars": [
+        0,
+        0,
+        0,
+        100,
+        0
+      ]
+    },
+    "averagePoint": "4.3",
+    "instructor": {
+      "id": "c5d3ad42-a2c8-421f-902a-a2dc8dc256bc",
+      "userId": "620db59b-12e5-416e-9f34-aab5d6608fde",
+      "name": "Trọng Võ",
+      "email": "fakermsi1999@gmail.com",
+      "avatar": "https://lh3.googleusercontent.com/-E9q5ALVgFQ0/AAAAAAAAAAI/AAAAAAAAAAA/AMZuucmuBWM9j8ZdDDFqnLgwqPoe2WRTbg/s96-c/photo.jpg",
+      "phone": "12321123213",
+      "major": "312312",
+      "intro": null,
+      "skills": [
+        "1212"
+      ],
+      "createdAt": "2020-12-17T14:01:03.518Z",
+      "updatedAt": "2020-12-20T18:39:53.103Z",
+      "totalCourse": 1,
+      "averagePoint": 4.333333333333333,
+      "countRating": 1,
+      "ratedNumber": 1,
+      "soldNumber": 6,
+      "courses": [
+        {
+          "id": "f0dd6257-7cad-4c8b-9207-cdef05f2cdc0",
+          "title": "Microservices with Node JS and React",
+          "subtitle": "Build, deploy, and scale an E-Commerce app using Microservices built with Node, React, Docker and Kubernetes",
+          "price": 0,
+          "description": "Microservices are the number one solution for building and scaling out apps that are intended to grow.  Just one little issue: there are few resources online that delve into the most complex and nasty issues around them!  I built this course to fix that.  This course tackles every major issues around microservices head on. From challenges with data replication to confusing unordered event streams, every major challenge of building microservices is covered.",
+          "requirement": [
+            "Basic knowledge of Javascript and Express is required"
+          ],
+          "learnWhat": [
+            "Architect large, scalable apps using a collection of microservices",
+            "Solve concurrency issues in a distributed systems environment"
+          ],
+          "soldNumber": 6,
+          "ratedNumber": 1,
+          "videoNumber": 1,
+          "totalHours": 0.51,
+          "formalityPoint": 4,
+          "contentPoint": 4,
+          "presentationPoint": 5,
+          "imageUrl": "https://storage.googleapis.com/itedu-bucket/Courses/f0dd6257-7cad-4c8b-9207-cdef05f2cdc0/avatar/cd8d4963-a057-48db-b74c-1e0fa554a149.png",
+          "promoVidUrl": "https://storage.googleapis.com/itedu-bucket/Courses/f0dd6257-7cad-4c8b-9207-cdef05f2cdc0/promo/7d26a454-4f06-4869-b36c-b2fd910d0a18.mp4",
+          "status": "COMPLETED",
+          "isHidden": false,
+          "createdAt": "2020-12-20T18:41:02.576Z",
+          "updatedAt": "2020-12-22T02:44:52.581Z",
+          "instructorId": "c5d3ad42-a2c8-421f-902a-a2dc8dc256bc",
+          "typeUploadVideoLesson": 2
+        }
+      ]
+    },
+    "coursesLikeCategory": [
+      {
+        "id": "7844e73e-f61b-4f1b-82ce-f98f120a7c46",
+        "title": "IT-EDU",
+        "subtitle": "Đồ án tốt nghiệp",
+        "price": 0,
+        "description": "Khóa học dành cho những sinh viên tốt nghiệp ITUS",
+        "requirement": [
+          "Không cần"
+        ],
+        "learnWhat": [
+          "Phát triển đồ án tốt nghiệp dựa trên đồ án cũ"
+        ],
+        "soldNumber": 13,
+        "ratedNumber": 5,
+        "videoNumber": 2,
+        "totalHours": 0.002,
+        "formalityPoint": 10000061.7,
+        "contentPoint": 10000061.7,
+        "presentationPoint": 10000061.6,
+        "imageUrl": "https://storage.googleapis.com/itedu-bucket/Courses/7844e73e-f61b-4f1b-82ce-f98f120a7c46/avatar/183dfa31-ddcd-4d49-843e-8887fc9f3aaa.jpg",
+        "promoVidUrl": "https://storage.googleapis.com/itedu-bucket/Courses/7844e73e-f61b-4f1b-82ce-f98f120a7c46/promo/6c45f15c-6165-4353-89a7-658a58934703.mp4",
+        "status": "COMPLETED",
+        "isHidden": false,
+        "isDeleted": false,
+        "createdAt": "2020-12-06T12:37:13.024Z",
+        "updatedAt": "2020-12-21T14:53:47.584Z",
+        "instructorId": "ee908711-a249-46f9-9aaa-48b10466a813",
+        "typeUploadVideoLesson": 1,
+        "instructorName": "Hải Lê",
+        "averagePoint": 10000061.666666666
+      },
+      {
+        "id": "b3b4bb79-3252-4cfe-88c4-3a4f17588b18",
+        "title": "Lập Trình Di Động IOS",
+        "subtitle": "Kiến thức căn bản giúp lập trình ứng dụng di động chạy tên IOS",
+        "price": 0,
+        "description": "Kiến thức căn bản giúp lập trình ứng dụng di động chạy tên IOS",
+        "requirement": [
+          "C/C++"
+        ],
+        "learnWhat": [
+          "Swift",
+          "Objective-C"
+        ],
+        "soldNumber": 5,
+        "ratedNumber": 1,
+        "videoNumber": 6,
+        "totalHours": 0.014,
+        "formalityPoint": 1,
+        "contentPoint": 1,
+        "presentationPoint": 1,
+        "imageUrl": "https://storage.googleapis.com/itedu-bucket/Courses/b3b4bb79-3252-4cfe-88c4-3a4f17588b18/avatar/34cb2a39-f7cc-4e1c-b758-92baecd264c5.jpg",
+        "promoVidUrl": "https://storage.googleapis.com/itedu-bucket/Courses/b3b4bb79-3252-4cfe-88c4-3a4f17588b18/promo/889bbc08-64e1-4dbc-8865-d40c0d00359a.mov",
+        "status": "COMPLETED",
+        "isHidden": false,
+        "isDeleted": false,
+        "createdAt": "2020-12-07T08:24:05.217Z",
+        "updatedAt": "2020-12-20T14:27:40.844Z",
+        "instructorId": "c9a2e9ce-2c02-4e00-bb21-0bc9d182307a",
+        "typeUploadVideoLesson": 1,
+        "instructorName": "Hai Pham",
+        "averagePoint": 1
+      },
+      {
+        "id": "4cd7daff-ba01-436c-922c-dbd5ffd6b11b",
+        "title": "Lập Trình Di Động Android",
+        "subtitle": "Kiến thức căn bản giúp lập trình ứng dụng di động với Android Studio",
+        "price": 0,
+        "description": "Kiến thức căn bản giúp lập trình ứng dụng di động với Android Studio",
+        "requirement": [
+          "Java Programming"
+        ],
+        "learnWhat": [
+          "Java Programming",
+          "Andoird "
+        ],
+        "soldNumber": 5,
+        "ratedNumber": 0,
+        "videoNumber": 5,
+        "totalHours": 0.012,
+        "formalityPoint": 0,
+        "contentPoint": 0,
+        "presentationPoint": 0,
+        "imageUrl": "https://storage.googleapis.com/itedu-bucket/Courses/4cd7daff-ba01-436c-922c-dbd5ffd6b11b/avatar/56de437f-a5ba-473c-85a7-49accf4c08b9.jpg",
+        "promoVidUrl": "https://storage.googleapis.com/itedu-bucket/Courses/4cd7daff-ba01-436c-922c-dbd5ffd6b11b/promo/220ab9b9-46cf-4de7-be11-36f8d4342a0e.mov",
+        "status": "COMPLETED",
+        "isHidden": false,
+        "isDeleted": false,
+        "createdAt": "2020-12-07T08:15:46.978Z",
+        "updatedAt": "2020-12-21T07:49:59.011Z",
+        "instructorId": "c9a2e9ce-2c02-4e00-bb21-0bc9d182307a",
+        "typeUploadVideoLesson": 1,
+        "instructorName": "Hai Pham",
+        "averagePoint": 0
+      },
+      {
+        "id": "a647a36d-1e3e-4a9c-bb7b-de091107b434",
+        "title": "Lập Trình Ứng Dụng Di Động Với React Native",
+        "subtitle": "Kiến thức căn bản giúp lập trình ứng dụng di động với React Native",
+        "price": 0,
+        "description": "Kiến thức căn bản giúp lập trình ứng dụng di động với React Native",
+        "requirement": [
+          "Javascript"
+        ],
+        "learnWhat": [
+          "Javascript",
+          "ReactJS",
+          "React Native"
+        ],
+        "soldNumber": 3,
+        "ratedNumber": 1,
+        "videoNumber": 4,
+        "totalHours": 0.014000000000000004,
+        "formalityPoint": 5,
+        "contentPoint": 5,
+        "presentationPoint": 5,
+        "imageUrl": "https://storage.googleapis.com/itedu-bucket/Courses/a647a36d-1e3e-4a9c-bb7b-de091107b434/avatar/cb07f5e0-6111-41f6-b28c-2bac69f2a434.png",
+        "promoVidUrl": "https://storage.googleapis.com/itedu-bucket/Courses/a647a36d-1e3e-4a9c-bb7b-de091107b434/promo/650ae10e-0df9-4953-b20f-861462f93ac0.mov",
+        "status": "COMPLETED",
+        "isHidden": false,
+        "isDeleted": false,
+        "createdAt": "2020-12-07T07:55:23.404Z",
+        "updatedAt": "2020-12-20T15:34:43.761Z",
+        "instructorId": "c9a2e9ce-2c02-4e00-bb21-0bc9d182307a",
+        "typeUploadVideoLesson": 1,
+        "instructorName": "Hai Pham",
+        "averagePoint": 5
+      }
+    ]
+  }
+}

@@ -7,9 +7,5 @@ class Path {
 
   const Path(this.title, this.image, this.courses);
 
-  static const List<Path> listPath = [
-    Path("Java", "images/java.png", Course.listCourse),
-    Path("Java Unit Testing", "images/java.png", Course.listCourse),
-    Path("Design Patterns in Java", "images/java.png", Course.listCourse),
-  ];
+  static const List<Path> listPath = [];
 }

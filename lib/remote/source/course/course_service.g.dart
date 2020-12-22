@@ -17,12 +17,55 @@ class _CourseService implements CourseService {
   String baseUrl;
 
   @override
-  Future<NetworkCourse> getCourseInfo(courseId) async {
+  Future<MessageResponse> enrollCourse(bearToken, courseId) async {
+    ArgumentError.checkNotNull(bearToken, 'bearToken');
     ArgumentError.checkNotNull(courseId, 'courseId');
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
+    final _data = {'courseId': courseId};
+    _data.removeWhere((k, v) => v == null);
+    final _result = await _dio.request<Map<String, dynamic>>(
+        '/payment/get-free-courses',
+        queryParameters: queryParameters,
+        options: RequestOptions(
+            method: 'POST',
+            headers: <String, dynamic>{r'Authorization': bearToken},
+            extra: _extra,
+            baseUrl: baseUrl),
+        data: _data);
+    final value = MessageResponse.fromJson(_result.data);
+    return value;
+  }
+
+  @override
+  Future<MessageResponse> likeCourse(bearToken, courseId) async {
+    ArgumentError.checkNotNull(bearToken, 'bearToken');
+    ArgumentError.checkNotNull(courseId, 'courseId');
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _data = {'courseId': courseId};
+    _data.removeWhere((k, v) => v == null);
+    final _result = await _dio.request<Map<String, dynamic>>(
+        '/user/like-course',
+        queryParameters: queryParameters,
+        options: RequestOptions(
+            method: 'POST',
+            headers: <String, dynamic>{r'Authorization': bearToken},
+            extra: _extra,
+            baseUrl: baseUrl),
+        data: _data);
+    final value = MessageResponse.fromJson(_result.data);
+    return value;
+  }
+
+  @override
+  Future<CourseDetailResponse> getCourseInfo(id) async {
+    ArgumentError.checkNotNull(id, 'id');
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result = await _dio.request<Map<String, dynamic>>('/user/intro-page',
+    final _result = await _dio.request<Map<String, dynamic>>(
+        '/course/get-course-detail/$id/null',
         queryParameters: queryParameters,
         options: RequestOptions(
             method: 'GET',
@@ -30,7 +73,7 @@ class _CourseService implements CourseService {
             extra: _extra,
             baseUrl: baseUrl),
         data: _data);
-    final value = NetworkCourse.fromJson(_result.data);
+    final value = CourseDetailResponse.fromJson(_result.data);
     return value;
   }
 
@@ -95,7 +138,7 @@ class _CourseService implements CourseService {
   }
 
   @override
-  Future<ListCourseResponse> getFavoritesCourses(bearToken) async {
+  Future<MyCourseResponse> getFavoritesCourses(bearToken) async {
     ArgumentError.checkNotNull(bearToken, 'bearToken');
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -109,12 +152,12 @@ class _CourseService implements CourseService {
             extra: _extra,
             baseUrl: baseUrl),
         data: _data);
-    final value = ListCourseResponse.fromJson(_result.data);
+    final value = MyCourseResponse.fromJson(_result.data);
     return value;
   }
 
   @override
-  Future<ListCourseResponse> getMyCourses(bearToken) async {
+  Future<MyCourseResponse> getMyCourses(bearToken) async {
     ArgumentError.checkNotNull(bearToken, 'bearToken');
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -128,7 +171,7 @@ class _CourseService implements CourseService {
             extra: _extra,
             baseUrl: baseUrl),
         data: _data);
-    final value = ListCourseResponse.fromJson(_result.data);
+    final value = MyCourseResponse.fromJson(_result.data);
     return value;
   }
 

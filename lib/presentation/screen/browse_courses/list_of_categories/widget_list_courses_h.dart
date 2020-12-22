@@ -7,11 +7,13 @@ import 'file:///C:/react-native/MyOnlineLearning/lib/presentation/screen/browse_
 class ListCourseHorizontal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Consumer<Category>(
-      builder: (_, category, __) => Container(
+    return Consumer<Category>(builder: (_, category, __) {
+      final bool isMyCourse = category.courses.isNotEmpty &&
+          category.courses[0].ratedNumber == null;
+      return Container(
         width: double.infinity,
         margin: const EdgeInsets.only(top: 16.0),
-        height: 240,
+        height: isMyCourse ? 200 : 240,
         child: category.courses.isNotEmpty
             ? ListView.builder(
                 scrollDirection: Axis.horizontal,
@@ -24,7 +26,7 @@ class ListCourseHorizontal extends StatelessWidget {
                   );
                 })
             : Center(child: Text("NO DATA")),
-      ),
-    );
+      );
+    });
   }
 }

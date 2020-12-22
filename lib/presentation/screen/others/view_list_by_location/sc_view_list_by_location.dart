@@ -47,7 +47,7 @@ class ViewListByLocationScreenState extends State<ViewListByLocationScreen> {
           ),
           Expanded(
             child: ListLessonByLocation(
-              courses: Course.listCourse,
+              courses: [],
             ),
           ),
         ],

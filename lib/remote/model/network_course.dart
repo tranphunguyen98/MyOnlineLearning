@@ -9,11 +9,12 @@ class NetworkCourse {
   final int ratedNumber;
   final double totalHours;
   final String imageUrl;
+  final String promoVidUrl;
   final String updatedAt;
   final String instructorId;
   final String instructorName;
 
-//<editor-fold desc="Data Methods" defaultstate="collapsed">
+  //<editor-fold desc="Data Methods" defaultstate="collapsed">
 
   const NetworkCourse({
     @required this.id,
@@ -24,6 +25,7 @@ class NetworkCourse {
     @required this.ratedNumber,
     @required this.totalHours,
     @required this.imageUrl,
+    @required this.promoVidUrl,
     @required this.updatedAt,
     @required this.instructorId,
     @required this.instructorName,
@@ -38,6 +40,7 @@ class NetworkCourse {
     int ratedNumber,
     double totalHours,
     String imageUrl,
+    String promoVidUrl,
     String updatedAt,
     String instructorId,
     String instructorName,
@@ -50,6 +53,7 @@ class NetworkCourse {
         (ratedNumber == null || identical(ratedNumber, this.ratedNumber)) &&
         (totalHours == null || identical(totalHours, this.totalHours)) &&
         (imageUrl == null || identical(imageUrl, this.imageUrl)) &&
+        (promoVidUrl == null || identical(promoVidUrl, this.promoVidUrl)) &&
         (updatedAt == null || identical(updatedAt, this.updatedAt)) &&
         (instructorId == null || identical(instructorId, this.instructorId)) &&
         (instructorName == null ||
@@ -57,7 +61,7 @@ class NetworkCourse {
       return this;
     }
 
-    return NetworkCourse(
+    return new NetworkCourse(
       id: id ?? this.id,
       title: title ?? this.title,
       subtitle: subtitle ?? this.subtitle,
@@ -66,6 +70,7 @@ class NetworkCourse {
       ratedNumber: ratedNumber ?? this.ratedNumber,
       totalHours: totalHours ?? this.totalHours,
       imageUrl: imageUrl ?? this.imageUrl,
+      promoVidUrl: promoVidUrl ?? this.promoVidUrl,
       updatedAt: updatedAt ?? this.updatedAt,
       instructorId: instructorId ?? this.instructorId,
       instructorName: instructorName ?? this.instructorName,
@@ -74,7 +79,7 @@ class NetworkCourse {
 
   @override
   String toString() {
-    return 'NetworkCourse{id: $id, title: $title, subtitle: $subtitle, price: $price, description: $description, ratedNumber: $ratedNumber, totalHours: $totalHours, imageUrl: $imageUrl, updatedAt: $updatedAt, instructorId: $instructorId, instructorName: $instructorName}';
+    return 'NetworkCourse{id: $id, title: $title, subtitle: $subtitle, price: $price, description: $description, ratedNumber: $ratedNumber, totalHours: $totalHours, imageUrl: $imageUrl, promoVidUrl: $promoVidUrl, updatedAt: $updatedAt, instructorId: $instructorId, instructorName: $instructorName}';
   }
 
   @override
@@ -90,6 +95,7 @@ class NetworkCourse {
           ratedNumber == other.ratedNumber &&
           totalHours == other.totalHours &&
           imageUrl == other.imageUrl &&
+          promoVidUrl == other.promoVidUrl &&
           updatedAt == other.updatedAt &&
           instructorId == other.instructorId &&
           instructorName == other.instructorName);
@@ -104,6 +110,7 @@ class NetworkCourse {
       ratedNumber.hashCode ^
       totalHours.hashCode ^
       imageUrl.hashCode ^
+      promoVidUrl.hashCode ^
       updatedAt.hashCode ^
       instructorId.hashCode ^
       instructorName.hashCode;
@@ -118,6 +125,7 @@ class NetworkCourse {
       ratedNumber: map['ratedNumber'] as int,
       totalHours: map['totalHours'] as double,
       imageUrl: map['imageUrl'] as String,
+      promoVidUrl: map['promoVidUrl'] as String,
       updatedAt: map['updatedAt'] as String,
       instructorId: map['instructorId'] as String,
       instructorName: map['instructor.user.name'] as String,
@@ -135,12 +143,13 @@ class NetworkCourse {
       'ratedNumber': this.ratedNumber,
       'totalHours': this.totalHours,
       'imageUrl': this.imageUrl,
+      'promoVidUrl': this.promoVidUrl,
       'updatedAt': this.updatedAt,
       'instructorId': this.instructorId,
-      'instructor.user.name': this.instructorName,
+      'instructorName': this.instructorName,
     } as Map<String, dynamic>;
   }
 
-//</editor-fold>
+  //</editor-fold>
 
 }

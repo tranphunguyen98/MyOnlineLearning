@@ -37,9 +37,12 @@ dependencies:
   # DI
   get_it: ^5.0.1
   injectable: ^1.0.5
+  # Video
+  video_player: ^1.0.1
   # Network
   retrofit:
   logger:
+
 
 dev_dependencies:
   flutter_test:
