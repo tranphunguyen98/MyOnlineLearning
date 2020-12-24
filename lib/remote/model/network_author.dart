@@ -1,24 +1,42 @@
-import 'package:json_annotation/json_annotation.dart';
 import 'package:my_online_learning/remote/model/network_course.dart';
 
-part 'network_author.g.dart';
-
-@JsonSerializable(nullable: false)
 class NetworkAuthor {
   final String id;
   final String name;
   final String avatar;
   final String intro;
+  final String numcourses;
   final List<NetworkCourse> courses;
 
-  const NetworkAuthor(
+  NetworkAuthor(
       {this.id = "",
       this.name = "",
       this.avatar = "",
       this.intro = "",
-      this.courses});
+      this.numcourses = "0",
+      this.courses = const []});
 
-  factory NetworkAuthor.fromJson(Map<String, dynamic> json) =>
-      _$NetworkAuthorFromJson(json);
-  Map<String, dynamic> toJson() => _$NetworkAuthorToJson(this);
+  factory NetworkAuthor.fromJson(Map<String, dynamic> json) => NetworkAuthor(
+        id: json['id'] as String,
+        name: json['name'] as String,
+        avatar: json['avatar'] as String,
+        intro: json['intro'] as String,
+        numcourses: json['numcourses'] as String,
+        courses: ((json['courses'] as List) ?? [])
+            .map((e) => NetworkCourse.fromJson(e as Map<String, dynamic>))
+            .toList(),
+      );
+
+  Map<String, dynamic> toJson() => <String, dynamic>{
+        'id': id,
+        'name': name,
+        'avatar': avatar,
+        'intro': intro,
+        'courses': courses,
+      };
+
+  @override
+  String toString() {
+    return 'NetworkAuthor{id: $id, name: $name, avatar: $avatar, intro: $intro, courses: $courses}';
+  }
 }

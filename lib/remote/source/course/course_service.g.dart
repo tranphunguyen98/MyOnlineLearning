@@ -221,21 +221,14 @@ class _CourseService implements CourseService {
   }
 
   @override
-  Future<ListCourseSearchResponse> search(keyword, opt, limit, offset) async {
+  Future<ListCourseSearchResponse> search(keyword, opt) async {
     ArgumentError.checkNotNull(keyword, 'keyword');
     ArgumentError.checkNotNull(opt, 'opt');
-    ArgumentError.checkNotNull(limit, 'limit');
-    ArgumentError.checkNotNull(offset, 'offset');
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _data = {
-      'keyword': keyword,
-      'opt': opt,
-      'limit': limit,
-      'offset': offset
-    };
+    final _data = {'keyword': keyword, 'opt': opt};
     _data.removeWhere((k, v) => v == null);
-    final _result = await _dio.request<Map<String, dynamic>>('/course/search',
+    final _result = await _dio.request<Map<String, dynamic>>('/course/searchV2',
         queryParameters: queryParameters,
         options: RequestOptions(
             method: 'POST',

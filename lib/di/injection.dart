@@ -15,6 +15,7 @@ import 'package:my_online_learning/data/repository/user/cache_user_data_source.d
 import 'package:my_online_learning/data/repository/user/i_user_repository.dart';
 import 'package:my_online_learning/data/repository/user/remote_user_data_source.dart';
 import 'package:my_online_learning/data/repository/user/user_repository_impl.dart';
+import 'package:my_online_learning/remote/mapper/network_author_mapper.dart';
 import 'package:my_online_learning/remote/mapper/network_category_mapper.dart';
 import 'package:my_online_learning/remote/mapper/network_course_detail_mapper.dart';
 import 'package:my_online_learning/remote/mapper/network_course_mapper.dart';
@@ -58,6 +59,7 @@ Future<void> configureDependencies() async {
       getIt.get<NetworkMyCourseMapper>(),
       getIt.get<NetworkCourseDetailMapper>(),
       getIt.get<NetworkCategoryMapper>(),
+      getIt.get<NetworkAuthorMapper>(),
     );
   });
 

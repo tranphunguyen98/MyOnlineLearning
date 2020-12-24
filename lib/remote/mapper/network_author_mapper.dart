@@ -10,11 +10,15 @@ class NetworkAuthorMapper implements NetworkMapper<NetworkAuthor, Author> {
   final courseMapper = getIt<NetworkCourseMapper>();
   @override
   Author mapFromRemote(NetworkAuthor type) {
+    print(type);
     return Author(
       id: type.id,
       avatar: type.avatar,
       name: type.name,
-      courses: type.courses.map((e) => courseMapper.mapFromRemote(e)).toList(),
+      courses: (type.courses ?? [])
+          .map((e) => courseMapper.mapFromRemote(e))
+          .toList(),
+      numberCourses: type.numcourses,
     );
   }
 

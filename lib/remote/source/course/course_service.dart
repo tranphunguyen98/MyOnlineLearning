@@ -54,11 +54,11 @@ abstract class CourseService {
     @Field() int offset,
   );
 
-  @POST("/course/search")
+  @POST("/course/searchV2")
   Future<ListCourseSearchResponse> search(
     @Field() String keyword,
     @Field() OptionSearch opt,
-    @Field() int limit,
-    @Field() int offset,
+    //@Field() int limit,
+    //@Field() int offset,
   );
 }

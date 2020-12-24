@@ -10,8 +10,8 @@ ListCourseSearchResponse _$ListCourseSearchResponseFromJson(
     Map<String, dynamic> json) {
   return ListCourseSearchResponse(
     message: json['message'] as String,
-    payload:
-        SearchCourseResult.fromJson(json['payload'] as Map<String, dynamic>),
+    payload: ListSearchCourseResult.fromJson(
+        json['payload'] as Map<String, dynamic>),
   );
 }
 

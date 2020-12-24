@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:my_online_learning/model/entity/author.dart';
+import 'package:my_online_learning/presentation/common_widgets/widget_circle_avatar_network.dart';
 import 'package:my_online_learning/presentation/screen/browse_courses/list_of_authors/sc_detail_author.dart';
 import 'package:my_online_learning/utils/extensions.dart';
 import 'package:my_online_learning/utils/my_const/my_const.dart';
@@ -19,17 +20,7 @@ class ItemAuthorSearch extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            width: 60.0,
-            height: 60.0,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              image: new DecorationImage(
-                fit: BoxFit.fill,
-                image: AssetImage(author.avatar),
-              ),
-            ),
-          ),
+          CircleAvatarNetwork(networkImageUrl: author.avatar, size: 60.0),
           SizedBox(
             width: 8.0,
           ),
@@ -47,7 +38,7 @@ class ItemAuthorSearch extends StatelessWidget {
                 height: 4.0,
               ),
               Text(
-                "${author.courses.length} courses",
+                "${author.numberCourses} courses",
                 style: StyleConst.textRegularGray,
               ),
             ],

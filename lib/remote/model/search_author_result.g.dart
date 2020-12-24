@@ -1,20 +1,20 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'search_course_result.dart';
+part of 'search_author_result.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-SearchCourseResult _$SearchCourseResultFromJson(Map<String, dynamic> json) {
-  return SearchCourseResult(
+SearchAuthorResult _$SearchAuthorResultFromJson(Map<String, dynamic> json) {
+  return SearchAuthorResult(
     data: (json['data'] as List)
-        .map((e) => NetworkCourse.fromJson(e as Map<String, dynamic>))
+        .map((e) => NetworkAuthor.fromJson(e as Map<String, dynamic>))
         .toList(),
   );
 }
 
-Map<String, dynamic> _$SearchCourseResultToJson(SearchCourseResult instance) =>
+Map<String, dynamic> _$SearchAuthorResultToJson(SearchAuthorResult instance) =>
     <String, dynamic>{
       'data': instance.data,
     };

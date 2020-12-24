@@ -5,10 +5,9 @@ part 'search_course_result.g.dart';
 
 @JsonSerializable(nullable: false)
 class SearchCourseResult {
-  final List<NetworkCourse> rows;
-  final int count;
+  final List<NetworkCourse> data;
 
-  SearchCourseResult({this.rows, this.count});
+  SearchCourseResult({this.data});
 
   factory SearchCourseResult.fromJson(Map<String, dynamic> json) =>
       _$SearchCourseResultFromJson(json);

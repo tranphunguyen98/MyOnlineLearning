@@ -1,3 +1,4 @@
+import 'package:my_online_learning/data/model/search_result.dart';
 import 'package:my_online_learning/model/entity/category.dart';
 import 'package:my_online_learning/model/entity/course.dart';
 import 'package:my_online_learning/remote/model/option_search.dart';
@@ -11,7 +12,7 @@ abstract class ICourseRepository {
   Future<Course> getCourseInfo(String courseId);
   Future<Course> getDetailWithLesson(String courseId);
   Future<List<Course>> searchV2(String token, String keyword);
-  Future<List<Course>> search(String keyword, OptionSearch optionSearch);
+  Future<SearchResult> search(String keyword, OptionSearch optionSearch);
   Future<bool> enrollCourse(String bearToken, String courseId);
   Future<bool> likeCourse(String bearToken, String courseId);
   Future<List<Category>> getCategories();

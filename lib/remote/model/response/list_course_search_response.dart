@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:my_online_learning/remote/model/list_search_course_result.dart';
 import 'package:my_online_learning/remote/model/search_course_result.dart';
 
 part 'list_course_search_response.g.dart';
@@ -6,7 +7,7 @@ part 'list_course_search_response.g.dart';
 @JsonSerializable(nullable: false)
 class ListCourseSearchResponse {
   final String message;
-  final SearchCourseResult payload;
+  final ListSearchCourseResult payload;
 
   ListCourseSearchResponse({this.message, this.payload});
 
