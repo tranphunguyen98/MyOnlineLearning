@@ -14,7 +14,7 @@ class ListAuthorHorizontal extends StatelessWidget {
         child: ListView.builder(
             scrollDirection: Axis.horizontal,
             shrinkWrap: true,
-            itemCount: listAuthor.length,
+            itemCount: listAuthor?.length ?? 0,
             itemBuilder: (BuildContext context, int index) {
               return Padding(
                 padding: const EdgeInsets.only(right: 16.0),

@@ -19,6 +19,7 @@ import '../remote/mapper/network_lesson_mapper.dart';
 import '../remote/mapper/network_my_course_mapper.dart';
 import '../remote/mapper/network_section_mapper.dart';
 import '../remote/mapper/network_user_mapper.dart';
+import '../remote/mapper/response_author_mapper.dart';
 
 /// adds generated dependencies
 /// to the provided [GetIt] instance
@@ -39,6 +40,7 @@ GetIt $initGetIt(
   gh.factory<NetworkMyCourseMapper>(() => NetworkMyCourseMapper());
   gh.factory<NetworkSectionMapper>(() => NetworkSectionMapper());
   gh.factory<NetworkUserMapper>(() => NetworkUserMapper());
+  gh.factory<ResponseAuthorMapper>(() => ResponseAuthorMapper());
   gh.factory<AuthorRepository>(
       () => AuthorRepository(get<AuthorService>(), get<NetworkAuthorMapper>()));
   return get;

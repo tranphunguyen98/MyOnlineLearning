@@ -8,6 +8,8 @@ part of 'item_author_response.dart';
 
 ItemAuthorResponse _$ItemAuthorResponseFromJson(Map<String, dynamic> json) {
   return ItemAuthorResponse(
+    name: json['name'] as String,
+    avatar: json['avatar'] as String,
     id: json['id'] as String,
   );
 }
@@ -15,4 +17,6 @@ ItemAuthorResponse _$ItemAuthorResponseFromJson(Map<String, dynamic> json) {
 Map<String, dynamic> _$ItemAuthorResponseToJson(ItemAuthorResponse instance) =>
     <String, dynamic>{
       'id': instance.id,
+      'name': instance.name,
+      'avatar': instance.avatar,
     };
