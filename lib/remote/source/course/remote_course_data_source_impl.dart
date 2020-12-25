@@ -4,6 +4,7 @@ import 'package:my_online_learning/data/repository/course/remote_course_data_sou
 import 'package:my_online_learning/model/entity/author.dart';
 import 'package:my_online_learning/model/entity/category.dart';
 import 'package:my_online_learning/model/entity/course.dart';
+import 'package:my_online_learning/model/entity/search_history_item.dart';
 import 'package:my_online_learning/remote/mapper/network_author_mapper.dart';
 import 'package:my_online_learning/remote/mapper/network_category_mapper.dart';
 import 'package:my_online_learning/remote/mapper/network_course_detail_mapper.dart';
@@ -130,10 +131,11 @@ class RemoteCourseDataSourceImplement implements RemoteCourseDataSource {
   }
 
   @override
-  Future<SearchResult> search(String keyword, OptionSearch optionSearch) async {
+  Future<SearchResult> search(
+      String bearToken, String keyword, OptionSearch optionSearch) async {
     try {
       final listCourseSearchResponse =
-          await _courseService.search(keyword, optionSearch);
+          await _courseService.search(bearToken, keyword, optionSearch);
       final resultCourses =
           listCourseSearchResponse.payload.courses.data ?? <NetworkCourse>[];
       final List<NetworkAuthor> resultAuthors =
@@ -199,6 +201,35 @@ class RemoteCourseDataSourceImplement implements RemoteCourseDataSource {
           .toList();
     } on DioError catch (e) {
       throw Exception(e.response.data["message"]);
+    }
+  }
+
+  @override
+  Future<bool> deleteSearchHistory(String bearToken, String id) async {
+    try {
+      final response = await _courseService.deleteSearchHistory(bearToken, id);
+      if (response.message == "OK") {
+        return true;
+      }
+    } on DioError catch (e) {
+      throw Exception(e.response.data["message"]);
+    }
+    return false;
+  }
+
+  @override
+  Future<List<SearchHistoryItem>> getSearchHistory(String bearToken) async {
+    print("bearToken ${bearToken}");
+    try {
+      final response = await _courseService.getSearchHistory(bearToken);
+      print(
+          "response Search: ${response.message} :: ${response.payload.data.length}");
+      return response.payload.data ?? [];
+    } on DioError catch (e) {
+      print("erorroror: ${e}");
+      throw Exception(e.response.data["message"]);
+    } catch (e) {
+      print("erorroror1: ${e}");
     }
   }
 }

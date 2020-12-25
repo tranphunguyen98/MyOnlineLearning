@@ -6,6 +6,7 @@ import 'package:my_online_learning/remote/model/response/list_course_response.da
 import 'package:my_online_learning/remote/model/response/list_course_search_response.dart';
 import 'package:my_online_learning/remote/model/response/my_course_response.dart';
 import 'package:my_online_learning/remote/model/response/response.dart';
+import 'package:my_online_learning/remote/model/response/search_history_response.dart';
 import 'package:retrofit/http.dart';
 import 'package:retrofit/retrofit.dart';
 
@@ -56,9 +57,18 @@ abstract class CourseService {
 
   @POST("/course/searchV2")
   Future<ListCourseSearchResponse> search(
+    @Field() String token,
     @Field() String keyword,
     @Field() OptionSearch opt,
     //@Field() int limit,
     //@Field() int offset,
   );
+
+  @GET("course/search-history")
+  Future<SearchHistoryResponse> getSearchHistory(
+      @Header("Authorization") String bearToken);
+
+  @GET("course/search-history/{id}")
+  Future<MessageResponse> deleteSearchHistory(
+      @Header("Authorization") String bearToken, @Path("id") String id);
 }

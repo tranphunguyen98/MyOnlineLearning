@@ -3,6 +3,7 @@ import 'package:my_online_learning/data/repository/course/i_course_repository.da
 import 'package:my_online_learning/data/repository/course/remote_course_data_source.dart';
 import 'package:my_online_learning/model/entity/category.dart';
 import 'package:my_online_learning/model/entity/course.dart';
+import 'package:my_online_learning/model/entity/search_history_item.dart';
 import 'package:my_online_learning/remote/model/option_search.dart';
 
 class CourseRepositoryImplement implements ICourseRepository {
@@ -36,8 +37,9 @@ class CourseRepositoryImplement implements ICourseRepository {
       _remoteDataSource.searchV2(token, keyword);
 
   @override
-  Future<SearchResult> search(String keyword, OptionSearch optionSearch) =>
-      _remoteDataSource.search(keyword, optionSearch);
+  Future<SearchResult> search(
+          String bearerToken, String keyword, OptionSearch optionSearch) =>
+      _remoteDataSource.search(bearerToken, keyword, optionSearch);
 
   @override
   Future<List<Course>> getMyCourses(String bearToken) =>
@@ -53,4 +55,12 @@ class CourseRepositoryImplement implements ICourseRepository {
 
   @override
   Future<List<Category>> getCategories() => _remoteDataSource.getCategories();
+
+  @override
+  Future<bool> deleteSearchHistory(String bearToken, String id) =>
+      _remoteDataSource.deleteSearchHistory(bearToken, id);
+
+  @override
+  Future<List<SearchHistoryItem>> getSearchHistory(String bearToken) =>
+      _remoteDataSource.getSearchHistory(bearToken);
 }

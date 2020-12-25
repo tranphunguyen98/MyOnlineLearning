@@ -30,7 +30,7 @@ class SearchResultModel extends ChangeNotifier {
     print("TOKEN::: $token");
     //if (token.isEmpty) {
     final searchResult = await getIt<ICourseRepository>()
-        .search(keyword, OptionSearch(category: []));
+        .search(token, keyword, OptionSearch(category: []));
 
     _data = SearchResult(
         searchResult.listCourse ?? [], searchResult.listAuthor ?? []);

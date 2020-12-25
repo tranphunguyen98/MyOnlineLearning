@@ -3,8 +3,16 @@ import 'package:my_online_learning/model/entity/search_history_item.dart';
 
 class SearchHistory extends ChangeNotifier {
   final List<SearchHistoryItem> _searchHistory = <SearchHistoryItem>[];
+  bool loadedDataFromServer = false;
 
   List<SearchHistoryItem> get data => _searchHistory;
+
+  void addAll(List<SearchHistoryItem> list) {
+    loadedDataFromServer = true;
+    _searchHistory.clear();
+    _searchHistory.addAll(list);
+    notifyListeners();
+  }
 
   void addItem(SearchHistoryItem searchHistoryItem) {
     _searchHistory.add(searchHistoryItem);

@@ -13,35 +13,36 @@ class WidgetSearchEditText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<SearchResultModel>(builder: (context, searchResult, child) {
-      return GestureDetector(
-        onTap: () {
-          context.read<SearchResultModel>().switchToSearchMode();
-        },
-        child: Container(
-          padding: const EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0),
-          color: context.theme.primaryColorDark,
-          child: TextField(
-            controller: _controller,
-            autofocus: true,
-            enabled: !searchResult.isGetResultMode(),
-            keyboardType: TextInputType.text,
-            textAlign: TextAlign.left,
-            style: context.textTheme.subtitle2,
-            onSubmitted: (data) {
-              _controller.clear();
-              final token = context.read<UserModel>().user.token ?? "";
-              searchResult.search(token, data);
-              context.read<SearchHistory>().addItem(SearchHistoryItem(data));
-            },
-            decoration: InputDecoration(
-              contentPadding: EdgeInsets.all(8.0),
-              hintText: "Search...",
-              hintStyle: context.textTheme.subtitle2,
-            ),
-          ),
-        ),
-      );
-    });
+    return Consumer2<UserModel, SearchResultModel>(
+        builder: (context, user, searchResult, child) => GestureDetector(
+              onTap: () {
+                searchResult.switchToSearchMode();
+              },
+              child: Container(
+                padding: const EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0),
+                color: context.theme.primaryColorDark,
+                child: TextField(
+                  controller: _controller,
+                  autofocus: true,
+                  enabled: !searchResult.isGetResultMode(),
+                  keyboardType: TextInputType.text,
+                  textAlign: TextAlign.left,
+                  style: context.textTheme.subtitle2,
+                  onSubmitted: (data) {
+                    _controller.clear();
+                    final token = context.read<UserModel>().user.token ?? "";
+                    searchResult.search(token, data);
+                    context
+                        .read<SearchHistory>()
+                        .addItem(SearchHistoryItem(content: data));
+                  },
+                  decoration: InputDecoration(
+                    contentPadding: EdgeInsets.all(8.0),
+                    hintText: "Search...",
+                    hintStyle: context.textTheme.subtitle2,
+                  ),
+                ),
+              ),
+            ));
   }
 }

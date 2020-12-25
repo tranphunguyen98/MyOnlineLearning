@@ -46,7 +46,7 @@ class CategoryDetailScreen extends StatelessWidget {
               ListSkill(),
               FutureBuilder<SearchResult>(
                 future: getIt<ICourseRepository>()
-                    .search("", OptionSearch(category: [category.id])),
+                    .search("", "", OptionSearch(category: [category.id])),
                 builder: (context, snapshot) => snapshot.hasData
                     ? Provider<Category>(
                         create: (context) => Category(
@@ -57,7 +57,7 @@ class CategoryDetailScreen extends StatelessWidget {
               ),
               FutureBuilder<SearchResult>(
                 future: getIt<ICourseRepository>()
-                    .search("", OptionSearch(category: [category.id])),
+                    .search("", "", OptionSearch(category: [category.id])),
                 builder: (context, snapshot) => snapshot.hasData
                     ? Provider<Category>(
                         create: (context) => Category(

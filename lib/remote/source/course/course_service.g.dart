@@ -221,12 +221,13 @@ class _CourseService implements CourseService {
   }
 
   @override
-  Future<ListCourseSearchResponse> search(keyword, opt) async {
+  Future<ListCourseSearchResponse> search(token, keyword, opt) async {
+    ArgumentError.checkNotNull(token, 'token');
     ArgumentError.checkNotNull(keyword, 'keyword');
     ArgumentError.checkNotNull(opt, 'opt');
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _data = {'keyword': keyword, 'opt': opt};
+    final _data = {'token': token, 'keyword': keyword, 'opt': opt};
     _data.removeWhere((k, v) => v == null);
     final _result = await _dio.request<Map<String, dynamic>>('/course/searchV2',
         queryParameters: queryParameters,
@@ -237,6 +238,45 @@ class _CourseService implements CourseService {
             baseUrl: baseUrl),
         data: _data);
     final value = ListCourseSearchResponse.fromJson(_result.data);
+    return value;
+  }
+
+  @override
+  Future<SearchHistoryResponse> getSearchHistory(bearToken) async {
+    ArgumentError.checkNotNull(bearToken, 'bearToken');
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.request<Map<String, dynamic>>(
+        'course/search-history',
+        queryParameters: queryParameters,
+        options: RequestOptions(
+            method: 'GET',
+            headers: <String, dynamic>{r'Authorization': bearToken},
+            extra: _extra,
+            baseUrl: baseUrl),
+        data: _data);
+    final value = SearchHistoryResponse.fromJson(_result.data);
+    return value;
+  }
+
+  @override
+  Future<MessageResponse> deleteSearchHistory(bearToken, id) async {
+    ArgumentError.checkNotNull(bearToken, 'bearToken');
+    ArgumentError.checkNotNull(id, 'id');
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.request<Map<String, dynamic>>(
+        'course/search-history/$id',
+        queryParameters: queryParameters,
+        options: RequestOptions(
+            method: 'GET',
+            headers: <String, dynamic>{r'Authorization': bearToken},
+            extra: _extra,
+            baseUrl: baseUrl),
+        data: _data);
+    final value = MessageResponse.fromJson(_result.data);
     return value;
   }
 }

@@ -9,6 +9,8 @@ class User {
   final String password;
   final String token;
 
+  String get bearerToken => "Bearer $token";
+
   const User({
     @required this.id,
     @required this.username,
