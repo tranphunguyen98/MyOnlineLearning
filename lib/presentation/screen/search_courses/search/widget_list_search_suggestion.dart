@@ -14,16 +14,14 @@ class ListSearchSuggestion extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer2<SearchHistory, UserModel>(
         builder: (context, searchHistory, userModel, child) {
-      if (userModel.user.token != null && !searchHistory.loadedDataFromServer) {
+      if (userModel.user.token != null) {
         return FutureBuilder<List<SearchHistoryItem>>(
             future: getIt<ICourseRepository>()
                 .getSearchHistory(userModel.user.bearerToken),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 print("data: ${snapshot.data.length}");
-                if (!searchHistory.loadedDataFromServer) {
-                  searchHistory.addAll(snapshot.data);
-                }
+                searchHistory.addAll(snapshot.data);
                 return Column(
                   children: [
                     SizedBox(
@@ -40,8 +38,16 @@ class ListSearchSuggestion extends StatelessWidget {
                         ),
                         Spacer(),
                         FlatButton(
-                          onPressed: () {
-                            searchHistory.removeAll();
+                          onPressed: () async {
+                            try {
+                              await searchHistory
+                                  .removeAll(userModel.user.bearerToken);
+                              Scaffold.of(context).showSnackBar(
+                                  SnackBar(content: Text("Delete Successful")));
+                            } catch (e) {
+                              Scaffold.of(context).showSnackBar(
+                                  SnackBar(content: Text("Delete Failed: $e")));
+                            }
                           },
                           child: Text(
                             "CLEAR ALL",
@@ -60,9 +66,8 @@ class ListSearchSuggestion extends StatelessWidget {
                           return Padding(
                             padding: const EdgeInsets.symmetric(
                                 vertical: 8.0, horizontal: 8.0),
-                            child: ItemSearchSuggestion(
-                              suggestion: searchHistory.data[index].content,
-                            ),
+                            child:
+                                ItemSearchSuggestion(searchHistory.data[index]),
                           );
                         },
                       ),
@@ -92,7 +97,7 @@ class ListSearchSuggestion extends StatelessWidget {
                 Spacer(),
                 FlatButton(
                   onPressed: () {
-                    searchHistory.removeAll();
+                    searchHistory.removeAll("");
                   },
                   child: Text(
                     "CLEAR ALL",
@@ -112,7 +117,7 @@ class ListSearchSuggestion extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(
                         vertical: 8.0, horizontal: 8.0),
                     child: ItemSearchSuggestion(
-                      suggestion: searchHistory.data[index].content,
+                      searchHistory.data[index],
                     ),
                   );
                 },

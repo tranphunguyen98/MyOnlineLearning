@@ -268,10 +268,10 @@ class _CourseService implements CourseService {
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.request<Map<String, dynamic>>(
-        'course/search-history/$id',
+        'course/delete-search-history/$id',
         queryParameters: queryParameters,
         options: RequestOptions(
-            method: 'GET',
+            method: 'DELETE',
             headers: <String, dynamic>{r'Authorization': bearToken},
             extra: _extra,
             baseUrl: baseUrl),

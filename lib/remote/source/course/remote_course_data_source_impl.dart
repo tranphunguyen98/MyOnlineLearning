@@ -230,6 +230,7 @@ class RemoteCourseDataSourceImplement implements RemoteCourseDataSource {
       throw Exception(e.response.data["message"]);
     } catch (e) {
       print("erorroror1: ${e}");
+      throw Exception(e.response.data["message"]);
     }
   }
 }

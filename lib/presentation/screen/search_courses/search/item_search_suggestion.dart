@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:my_online_learning/data/model/search_result_model.dart';
+import 'package:my_online_learning/model/entity/search_history_item.dart';
 import 'package:my_online_learning/utils/extensions.dart';
 import "package:provider/provider.dart";
 
 class ItemSearchSuggestion extends StatelessWidget {
-  final String suggestion;
-  const ItemSearchSuggestion({this.suggestion});
+  final SearchHistoryItem searchHistoryItem;
+  ItemSearchSuggestion(this.searchHistoryItem);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        context.read<SearchResultModel>().search("", suggestion);
+        context.read<SearchResultModel>().search("", searchHistoryItem.content);
       },
       child: Row(
         children: [
@@ -27,7 +28,7 @@ class ItemSearchSuggestion extends StatelessWidget {
           ),
           Expanded(
             child: Text(
-              suggestion,
+              searchHistoryItem.content,
               style: context.textTheme.subtitle2,
             ),
           ),

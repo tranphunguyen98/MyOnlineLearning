@@ -68,7 +68,7 @@ abstract class CourseService {
   Future<SearchHistoryResponse> getSearchHistory(
       @Header("Authorization") String bearToken);
 
-  @GET("course/search-history/{id}")
+  @DELETE("course/delete-search-history/{id}")
   Future<MessageResponse> deleteSearchHistory(
       @Header("Authorization") String bearToken, @Path("id") String id);
 }
