@@ -15,6 +15,7 @@ NetworkLesson _$NetworkLessonFromJson(Map<String, dynamic> json) {
     name: json['name'] as String,
     videoUrl: json['videoUrl'] as String,
     hours: (json['hours'] as num).toDouble(),
+    videoName: json['videoName'] as String,
   );
 }
 
@@ -25,6 +26,7 @@ Map<String, dynamic> _$NetworkLessonToJson(NetworkLesson instance) =>
       'sectionId': instance.sectionId,
       'numberOrder': instance.numberOrder,
       'name': instance.name,
+      'videoName': instance.videoName,
       'videoUrl': instance.videoUrl,
       'hours': instance.hours,
     };

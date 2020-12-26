@@ -39,6 +39,8 @@ dependencies:
   injectable: ^1.0.5
   # Video
   video_player: ^1.0.1
+  #Path:
+  path_provider: ^1.6.24
   # Network
   retrofit:
   logger:

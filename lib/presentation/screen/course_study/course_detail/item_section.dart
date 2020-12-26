@@ -5,8 +5,9 @@ import 'package:my_online_learning/utils/my_const/style_const.dart';
 
 class ItemChapter extends StatelessWidget {
   final Chapter chapter;
+  final Function(String, String) changeVideoLink;
 
-  const ItemChapter(this.chapter);
+  const ItemChapter(this.chapter, this.changeVideoLink);
 
   @override
   Widget build(BuildContext context) {
@@ -16,31 +17,38 @@ class ItemChapter extends StatelessWidget {
         SizedBox(
           height: 16.0,
         ),
-        ...chapter.listLesson.map((lesson) => Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.stop_circle,
-                    color: lesson.isStudying
-                        ? Colors.green
-                        : context.theme.primaryColorDark,
-                    size: 12,
-                  ),
-                  SizedBox(
-                    width: 8.0,
-                  ),
-                  Expanded(
-                      child: Text(
-                    lesson.name,
-                    style: context.textTheme.subtitle2,
-                  )),
-                  Text(
-                    lesson.durationString,
-                    style: StyleConst.textRegularGray,
-                  ),
-                ],
+        ...chapter.listLesson.map((lesson) => GestureDetector(
+              onTap: () {
+                print("video: ${lesson.videoUrl}");
+                //context.read<LinkVideoPlay>().link = lesson.videoUrl;
+                changeVideoLink(lesson.videoUrl, lesson.videoName);
+              },
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 16.0, vertical: 16.0),
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.stop_circle,
+                      color: lesson.isStudying
+                          ? Colors.green
+                          : context.theme.primaryColorDark,
+                      size: 12,
+                    ),
+                    SizedBox(
+                      width: 8.0,
+                    ),
+                    Expanded(
+                        child: Text(
+                      lesson.name,
+                      style: context.textTheme.subtitle2,
+                    )),
+                    Text(
+                      lesson.durationString,
+                      style: StyleConst.textRegularGray,
+                    ),
+                  ],
+                ),
               ),
             ))
       ],

@@ -7,6 +7,7 @@ import 'package:my_online_learning/remote/model/response/list_course_search_resp
 import 'package:my_online_learning/remote/model/response/my_course_response.dart';
 import 'package:my_online_learning/remote/model/response/response.dart';
 import 'package:my_online_learning/remote/model/response/search_history_response.dart';
+import 'package:my_online_learning/remote/model/response/video_response.dart';
 import 'package:retrofit/http.dart';
 import 'package:retrofit/retrofit.dart';
 
@@ -27,8 +28,9 @@ abstract class CourseService {
   Future<MessageResponse> likeCourse(
       @Header("Authorization") String bearToken, @Field() String courseId);
 
-  @GET("/course/get-course-detail/{id}/null")
-  Future<CourseDetailResponse> getCourseInfo(@Path("id") String id);
+  @GET("/course/get-course-detail/{id}/{idUser}")
+  Future<CourseDetailResponse> getCourseInfo(
+      @Path("id") String id, @Path("idUser") String idUser);
 
   @POST("/course/top-rate")
   Future<ListCourseResponse> getTopRate(@Field() int limit, @Field() int page);
@@ -71,4 +73,8 @@ abstract class CourseService {
   @DELETE("course/delete-search-history/{id}")
   Future<MessageResponse> deleteSearchHistory(
       @Header("Authorization") String bearToken, @Path("id") String id);
+
+  @GET("lesson/video/{idCourse}/{idLesson}")
+  Future<VideoResponse> getVideoInfo(@Header("Authorization") String bearToken,
+      @Path("idCourse") String idCourse, @Path("idLesson") String idLesson);
 }

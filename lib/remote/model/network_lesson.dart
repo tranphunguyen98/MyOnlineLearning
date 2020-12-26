@@ -9,18 +9,19 @@ class NetworkLesson {
   final String sectionId;
   final int numberOrder;
   final String name;
+  final String videoName;
   final String videoUrl;
   final double hours;
 
-  const NetworkLesson({
-    this.id,
-    this.courseId,
-    this.sectionId,
-    this.numberOrder,
-    this.name,
-    this.videoUrl,
-    this.hours,
-  });
+  const NetworkLesson(
+      {this.id,
+      this.courseId,
+      this.sectionId,
+      this.numberOrder,
+      this.name,
+      this.videoUrl,
+      this.hours,
+      this.videoName});
 
   factory NetworkLesson.fromJson(Map<String, dynamic> json) =>
       _$NetworkLessonFromJson(json);

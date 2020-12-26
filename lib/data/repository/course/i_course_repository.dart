@@ -15,7 +15,8 @@ abstract class ICourseRepository {
 
   Future<List<Course>> getMyCourses(String bearToken);
 
-  Future<Course> getCourseInfo(String courseId);
+  Future<Course> getCourseInfo(
+      String bearerToken, String courseId, String userId);
 
   Future<Course> getDetailWithLesson(String courseId);
 

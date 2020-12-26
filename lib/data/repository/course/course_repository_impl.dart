@@ -12,8 +12,9 @@ class CourseRepositoryImplement implements ICourseRepository {
   CourseRepositoryImplement(this._remoteDataSource);
 
   @override
-  Future<Course> getCourseInfo(String courseId) =>
-      _remoteDataSource.getCourseInfo(courseId);
+  Future<Course> getCourseInfo(
+          String bearerToken, String courseId, String userId) =>
+      _remoteDataSource.getCourseInfo(bearerToken, courseId, userId);
 
   @override
   Future<List<Course>> getFavoriteCourses(String bearToken) =>

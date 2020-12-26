@@ -16,6 +16,7 @@ class NetworkLessonMapper implements NetworkMapper<NetworkLesson, Lesson> {
       numberOrder: type.numberOrder,
       sectionId: type.sectionId,
       videoUrl: type.videoUrl,
+      videoName: type.videoName,
     );
   }
 

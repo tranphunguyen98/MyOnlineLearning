@@ -8,9 +8,6 @@ part of 'network_course_detail.dart';
 
 NetworkCourseDetail _$NetworkCourseDetailFromJson(Map<String, dynamic> json) {
   return NetworkCourseDetail(
-    section: (json['section'] as List)
-        .map((e) => NetworkChapter.fromJson(e as Map<String, dynamic>))
-        .toList(),
     id: json['id'] as String,
     title: json['title'] as String,
     subtitle: json['subtitle'] as String,
@@ -23,6 +20,9 @@ NetworkCourseDetail _$NetworkCourseDetailFromJson(Map<String, dynamic> json) {
     updatedAt: json['updatedAt'] as String,
     instructorId: json['instructorId'] as String,
     instructorName: json['instructorName'] as String,
+    section: (json['section'] as List)
+        .map((e) => NetworkChapter.fromJson(e as Map<String, dynamic>))
+        .toList(),
     instructor:
         NetworkAuthor.fromJson(json['instructor'] as Map<String, dynamic>),
   );

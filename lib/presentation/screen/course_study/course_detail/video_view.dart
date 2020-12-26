@@ -1,11 +1,15 @@
+import 'dart:io';
+
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:my_online_learning/model/entity/course.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:video_player/video_player.dart';
 
 class VideoView extends StatefulWidget {
-  final Course course;
+  final String link;
+  final String nameVideo;
 
-  const VideoView(this.course);
+  const VideoView(this.link, this.nameVideo);
 
   @override
   _VideoViewState createState() => _VideoViewState();
@@ -13,37 +17,81 @@ class VideoView extends StatefulWidget {
 
 class _VideoViewState extends State<VideoView> {
   VideoPlayerController _controller;
+  bool downloading = false;
+  String progressString = "0%";
+
+  Future<String> downloadFile(String url) async {
+    Dio dio = Dio();
+    try {
+      var dir = await getApplicationDocumentsDirectory();
+      print("pathhhhhhhhhhhh ${dir.path}");
+      final pathName = "${dir.path}/${widget.nameVideo}";
+      await dio.download(url, pathName, onReceiveProgress: (rec, total) {
+        // print("Rec: $rec , Total: $total");
+
+        setState(() {
+          downloading = true;
+          progressString = ((rec / total) * 100).toStringAsFixed(0) + "%";
+        });
+      });
+      return pathName;
+    } catch (e) {
+      print(e);
+    }
+
+    setState(() {
+      downloading = false;
+      progressString = "Completed";
+    });
+    print("Download completed");
+  }
 
   @override
   void initState() {
-    print("promo: ${widget.course.promoVidUrl}");
-
+    print("promo: ${widget.link}");
     super.initState();
-    _controller = VideoPlayerController.network(widget.course.promoVidUrl)
-      ..initialize().then((_) {
-        print("promo:load ${widget.course.promoVidUrl}");
+    if (widget.link.contains("Algorithm")) {
+      print("loveeeeeeeee");
+      downloadFile(widget.link).then((value) {
+        print("link file : $value");
+        File file = File(value);
+        _controller = VideoPlayerController.file(file)
+          ..initialize().then((_) {
+            print("promo:load ${widget.link}");
 
-        // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
-        setState(() {});
+            // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
+            setState(() {});
+          });
       });
+    } else {
+      _controller = VideoPlayerController.network(widget.link)
+        ..initialize().then((_) {
+          print("promo:load ${widget.link}");
+
+          // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
+          setState(() {});
+        });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        setState(() {
-          _controller.value.isPlaying
-              ? _controller.pause()
-              : _controller.play();
-        });
+        if (_controller?.value != null) {
+          setState(() {
+            _controller.value.isPlaying
+                ? _controller.pause()
+                : _controller.play();
+          });
+        }
       },
       child: SizedBox(
         height: 240.0,
         width: double.infinity,
         child: Stack(
           children: [
-            if (_controller.value.initialized)
+            if (_controller?.value != null && _controller.value.initialized)
               // AspectRatio(
               //   aspectRatio: _controller.value.aspectRatio,
               //   child: VideoPlayer(_controller),
@@ -61,9 +109,12 @@ class _VideoViewState extends State<VideoView> {
               child: Align(
                   alignment: Alignment.center,
                   child: Icon(
-                    _controller.value.isPlaying
+                    //  Icons.play_circle_outline,
+                    _controller?.value == null
                         ? Icons.pause_circle_outline
-                        : Icons.play_circle_outline,
+                        : _controller.value.isPlaying
+                            ? Icons.pause_circle_outline
+                            : Icons.play_circle_outline,
                     size: 64.0,
                     color: Colors.white,
                   )),

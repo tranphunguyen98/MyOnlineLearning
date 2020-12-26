@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:my_online_learning/data/model/user.dart';
+import 'package:my_online_learning/data/model/user_model.dart';
 import 'package:my_online_learning/data/repository/course/i_course_repository.dart';
 import 'package:my_online_learning/di/injection.dart';
 import 'package:my_online_learning/model/entity/course.dart';
@@ -9,6 +11,7 @@ import 'package:my_online_learning/presentation/screen/course_study/course_detai
 import 'package:my_online_learning/presentation/screen/course_study/course_detail/video_view.dart';
 import 'package:my_online_learning/utils/extensions.dart';
 import 'package:my_online_learning/utils/my_const/my_const.dart';
+import 'package:provider/provider.dart';
 
 import 'WidgetButtonIcon.dart';
 import 'content_of_course.dart';
@@ -24,49 +27,96 @@ class CourseDetailScreen extends StatefulWidget {
 
 class _CourseDetailScreenState extends State<CourseDetailScreen> {
   Course course;
+  String linkVideo;
+  String videoName = "";
+  bool isLoaded = false;
+
+  void changeLinkVideo(String link, String _videoName) {
+    print("Changeeeee");
+    setState(() {
+      linkVideo = link;
+      videoName = _videoName;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<Course>(
-        future: getIt<ICourseRepository>().getCourseInfo(widget.courseId),
-        builder: (_, courseSnapshot) {
-          if (courseSnapshot.hasData) {
-            course = courseSnapshot.data;
-            return Scaffold(
-              backgroundColor: context.theme.backgroundColor,
-              body: Column(
-                children: [
-                  VideoView(
-                    course,
-                  ),
-                  Expanded(
-                    child: ListView(
-                      children: [
-                        _buildHeaderInfo(),
-                        RowFunction(course),
-                        _buildDescription(),
-                        //_buildButtonFunction(),
-                        _buildContentHeader(),
-                        SizedBox(height: 16.0),
-                        ContentOfCourse(
-                          course: course,
-                        ),
-                      ],
+    final user = context.select<UserModel, User>((value) => value.user);
+    if (!isLoaded) {
+      return FutureBuilder<Course>(
+          future: getIt<ICourseRepository>().getCourseInfo(
+              user?.bearerToken ?? "", widget.courseId, user?.id ?? ""),
+          builder: (_, courseSnapshot) {
+            if (courseSnapshot.hasData) {
+              print("isLoadede $isLoaded");
+              course = courseSnapshot.data;
+              if (!isLoaded) {
+                linkVideo = course.promoVidUrl;
+                videoName = "";
+                isLoaded = true;
+              }
+              // return ChangeNotifierProvider<LinkVideoPlay>(
+              //   create: (context) {
+              //     return LinkVideoPlay(course.promoVidUrl);
+              //   },
+              //   child:
+              // );
+              return Scaffold(
+                backgroundColor: context.theme.backgroundColor,
+                body: Column(
+                  children: [
+                    VideoView(linkVideo, videoName),
+                    Expanded(
+                      child: ListView(
+                        children: [
+                          _buildHeaderInfo(),
+                          RowFunction(course),
+                          _buildDescription(),
+                          //_buildButtonFunction(),
+                          _buildContentHeader(),
+                          SizedBox(height: 16.0),
+                          ContentOfCourse(
+                              course: course, changeVideoLink: changeLinkVideo),
+                        ],
+                      ),
                     ),
-                  ),
+                  ],
+                ),
+              );
+            } else if (courseSnapshot.hasError) {
+              return Center(
+                child: Text(courseSnapshot.error.toString()),
+              );
+            } else {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+          });
+    } else {
+      return Scaffold(
+        backgroundColor: context.theme.backgroundColor,
+        body: Column(
+          children: [
+            VideoView(linkVideo, videoName),
+            Expanded(
+              child: ListView(
+                children: [
+                  _buildHeaderInfo(),
+                  RowFunction(course),
+                  _buildDescription(),
+                  //_buildButtonFunction(),
+                  _buildContentHeader(),
+                  SizedBox(height: 16.0),
+                  ContentOfCourse(
+                      course: course, changeVideoLink: changeLinkVideo),
                 ],
               ),
-            );
-          } else if (courseSnapshot.hasError) {
-            return Center(
-              child: Text(courseSnapshot.error.toString()),
-            );
-          } else {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-        });
+            ),
+          ],
+        ),
+      );
+    }
   }
 
   Widget _buildItemAuthor() {
@@ -162,7 +212,7 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
 
   Widget _buildRating() {
     return RatingBar(
-      initialRating: course.ratedNumber,
+      initialRating: course.ratedNumber ?? 0,
       minRating: 1,
       direction: Axis.horizontal,
       allowHalfRating: true,

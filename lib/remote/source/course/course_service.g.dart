@@ -76,13 +76,14 @@ class _CourseService implements CourseService {
   }
 
   @override
-  Future<CourseDetailResponse> getCourseInfo(id) async {
+  Future<CourseDetailResponse> getCourseInfo(id, idUser) async {
     ArgumentError.checkNotNull(id, 'id');
+    ArgumentError.checkNotNull(idUser, 'idUser');
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.request<Map<String, dynamic>>(
-        '/course/get-course-detail/$id/null',
+        '/course/get-course-detail/$id/$idUser',
         queryParameters: queryParameters,
         options: RequestOptions(
             method: 'GET',
@@ -277,6 +278,27 @@ class _CourseService implements CourseService {
             baseUrl: baseUrl),
         data: _data);
     final value = MessageResponse.fromJson(_result.data);
+    return value;
+  }
+
+  @override
+  Future<VideoResponse> getVideoInfo(bearToken, idCourse, idLesson) async {
+    ArgumentError.checkNotNull(bearToken, 'bearToken');
+    ArgumentError.checkNotNull(idCourse, 'idCourse');
+    ArgumentError.checkNotNull(idLesson, 'idLesson');
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.request<Map<String, dynamic>>(
+        'lesson/video/$idCourse/$idLesson',
+        queryParameters: queryParameters,
+        options: RequestOptions(
+            method: 'GET',
+            headers: <String, dynamic>{r'Authorization': bearToken},
+            extra: _extra,
+            baseUrl: baseUrl),
+        data: _data);
+    final value = VideoResponse.fromJson(_result.data);
     return value;
   }
 }

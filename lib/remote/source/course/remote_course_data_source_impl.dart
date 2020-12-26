@@ -3,7 +3,9 @@ import 'package:my_online_learning/data/model/search_result.dart';
 import 'package:my_online_learning/data/repository/course/remote_course_data_source.dart';
 import 'package:my_online_learning/model/entity/author.dart';
 import 'package:my_online_learning/model/entity/category.dart';
+import 'package:my_online_learning/model/entity/chapter.dart';
 import 'package:my_online_learning/model/entity/course.dart';
+import 'package:my_online_learning/model/entity/lesson.dart';
 import 'package:my_online_learning/model/entity/search_history_item.dart';
 import 'package:my_online_learning/remote/mapper/network_author_mapper.dart';
 import 'package:my_online_learning/remote/mapper/network_category_mapper.dart';
@@ -13,6 +15,7 @@ import 'package:my_online_learning/remote/mapper/network_my_course_mapper.dart';
 import 'package:my_online_learning/remote/model/network_author.dart';
 import 'package:my_online_learning/remote/model/network_course.dart';
 import 'package:my_online_learning/remote/model/option_search.dart';
+import 'package:my_online_learning/remote/model/response/course_detail_response.dart';
 
 import 'course_service.dart';
 
@@ -33,11 +36,50 @@ class RemoteCourseDataSourceImplement implements RemoteCourseDataSource {
       this._mapperAuthor);
 
   @override
-  Future<Course> getCourseInfo(String courseId) async {
+  Future<Course> getCourseInfo(
+      String bearerToken, String courseId, String userId) async {
     try {
-      final courseResponse = await _courseService.getCourseInfo(courseId);
-      print('chapter ${courseResponse.payload?.section?.length ?? 10000}');
-      return _mapperCourseDetail.mapFromRemote(courseResponse.payload);
+      CourseDetailResponse courseResponse;
+      if (userId.isEmpty) {
+        courseResponse = await _courseService.getCourseInfo(courseId, "null");
+      } else {
+        courseResponse = await _courseService.getCourseInfo(courseId, userId);
+      }
+
+      // print('chapter ${courseResponse.payload?.section?.length ?? 10000}');
+      final courseDetail =
+          _mapperCourseDetail.mapFromRemote(courseResponse.payload);
+      // print('courseDetail: ${courseDetail.toString()}');
+      print("bearer $bearerToken");
+      if (bearerToken.length > 15) {
+        final newListChapters = <Chapter>[];
+
+        for (final chapter in courseDetail.chapters) {
+          // print('courseDetail: ${chapter.toString()}');
+          final newListLesson = <Lesson>[];
+          for (final lesson in chapter.listLesson) {
+            // print("lesson1: ${lesson.toString()}");
+            final infoVideoResponse = await _courseService.getVideoInfo(
+                bearerToken, courseId, lesson.id);
+            // print("response: ${infoVideoResponse.toString}");
+            final lessonWithVideoInfo = lesson.copyWith(
+              videoUrl: infoVideoResponse.payload.videoUrl,
+              isFinish: infoVideoResponse.payload.isFinish,
+            );
+            newListLesson.add(lessonWithVideoInfo);
+            // print("lesson: ${lessonWithVideoInfo.toString()}");
+          }
+          final newChapter = chapter.copyWith(listLesson: newListLesson);
+          newListChapters.add(newChapter);
+          // chapter.listLesson.map((lesson) async {
+          //
+          //   return lessonWithVideoInfo;
+          // });
+        }
+        return courseDetail.copyWith(chapters: newListChapters);
+      }
+
+      return courseDetail;
     } on DioError catch (e) {
       print('error: $e');
       throw Exception(e.response.data["message"]);

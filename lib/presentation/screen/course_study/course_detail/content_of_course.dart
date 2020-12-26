@@ -4,7 +4,9 @@ import 'package:my_online_learning/presentation/screen/course_study/course_detai
 
 class ContentOfCourse extends StatelessWidget {
   final Course course;
-  const ContentOfCourse({Key key, this.course}) : super(key: key);
+  final Function(String, String) changeVideoLink;
+  const ContentOfCourse({Key key, this.course, this.changeVideoLink})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +19,7 @@ class ContentOfCourse extends StatelessWidget {
         physics: ClampingScrollPhysics(),
         itemCount: course.chapters.length,
         itemBuilder: (context, index) {
-          return ItemChapter(course.chapters[index]);
+          return ItemChapter(course.chapters[index], changeVideoLink);
         },
         separatorBuilder: (BuildContext context, int index) {
           return Padding(
