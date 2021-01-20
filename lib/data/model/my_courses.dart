@@ -48,4 +48,14 @@ class MyCourses extends ChangeNotifier {
   }
 
   bool contain(Course course) => _listcourses.contains(course);
+
+  bool containId(String courseId) {
+    final index = _listcourses.indexWhere((element) => element.id == courseId);
+    print("index 11111111111 $index");
+    if (index >= 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }

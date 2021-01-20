@@ -64,4 +64,8 @@ class CourseRepositoryImplement implements ICourseRepository {
   @override
   Future<List<SearchHistoryItem>> getSearchHistory(String bearToken) =>
       _remoteDataSource.getSearchHistory(bearToken);
+
+  @override
+  Future<List<Course>> getRecommendCourses(String id) =>
+      _remoteDataSource.getRecommendCourses(id);
 }

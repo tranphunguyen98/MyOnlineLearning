@@ -3,6 +3,7 @@ import 'package:my_online_learning/data/model/user.dart';
 import 'package:my_online_learning/data/repository/authentication/authentication_data_source.dart';
 import 'package:my_online_learning/remote/mapper/network_user_mapper.dart';
 import 'package:my_online_learning/remote/model/response/response.dart';
+import 'package:my_online_learning/remote/model/user_google.dart';
 
 import 'authentication_service.dart';
 
@@ -48,5 +49,13 @@ class AuthenticationDataSourceImplement implements AuthenticationDataSource {
       _authenticationService.signUp(_mapper.mapToRemote(user));
 
   @override
-  Future<bool> signInWithGoogle() => _authenticationService.signInWithGoogle();
+  Future<bool> signInWithGoogle(UserGoogle userGoogle) async {
+    try {
+      final messageResponse =
+          await _authenticationService.signInWithGoogle(userGoogle);
+      return true;
+    } on DioError catch (e) {
+      throw Exception(e.response.data["message"]);
+    }
+  }
 }

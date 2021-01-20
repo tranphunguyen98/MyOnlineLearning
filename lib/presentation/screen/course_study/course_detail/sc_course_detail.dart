@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:my_online_learning/data/model/my_courses.dart';
 import 'package:my_online_learning/data/model/user.dart';
 import 'package:my_online_learning/data/model/user_model.dart';
 import 'package:my_online_learning/data/repository/course/i_course_repository.dart';
@@ -43,56 +44,63 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
   Widget build(BuildContext context) {
     final user = context.select<UserModel, User>((value) => value.user);
     if (!isLoaded) {
-      return FutureBuilder<Course>(
-          future: getIt<ICourseRepository>().getCourseInfo(
-              user?.bearerToken ?? "", widget.courseId, user?.id ?? ""),
-          builder: (_, courseSnapshot) {
-            if (courseSnapshot.hasData) {
-              print("isLoadede $isLoaded");
-              course = courseSnapshot.data;
-              if (!isLoaded) {
-                linkVideo = course.promoVidUrl;
-                videoName = "";
-                isLoaded = true;
-              }
-              // return ChangeNotifierProvider<LinkVideoPlay>(
-              //   create: (context) {
-              //     return LinkVideoPlay(course.promoVidUrl);
-              //   },
-              //   child:
-              // );
-              return Scaffold(
-                backgroundColor: context.theme.backgroundColor,
-                body: Column(
-                  children: [
-                    VideoView(linkVideo, videoName),
-                    Expanded(
-                      child: ListView(
-                        children: [
-                          _buildHeaderInfo(),
-                          RowFunction(course),
-                          _buildDescription(),
-                          //_buildButtonFunction(),
-                          _buildContentHeader(),
-                          SizedBox(height: 16.0),
-                          ContentOfCourse(
-                              course: course, changeVideoLink: changeLinkVideo),
-                        ],
+      return Consumer<MyCourses>(
+        builder: (context, myCourses, child) => FutureBuilder<Course>(
+            future: getIt<ICourseRepository>().getCourseInfo(
+                myCourses.containId(widget.courseId) ? user?.bearerToken : "",
+                widget.courseId,
+                myCourses.containId(widget.courseId) && user?.id != null
+                    ? user.id
+                    : "null"),
+            builder: (_, courseSnapshot) {
+              if (courseSnapshot.hasData) {
+                print("isLoadede $isLoaded");
+                course = courseSnapshot.data;
+                if (!isLoaded) {
+                  linkVideo = course.promoVidUrl;
+                  videoName = "";
+                  isLoaded = true;
+                }
+                // return ChangeNotifierProvider<LinkVideoPlay>(
+                //   create: (context) {
+                //     return LinkVideoPlay(course.promoVidUrl);
+                //   },
+                //   child:
+                // );
+                return Scaffold(
+                  backgroundColor: context.theme.backgroundColor,
+                  body: Column(
+                    children: [
+                      VideoView(linkVideo, videoName),
+                      Expanded(
+                        child: ListView(
+                          children: [
+                            _buildHeaderInfo(),
+                            RowFunction(course),
+                            _buildDescription(),
+                            //_buildButtonFunction(),
+                            _buildContentHeader(),
+                            SizedBox(height: 16.0),
+                            ContentOfCourse(
+                                course: course,
+                                changeVideoLink: changeLinkVideo),
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-              );
-            } else if (courseSnapshot.hasError) {
-              return Center(
-                child: Text(courseSnapshot.error.toString()),
-              );
-            } else {
-              return Center(
-                child: CircularProgressIndicator(),
-              );
-            }
-          });
+                    ],
+                  ),
+                );
+              } else if (courseSnapshot.hasError) {
+                return Center(
+                  child: Text(courseSnapshot.error.toString()),
+                );
+              } else {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+            }),
+      );
     } else {
       return Scaffold(
         backgroundColor: context.theme.backgroundColor,

@@ -37,19 +37,23 @@ class _AuthenticationService implements AuthenticationService {
   }
 
   @override
-  Future<bool> signInWithGoogle() async {
+  Future<MessageResponse> signInWithGoogle(userGoogle) async {
+    ArgumentError.checkNotNull(userGoogle, 'userGoogle');
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result = await _dio.request<bool>('/user/intro-page',
+    _data.addAll(userGoogle?.toJson() ?? <String, dynamic>{});
+    _data.removeWhere((k, v) => v == null);
+    final _result = await _dio.request<Map<String, dynamic>>(
+        '/user/login-google-mobile',
         queryParameters: queryParameters,
         options: RequestOptions(
-            method: 'GET',
+            method: 'POST',
             headers: <String, dynamic>{},
             extra: _extra,
             baseUrl: baseUrl),
         data: _data);
-    final value = _result.data;
+    final value = MessageResponse.fromJson(_result.data);
     return value;
   }
 

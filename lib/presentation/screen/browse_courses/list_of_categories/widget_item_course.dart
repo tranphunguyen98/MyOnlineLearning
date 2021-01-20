@@ -33,16 +33,39 @@ class ItemCourse extends StatelessWidget {
         width: 190,
         child: Column(
           children: [
-            Container(
-              width: double.infinity,
-              height: 120.0,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  fit: BoxFit.fill,
-                  image: NetworkImage(course.imageUrl),
+            Stack(children: [
+              Container(
+                width: double.infinity,
+                height: 120.0,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    fit: BoxFit.fill,
+                    image: NetworkImage(course.imageUrl),
+                  ),
                 ),
               ),
-            ),
+              Positioned(
+                right: 8.0,
+                top: 0.0,
+                child: PopupMenuButton<DropdownChoices>(
+                  icon: Icon(
+                    Icons.more_vert,
+                  ),
+                  onSelected: (DropdownChoices choice) {
+                    choice.onPressed(context);
+                  },
+                  elevation: 6,
+                  itemBuilder: (BuildContext context) {
+                    return dropdownChoices.map((DropdownChoices choice) {
+                      return PopupMenuItem<DropdownChoices>(
+                        value: choice,
+                        child: Text(choice.title),
+                      );
+                    }).toList();
+                  },
+                ),
+              ),
+            ]),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: WidgetColumnInfoCourse(

@@ -111,7 +111,7 @@ class _VideoViewState extends State<VideoView> {
                   child: Icon(
                     //  Icons.play_circle_outline,
                     _controller?.value == null
-                        ? Icons.pause_circle_outline
+                        ? Icons.hourglass_empty
                         : _controller.value.isPlaying
                             ? Icons.pause_circle_outline
                             : Icons.play_circle_outline,

@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:my_online_learning/remote/model/network_user.dart';
 import 'package:my_online_learning/remote/model/response/response.dart';
 import 'package:my_online_learning/remote/model/response/user_response.dart';
+import 'package:my_online_learning/remote/model/user_google.dart';
 import 'package:retrofit/http.dart';
 import 'package:retrofit/retrofit.dart';
 
@@ -15,8 +16,8 @@ abstract class AuthenticationService {
   @POST("/user/login")
   Future<UserResponse> signIn(@Field() String email, @Field() String password);
 
-  @GET("/user/intro-page")
-  Future<bool> signInWithGoogle();
+  @POST("/user/login-google-mobile")
+  Future<MessageResponse> signInWithGoogle(@Body() UserGoogle userGoogle);
 
   @POST("/user/register")
   Future<MessageResponse> signUp(@Body() NetworkUser user);

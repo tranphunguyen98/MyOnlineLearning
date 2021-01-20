@@ -2,6 +2,7 @@ import 'package:my_online_learning/data/model/user.dart';
 import 'package:my_online_learning/data/repository/authentication/authentication_data_source.dart';
 import 'package:my_online_learning/data/repository/authentication/i_authentication_repository.dart';
 import 'package:my_online_learning/remote/model/response/response.dart';
+import 'package:my_online_learning/remote/model/user_google.dart';
 
 class AuthenticationRepositoryImplement implements IAuthenticationRepository {
   final AuthenticationDataSource _authenticationDataSource;
@@ -33,7 +34,7 @@ class AuthenticationRepositoryImplement implements IAuthenticationRepository {
       _authenticationDataSource.signUp(user);
 
   @override
-  Future<bool> signInWithGoogle() {
-    return _authenticationDataSource.signInWithGoogle();
+  Future<bool> signInWithGoogle(UserGoogle userGoogle) {
+    return _authenticationDataSource.signInWithGoogle(userGoogle);
   }
 }

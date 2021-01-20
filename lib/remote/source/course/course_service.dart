@@ -77,4 +77,11 @@ abstract class CourseService {
   @GET("lesson/video/{idCourse}/{idLesson}")
   Future<VideoResponse> getVideoInfo(@Header("Authorization") String bearToken,
       @Path("idCourse") String idCourse, @Path("idLesson") String idLesson);
+
+  @GET("user/recommend-course/{id}/{limit}/{offset}")
+  Future<ListCourseResponse> getRecommendCourses(
+    @Path("id") String id,
+    @Path("limit") int limit,
+    @Path("offset") int offset,
+  );
 }

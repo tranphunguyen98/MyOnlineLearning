@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "542897629111",
+    "project_id": "myonlinelearning-d424b",
+    "storage_bucket": "myonlinelearning-d424b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:542897629111:android:43420ec2f4db38c102aa32",
+        "android_client_info": {
+          "package_name": "phunguyen.my_online_learning"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "542897629111-0emi5g77h3j3pgssjgteagskpbeo80qi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "phunguyen.my_online_learning",
+            "certificate_hash": "8cc571207dd6b11c9bb7561bcf8baddcb0aa2823"
+          }
+        },
+        {
+          "client_id": "542897629111-ct0l7nqdoitoteruv63119qttdao3n07.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDN0wIc7-B0yjutVd73R5AZxEcPVUad6OM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "542897629111-ct0l7nqdoitoteruv63119qttdao3n07.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

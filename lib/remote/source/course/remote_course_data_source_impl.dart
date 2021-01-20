@@ -275,4 +275,22 @@ class RemoteCourseDataSourceImplement implements RemoteCourseDataSource {
       throw Exception(e.response.data["message"]);
     }
   }
+
+  @override
+  Future<List<Course>> getRecommendCourses(String id) async {
+    try {
+      final response = await _courseService.getRecommendCourses(id, 10, 1);
+      return response.payload
+              .map((e) => _mapperCourse.mapFromRemote(e))
+              .toList() ??
+          [];
+    } on DioError catch (e) {
+      print("erorroror: ${e}");
+      throw Exception(e.response.data["message"]);
+    } catch (e, stack) {
+      print("erorroror1: ${e}");
+      print("stack: $stack");
+      throw Exception(e.response.data["message"]);
+    }
+  }
 }

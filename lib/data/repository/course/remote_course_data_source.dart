@@ -34,4 +34,6 @@ abstract class RemoteCourseDataSource {
   Future<List<SearchHistoryItem>> getSearchHistory(String bearToken);
 
   Future<bool> deleteSearchHistory(String bearToken, String id);
+
+  Future<List<Course>> getRecommendCourses(String id);
 }

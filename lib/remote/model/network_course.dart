@@ -127,10 +127,13 @@ class NetworkCourse {
       id: map['id'] as String,
       title: map['title'] as String,
       subtitle: map['subtitle'] as String,
-      price: map['price'] as int,
+      // price: (map['price'] != null) ? map['price'] as int : 0,
+      price: 1000000,
       description: map['description'] as String,
       ratedNumber: map['ratedNumber'] as int,
-      totalHours: map['totalHours'] as double,
+      totalHours: (map['totalHours'] is int)
+          ? (map['totalHours'] as int).toDouble()
+          : map['totalHours'] as double,
       imageUrl: map['imageUrl'] as String,
       promoVidUrl: map['promoVidUrl'] as String,
       updatedAt: map['updatedAt'] as String,

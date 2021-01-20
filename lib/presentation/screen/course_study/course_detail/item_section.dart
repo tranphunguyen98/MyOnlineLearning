@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:my_online_learning/data/model/my_courses.dart';
 import 'package:my_online_learning/model/entity/chapter.dart';
 import 'package:my_online_learning/utils/extensions.dart';
 import 'package:my_online_learning/utils/my_const/style_const.dart';
+import 'package:provider/provider.dart';
 
 class ItemChapter extends StatelessWidget {
   final Chapter chapter;
@@ -19,9 +21,13 @@ class ItemChapter extends StatelessWidget {
         ),
         ...chapter.listLesson.map((lesson) => GestureDetector(
               onTap: () {
-                print("video: ${lesson.videoUrl}");
-                //context.read<LinkVideoPlay>().link = lesson.videoUrl;
-                changeVideoLink(lesson.videoUrl, lesson.videoName);
+                if (context.read<MyCourses>().containId(chapter.courseId)) {
+                  print("video: ${lesson.videoUrl}");
+                  //context.read<LinkVideoPlay>().link = lesson.videoUrl;
+                  changeVideoLink(lesson.videoUrl, lesson.videoName);
+                } else {
+                  print("NOOOOOOOOOOO");
+                }
               },
               child: Padding(
                 padding: const EdgeInsets.symmetric(

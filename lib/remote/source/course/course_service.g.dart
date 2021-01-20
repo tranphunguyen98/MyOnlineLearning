@@ -301,4 +301,25 @@ class _CourseService implements CourseService {
     final value = VideoResponse.fromJson(_result.data);
     return value;
   }
+
+  @override
+  Future<ListCourseResponse> getRecommendCourses(id, limit, offset) async {
+    ArgumentError.checkNotNull(id, 'id');
+    ArgumentError.checkNotNull(limit, 'limit');
+    ArgumentError.checkNotNull(offset, 'offset');
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.request<Map<String, dynamic>>(
+        'user/recommend-course/$id/$limit/$offset',
+        queryParameters: queryParameters,
+        options: RequestOptions(
+            method: 'GET',
+            headers: <String, dynamic>{},
+            extra: _extra,
+            baseUrl: baseUrl),
+        data: _data);
+    final value = ListCourseResponse.fromJson(_result.data);
+    return value;
+  }
 }

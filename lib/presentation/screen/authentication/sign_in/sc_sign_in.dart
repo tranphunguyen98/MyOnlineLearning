@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:my_online_learning/data/model/user_model.dart';
 import 'package:my_online_learning/data/repository/authentication/i_authentication_repository.dart';
 import 'package:my_online_learning/data/repository/user/i_user_repository.dart';
@@ -18,6 +19,13 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   void signIn() {}
+
+  GoogleSignIn _googleSignIn = GoogleSignIn(
+    scopes: [
+      'email',
+      'https://www.googleapis.com/auth/contacts.readonly',
+    ],
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -67,8 +75,22 @@ class _LoginScreenState extends State<LoginScreen> {
                     onPressed: () async {
                       _showDiaglogLoading("Sign In With Google");
                       try {
-                        final bool isSucceeded =
-                            await authRepo.signInWithGoogle();
+                        final result = await _googleSignIn.signIn();
+                        print("email: ${result.email}");
+                        print("id: ${result.id}");
+                        //
+                        // result.authentication.then((googleKey) {
+                        //   print(googleKey.accessToken);
+                        //   print(googleKey.idToken);
+                        //   print(_googleSignIn.currentUser.displayName);
+                        //   print(_googleSignIn.currentUser.email);
+                        //   print(_googleSignIn.currentUser.id);
+                        // }).catchError((err) {
+                        //   print('inner error');
+                        // });
+
+                        final bool isSucceeded = true;
+                        // await authRepo.signInWithGoogle();
                         if (isSucceeded) {
                           Navigator.pop(context);
                           _showMaterialDialog("Sign in Succeeded", "Succeeded");

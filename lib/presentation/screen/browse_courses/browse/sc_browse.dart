@@ -5,6 +5,7 @@ import 'package:my_online_learning/data/repository/course/i_course_repository.da
 import 'package:my_online_learning/di/injection.dart';
 import 'package:my_online_learning/model/entity/author.dart';
 import 'package:my_online_learning/model/entity/category.dart';
+import 'package:my_online_learning/model/entity/course.dart';
 import 'package:my_online_learning/presentation/screen/browse_courses/list_of_authors/widget_category_author.dart';
 import 'package:my_online_learning/presentation/screen/browse_courses/list_of_categories/widget_category_item_large.dart';
 import 'package:my_online_learning/presentation/screen/browse_courses/list_of_categories/widget_category_item_medium.dart';
@@ -22,7 +23,18 @@ class BrowseScreen extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              ListCategoryLarge(),
+              FutureBuilder<List<Course>>(
+                  future: getIt<ICourseRepository>().getTopSell(),
+                  //.getTopSell(context.watch<UserModel>().user.id),
+                  builder: (context, snapshot) => snapshot.hasData
+                      ? CategoryItemLarge(
+                          Category(
+                            title: "RECOMMENDED FOR YOU",
+                            image: "images/background_category_large.png",
+                            courses: snapshot.data,
+                          ),
+                        )
+                      : Container()),
               FutureBuilder<List<Category>>(
                   future: getIt<ICourseRepository>().getCategories(),
                   builder: (context, snapshot) {
@@ -54,6 +66,7 @@ class BrowseScreen extends StatelessWidget {
 
 class ListCategoryMedium extends StatelessWidget {
   final List<Category> categories;
+
   const ListCategoryMedium({
     Key key,
     @required this.categories,
@@ -126,22 +139,14 @@ class ListSkill extends StatelessWidget {
     );
   }
 }
-
-class ListCategoryLarge extends StatelessWidget {
-  const ListCategoryLarge({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        CategoryItemLarge(
-            "NEW\nRELEASES", "images/background_category_large.png"),
-        SizedBox(height: 16.0),
-        CategoryItemLarge(
-            "RECOMMENDED\nFOR YOU", "images/background_category_large.png"),
-      ],
-    );
-  }
-}
+//
+// class ListCategoryLarge extends StatelessWidget {
+//   const ListCategoryLarge({
+//     Key key,
+//   }) : super(key: key);
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return const CategoryItemLarge( const Category(title:"RECOMMENDED\nFOR YOU", image: "images/background_category_large.png"));
+//   }
+// }

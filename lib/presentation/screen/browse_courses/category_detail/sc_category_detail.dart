@@ -13,8 +13,9 @@ import 'package:provider/provider.dart';
 
 class CategoryDetailScreen extends StatelessWidget {
   final Category category;
+  final bool alreadyHaveData;
 
-  const CategoryDetailScreen({this.category});
+  CategoryDetailScreen({this.category, this.alreadyHaveData = false});
 
   @override
   Widget build(BuildContext context) {
@@ -43,40 +44,48 @@ class CategoryDetailScreen extends StatelessWidget {
             shrinkWrap: true,
             padding: EdgeInsets.all(16.0),
             children: <Widget>[
-              ListSkill(),
-              FutureBuilder<SearchResult>(
-                future: getIt<ICourseRepository>()
-                    .search("", "", OptionSearch(category: [category.id])),
-                builder: (context, snapshot) => snapshot.hasData
-                    ? Provider<Category>(
-                        create: (context) => Category(
-                            title: "NEW IN ${category.title}",
-                            courses: snapshot.data.listCourse),
-                        child: WidgetCategoryCourse())
-                    : Container(),
-              ),
-              FutureBuilder<SearchResult>(
-                future: getIt<ICourseRepository>()
-                    .search("", "", OptionSearch(category: [category.id])),
-                builder: (context, snapshot) => snapshot.hasData
-                    ? Provider<Category>(
-                        create: (context) => Category(
-                            title: "TRENDING IN  ${category.title}",
-                            courses: snapshot.data.listCourse),
-                        child: WidgetCategoryCourse())
-                    : Container(),
-              ),
-              FutureBuilder<List<Author>>(
-                future: getIt<AuthorRepository>().getAuthors(),
-                builder: (context, snapshot) => snapshot.hasData
-                    ? Provider<List<Author>>(
-                        create: (context) => snapshot.data,
-                        child: WidgetCategoryAuthor(
-                          title: "TOP AUTHORS IN ${category.title}",
-                        ),
-                      )
-                    : Container(),
-              ),
+              if (!this.alreadyHaveData) ListSkill(),
+              if (this.alreadyHaveData)
+                Provider(
+                  create: (context) => category,
+                  child: WidgetCategoryCourse(),
+                ),
+              if (!this.alreadyHaveData)
+                FutureBuilder<SearchResult>(
+                  future: getIt<ICourseRepository>()
+                      .search("", "", OptionSearch(category: [category.id])),
+                  builder: (context, snapshot) => snapshot.hasData
+                      ? Provider<Category>(
+                          create: (context) => Category(
+                              title: "NEW IN ${category.title}",
+                              courses: snapshot.data.listCourse),
+                          child: WidgetCategoryCourse())
+                      : Container(),
+                ),
+              if (!this.alreadyHaveData)
+                FutureBuilder<SearchResult>(
+                  future: getIt<ICourseRepository>()
+                      .search("", "", OptionSearch(category: [category.id])),
+                  builder: (context, snapshot) => snapshot.hasData
+                      ? Provider<Category>(
+                          create: (context) => Category(
+                              title: "TRENDING IN  ${category.title}",
+                              courses: snapshot.data.listCourse),
+                          child: WidgetCategoryCourse())
+                      : Container(),
+                ),
+              if (!this.alreadyHaveData)
+                FutureBuilder<List<Author>>(
+                  future: getIt<AuthorRepository>().getAuthors(),
+                  builder: (context, snapshot) => snapshot.hasData
+                      ? Provider<List<Author>>(
+                          create: (context) => snapshot.data,
+                          child: WidgetCategoryAuthor(
+                            title: "TOP AUTHORS IN ${category.title}",
+                          ),
+                        )
+                      : Container(),
+                ),
             ],
           ),
         ),
