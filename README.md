@@ -1,7 +1,7 @@
 # my_online_learning
 - This is Individual Final Project of subject Advanced Mobile Development - HCMUS_2017_03
 # Demo
-Demo DEADLINE_2 - Implement full project with local data 
+Demo DEADLINE_3 - Implement project with online data: https://youtu.be/PDDxzyJRj1g
 # Author
 - Student: Tran Phu Nguyen
 - ID: 1612448
